@@ -1,0 +1,81 @@
+.about {
+  background-color: var(--section-bg); /* Use theme variable instead of white */
+  color: var(--text-color); /* Ensure text color adapts to theme */
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--text-color); /* Theme-adaptive text color */
+}
+
+.about-details {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.about-details div {
+  flex: 1;
+}
+
+.about-details h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.about-details p {
+  font-size: 1rem;
+  color: var(--text-secondary, var(--text-color)); /* Fallback to text-color if secondary not defined */
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image .image-placeholder {
+  width: 350px;
+  height: 350px;
+  border-radius: 10px;
+  background-color: var(--card-bg); /* Theme-adaptive placeholder */
+  border: 1px solid var(--border-color); /* Add border for definition */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 992px) {
+  .about-content {
+    flex-direction: column;
+  }
+  
+  .about-image {
+    margin-top: 50px;
+  }
+  
+  .about-image .image-placeholder {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-details {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
