@@ -1,6 +1,6 @@
 .about {
-  background-color: var(--section-bg); /* Use theme variable instead of white */
-  color: var(--text-color); /* Ensure text color adapts to theme */
+  background-color: var(--section-bg);
+  color: var(--text-color);
 }
 
 .about-content {
@@ -16,7 +16,7 @@
 .about-text p {
   margin-bottom: 20px;
   font-size: 1.1rem;
-  color: var(--text-color); /* Theme-adaptive text color */
+  color: var(--text-color);
 }
 
 .about-details {
@@ -37,7 +37,7 @@
 
 .about-details p {
   font-size: 1rem;
-  color: var(--text-secondary, var(--text-color)); /* Fallback to text-color if secondary not defined */
+  color: var(--text-secondary, var(--text-color));
 }
 
 .about-image {
@@ -50,8 +50,8 @@
   width: 350px;
   height: 350px;
   border-radius: 10px;
-  background-color: var(--card-bg); /* Theme-adaptive placeholder */
-  border: 1px solid var(--border-color); /* Add border for definition */
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;

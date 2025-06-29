@@ -30,7 +30,7 @@
 
 .footer-links a,
 .footer-social a {
-  color: var(--text-color); /* Changed from text-light to text-color */
+  color: var(--text-color);
   text-decoration: none;
   transition: var(--transition);
 }
