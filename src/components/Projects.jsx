@@ -1,26 +1,62 @@
 import React from 'react';
 import './Projects.css';
 
+
 const projects = [
   {
     id: 1,
-    title: 'E-commerce Platform',
-    description: 'A full-stack e-commerce application with React, Node.js, and MongoDB',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Redux'],
-    githubLink: '#',
+    title: 'InnSight',
+    description: 'An interactive web application designed as a virtual assistant tool, allowing users to inquire about hotel and restaurant-related topics through voice or text input.',
+    technologies: ['React','Javascript','CSS','Python','HTML'],
+    githubLink: 'https://github.com/Corelocked/react-voice-enabled-ordering-system.git',
     liveDemo: '#',
-    image: 'project1.jpg'
+    image: require('../assets/images/innsight.png')
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description: 'A productivity application for managing tasks and projects',
-    technologies: ['React', 'Firebase', 'Material UI'],
-    githubLink: '#',
-    liveDemo: '#',
-    image: 'project2.jpg'
+    title: 'unFriendster',
+    description: 'An attempt to create a social media app for my Android App Dev class.',
+    technologies: ['Java','Firebase','XML'],
+    githubLink: 'https://github.com/Corelocked/unFriendster2.git',
+    liveDemo: 'https://drive.google.com/file/d/1OAb_6oc-SNPajD-ll_KCZ3X3yH-3UBvR/view?usp=drive_link',
+    image: require('../assets/images/unfriendster.png')
   },
-  // Add more projects as needed
+  {
+    id: 3,
+    title: 'Ang Pagong at ang Kuneho Game',
+    description: 'A recreational game about the story "Ang pagong at ang Kuneho", a classic Filipino fable that teaches the value of perseverance and humility. The story revolves around a race between a slow but determined turtle and a fast yet overconfident rabbit.',
+    technologies: ['Python'],
+    githubLink: 'https://github.com/Corelocked/Pagong-at-Kuneho.git',
+    liveDemo: 'https://drive.google.com/file/d/1wSdaMzPN1bbxsLYtLeZgqYe2JWFwiZIv/view?usp=drive_link',
+    image: require('../assets/images/ang_pagong_at_ang_kuneho.png')
+  },
+  {
+    id: 4,
+    title: 'Emotion Detector',
+    description: 'A program I made using Python that detects your emotion in real-time using a camera.',
+    technologies: ['Python'],
+    githubLink: 'https://github.com/Corelocked/emotion_detector.git',
+    liveDemo: '#',
+    image: require('../assets/images/placeholder.png')
+  },
+  {
+    id: 5,
+    title: 'Moody',
+    description: 'An interactive web application that tracks your daily mood swings',
+    technologies: ['Javascript','React','CSS','HTML'],
+    githubLink: 'https://github.com/Corelocked/moody.git',
+    liveDemo: '#',
+    image: require('../assets/images/placeholder.png')
+  },
+  {
+    id: 6,
+    title: 'To Rysa',
+    description: 'An interactive web application I made to ask my girlfriend to go out with me',
+    technologies: ['Javascript','CSS','HTML'],
+    githubLink: 'https://github.com/Corelocked/Corelocked.github.io.git',
+    liveDemo: '#',
+    image: require('../assets/images/rysa.png')
+  },
 ];
 
 const Projects = () => {
@@ -32,8 +68,7 @@ const Projects = () => {
           {projects.map((project) => (
             <div key={project.id} className="project-card">
               <div className="project-image">
-                {/* <img src={require(`../assets/images/${project.image}`)} alt={project.title} /> */}
-                <div className="image-placeholder"></div>
+                <img src={project.image} alt={project.title} />
               </div>
               <div className="project-info">
                 <h3>{project.title}</h3>
