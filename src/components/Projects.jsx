@@ -50,12 +50,39 @@ const projects = [
   },
   {
     id: 6,
-    title: 'To Rysa',
+    title: 'To Her',
     description: 'An interactive web application I made to ask my girlfriend to go out with me',
     technologies: ['Javascript','CSS','HTML'],
     githubLink: 'https://github.com/Corelocked/Corelocked.github.io.git',
     liveDemo: '#',
     image: require('../assets/images/rysa.png')
+  },
+  {
+    id: 7,
+    title: 'Academic Evaluator',
+    description: 'A program that evaluates the grades of a student',
+    technologies: ['Java'],
+    githubLink: 'https://drive.google.com/drive/folders/1-0zRNomH_1Z5W1lYjkLb_s8lToHQ2vbg?usp=drive_link',
+    liveDemo: '#',
+    image: require('../assets/images/placeholder.png')
+  },
+  {
+    id: 8,
+    title: 'Tetris Game',
+    description: 'A Tetis game made using Java and CSS',
+    technologies: ['Java','CSS'],
+    githubLink: 'https://github.com/Corelocked/Tetris.git',
+    liveDemo: '#',
+    image: require('../assets/images/placeholder.png')
+  },
+  {
+    id: 9,
+    title: 'POS',
+    description: 'Point of Sale System',
+    technologies: ['Java','CSS'],
+    githubLink: 'https://drive.google.com/drive/folders/1xMCH3Nzf1dldIWluI0p3IDfUYTJftDNP?usp=drive_link',
+    liveDemo: '#',
+    image: require('../assets/images/placeholder.png')
   },
 ];
 
