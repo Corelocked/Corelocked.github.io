@@ -50,10 +50,10 @@ const projects = [
   },
   {
     id: 6,
-    title: 'To Her',
+    title: 'OWQY',
     description: 'An interactive web application I made to ask my girlfriend to go out with me',
     technologies: ['Javascript','CSS','HTML'],
-    githubLink: 'https://github.com/Corelocked/Corelocked.github.io.git',
+    githubLink: 'https://github.com/Corelocked/OWQY.git',
     liveDemo: '#',
     image: require('../assets/images/rysa.png')
   },
