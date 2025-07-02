@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7d6fb32e.css",
+    "main.js": "/static/js/main.aeab4740.js",
+    "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
+    "static/media/About.jpg": "/static/media/About.08a4086ad619ef7a55e6.jpg",
+    "static/media/innsight.png": "/static/media/innsight.5bfb070f3692f6499c00.png",
+    "static/media/ang_pagong_at_ang_kuneho.png": "/static/media/ang_pagong_at_ang_kuneho.ff3b66e2edc72b7b2125.png",
+    "static/media/rysa.png": "/static/media/rysa.e3eb03af75714ff620cd.png",
+    "static/media/placeholder.png": "/static/media/placeholder.6ba783a6d3cba2fee64f.png",
+    "index.html": "/index.html",
+    "main.7d6fb32e.css.map": "/static/css/main.7d6fb32e.css.map",
+    "main.aeab4740.js.map": "/static/js/main.aeab4740.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7d6fb32e.css",
+    "static/js/main.aeab4740.js"
+  ]
+}
