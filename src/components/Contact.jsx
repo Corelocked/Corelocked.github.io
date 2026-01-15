@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import '../components/Animations.css';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 const Contact = () => {
+  const [titleRef, isTitleVisible] = useScrollReveal({ threshold: 0.2 });
+  const [infoRef, isInfoVisible] = useScrollReveal({ threshold: 0.2 });
+  const [formRef, isFormVisible] = useScrollReveal({ threshold: 0.2 });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,9 +32,17 @@ const Contact = () => {
   return (
     <section id="contact" className="contact">
       <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
+        <h2 
+          ref={titleRef}
+          className={`section-title scroll-reveal fade-up section-title-animated ${isTitleVisible ? 'visible' : ''}`}
+        >
+          Get In Touch
+        </h2>
         <div className="contact-content">
-          <div className="contact-info">
+          <div 
+            ref={infoRef}
+            className={`contact-info scroll-reveal fade-left delay-200 ${isInfoVisible ? 'visible' : ''}`}
+          >
             <h3>Contact Information</h3>
             <p>Email: cedricjoshua.palapuz@gmail.com</p>
             <p>Phone: (+63) 999-405-1077</p>
@@ -39,7 +53,11 @@ const Contact = () => {
               <a href="https://www.facebook.com/cdrplpz/" target="_blank" rel="noopener noreferrer">Facebook</a>
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form 
+            ref={formRef}
+            onSubmit={handleSubmit} 
+            className={`contact-form scroll-reveal fade-right delay-400 ${isFormVisible ? 'visible' : ''}`}
+          >
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input

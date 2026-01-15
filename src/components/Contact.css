@@ -1,10 +1,11 @@
 .contact {
-  background-color: #f5f7fa;
+  background-color: var(--section-alt-bg);
 }
 
 .contact-content {
   display: flex;
-  gap: 50px;
+  flex-wrap: wrap;
+  gap: clamp(30px, 5vw, 50px);
 }
 
 .contact-info {

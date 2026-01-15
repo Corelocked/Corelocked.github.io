@@ -75,7 +75,7 @@ a, button, input, textarea {
 }
 
 section {
-  padding: 80px 0;
+  padding: clamp(40px, 8vw, 100px) 0;
   background-color: var(--section-bg);
 }
 

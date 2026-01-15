@@ -1,53 +1,202 @@
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 1s ease forwards;
-}
-
-/* Delay animations */
-.delay-1 {
-  animation-delay: 0.2s;
-}
-
-.delay-2 {
-  animation-delay: 0.4s;
-}
-
-.delay-3 {
-  animation-delay: 0.6s;
-}
-
-/* Scroll reveal animation */
-.reveal {
-  position: relative;
+/* ===== Base Scroll Reveal Styles ===== */
+.scroll-reveal {
   opacity: 0;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 
-.reveal.active {
+.scroll-reveal.visible {
   opacity: 1;
 }
 
-.active.fade-bottom {
-  animation: fade-bottom 0.6s ease-in;
+/* ===== Fade Up Animation ===== */
+.scroll-reveal.fade-up {
+  transform: translateY(60px);
 }
 
-@keyframes fade-bottom {
-  0% {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
+.scroll-reveal.fade-up.visible {
+  transform: translateY(0);
+}
+
+/* ===== Fade Down Animation ===== */
+.scroll-reveal.fade-down {
+  transform: translateY(-60px);
+}
+
+.scroll-reveal.fade-down.visible {
+  transform: translateY(0);
+}
+
+/* ===== Fade Left Animation ===== */
+.scroll-reveal.fade-left {
+  transform: translateX(-60px);
+}
+
+.scroll-reveal.fade-left.visible {
+  transform: translateX(0);
+}
+
+/* ===== Fade Right Animation ===== */
+.scroll-reveal.fade-right {
+  transform: translateX(60px);
+}
+
+.scroll-reveal.fade-right.visible {
+  transform: translateX(0);
+}
+
+/* ===== Scale Up Animation ===== */
+.scroll-reveal.scale-up {
+  transform: scale(0.8);
+}
+
+.scroll-reveal.scale-up.visible {
+  transform: scale(1);
+}
+
+/* ===== Scale Down Animation ===== */
+.scroll-reveal.scale-down {
+  transform: scale(1.2);
+}
+
+.scroll-reveal.scale-down.visible {
+  transform: scale(1);
+}
+
+/* ===== Rotate Animation ===== */
+.scroll-reveal.rotate {
+  transform: rotate(-10deg) scale(0.9);
+}
+
+.scroll-reveal.rotate.visible {
+  transform: rotate(0) scale(1);
+}
+
+/* ===== Flip Animation ===== */
+.scroll-reveal.flip {
+  transform: perspective(600px) rotateX(30deg);
+  transform-origin: center bottom;
+}
+
+.scroll-reveal.flip.visible {
+  transform: perspective(600px) rotateX(0);
+}
+
+/* ===== Zoom Fade Animation ===== */
+.scroll-reveal.zoom-fade {
+  transform: scale(0.5);
+  filter: blur(10px);
+}
+
+.scroll-reveal.zoom-fade.visible {
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* ===== Slide Blur Animation ===== */
+.scroll-reveal.slide-blur {
+  transform: translateY(40px);
+  filter: blur(8px);
+}
+
+.scroll-reveal.slide-blur.visible {
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ===== Animation Delays ===== */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+.delay-600 { transition-delay: 0.6s; }
+.delay-700 { transition-delay: 0.7s; }
+.delay-800 { transition-delay: 0.8s; }
+
+/* ===== Animation Durations ===== */
+.duration-fast { transition-duration: 0.4s; }
+.duration-normal { transition-duration: 0.8s; }
+.duration-slow { transition-duration: 1.2s; }
+.duration-slower { transition-duration: 1.6s; }
+
+/* ===== Easing Functions ===== */
+.ease-smooth { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.ease-bounce { transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.ease-elastic { transition-timing-function: cubic-bezier(0.5, 1.5, 0.8, 1); }
+
+/* ===== Stagger Children Animation ===== */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 0.6s; }
+.stagger-children.visible > *:nth-child(7) { transition-delay: 0.7s; }
+.stagger-children.visible > *:nth-child(8) { transition-delay: 0.8s; }
+.stagger-children.visible > *:nth-child(9) { transition-delay: 0.9s; }
+.stagger-children.visible > *:nth-child(10) { transition-delay: 1s; }
+
+.stagger-children.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Section Title Animation ===== */
+.section-title-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-title-animated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color, #007bff), var(--accent-color, #00d4ff));
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-title-animated.visible::after {
+  width: 80px;
+  left: calc(50% - 40px);
+}
+
+/* ===== Card Hover Enhancements ===== */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Reduced Motion Support ===== */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal.fade-up,
+  .scroll-reveal.fade-down,
+  .scroll-reveal.fade-left,
+  .scroll-reveal.fade-right,
+  .scroll-reveal.scale-up,
+  .scroll-reveal.scale-down,
+  .scroll-reveal.rotate,
+  .scroll-reveal.flip,
+  .scroll-reveal.zoom-fade,
+  .scroll-reveal.slide-blur,
+  .stagger-children > * {
+    transition: none;
+    transform: none;
     opacity: 1;
+    filter: none;
   }
 }
