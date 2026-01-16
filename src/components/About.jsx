@@ -62,7 +62,7 @@ const About = () => {
                   </svg>
                 </div>
                 <h3>Experience</h3>
-                <p className="card-title">Intern</p>
+                <p className="card-title">Work Immersion Intern</p>
                 <p className="card-subtitle">Philippine Nuclear Research Institute</p>
                 <span className="card-date">2020</span>
               </div>

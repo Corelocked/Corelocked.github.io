@@ -19,14 +19,14 @@ const Hero = () => {
           <span className="hero-greeting">👋 Welcome to my portfolio</span>
           <h1>Hi, I'm <span className="gradient-text">Cedric Joshua Palapuz</span></h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
-            <span className="tagline-prefix">I'm a</span> Android <span className="tagline-prefix">and</span> Full Stack Developer
+            <span className="tagline-prefix">I'm an</span> Android <span className="tagline-prefix">and</span> Full Stack Developer
           </h2>
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
             I build mobile and web applications that are not only functional but also provide an engaging user experience. Let's create something amazing together!
           </p>
           <div className={`hero-buttons scroll-reveal fade-up delay-400 ${isLoaded ? 'visible' : ''}`}>
             <a href="#projects" className="btn btn-primary">
-              <span>View My Work</span>
+              <span>View My Works</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
