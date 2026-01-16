@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Support.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import umbreonVideo from '../assets/images/umbreon.mp4';
 
 // Import QR code images
 import mayaQR from '../assets/images/maya-qr.jpg';
@@ -50,8 +51,8 @@ const Support = () => {
       ),
       description: 'Direct support via PayPal donation',
       link: 'https://paypal.me/Corelocked', // Replace with your PayPal.me link
-      color: '#003087',
-      bgColor: 'rgba(0, 48, 135, 0.1)'
+      color: '#00A0FF',
+      bgColor: 'rgba(0, 160, 255, 0.1)'
     },
     {
       id: 4,
@@ -97,6 +98,13 @@ const Support = () => {
 
   return (
     <section id="support" className="support">
+      {/* Video Background */}
+      <div className="video-background">
+        <video autoPlay muted loop playsInline>
+          <source src={umbreonVideo} type="video/mp4" />
+        </video>
+        <div className="video-overlay"></div>
+      </div>
       <div className="container">
         <div 
           ref={titleRef}

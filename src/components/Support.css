@@ -4,6 +4,43 @@
   background: var(--bg-secondary);
   position: relative;
   overflow: hidden;
+  clip-path: inset(0);
+}
+
+/* Video Background */
+.support .video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.support .video-background video {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 100%;
+  filter: blur(3px);
+}
+
+.support .video-background .video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.support .container {
+  position: relative;
+  z-index: 1;
 }
 
 .support::before {
@@ -32,13 +69,15 @@
 
 /* Support Card */
 .support-card {
-  background: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
   text-decoration: none;
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -71,7 +110,9 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,13 +130,13 @@
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 10px;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 /* Support Description */
 .support-description {
   font-size: 0.95rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -106,7 +147,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.15);
   color: var(--card-color);
   border-radius: 30px;
   font-weight: 600;

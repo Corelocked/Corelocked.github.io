@@ -31,17 +31,43 @@ const About = () => {
           >
             <div className="about-intro">
               <p className="lead-text">
-                I'm a passionate developer with 3 years of experience building web applications.
+                I'm a passionate developer with 4+ years of experience building web applications.
                 I specialize in JavaScript technologies including React, Node.js, and Express.
-                I also have experience in mobile app development using Kotlin and Flutter.
+                I also have experience in mobile app development using Kotlin and a little bit of Flutter.
               </p>
               <p>
                 I love creating efficient, user-friendly solutions that solve real-world problems.
                 When I'm not coding, I enjoy graphic design and video editing to bring ideas to life visually.
               </p>
             </div>
-            
+
             <div className="about-cards">
+              {/* <div className="about-card">
+                <div className="card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <h3>Education</h3>
+                <p className="card-title">High School</p>
+                <p className="card-subtitle">Quezon City Academy</p>
+                <span className="card-date">2014 - 2018</span>
+              </div>
+
+              <div className="about-card">
+                <div className="card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <h3>Education</h3>
+                <p className="card-title">Senior High School - STEM</p>
+                <p className="card-subtitle">Quezon City Academy</p>
+                <span className="card-date">2018 - 2020</span>
+              </div> */}
+
               <div className="about-card">
                 <div className="card-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

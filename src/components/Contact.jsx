@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import './Contact.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import umbreonVideo from '../assets/images/umbreon.mp4';
 
 // EmailJS Configuration
 // To set up EmailJS:
@@ -77,6 +78,13 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact">
+      {/* Video Background */}
+      <div className="video-background">
+        <video autoPlay muted loop playsInline>
+          <source src={umbreonVideo} type="video/mp4" />
+        </video>
+        <div className="video-overlay"></div>
+      </div>
       <div className="container">
         <div 
           ref={titleRef}

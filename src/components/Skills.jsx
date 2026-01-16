@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Skills.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import umbreonVideo from '../assets/images/umbreon.mp4';
 // Import SVGs as React components
 import { ReactComponent as FrontendIcon } from '../assets/icons/frontend.svg';
 import { ReactComponent as BackendIcon } from '../assets/icons/backend.svg';
@@ -139,6 +140,13 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills">
+      {/* Video Background */}
+      <div className="video-background">
+        <video autoPlay muted loop playsInline>
+          <source src={umbreonVideo} type="video/mp4" />
+        </video>
+        <div className="video-overlay"></div>
+      </div>
       {/* Background decoration */}
       <div className="skills-bg-decoration"></div>
       <div className="skills-bg-decoration-2"></div>
