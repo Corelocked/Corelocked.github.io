@@ -41,7 +41,8 @@ const Header = () => {
           <Link to="about" smooth={true} duration={500} onClick={closeMenu} className="nav-link">About</Link>
           <Link to="skills" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Skills</Link>
           <Link to="projects" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Projects</Link>
-          <Link to="contact" smooth={true} duration={500} onClick={closeMenu} className="nav-link nav-link-cta">Contact</Link>
+          <Link to="contact" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Contact</Link>
+          <Link to="support" smooth={true} duration={500} onClick={closeMenu} className="nav-link nav-link-cta">Support</Link>
           <ThemeToggle />
         </nav>
       </div>

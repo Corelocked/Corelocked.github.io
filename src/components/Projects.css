@@ -460,3 +460,16 @@
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
 }
+
+.video-badge.unavailable {
+  background: linear-gradient(135deg, #747d8c 0%, #57606f 100%);
+  box-shadow: 0 4px 15px rgba(116, 125, 140, 0.4);
+}
+
+.video-badge.unavailable::before {
+  display: none;
+}
+
+.project-card:hover .video-badge.unavailable {
+  box-shadow: 0 6px 20px rgba(116, 125, 140, 0.5);
+}

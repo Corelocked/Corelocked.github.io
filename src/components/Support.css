@@ -1,0 +1,350 @@
+/* Support Section */
+.support {
+  padding: 100px 0;
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.support::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+}
+
+.support-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Support Options Grid */
+.support-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto 50px;
+}
+
+/* Support Card */
+.support-card {
+  background: var(--bg-primary);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.support-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--card-color);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.support-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-color: var(--card-color);
+}
+
+.support-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Support Icon */
+.support-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  transition: all 0.4s ease;
+}
+
+.support-card:hover .support-icon {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Support Name */
+.support-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+/* Support Description */
+.support-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Support Button */
+.support-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--card-bg);
+  color: var(--card-color);
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.support-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.support-card:hover .support-btn {
+  background: var(--card-color);
+  color: white;
+}
+
+.support-card:hover .support-btn svg {
+  transform: translateX(5px);
+}
+
+/* Support Message */
+.support-message {
+  text-align: center;
+  padding: 30px 40px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.support-message .heart-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.support-message p {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .support {
+    padding: 80px 0;
+  }
+
+  .support-options {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .support-card {
+    padding: 30px 25px;
+  }
+
+  .support-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .support-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .support-name {
+    font-size: 1.2rem;
+  }
+
+  .support-message {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+    margin: 0 20px;
+  }
+
+  .support-message p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .support-header {
+    margin-bottom: 40px;
+  }
+
+  .support-card {
+    padding: 25px 20px;
+  }
+
+  .support-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+}
+
+/* QR Code Modal */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.qr-modal {
+  background: var(--bg-primary);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--bg-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.qr-modal-close:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.qr-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.qr-modal-image {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.qr-modal-image img {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  display: block;
+}
+
+.qr-modal-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Button style for QR cards */
+button.support-card {
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  font-family: inherit;
+}
+
+@media (max-width: 480px) {
+  .qr-modal {
+    padding: 30px 20px;
+  }
+
+  .qr-modal-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .qr-modal-title {
+    font-size: 1.3rem;
+  }
+}
