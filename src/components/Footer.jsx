@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-scroll';
 import './Footer.css';
 
 const Footer = () => {
@@ -10,11 +11,11 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-brand">
-            <a href="#home" className="footer-logo">
+            <Link to="home" smooth={true} duration={500} className="footer-logo">
               <span className="logo-bracket">&lt;</span>
               <span className="logo-text">Cedric</span>
               <span className="logo-bracket">/&gt;</span>
-            </a>
+            </Link>
             <p className="footer-tagline">
               Building digital experiences that make a difference.
             </p>
@@ -23,10 +24,10 @@ const Footer = () => {
           <div className="footer-nav">
             <h4>Quick Links</h4>
             <div className="footer-links">
-              <a href="#about">About</a>
-              <a href="#skills">Skills</a>
-              <a href="#projects">Projects</a>
-              <a href="#contact">Contact</a>
+              <Link to="about" smooth={true} duration={500} offset={-80}>About</Link>
+              <Link to="skills" smooth={true} duration={500} offset={-80}>Skills</Link>
+              <Link to="projects" smooth={true} duration={500} offset={-80}>Projects</Link>
+              <Link to="contact" smooth={true} duration={500} offset={-80}>Contact</Link>
             </div>
           </div>
           
@@ -60,7 +61,7 @@ const Footer = () => {
         <div className="footer-bottom">
           <p>© {currentYear} Cedric Joshua Palapuz. Built with ❤️ and React.</p>
           <div className="footer-bottom-links">
-            <a href="#home">Back to Top ↑</a>
+            <Link to="home" smooth={true} duration={500}>Back to Top ↑</Link>
           </div>
         </div>
       </div>

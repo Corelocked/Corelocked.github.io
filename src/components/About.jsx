@@ -33,10 +33,11 @@ const About = () => {
               <p className="lead-text">
                 I'm a passionate developer with 3 years of experience building web applications.
                 I specialize in JavaScript technologies including React, Node.js, and Express.
+                I also have experience in mobile app development using Kotlin and Flutter.
               </p>
               <p>
-                When I'm not coding, I enjoy contributing to open-source projects,
-                learning new technologies, and sharing knowledge with the developer community.
+                I love creating efficient, user-friendly solutions that solve real-world problems.
+                When I'm not coding, I enjoy graphic design and video editing to bring ideas to life visually.
               </p>
             </div>
             

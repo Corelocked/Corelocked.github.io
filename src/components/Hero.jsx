@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-scroll';
 import './Hero.css';
 import '../components/Animations.css';
 import hero from '../assets/images/Hero2.JPG';
@@ -25,15 +26,15 @@ const Hero = () => {
             I build mobile and web applications that are not only functional but also provide an engaging user experience. Let's create something amazing together!
           </p>
           <div className={`hero-buttons scroll-reveal fade-up delay-400 ${isLoaded ? 'visible' : ''}`}>
-            <a href="#projects" className="btn btn-primary">
+            <Link to="projects" smooth={true} duration={500} offset={-80} className="btn btn-primary">
               <span>View My Works</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </a>
-            <a href="#contact" className="btn btn-outline">
+            </Link>
+            <Link to="contact" smooth={true} duration={500} offset={-80} className="btn btn-outline">
               <span>Contact Me</span>
-            </a>
+            </Link>
           </div>
           <div className={`hero-stats scroll-reveal fade-up delay-500 ${isLoaded ? 'visible' : ''}`}>
             <div className="stat-item">

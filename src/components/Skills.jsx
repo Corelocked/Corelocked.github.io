@@ -67,9 +67,9 @@ const skillCategories = [
     name: 'Frontend',
     iconKey: 'frontend',
     skills: [
-      { name: 'JavaScript', level: 90, iconKey: 'javascript' },
-      { name: 'React', level: 95, iconKey: 'react' },
-      { name: 'HTML/CSS', level: 95, iconKey: 'html' },
+      { name: 'JavaScript', level: 80, iconKey: 'javascript' },
+      { name: 'React', level: 90, iconKey: 'react' },
+      { name: 'HTML/CSS', level: 80, iconKey: 'html' },
     ]
   },
   {
@@ -77,9 +77,9 @@ const skillCategories = [
     name: 'Backend',
     iconKey: 'backend',
     skills: [
-      { name: 'NodeJS', level: 95, iconKey: 'nodejs' },
+      { name: 'NodeJS', level: 90, iconKey: 'nodejs' },
       { name: 'Python', level: 75, iconKey: 'python' },
-      { name: 'Laravel', level: 90, iconKey: 'laravel' },
+      { name: 'Laravel', level: 85, iconKey: 'laravel' },
     ]
   },
   {
@@ -89,7 +89,7 @@ const skillCategories = [
     skills: [
       { name: 'Kotlin', level: 90, iconKey: 'kotlin' },
       { name: 'Java', level: 50, iconKey: 'java' },
-      { name: 'Dart/Flutter', level: 70, iconKey: 'flutter' },
+      { name: 'Dart/Flutter', level: 50, iconKey: 'flutter' },
     ]
   },
   {
@@ -97,9 +97,9 @@ const skillCategories = [
     name: 'Creative',
     iconKey: 'creative',
     skills: [
-      { name: 'Canva', level: 90, iconKey: 'canva' },
-      { name: 'Photoshop', level: 75, iconKey: 'photoshop' },
-      { name: 'Premiere Pro', level: 70, iconKey: 'premiere' },
+      { name: 'Canva', level: 95, iconKey: 'canva' },
+      { name: 'Photoshop', level: 70, iconKey: 'photoshop' },
+      { name: 'Premiere Pro', level: 80, iconKey: 'premiere' },
     ]
   },
   {
@@ -107,9 +107,9 @@ const skillCategories = [
     name: 'Productivity',
     iconKey: 'productivity',
     skills: [
-      { name: 'MS Office', level: 90, iconKey: 'msoffice' },
+      { name: 'MS Office', level: 95, iconKey: 'msoffice' },
       { name: 'Google Workspace', level: 95, iconKey: 'google' },
-      { name: 'Power BI', level: 70, iconKey: 'powerbi' },
+      { name: 'Power BI', level: 85, iconKey: 'powerbi' },
     ]
   },
   {
@@ -117,12 +117,12 @@ const skillCategories = [
     name: 'Dev Tools',
     iconKey: 'tools',
     skills: [
-      { name: 'Git/GitHub', level: 85, iconKey: 'git' },
-      { name: 'Firebase', level: 80, iconKey: 'firebase' },
+      { name: 'Git/GitHub', level: 90, iconKey: 'git' },
+      { name: 'Firebase', level: 90, iconKey: 'firebase' },
       { name: 'MongoDB', level: 75, iconKey: 'mongodb' },
       { name: 'SQLite', level: 75, iconKey: 'sqlite' },
       { name: 'Jupyter Notebook', level: 80, iconKey: 'jupyter' },
-      { name: 'Google Colab', level: 85, iconKey: 'colab' },
+      { name: 'Google Colab', level: 90, iconKey: 'colab' },
     ]
   }
 ];
@@ -221,7 +221,7 @@ const Skills = () => {
                       </div>
                     </div>
                     <div className="skill-label">
-                      <span>{skill.level >= 90 ? 'Expert' : skill.level >= 70 ? 'Advanced' : skill.level >= 50 ? 'Intermediate' : 'Learning'}</span>
+                      <span>{skill.level >= 90 ? 'Confident' : skill.level >= 70 ? 'Average' : skill.level >= 50 ? 'Intermediate' : 'Learning'}</span>
                     </div>
                   </div>
                 ))}

@@ -21,11 +21,11 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <a href="#home" className="logo">
+        <Link to="home" smooth={true} duration={500} className="logo">
           <span className="logo-bracket">&lt;</span>
           <span className="logo-text">Cedric</span>
           <span className="logo-bracket">/&gt;</span>
-        </a>
+        </Link>
         
         <button 
           className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
