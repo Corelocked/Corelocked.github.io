@@ -20,12 +20,12 @@
 
 .support .video-background video {
   width: 100%;
-  height: auto;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-height: 100%;
+  object-fit: cover;
   filter: blur(3px);
 }
 
@@ -41,6 +41,15 @@
 .support .container {
   position: relative;
   z-index: 1;
+}
+
+/* Mobile video fix */
+@media (max-width: 768px) {
+  .support .video-background video {
+    width: auto;
+    height: 100%;
+    min-width: 100%;
+  }
 }
 
 .support::before {
