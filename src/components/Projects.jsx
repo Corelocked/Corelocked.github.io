@@ -365,7 +365,7 @@ const projects = [
     category: ['Film Editing','Creative Design'],
     githubLink: '#',
     liveDemo: 'https://youtu.be/TAJ7gHYPAGI',
-    image: require('../assets/images/blogshark-logo.png'),
+    image: require('../assets/images/placeholder.png'),
     featured: true
   },
 ];

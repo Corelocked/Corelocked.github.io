@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0ccb5f6f.css",
-    "main.js": "/static/js/main.f4d58abd.js",
+    "main.js": "/static/js/main.56554c43.js",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
     "static/media/dost-website-redesign.png": "/static/media/dost-website-redesign.aa9c930501c6aeced629.png",
     "static/media/e-tala logo.jpg": "/static/media/e-tala logo.dd6975ccfd0c225fe328.jpg",
@@ -43,10 +43,10 @@
     "static/media/frontend.svg": "/static/media/frontend.67d96e6df9d7fa4c78a35508d1bbe951.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
     "main.0ccb5f6f.css.map": "/static/css/main.0ccb5f6f.css.map",
-    "main.f4d58abd.js.map": "/static/js/main.f4d58abd.js.map"
+    "main.56554c43.js.map": "/static/js/main.56554c43.js.map"
   },
   "entrypoints": [
     "static/css/main.0ccb5f6f.css",
-    "static/js/main.f4d58abd.js"
+    "static/js/main.56554c43.js"
   ]
 }
