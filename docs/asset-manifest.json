@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.5b71d4f9.css",
-    "main.js": "/static/js/main.56bd267a.js",
+    "main.css": "/static/css/main.0ccb5f6f.css",
+    "main.js": "/static/js/main.e9a4ad3e.js",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
     "static/media/dost-website-redesign.png": "/static/media/dost-website-redesign.aa9c930501c6aeced629.png",
     "static/media/e-tala logo.jpg": "/static/media/e-tala logo.dd6975ccfd0c225fe328.jpg",
     "static/media/moody.png": "/static/media/moody.e94182da2101b7376f07.png",
     "static/media/Hero2.JPG": "/static/media/Hero2.0d357a76c0a4d354dcee.JPG",
     "static/media/innsight.png": "/static/media/innsight.5bfb070f3692f6499c00.png",
+    "static/media/emotion-detector.jpg": "/static/media/emotion-detector.96b7bb203dbf73040f96.jpg",
     "static/media/ang_pagong_at_ang_kuneho.png": "/static/media/ang_pagong_at_ang_kuneho.ff3b66e2edc72b7b2125.png",
+    "static/media/lakbay-logo2.png": "/static/media/lakbay-logo2.f7af4a19b81999b15f5c.png",
     "static/media/lakbay-logo.png": "/static/media/lakbay-logo.e18181af57495b87e91b.png",
     "static/media/placeholder.png": "/static/media/placeholder.6ba783a6d3cba2fee64f.png",
     "static/media/laravel.svg": "/static/media/laravel.1c0d91ff70269cd7160f32f86923c3f7.svg",
@@ -23,8 +25,8 @@
     "static/media/react.svg": "/static/media/react.90af9da459690463bc4eb8d107b168c5.svg",
     "static/media/jupyter.svg": "/static/media/jupyter.fed0d6e7756e267d149a8e2f59a469a2.svg",
     "static/media/photoshop.svg": "/static/media/photoshop.420c7ad272a21ff9244bbcecb5f28308.svg",
-    "static/media/colab.svg": "/static/media/colab.8d22580adc5f07678468c69302df8d5c.svg",
     "index.html": "/index.html",
+    "static/media/colab.svg": "/static/media/colab.8d22580adc5f07678468c69302df8d5c.svg",
     "static/media/node-js.svg": "/static/media/node-js.a670f5a7b626356dc925573299f71f3f.svg",
     "static/media/canva.svg": "/static/media/canva.9f563cbd66d7d729fd59510bd688df9d.svg",
     "static/media/productivity.svg": "/static/media/productivity.f96beb338501fa63ba63424546b2feac.svg",
@@ -39,11 +41,11 @@
     "static/media/flutter.svg": "/static/media/flutter.40ebc8d1e3a656f9b768dae63926e23e.svg",
     "static/media/frontend.svg": "/static/media/frontend.67d96e6df9d7fa4c78a35508d1bbe951.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
-    "main.5b71d4f9.css.map": "/static/css/main.5b71d4f9.css.map",
-    "main.56bd267a.js.map": "/static/js/main.56bd267a.js.map"
+    "main.0ccb5f6f.css.map": "/static/css/main.0ccb5f6f.css.map",
+    "main.e9a4ad3e.js.map": "/static/js/main.e9a4ad3e.js.map"
   },
   "entrypoints": [
-    "static/css/main.5b71d4f9.css",
-    "static/js/main.56bd267a.js"
+    "static/css/main.0ccb5f6f.css",
+    "static/js/main.e9a4ad3e.js"
   ]
 }
