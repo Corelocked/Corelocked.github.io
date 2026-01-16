@@ -19,10 +19,10 @@ const Hero = () => {
           <span className="hero-greeting">👋 Welcome to my portfolio</span>
           <h1>Hi, I'm <span className="gradient-text">Cedric Joshua Palapuz</span></h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
-            <span className="tagline-prefix">I'm a</span> Full Stack Developer
+            <span className="tagline-prefix">I'm a</span> Android <span className="tagline-prefix">and</span> Full Stack Developer
           </h2>
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
-            I build exceptional digital experiences that combine beautiful design with clean, efficient code.
+            I build mobile and web applications that are not only functional but also provide an engaging user experience. Let's create something amazing together!
           </p>
           <div className={`hero-buttons scroll-reveal fade-up delay-400 ${isLoaded ? 'visible' : ''}`}>
             <a href="#projects" className="btn btn-primary">
@@ -37,8 +37,8 @@ const Hero = () => {
           </div>
           <div className={`hero-stats scroll-reveal fade-up delay-500 ${isLoaded ? 'visible' : ''}`}>
             <div className="stat-item">
-              <span className="stat-number">3+</span>
-              <span className="stat-label">Years Experience</span>
+              <span className="stat-number">4+</span>
+              <span className="stat-label">Years Academic Experience</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">

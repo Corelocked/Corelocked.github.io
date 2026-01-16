@@ -123,6 +123,17 @@ const projects = [
     image: require('../assets/images/lakbay-logo.png'),
     featured: false
   },
+  {
+    id: 12,
+    title: 'Lakbay (Work in Progress)',
+    description: 'A scenic travel mobile app. Created as our Thesis project.',
+    technologies: ['Kotlin'],
+    category: ['Mobile App'],
+    githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git',
+    liveDemo: '#',
+    image: require('../assets/images/lakbay-logo2.png'),
+    featured: false
+  },
 ];
 
 const categories = ['All', 'Web App', 'Mobile App', 'Desktop App', 'Game', 'AI/ML', 'Creative Design'];
