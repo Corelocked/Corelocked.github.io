@@ -346,6 +346,17 @@ const projects = [
     image: require('../assets/images/lakbay-logo2.png'),
     featured: false
   },
+  {
+    id: 13,
+    title: 'BlogShark',
+    description: 'A social media platform for bloggers to share and connect. Made completely from scratch using Laravel and SQLite for my Dynamic Web Dev class.',
+    technologies: ['Laravel', 'SQLite', 'JavaScript', 'CSS'],
+    category: ['Website'],
+    githubLink: 'https://github.com/Corelocked/dywebFinals.git',
+    liveDemo: 'https://youtu.be/T-8okZkfd_0',
+    image: require('../assets/images/blogshark-logo.png'),
+    featured: true
+  },
 ];
 
 const categories = ['All', 'Web App', 'Mobile App', 'Desktop App', 'Game', 'AI/ML', 'Creative Design'];
