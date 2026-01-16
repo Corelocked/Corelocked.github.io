@@ -19,6 +19,7 @@ const Header = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
+    <>
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <Link to="home" smooth={true} duration={500} className="logo">
@@ -43,13 +44,21 @@ const Header = () => {
           <Link to="projects" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Projects</Link>
           <Link to="contact" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Contact</Link>
           <Link to="support" smooth={true} duration={500} onClick={closeMenu} className="nav-link nav-link-cta">Support</Link>
-          <ThemeToggle />
+          <div className="desktop-theme-toggle">
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
       
       {/* Mobile menu overlay */}
       {isMenuOpen && <div className="nav-overlay" onClick={closeMenu}></div>}
     </header>
+    
+    {/* Mobile theme toggle - completely outside header for proper fixed positioning */}
+    <div className="mobile-theme-toggle">
+      <ThemeToggle />
+    </div>
+  </>
   );
 };
 
