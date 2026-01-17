@@ -13,6 +13,8 @@ const Support = () => {
   const [cardsRef, isCardsVisible] = useScrollReveal({ threshold: 0.2 });
   const [messageRef, isMessageVisible] = useScrollReveal({ threshold: 0.2 });
   const [activeQR, setActiveQR] = useState(null);
+  const [heartClicked, setHeartClicked] = useState(false);
+  const [heartPop, setHeartPop] = useState(false);
 
   const supportOptions = [
     // {
@@ -59,7 +61,7 @@ const Support = () => {
       name: 'Maya',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v2h-3v-2zm-3 0h2v3h-2v-3zm3 3h3v4h-2v-2h-1v-2zm-3 3h2v2h-2v-2zm-7-6h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm0 4h2v4h-2v-4z"/>
+          <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
         </svg>
       ),
       description: 'Send via Maya QR code (Philippines)',
@@ -195,9 +197,26 @@ const Support = () => {
           ref={messageRef}
           className={`support-message scroll-reveal fade-up delay-400 ${isMessageVisible ? 'visible' : ''}`}
         >
-          <div className="heart-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          <div 
+            className={`heart-icon${heartClicked ? ' heart-clicked' : ''}${heartPop ? ' heart-pop' : ''}`}
+            onClick={() => {
+              if (!heartClicked) {
+                setHeartClicked(true);
+                setHeartPop(false);
+                // Force reflow to restart animation
+                setTimeout(() => {
+                  setHeartPop(true);
+                  setTimeout(() => setHeartPop(false), 900);
+                }, 10);
+              } else {
+                setHeartClicked(false);
+                setHeartPop(false);
+              }
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ color: heartClicked ? '#e53935' : 'white', transition: 'color 0.3s' }}>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/>
             </svg>
           </div>
           <p>Your support means the world to me and helps me continue creating awesome projects!</p>

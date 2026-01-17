@@ -47,7 +47,6 @@ const ProjectCard = ({ project }) => {
           alt={project.title}
           className={hasVideo && isHovered ? 'hidden' : ''}
         />
-        
         {/* Video Preview */}
         {hasVideo && (
           <div className="video-badge">Preview</div>
@@ -65,7 +64,6 @@ const ProjectCard = ({ project }) => {
             allowFullScreen
           />
         )}
-        
         <div className={`image-overlay ${isHovered && hasVideo ? 'video-active' : ''}`}>
           <div className="overlay-links">
             {project.category.includes('Creative Design') ? (
@@ -149,6 +147,9 @@ const ProjectCard = ({ project }) => {
           {project.category.map((cat, index) => (
             <span key={index} className="project-category">{cat}</span>
           ))}
+          {project.isWIP && (
+            <span className="project-wip-tag">WIP</span>
+          )}
         </div>
       </div>
 
@@ -359,7 +360,7 @@ const projects = [
   },
   {
     id: 10,
-    title: 'DOST website Redesign',
+    title: 'DOST Website Redesign',
     description: 'A redesign of the Department of Science and Technology (DOST) website using Canva. Created for a web design class project.',
     technologies: ['Canva'],
     category: ['Creative Design'],
@@ -375,18 +376,19 @@ const projects = [
     category: ['Creative Design'],
     canvaLink: 'https://www.canva.com/design/DAG3DY7iccM/gGWzD2lJDBGp3n9ekzTcMw/edit?utm_content=DAG3DY7iccM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
     image: require('../assets/images/lakbay-logo.png'),
-    featured: false
+    featured: false,
   },
   {
     id: 12,
-    title: 'Lakbay (Work in Progress)',
+    title: 'Lakbay',
     description: 'A scenic travel mobile app. Created as our Thesis project.',
     technologies: ['Kotlin','Python','Firebase'],
     category: ['Mobile App'],
     githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git',
     liveDemo: '#',
     image: require('../assets/images/lakbay-logo2.png'),
-    featured: false
+    featured: false,
+    isWIP: true
   },
   {
     id: 13,

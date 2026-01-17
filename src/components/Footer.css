@@ -61,6 +61,7 @@
   color: var(--gray-color);
   font-size: 0.95rem;
   line-height: 1.7;
+  
 }
 
 /* Nav Section */
@@ -99,6 +100,8 @@
 .footer-social {
   display: flex;
   gap: 12px;
+  justify-content: center;
+  width: 100%;
 }
 
 .footer-social a {

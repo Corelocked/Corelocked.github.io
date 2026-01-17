@@ -35,7 +35,7 @@ const About = () => {
                 I specialize in JavaScript technologies including React, Node.js, and Express.
                 I also have experience in mobile app development using Kotlin and a little bit of Flutter.
               </p>
-              <p>
+              <p className="lead-subtext">
                 I love creating efficient, user-friendly solutions that solve real-world problems.
                 When I'm not coding, I enjoy graphic design and video editing to bring ideas to life visually.
               </p>
