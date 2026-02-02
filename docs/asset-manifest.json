@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.dbfc7b37.css",
-    "main.js": "/static/js/main.826ca867.js",
+    "main.css": "/static/css/main.dfb316a4.css",
+    "main.js": "/static/js/main.ac4c138c.js",
     "static/media/umbreon.mp4": "/static/media/umbreon.b892936d7038e158985c.mp4",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
     "static/media/spider-gwen.mp4": "/static/media/spider-gwen.98f052310c564895d34e.mp4",
@@ -44,11 +44,11 @@
     "static/media/flutter.svg": "/static/media/flutter.40ebc8d1e3a656f9b768dae63926e23e.svg",
     "static/media/frontend.svg": "/static/media/frontend.67d96e6df9d7fa4c78a35508d1bbe951.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
-    "main.dbfc7b37.css.map": "/static/css/main.dbfc7b37.css.map",
-    "main.826ca867.js.map": "/static/js/main.826ca867.js.map"
+    "main.dfb316a4.css.map": "/static/css/main.dfb316a4.css.map",
+    "main.ac4c138c.js.map": "/static/js/main.ac4c138c.js.map"
   },
   "entrypoints": [
-    "static/css/main.dbfc7b37.css",
-    "static/js/main.826ca867.js"
+    "static/css/main.dfb316a4.css",
+    "static/js/main.ac4c138c.js"
   ]
 }

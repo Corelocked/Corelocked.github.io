@@ -1,3 +1,6 @@
+/* Minecraft Font */
+@import url('https://fonts.cdnfonts.com/css/minecraft-4');
+
 /* Virtual Cat Styles */
 .virtual-cat {
   position: fixed;
@@ -6,17 +9,459 @@
   z-index: 1000;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-/* Petting animation */
+/* Add a ground shadow that responds to movement */
+.virtual-cat::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 8px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  transition: all 0.2s ease;
+}
+
+.virtual-cat.walking::after {
+  animation: shadow-walk 0.4s ease-in-out infinite;
+}
+
+.virtual-cat.sleeping::after {
+  width: 40px;
+  height: 10px;
+  opacity: 0.8;
+}
+
+.virtual-cat.carrying::after {
+  opacity: 0;
+}
+
+.virtual-cat.shocked::after {
+  animation: shadow-jump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes shadow-walk {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) scaleX(0.9); opacity: 0.6; }
+}
+
+@keyframes shadow-jump {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  30% { transform: translateX(-50%) scale(0.5); opacity: 0.3; }
+  100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+}
+
+/* Minecraft-style name tag */
+.cat-nametag {
+  --flip: 1;
+  position: absolute;
+  top: -22px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: 'Minecraft', 'Minecraftia', monospace;
+  font-size: 10px;
+  font-weight: normal;
+  padding: 2px 6px;
+  border-radius: 2px;
+  transform: scaleX(var(--flip));
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  letter-spacing: 1px;
+  pointer-events: none;
+  z-index: 10;
+  image-rendering: pixelated;
+  text-align: center;
+}
+
+/* Pet Food Bowl */
+.pet-bowl {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  width: 50px;
+  height: 35px;
+  z-index: 999;
+  pointer-events: none;
+  filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.3));
+}
+
+.bowl-inner {
+  pointer-events: auto;
+}
+
+.bowl-rim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 12px;
+  background: linear-gradient(180deg, #e91e63 0%, #c2185b 50%, #ad1457 100%);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.bowl-inner {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 40px;
+  height: 8px;
+  background: linear-gradient(180deg, #5d4037 0%, #4e342e 100%);
+  border-radius: 50%;
+  z-index: 4;
+  overflow: hidden;
+}
+
+.bowl-food {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.food-piece {
+  width: 12px;
+  height: 10px;
+  background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 50%, #5d4037 100%);
+  border-radius: 30% 70% 50% 50%;
+  transform: rotate(var(--rotation, 0deg));
+  /* Larger clickable area */
+  padding: 5px;
+  margin: -5px;
+  box-sizing: content-box;
+}
+
+.food-piece:nth-child(1) { --rotation: -15deg; }
+.food-piece:nth-child(2) { --rotation: 20deg; transform: translateY(-1px); }
+.food-piece:nth-child(3) { --rotation: -5deg; }
+.food-piece:nth-child(4) { --rotation: 25deg; transform: translateY(-1px); }
+.food-piece:nth-child(5) { --rotation: -20deg; }
+
+/* Bowl fullness states */
+.bowl-full .bowl-food {
+  opacity: 1;
+}
+
+.bowl-full .food-piece {
+  transform: scale(1.2) rotate(var(--rotation, 0deg));
+}
+
+.bowl-half .bowl-food {
+  opacity: 0.7;
+}
+
+.bowl-half .food-piece:nth-child(4),
+.bowl-half .food-piece:nth-child(5) {
+  opacity: 0;
+}
+
+.bowl-empty .bowl-food {
+  opacity: 0.3;
+}
+
+.bowl-empty .food-piece:nth-child(2),
+.bowl-empty .food-piece:nth-child(3),
+.bowl-empty .food-piece:nth-child(4),
+.bowl-empty .food-piece:nth-child(5) {
+  opacity: 0;
+}
+
+.bowl-base {
+  position: absolute;
+  top: 8px;
+  left: 3px;
+  width: 44px;
+  height: 20px;
+  background: linear-gradient(180deg, #c2185b 0%, #ad1457 30%, #880e4f 100%);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  z-index: 2;
+}
+
+.bowl-label {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Minecraft', 'Minecraftia', monospace;
+  font-size: 6px;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+/* Eating Animation - More enthusiastic munching */
+.virtual-cat.eating .cat-head {
+  animation: eating-head 0.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.eating .cat-body {
+  animation: eating-body 0.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.eating .cat-tail {
+  animation: eating-happy-tail 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.virtual-cat.eating .cat-ears .ear.left {
+  animation: eating-ears-left 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.eating .cat-ears .ear.right {
+  animation: eating-ears-right 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.1s;
+}
+
+.virtual-cat.eating .cat-legs {
+  opacity: 1 !important;
+  transform: translateX(-50%) scaleY(1) !important;
+}
+
+.virtual-cat.eating .cat-legs .leg {
+  animation: eating-legs 0.5s ease-in-out infinite !important;
+}
+
+.virtual-cat.eating .cat-whiskers .whisker-left,
+.virtual-cat.eating .cat-whiskers .whisker-right {
+  animation: eating-whiskers 0.35s ease-in-out infinite;
+}
+
+.virtual-cat.eating .cat-eyes .eye::before {
+  animation: eating-eyes 0.7s ease-in-out infinite !important;
+}
+
+@keyframes eating-head {
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  30% { transform: translateX(-50%) translateY(6px) rotate(6deg); }
+  50% { transform: translateX(-50%) translateY(8px) rotate(4deg); }
+  70% { transform: translateX(-50%) translateY(5px) rotate(6deg); }
+  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+@keyframes eating-body {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(2px) scale(1.02, 0.98); }
+}
+
+@keyframes eating-happy-tail {
+  0% { transform: rotate(-12deg); }
+  25% { transform: rotate(20deg); }
+  50% { transform: rotate(-8deg); }
+  75% { transform: rotate(22deg); }
+  100% { transform: rotate(-12deg); }
+}
+
+@keyframes eating-ears-left {
+  0%, 100% { transform: rotate(-20deg); }
+  25% { transform: rotate(-12deg); }
+  50% { transform: rotate(-18deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+@keyframes eating-ears-right {
+  0%, 100% { transform: rotate(20deg); }
+  25% { transform: rotate(12deg); }
+  50% { transform: rotate(18deg); }
+  75% { transform: rotate(10deg); }
+}
+
+@keyframes eating-legs {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(1px); }
+}
+
+@keyframes eating-whiskers {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg) translateY(1px); }
+}
+
+@keyframes eating-eyes {
+  0%, 40%, 100% { transform: translateX(-50%) scaleY(1); }
+  45%, 55% { transform: translateX(-50%) scaleY(0.3); }
+}
+
+/* Floating food piece (when dragging) */
+.floating-food {
+  position: fixed;
+  width: 20px;
+  height: 16px;
+  background: linear-gradient(135deg, #a1887f 0%, #8d6e63 50%, #6d4c41 100%);
+  border-radius: 30% 70% 50% 50%;
+  z-index: 10000;
+  pointer-events: none;
+  cursor: grabbing;
+  filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.3));
+  animation: food-float 0.3s ease-in-out infinite;
+}
+
+@keyframes food-float {
+  0%, 100% { transform: rotate(-5deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.05); }
+}
+
+/* Make food pieces in bowl interactive */
+.bowl-food .food-piece {
+  cursor: grab;
+  pointer-events: auto;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.bowl-food .food-piece:hover {
+  transform: translateY(-3px) rotate(var(--rotation, 0deg)) scale(1.2);
+  filter: brightness(1.2);
+}
+
+.pet-bowl {
+  pointer-events: auto;
+  cursor: grab;
+}
+
+/* Being fed animation (hand feeding) */
+.virtual-cat.being-fed .cat-head {
+  animation: being-fed-head 0.3s ease-in-out infinite;
+}
+
+.virtual-cat.being-fed .cat-body {
+  animation: being-fed-excited 0.3s ease-in-out infinite;
+}
+
+.virtual-cat.being-fed .cat-tail {
+  animation: being-fed-tail 0.25s ease-in-out infinite !important;
+}
+
+.virtual-cat.being-fed .cat-ears .ear.left {
+  animation: being-fed-ears-left 0.4s ease-in-out infinite;
+}
+
+.virtual-cat.being-fed .cat-ears .ear.right {
+  animation: being-fed-ears-right 0.4s ease-in-out infinite;
+}
+
+@keyframes being-fed-head {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-3px); }
+}
+
+@keyframes being-fed-excited {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-2px) scale(1.02); }
+}
+
+@keyframes being-fed-tail {
+  0% { transform: rotate(-15deg); }
+  50% { transform: rotate(25deg); }
+  100% { transform: rotate(-15deg); }
+}
+
+@keyframes being-fed-ears-left {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+@keyframes being-fed-ears-right {
+  0%, 100% { transform: rotate(15deg); }
+  50% { transform: rotate(25deg); }
+}
+
+/* Watching food animation (when food is being held) */
+.virtual-cat.watching-food {
+  animation: none !important;
+}
+
+.virtual-cat.watching-food .cat-body {
+  animation: watching-food-body 0.5s ease-in-out infinite;
+}
+
+.virtual-cat.watching-food .cat-head {
+  animation: watching-food-head 0.4s ease-in-out infinite;
+}
+
+.virtual-cat.watching-food .cat-eyes .eye::before {
+  width: 8px !important;
+  height: 8px !important;
+  animation: watching-food-pupils 0.3s ease-in-out infinite !important;
+}
+
+.virtual-cat.watching-food .cat-tail {
+  animation: watching-food-tail 0.4s ease-in-out infinite !important;
+}
+
+.virtual-cat.watching-food .cat-ears .ear.left {
+  animation: watching-food-ears-left 0.5s ease-in-out infinite;
+}
+
+.virtual-cat.watching-food .cat-ears .ear.right {
+  animation: watching-food-ears-right 0.5s ease-in-out infinite;
+}
+
+.virtual-cat.watching-food .cat-legs {
+  opacity: 1 !important;
+  transform: translateX(-50%) scaleY(1) !important;
+}
+
+.virtual-cat.watching-food .cat-legs .leg {
+  animation: watching-food-legs 0.3s ease-in-out infinite !important;
+}
+
+@keyframes watching-food-body {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes watching-food-head {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-3px); }
+}
+
+@keyframes watching-food-pupils {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
+}
+
+@keyframes watching-food-tail {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+@keyframes watching-food-ears-left {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(-10deg); }
+}
+
+@keyframes watching-food-ears-right {
+  0%, 100% { transform: rotate(15deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes watching-food-legs {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(1px); }
+}
+
+/* Petting animation - Enhanced with purring vibration */
 .virtual-cat.petting .cat-body {
-  animation: petting-happy 0.3s ease-in-out infinite;
+  animation: petting-happy 0.3s cubic-bezier(0.4, 0, 0.2, 1) infinite, purr-vibrate 0.1s linear infinite;
 }
 
 .virtual-cat.petting .cat-head {
-  animation: head-nuzzle 0.5s ease-in-out infinite;
+  animation: head-nuzzle 0.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.petting .cat-eyes .eye::before {
@@ -25,11 +470,16 @@
 }
 
 .virtual-cat.petting .cat-tail {
-  animation: happy-tail 0.3s ease-in-out infinite !important;
+  animation: happy-tail 0.25s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
 }
 
-.virtual-cat.petting .cat-ears .ear {
-  animation: ear-twitch 0.4s ease-in-out infinite;
+.virtual-cat.petting .cat-ears .ear.left {
+  animation: ear-twitch 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.petting .cat-whiskers .whisker-left,
+.virtual-cat.petting .cat-whiskers .whisker-right {
+  animation: petting-whiskers 0.6s ease-in-out infinite;
 }
 
 @keyframes petting-happy {
@@ -37,24 +487,35 @@
   50% { transform: translateY(-2px); }
 }
 
+@keyframes purr-vibrate {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(0.3px); }
+  75% { transform: translateX(-0.3px); }
+}
+
 @keyframes head-nuzzle {
-  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
-  50% { transform: translateX(-50%) rotate(2deg); }
+  0%, 100% { transform: translateX(-50%) rotate(-3deg); }
+  50% { transform: translateX(-50%) rotate(3deg); }
 }
 
 @keyframes happy-tail {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(15deg); }
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(18deg); }
 }
 
 @keyframes ear-twitch {
   0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(-15deg); }
+  50% { transform: rotate(-12deg); }
 }
 
 @keyframes ear-twitch-right {
   0%, 100% { transform: rotate(20deg); }
-  50% { transform: rotate(15deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@keyframes petting-whiskers {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
 }
 
 .virtual-cat.petting .cat-ears .ear.right {
@@ -62,25 +523,25 @@
   animation-delay: 0.1s;
 }
 
-/* Carrying animation - being held */
+/* Carrying animation - being held - More playful dangling */
 .virtual-cat.carrying {
   cursor: grabbing !important;
   z-index: 9999;
 }
 
 .virtual-cat.carrying .cat-body {
-  animation: carrying-wobble 0.5s ease-in-out infinite;
+  animation: carrying-wobble 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.carrying .cat-head {
-  animation: carrying-head 0.3s ease-in-out infinite;
+  animation: carrying-head 0.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.carrying .cat-eyes .eye::before {
   width: 7px;
   height: 7px;
   top: 1px;
-  animation: none;
+  animation: carrying-eyes 0.5s ease-in-out infinite;
 }
 
 .virtual-cat.carrying .cat-legs {
@@ -89,55 +550,81 @@
 }
 
 .virtual-cat.carrying .cat-legs .leg {
-  animation: dangling-legs 0.3s ease-in-out infinite !important;
+  animation: dangling-legs 0.25s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
   height: 18px !important;
 }
 
 .virtual-cat.carrying .cat-legs .leg.front-right,
 .virtual-cat.carrying .cat-legs .leg.back-right {
-  animation-delay: 0.15s !important;
+  animation-delay: 0.125s !important;
+}
+
+.virtual-cat.carrying .cat-legs .leg.back-left {
+  animation-delay: 0.05s !important;
+}
+
+.virtual-cat.carrying .cat-legs .leg.back-right {
+  animation-delay: 0.175s !important;
 }
 
 .virtual-cat.carrying .cat-tail {
-  animation: carrying-tail 0.4s ease-in-out infinite !important;
+  animation: carrying-tail 0.35s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
 }
 
 .virtual-cat.carrying .cat-ears .ear.left {
-  animation: carrying-ears-left 0.25s ease-in-out infinite;
+  animation: carrying-ears-left 0.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.carrying .cat-ears .ear.right {
-  animation: carrying-ears-right 0.25s ease-in-out infinite;
+  animation: carrying-ears-right 0.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.1s;
+}
+
+.virtual-cat.carrying .cat-whiskers .whisker-left,
+.virtual-cat.carrying .cat-whiskers .whisker-right {
+  animation: carrying-whiskers 0.3s ease-in-out infinite;
 }
 
 @keyframes carrying-wobble {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(4deg) translateY(1px); }
 }
 
 @keyframes carrying-head {
-  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
-  50% { transform: translateX(-50%) rotate(2deg); }
+  0%, 100% { transform: translateX(-50%) rotate(-3deg); }
+  50% { transform: translateX(-50%) rotate(3deg); }
+}
+
+@keyframes carrying-eyes {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(0.5px); }
 }
 
 @keyframes dangling-legs {
-  0%, 100% { transform: rotate(15deg); }
-  50% { transform: rotate(-15deg); }
+  0% { transform: rotate(20deg) translateY(0); }
+  50% { transform: rotate(-20deg) translateY(2px); }
+  100% { transform: rotate(20deg) translateY(0); }
 }
 
 @keyframes carrying-tail {
-  0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(20deg); }
+  0% { transform: rotate(-25deg); }
+  50% { transform: rotate(25deg); }
+  100% { transform: rotate(-25deg); }
 }
 
 @keyframes carrying-ears-left {
-  0%, 100% { transform: rotate(-25deg); }
+  0%, 100% { transform: rotate(-28deg); }
   50% { transform: rotate(-15deg); }
 }
 
 @keyframes carrying-ears-right {
-  0%, 100% { transform: rotate(25deg); }
+  0%, 100% { transform: rotate(28deg); }
   50% { transform: rotate(15deg); }
+}
+
+@keyframes carrying-whiskers {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg) translateY(1px); }
 }
 
 /* Earthquake animation - when scrolling */
@@ -152,7 +639,7 @@
   animation: none;
 }
 
-.virtual-cat.earthquake .cat-ears .ear {
+.virtual-cat.earthquake .cat-ears .ear.left {
   animation: earthquake-ears 0.05s linear infinite;
 }
 
@@ -204,37 +691,37 @@
   50% { transform: translateY(2px); }
 }
 
-/* Shocked animation - when clicked while sleeping */
+/* Shocked animation - when clicked while sleeping - More dramatic */
 .virtual-cat.shocked {
-  animation: shocked-jump 0.5s ease-out;
+  animation: shocked-jump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .virtual-cat.shocked .cat-body {
-  animation: shocked-body 0.3s ease-out;
+  animation: shocked-body 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .virtual-cat.shocked .cat-head {
-  animation: shocked-head 0.2s ease-out;
+  animation: shocked-head 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .virtual-cat.shocked .cat-eyes .eye::before {
-  width: 10px !important;
-  height: 10px !important;
-  top: -1px !important;
+  width: 11px !important;
+  height: 11px !important;
+  top: -2px !important;
   border-radius: 50% !important;
-  animation: none !important;
+  animation: shocked-pupils 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .virtual-cat.shocked .cat-ears .ear.left {
-  animation: shocked-ear-left 0.3s ease-out;
+  animation: shocked-ear-left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .virtual-cat.shocked .cat-ears .ear.right {
-  animation: shocked-ear-right 0.3s ease-out;
+  animation: shocked-ear-right 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .virtual-cat.shocked .cat-tail {
-  animation: shocked-tail 0.4s ease-out !important;
+  animation: shocked-tail 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .virtual-cat.shocked .cat-legs {
@@ -243,61 +730,75 @@
 }
 
 .virtual-cat.shocked .cat-legs .leg {
-  animation: shocked-legs 0.2s ease-out !important;
+  animation: shocked-legs 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 .virtual-cat.shocked .cat-whiskers .whisker-left,
 .virtual-cat.shocked .cat-whiskers .whisker-right {
-  animation: shocked-whiskers 0.15s ease-out !important;
+  animation: shocked-whiskers 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
 @keyframes shocked-jump {
-  0% { transform: translateY(0); }
-  30% { transform: translateY(-20px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
+  0% { transform: translateY(0) scale(1); }
+  20% { transform: translateY(-25px) scale(1.1, 0.9); }
+  40% { transform: translateY(-20px) scale(0.95, 1.05); }
+  60% { transform: translateY(-10px) scale(1.02); }
+  80% { transform: translateY(-3px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 @keyframes shocked-body {
   0%, 100% { transform: scale(1); }
-  20% { transform: scale(1.1, 0.9); }
-  40% { transform: scale(0.95, 1.05); }
+  15% { transform: scale(1.15, 0.85); }
+  30% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.05, 0.95); }
 }
 
 @keyframes shocked-head {
-  0% { transform: translateX(-50%) translateY(0); }
-  30% { transform: translateX(-50%) translateY(-5px); }
-  100% { transform: translateX(-50%) translateY(0); }
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  20% { transform: translateX(-50%) translateY(-8px) rotate(-5deg); }
+  40% { transform: translateX(-50%) translateY(-5px) rotate(3deg); }
+  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+@keyframes shocked-pupils {
+  0% { transform: translateX(-50%) scale(0.5); }
+  30% { transform: translateX(-50%) scale(1.3); }
+  100% { transform: translateX(-50%) scale(1); }
 }
 
 @keyframes shocked-ear-left {
   0% { transform: rotate(-20deg); }
-  30% { transform: rotate(-40deg); }
+  25% { transform: rotate(-50deg) translateY(-3px); }
+  50% { transform: rotate(-35deg); }
   100% { transform: rotate(-20deg); }
 }
 
 @keyframes shocked-ear-right {
   0% { transform: rotate(20deg); }
-  30% { transform: rotate(40deg); }
+  25% { transform: rotate(50deg) translateY(-3px); }
+  50% { transform: rotate(35deg); }
   100% { transform: rotate(20deg); }
 }
 
 @keyframes shocked-tail {
   0% { transform: rotate(0deg); }
-  20% { transform: rotate(45deg); }
-  40% { transform: rotate(-30deg); }
-  60% { transform: rotate(20deg); }
+  15% { transform: rotate(60deg) translateY(-5px); }
+  30% { transform: rotate(-45deg); }
+  50% { transform: rotate(30deg); }
+  70% { transform: rotate(-20deg); }
   100% { transform: rotate(0deg); }
 }
 
 @keyframes shocked-legs {
-  0%, 100% { transform: scaleY(1); }
-  30% { transform: scaleY(1.3); }
+  0%, 100% { transform: scaleY(1) translateY(0); }
+  25% { transform: scaleY(1.4) translateY(-3px); }
+  50% { transform: scaleY(0.8) translateY(1px); }
 }
 
 @keyframes shocked-whiskers {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(10deg); }
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(15deg) translateY(-2px); }
 }
 
 /* Punching animation - swipe at cursor */
@@ -524,17 +1025,17 @@
   40% { transform: scaleY(0.9) translateY(2px); }
 }
 
-/* Stretching animation - when waking up */
+/* Stretching animation - when waking up - More fluid and cat-like */
 .virtual-cat.stretching .cat-body {
-  animation: stretch-body 0.8s ease-in-out;
+  animation: stretch-body 2.5s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .virtual-cat.stretching .cat-body::before {
-  animation: stretch-torso 0.8s ease-in-out;
+  animation: stretch-torso 2.5s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .virtual-cat.stretching .cat-head {
-  animation: stretch-head 0.8s ease-in-out;
+  animation: stretch-head 2.5s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .virtual-cat.stretching .cat-eyes .eye::before {
@@ -542,6 +1043,7 @@
   height: 2px;
   border-radius: 50%;
   top: 4px;
+  animation: stretch-eyes 2.5s ease-in-out;
 }
 
 .virtual-cat.stretching .cat-legs {
@@ -551,74 +1053,127 @@
 
 .virtual-cat.stretching .cat-legs .leg.front-left,
 .virtual-cat.stretching .cat-legs .leg.front-right {
-  animation: stretch-front-legs 0.8s ease-in-out;
+  animation: stretch-front-legs 2.5s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .virtual-cat.stretching .cat-legs .leg.back-left,
 .virtual-cat.stretching .cat-legs .leg.back-right {
-  animation: stretch-back-legs 0.8s ease-in-out;
+  animation: stretch-back-legs 2.5s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .virtual-cat.stretching .cat-tail {
-  animation: stretch-tail 0.8s ease-in-out !important;
+  animation: stretch-tail 2.5s cubic-bezier(0.4, 0, 0.6, 1) !important;
 }
 
-.virtual-cat.stretching .cat-ears .ear {
-  animation: stretch-ears 0.8s ease-in-out;
+.virtual-cat.stretching .cat-ears .ear.left {
+  animation: stretch-ears-left 2.5s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.virtual-cat.stretching .cat-ears .ear.right {
+  animation: stretch-ears-right 2.5s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .virtual-cat.stretching .cat-mouth {
   width: 10px !important;
   height: 6px !important;
   border-radius: 0 0 50% 50% !important;
+  animation: stretch-yawn 2.5s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-whiskers .whisker-left,
+.virtual-cat.stretching .cat-whiskers .whisker-right {
+  animation: stretch-whiskers 2.5s ease-in-out;
 }
 
 @keyframes stretch-body {
-  0%, 100% { transform: translateY(0); }
-  30% { transform: translateY(5px) scaleX(1.1); }
-  60% { transform: translateY(-3px) scaleX(0.95) scaleY(1.1); }
+  0% { transform: translateY(0) scale(1); }
+  10% { transform: translateY(2px) scaleX(1.05) scaleY(0.95); }
+  25% { transform: translateY(5px) scaleX(1.2) scaleY(0.85); }
+  40% { transform: translateY(3px) scaleX(1.15) scaleY(0.9); }
+  55% { transform: translateY(-5px) scaleX(0.9) scaleY(1.2); }
+  70% { transform: translateY(-8px) scaleX(0.85) scaleY(1.25); }
+  85% { transform: translateY(-3px) scaleX(0.95) scaleY(1.1); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 @keyframes stretch-torso {
-  0%, 100% { transform: translateX(-50%) scaleX(1); }
-  30% { transform: translateX(-50%) scaleX(1.15) scaleY(0.9); }
-  60% { transform: translateX(-50%) scaleX(0.9) scaleY(1.1); }
+  0% { transform: translateX(-50%) scaleX(1) scaleY(1); }
+  25% { transform: translateX(-50%) scaleX(1.25) scaleY(0.8); }
+  40% { transform: translateX(-50%) scaleX(1.2) scaleY(0.85); }
+  55% { transform: translateX(-50%) scaleX(0.85) scaleY(1.2); }
+  70% { transform: translateX(-50%) scaleX(0.8) scaleY(1.25); }
+  100% { transform: translateX(-50%) scaleX(1) scaleY(1); }
 }
 
 @keyframes stretch-head {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  30% { transform: translateX(-50%) translateY(3px); }
-  60% { transform: translateX(-50%) translateY(-8px); }
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  10% { transform: translateX(-50%) translateY(2px) rotate(-2deg); }
+  25% { transform: translateX(-50%) translateY(5px) rotate(-5deg); }
+  55% { transform: translateX(-50%) translateY(-10px) rotate(3deg); }
+  70% { transform: translateX(-50%) translateY(-15px) rotate(0deg); }
+  85% { transform: translateX(-50%) translateY(-5px) rotate(0deg); }
+  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+@keyframes stretch-eyes {
+  0%, 100% { transform: translateX(-50%) scaleY(0.3); }
+  70% { transform: translateX(-50%) scaleY(0.1); }
 }
 
 @keyframes stretch-front-legs {
-  0%, 100% { height: 12px; transform: rotate(0deg); }
-  30% { height: 8px; transform: rotate(10deg); }
-  60% { height: 18px; transform: rotate(-5deg); }
+  0% { height: 12px; transform: rotate(0deg); }
+  15% { height: 6px; transform: rotate(20deg); }
+  25% { height: 4px; transform: rotate(25deg); }
+  55% { height: 20px; transform: rotate(-10deg); }
+  70% { height: 24px; transform: rotate(-15deg); }
+  85% { height: 18px; transform: rotate(-5deg); }
+  100% { height: 12px; transform: rotate(0deg); }
 }
 
 @keyframes stretch-back-legs {
-  0%, 100% { height: 12px; transform: rotate(0deg); }
-  30% { height: 15px; transform: rotate(-10deg); }
-  60% { height: 10px; transform: rotate(5deg); }
+  0% { height: 12px; transform: rotate(0deg); }
+  15% { height: 18px; transform: rotate(-20deg); }
+  25% { height: 20px; transform: rotate(-25deg); }
+  55% { height: 8px; transform: rotate(10deg); }
+  70% { height: 6px; transform: rotate(15deg); }
+  85% { height: 10px; transform: rotate(5deg); }
+  100% { height: 12px; transform: rotate(0deg); }
 }
 
 @keyframes stretch-tail {
-  0% { transform: rotate(0deg); }
-  30% { transform: rotate(30deg) translateY(5px); }
-  60% { transform: rotate(-20deg) translateY(-3px); }
-  100% { transform: rotate(0deg); }
+  0% { transform: rotate(0deg) translateY(0); }
+  15% { transform: rotate(25deg) translateY(3px); }
+  35% { transform: rotate(40deg) translateY(5px); }
+  55% { transform: rotate(-20deg) translateY(-3px); }
+  75% { transform: rotate(-30deg) translateY(-5px); }
+  85% { transform: rotate(-10deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0); }
 }
 
-@keyframes stretch-ears {
+@keyframes stretch-ears-left {
   0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(-30deg); }
+  35% { transform: rotate(-35deg); }
+  70% { transform: rotate(-10deg); }
+}
+
+@keyframes stretch-ears-right {
+  0%, 100% { transform: rotate(20deg); }
+  35% { transform: rotate(35deg); }
+  70% { transform: rotate(10deg); }
+}
+
+@keyframes stretch-yawn {
+  0%, 100% { height: 0; opacity: 0; }
+  30%, 70% { height: 6px; opacity: 1; }
+}
+
+@keyframes stretch-whiskers {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(5deg) translateY(2px); }
+  70% { transform: rotate(-3deg) translateY(-1px); }
 }
 
 /* Idle Animations - random behaviors when not moving */
-.virtual-cat.idle {
-  /* Base idle state - cat stops walking */
-}
 
 /* Grooming idle animation */
 .virtual-cat.idle.grooming .cat-head {
@@ -645,38 +1200,59 @@
   75% { transform: rotate(40deg) translateY(-5px); }
 }
 
-/* Looking around idle animation */
+/* Looking around idle animation - More expressive head movements */
 .virtual-cat.idle.looking .cat-head {
-  animation: looking-head 2s ease-in-out infinite;
+  animation: looking-head 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.idle.looking .cat-eyes .eye::before {
-  animation: looking-eyes 2s ease-in-out infinite !important;
+  animation: looking-eyes 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
 }
 
-.virtual-cat.idle.looking .cat-ears .ear {
-  animation: looking-ears 2s ease-in-out infinite;
+.virtual-cat.idle.looking .cat-ears .ear.left {
+  animation: looking-ears-left 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.idle.looking .cat-ears .ear.right {
-  animation-delay: 0.3s;
+  animation: looking-ears-right 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.4s;
+}
+
+.virtual-cat.idle.looking .cat-body {
+  animation: looking-body 2.5s ease-in-out infinite;
 }
 
 @keyframes looking-head {
   0%, 100% { transform: translateX(-50%) rotate(0deg); }
-  30% { transform: translateX(-50%) rotate(-10deg); }
-  70% { transform: translateX(-50%) rotate(10deg); }
+  20% { transform: translateX(-50%) rotate(-12deg) translateY(-1px); }
+  40% { transform: translateX(-50%) rotate(-8deg); }
+  60% { transform: translateX(-50%) rotate(12deg) translateY(-1px); }
+  80% { transform: translateX(-50%) rotate(8deg); }
 }
 
 @keyframes looking-eyes {
-  0%, 100% { transform: translateX(0); }
-  30% { transform: translateX(-2px); }
-  70% { transform: translateX(2px); }
+  0%, 100% { transform: translateX(-50%); }
+  20% { transform: translateX(-70%); }
+  40% { transform: translateX(-55%); }
+  60% { transform: translateX(-30%); }
+  80% { transform: translateX(-45%); }
 }
 
-@keyframes looking-ears {
+@keyframes looking-ears-left {
   0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(-30deg); }
+  30% { transform: rotate(-32deg); }
+  70% { transform: rotate(-15deg); }
+}
+
+@keyframes looking-ears-right {
+  0%, 100% { transform: rotate(20deg); }
+  30% { transform: rotate(15deg); }
+  70% { transform: rotate(32deg); }
+}
+
+@keyframes looking-body {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.5px); }
 }
 
 /* Tail flick idle animation */
@@ -712,82 +1288,184 @@
   50% { transform: rotate(35deg); }
 }
 
-/* Curious animation - when investigating cursor */
+/* Curious animation - when investigating cursor - More dynamic and cat-like */
+.virtual-cat.curious .cat-body {
+  animation: curious-body 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 .virtual-cat.curious .cat-head {
-  animation: curious-head 1s ease-in-out infinite;
+  animation: curious-head 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .virtual-cat.curious .cat-eyes .eye::before {
-  width: 8px;
-  height: 8px;
-  animation: curious-eyes 1s ease-in-out infinite !important;
+  width: 9px;
+  height: 9px;
+  animation: curious-eyes 1s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
 }
 
-.virtual-cat.curious .cat-ears .ear {
-  animation: curious-ears 1s ease-in-out infinite;
+.virtual-cat.curious .cat-ears .ear.left {
+  animation: curious-ears-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.curious .cat-ears .ear.right {
+  animation: curious-ears-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.1s;
 }
 
 .virtual-cat.curious .cat-tail {
-  animation: curious-tail 0.8s ease-in-out infinite !important;
+  animation: curious-tail 0.6s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.virtual-cat.curious .cat-whiskers .whisker-left,
+.virtual-cat.curious .cat-whiskers .whisker-right {
+  animation: curious-whiskers 1s ease-in-out infinite;
+}
+
+.virtual-cat.curious .cat-legs {
+  opacity: 1 !important;
+}
+
+.virtual-cat.curious .cat-legs .leg {
+  animation: curious-legs 1s ease-in-out infinite !important;
+}
+
+@keyframes curious-body {
+  0%, 100% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-1px) scale(1.01); }
+  60% { transform: translateY(-2px) scale(1.02); }
 }
 
 @keyframes curious-head {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-3px); }
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  30% { transform: translateX(-50%) translateY(-3px) rotate(-3deg); }
+  60% { transform: translateX(-50%) translateY(-4px) rotate(2deg); }
 }
 
 @keyframes curious-eyes {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  30% { transform: translateX(-50%) scale(1.15); }
+  60% { transform: translateX(-50%) scale(1.1); }
 }
 
-@keyframes curious-ears {
+@keyframes curious-ears-left {
   0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(-10deg); }
+  30% { transform: rotate(-8deg); }
+  60% { transform: rotate(-12deg); }
+}
+
+@keyframes curious-ears-right {
+  0%, 100% { transform: rotate(20deg); }
+  30% { transform: rotate(8deg); }
+  60% { transform: rotate(12deg); }
 }
 
 @keyframes curious-tail {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(15deg); }
-  75% { transform: rotate(-15deg); }
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(18deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(-18deg); }
+  100% { transform: rotate(0deg); }
 }
 
-/* Happy mood - more animated */
+@keyframes curious-whiskers {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-1px) rotate(2deg); }
+}
+
+@keyframes curious-legs {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+
+/* Happy mood - more animated and expressive */
 .virtual-cat.happy .cat-tail {
-  animation: happy-tail-wag 0.5s ease-in-out infinite !important;
+  animation: happy-tail-wag 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
 }
 
 .virtual-cat.happy .cat-eyes .eye::before {
-  height: 6px;
+  height: 5px;
   border-radius: 50% 50% 50% 50%;
+  animation: happy-eyes 2s ease-in-out infinite !important;
+}
+
+.virtual-cat.happy .cat-ears .ear.left {
+  animation: happy-ears-left 1.5s ease-in-out infinite;
+}
+
+.virtual-cat.happy .cat-ears .ear.right {
+  animation: happy-ears-right 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.virtual-cat.happy .cat-body {
+  animation: happy-bounce 2s ease-in-out infinite;
 }
 
 @keyframes happy-tail-wag {
-  0%, 100% { transform: rotate(-10deg); }
-  50% { transform: rotate(20deg); }
+  0% { transform: rotate(-12deg); }
+  25% { transform: rotate(22deg); }
+  50% { transform: rotate(-8deg); }
+  75% { transform: rotate(25deg); }
+  100% { transform: rotate(-12deg); }
 }
 
-/* Grumpy mood - flat ears, narrow eyes */
+@keyframes happy-eyes {
+  0%, 100% { transform: translateX(-50%) scaleY(1); }
+  50% { transform: translateX(-50%) scaleY(0.8); }
+}
+
+@keyframes happy-ears-left {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-12deg); }
+}
+
+@keyframes happy-ears-right {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@keyframes happy-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+
+/* Grumpy mood - flat ears, narrow eyes, annoyed tail */
 .virtual-cat.grumpy .cat-ears .ear.left {
   transform: rotate(-35deg);
+  transition: transform 0.3s ease;
 }
 
 .virtual-cat.grumpy .cat-ears .ear.right {
   transform: rotate(35deg);
+  transition: transform 0.3s ease;
 }
 
 .virtual-cat.grumpy .cat-eyes .eye::before {
-  height: 4px;
-  top: 3px;
+  height: 3px;
+  top: 4px;
+  transition: all 0.3s ease;
 }
 
 .virtual-cat.grumpy .cat-tail {
-  animation: grumpy-tail 2s ease-in-out infinite !important;
+  animation: grumpy-tail 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.virtual-cat.grumpy .cat-whiskers .whisker-left,
+.virtual-cat.grumpy .cat-whiskers .whisker-right {
+  animation: grumpy-whiskers 3s ease-in-out infinite;
 }
 
 @keyframes grumpy-tail {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
+  0%, 70%, 100% { transform: rotate(-3deg); }
+  75% { transform: rotate(8deg); }
+  80% { transform: rotate(-5deg); }
+  /* Occasional annoyed flick */
+}
+
+@keyframes grumpy-whiskers {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(-2deg); }
+  96% { transform: rotate(2deg); }
 }
 
 /* Theme change reaction - Dark Mode */
@@ -806,8 +1484,12 @@
   animation: theme-look-around 1.2s ease-in-out;
 }
 
-.virtual-cat.theme-dark .cat-ears .ear {
-  animation: theme-ears-perk 1.2s ease-out;
+.virtual-cat.theme-dark .cat-ears .ear.left {
+  animation: theme-ears-perk-left 1.2s ease-out;
+}
+
+.virtual-cat.theme-dark .cat-ears .ear.right {
+  animation: theme-ears-perk-right 1.2s ease-out;
 }
 
 .virtual-cat.theme-dark .cat-tail {
@@ -833,10 +1515,16 @@
   75% { transform: translateX(-50%) rotate(15deg); }
 }
 
-@keyframes theme-ears-perk {
+@keyframes theme-ears-perk-left {
   0% { transform: rotate(-20deg); }
   30% { transform: rotate(-5deg); }
   100% { transform: rotate(-20deg); }
+}
+
+@keyframes theme-ears-perk-right {
+  0% { transform: rotate(20deg); }
+  30% { transform: rotate(5deg); }
+  100% { transform: rotate(20deg); }
 }
 
 @keyframes theme-excited-tail {
@@ -1057,7 +1745,7 @@
   height: 6px;
   background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 70%);
   border-radius: 50%;
-  animation: eye-blink 4s ease-in-out infinite;
+  animation: eye-blink 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .cat-eyes .eye::after {
@@ -1069,11 +1757,21 @@
   height: 2px;
   background: white;
   border-radius: 50%;
+  animation: eye-sparkle 3s ease-in-out infinite;
 }
 
 @keyframes eye-blink {
-  0%, 95%, 100% { transform: translateX(-50%) scaleY(1); }
+  0%, 92%, 100% { transform: translateX(-50%) scaleY(1); }
+  94% { transform: translateX(-50%) scaleY(0.1); }
+  96% { transform: translateX(-50%) scaleY(1); }
+  /* Double blink occasionally */
   97% { transform: translateX(-50%) scaleY(0.1); }
+  99% { transform: translateX(-50%) scaleY(1); }
+}
+
+@keyframes eye-sparkle {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 /* Cat Nose */
@@ -1240,7 +1938,7 @@
   transform-origin: left center;
 }
 
-/* Cat Tail */
+/* Cat Tail - Smoother, more organic movement */
 .cat-tail {
   position: absolute;
   top: 42px;
@@ -1250,15 +1948,20 @@
   background: linear-gradient(270deg, #e9ecef 0%, #f8f9fa 60%, #ffffff 100%);
   border-radius: 10px 3px 3px 10px;
   transform-origin: right center;
-  animation: tail-wag 1.8s ease-in-out infinite;
+  animation: tail-wag 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   z-index: 0;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes tail-wag {
-  0%, 100% { transform: rotate(8deg); }
-  25% { transform: rotate(-12deg); }
-  50% { transform: rotate(5deg); }
-  75% { transform: rotate(-15deg); }
+  0% { transform: rotate(8deg) translateY(0); }
+  15% { transform: rotate(-5deg) translateY(-0.5px); }
+  30% { transform: rotate(10deg) translateY(0); }
+  45% { transform: rotate(-12deg) translateY(-0.5px); }
+  60% { transform: rotate(5deg) translateY(0); }
+  75% { transform: rotate(-8deg) translateY(-0.5px); }
+  90% { transform: rotate(12deg) translateY(0); }
+  100% { transform: rotate(8deg) translateY(0); }
 }
 
 /* Cat Legs */
@@ -1317,28 +2020,95 @@
 }
 
 @keyframes leg-walk {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(20deg); }
-  75% { transform: rotate(-20deg); }
+  0% { transform: rotate(0deg) translateY(0); }
+  15% { transform: rotate(25deg) translateY(-1px); }
+  30% { transform: rotate(15deg) translateY(0); }
+  50% { transform: rotate(0deg) translateY(1px); }
+  65% { transform: rotate(-20deg) translateY(-1px); }
+  80% { transform: rotate(-10deg) translateY(0); }
+  100% { transform: rotate(0deg) translateY(0); }
 }
 
 /* Walking animation */
 .virtual-cat.walking .cat-legs .leg {
-  animation-duration: 0.35s;
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Add a subtle bounce when walking */
 .virtual-cat.walking .cat-body {
-  animation: cat-bounce 0.35s ease-in-out infinite;
+  animation: cat-bounce 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.walking .cat-head {
+  animation: cat-head-bob 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.walking .cat-tail {
+  animation: walking-tail 0.6s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.virtual-cat.walking .cat-ears .ear.left {
+  animation: walking-ear-left 0.8s ease-in-out infinite;
+}
+
+.virtual-cat.walking .cat-ears .ear.right {
+  animation: walking-ear-right 0.8s ease-in-out infinite;
+  animation-delay: 0.1s;
 }
 
 @keyframes cat-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-1px) rotate(0.5deg); }
+  50% { transform: translateY(-2px) rotate(0deg); }
+  75% { transform: translateY(-1px) rotate(-0.5deg); }
 }
 
+@keyframes cat-head-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-1.5px); }
+}
+
+@keyframes walking-tail {
+  0% { transform: rotate(5deg); }
+  25% { transform: rotate(-10deg) translateY(-1px); }
+  50% { transform: rotate(8deg); }
+  75% { transform: rotate(-12deg) translateY(-1px); }
+  100% { transform: rotate(5deg); }
+}
+
+@keyframes walking-ear-left {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+@keyframes walking-ear-right {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(15deg); }
+}
+
+/* Idle - legs stop walking but add subtle breathing */
 .virtual-cat.idle .cat-legs .leg {
   animation: none;
+}
+
+.virtual-cat.idle .cat-body {
+  animation: idle-breathe 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.virtual-cat.idle .cat-whiskers .whisker-left,
+.virtual-cat.idle .cat-whiskers .whisker-right {
+  animation: idle-whiskers 4s ease-in-out infinite;
+}
+
+@keyframes idle-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(0.5px) scale(1.008); }
+}
+
+@keyframes idle-whiskers {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(0.5px); }
 }
 
 /* Sleeping animation - Cat Loaf Position */
@@ -1347,14 +2117,14 @@
 }
 
 .virtual-cat.sleeping .cat-body {
-  animation: sleep-breathe 3s ease-in-out infinite;
+  animation: sleep-breathe 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* Hide legs when sleeping (tucked under body like a loaf) */
 .virtual-cat.sleeping .cat-legs {
   opacity: 0;
   transform: translateX(-50%) scaleY(0.3);
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Make body more loaf-like when sleeping */
@@ -1362,7 +2132,7 @@
   transform: translateX(-50%) scaleY(1.1) scaleX(1.15);
   bottom: 8px;
   border-radius: 45% 45% 50% 50%;
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Tuck tail around body when sleeping */
@@ -1371,29 +2141,70 @@
   left: 8px;
   width: 18px;
   transform-origin: right center;
-  animation: sleep-tail 4s ease-in-out infinite;
-  transition: all 0.3s ease;
+  animation: sleep-tail 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .virtual-cat.sleeping .cat-eyes .eye::before {
   transform: translateX(-50%) scaleY(0.15);
   animation: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Slight head tilt when sleeping */
 .virtual-cat.sleeping .cat-head {
   transform: translateX(-50%) rotate(-3deg);
-  transition: transform 0.3s ease;
+  animation: sleep-head-drift 5s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gentle ear twitching while sleeping (dreaming!) */
+.virtual-cat.sleeping .cat-ears .ear.left {
+  animation: sleep-ear-twitch-left 6s ease-in-out infinite;
+}
+
+.virtual-cat.sleeping .cat-ears .ear.right {
+  animation: sleep-ear-twitch-right 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+/* Subtle whisker movement while sleeping */
+.virtual-cat.sleeping .cat-whiskers .whisker-left,
+.virtual-cat.sleeping .cat-whiskers .whisker-right {
+  animation: sleep-whiskers 4s ease-in-out infinite;
 }
 
 @keyframes sleep-breathe {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(1px) scale(1.02); }
+  40% { transform: translateY(1px) scale(1.02); }
+  60% { transform: translateY(1px) scale(1.02); }
 }
 
 @keyframes sleep-tail {
   0%, 100% { transform: rotate(5deg); }
   50% { transform: rotate(-3deg); }
+}
+
+@keyframes sleep-head-drift {
+  0%, 100% { transform: translateX(-50%) rotate(-3deg) translateY(0); }
+  50% { transform: translateX(-50%) rotate(-2deg) translateY(0.5px); }
+}
+
+@keyframes sleep-ear-twitch-left {
+  0%, 90%, 100% { transform: rotate(-20deg); }
+  93% { transform: rotate(-25deg); }
+  96% { transform: rotate(-18deg); }
+}
+
+@keyframes sleep-ear-twitch-right {
+  0%, 90%, 100% { transform: rotate(20deg); }
+  93% { transform: rotate(25deg); }
+  96% { transform: rotate(18deg); }
+}
+
+@keyframes sleep-whiskers {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(0.3px) rotate(1deg); }
 }
 
 /* Transition back to walking */
@@ -1419,19 +2230,20 @@
   transition: all 0.2s ease;
 }
 
-/* Speech Bubble */
+/* Speech Bubble - Enhanced with bounce and subtle float */
 .speech-bubble {
+  --flip: 1;
   position: absolute;
   top: -45px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scaleX(var(--flip));
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border: 2px solid #60a5fa;
   border-radius: 18px;
   padding: 8px 14px;
   box-shadow: 0 4px 15px rgba(96, 165, 250, 0.25),
               0 2px 6px rgba(0, 0, 0, 0.1);
-  animation: bubble-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: bubble-appear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, bubble-float 3s ease-in-out infinite 0.4s;
   white-space: nowrap;
   z-index: 1001;
 }
@@ -1443,6 +2255,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 0.01em;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  animation: text-appear 0.3s ease-out 0.1s both;
 }
 
 .speech-arrow {
@@ -1456,6 +2269,7 @@
   border-right: 10px solid transparent;
   border-top: 10px solid #60a5fa;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+  animation: arrow-bounce 3s ease-in-out infinite 0.4s;
 }
 
 .speech-arrow::after {
@@ -1473,12 +2287,31 @@
 @keyframes bubble-appear {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(10px) scale(0.8);
+    transform: translateX(-50%) translateY(15px) scale(0.5) scaleX(var(--flip, 1));
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-3px) scale(1.05) scaleX(var(--flip, 1));
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
+    transform: translateX(-50%) translateY(0) scale(1) scaleX(var(--flip, 1));
   }
+}
+
+@keyframes bubble-float {
+  0%, 100% { transform: translateX(-50%) translateY(0) scaleX(var(--flip, 1)); }
+  50% { transform: translateX(-50%) translateY(-2px) scaleX(var(--flip, 1)); }
+}
+
+@keyframes text-appear {
+  0% { opacity: 0; transform: translateY(3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-2px); }
 }
 
 /* Dark mode adjustments - keep the white cat but add a subtle glow */
