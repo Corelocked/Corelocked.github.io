@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>© {currentYear} Cedric Joshua Palapuz. Built with ❤️ and React.</p>
+          <p>© {currentYear} Cedric Joshua Palapuz. Built with React.</p>
           <div className="footer-bottom-links">
             <Link to="home" smooth={true} duration={500}>Back to Top ↑</Link>
           </div>
