@@ -17,7 +17,7 @@ const Hero = () => {
       <div className="hero-bg-decoration"></div>
       <div className="container">
         <div className={`hero-content scroll-reveal fade-left ${isLoaded ? 'visible' : ''}`}>
-          <span className="hero-greeting">👋 Welcome to my portfolio</span>
+          <span className="hero-greeting">Welcome to my portfolio</span>
           <h1>Hi, I'm <span className="gradient-text">Cedric Joshua Palapuz</span></h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
             <span className="tagline-prefix">I'm an</span> Android <span className="tagline-prefix">and</span> Full Stack Developer

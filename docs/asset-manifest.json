@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.93e86907.css",
-    "main.js": "/static/js/main.5cce81cb.js",
+    "main.js": "/static/js/main.70f8f599.js",
     "static/media/umbreon.mp4": "/static/media/umbreon.b892936d7038e158985c.mp4",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
     "static/media/dost-website-redesign.png": "/static/media/dost-website-redesign.aa9c930501c6aeced629.png",
@@ -44,10 +44,10 @@
     "static/media/frontend.svg": "/static/media/frontend.67d96e6df9d7fa4c78a35508d1bbe951.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
     "main.93e86907.css.map": "/static/css/main.93e86907.css.map",
-    "main.5cce81cb.js.map": "/static/js/main.5cce81cb.js.map"
+    "main.70f8f599.js.map": "/static/js/main.70f8f599.js.map"
   },
   "entrypoints": [
     "static/css/main.93e86907.css",
-    "static/js/main.5cce81cb.js"
+    "static/js/main.70f8f599.js"
   ]
 }
