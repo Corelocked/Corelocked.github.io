@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Support from './components/Support';
 import Footer from './components/Footer';
+import VirtualCat from './components/VirtualCat';
 
 function App() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -136,6 +137,7 @@ function App() {
       <Contact />
       <Support />
       <Footer />
+      <VirtualCat />
     </div>
   );
 }

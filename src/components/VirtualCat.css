@@ -1,0 +1,1555 @@
+/* Virtual Cat Styles */
+.virtual-cat {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  z-index: 1000;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Petting animation */
+.virtual-cat.petting .cat-body {
+  animation: petting-happy 0.3s ease-in-out infinite;
+}
+
+.virtual-cat.petting .cat-head {
+  animation: head-nuzzle 0.5s ease-in-out infinite;
+}
+
+.virtual-cat.petting .cat-eyes .eye::before {
+  transform: translateX(-50%) scaleY(0.2);
+  animation: none;
+}
+
+.virtual-cat.petting .cat-tail {
+  animation: happy-tail 0.3s ease-in-out infinite !important;
+}
+
+.virtual-cat.petting .cat-ears .ear {
+  animation: ear-twitch 0.4s ease-in-out infinite;
+}
+
+@keyframes petting-happy {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes head-nuzzle {
+  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+  50% { transform: translateX(-50%) rotate(2deg); }
+}
+
+@keyframes happy-tail {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes ear-twitch {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+@keyframes ear-twitch-right {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(15deg); }
+}
+
+.virtual-cat.petting .cat-ears .ear.right {
+  animation: ear-twitch-right 0.4s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+
+/* Carrying animation - being held */
+.virtual-cat.carrying {
+  cursor: grabbing !important;
+  z-index: 9999;
+}
+
+.virtual-cat.carrying .cat-body {
+  animation: carrying-wobble 0.5s ease-in-out infinite;
+}
+
+.virtual-cat.carrying .cat-head {
+  animation: carrying-head 0.3s ease-in-out infinite;
+}
+
+.virtual-cat.carrying .cat-eyes .eye::before {
+  width: 7px;
+  height: 7px;
+  top: 1px;
+  animation: none;
+}
+
+.virtual-cat.carrying .cat-legs {
+  opacity: 1 !important;
+  transform: translateX(-50%) scaleY(1) !important;
+}
+
+.virtual-cat.carrying .cat-legs .leg {
+  animation: dangling-legs 0.3s ease-in-out infinite !important;
+  height: 18px !important;
+}
+
+.virtual-cat.carrying .cat-legs .leg.front-right,
+.virtual-cat.carrying .cat-legs .leg.back-right {
+  animation-delay: 0.15s !important;
+}
+
+.virtual-cat.carrying .cat-tail {
+  animation: carrying-tail 0.4s ease-in-out infinite !important;
+}
+
+.virtual-cat.carrying .cat-ears .ear.left {
+  animation: carrying-ears-left 0.25s ease-in-out infinite;
+}
+
+.virtual-cat.carrying .cat-ears .ear.right {
+  animation: carrying-ears-right 0.25s ease-in-out infinite;
+}
+
+@keyframes carrying-wobble {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes carrying-head {
+  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+  50% { transform: translateX(-50%) rotate(2deg); }
+}
+
+@keyframes dangling-legs {
+  0%, 100% { transform: rotate(15deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+@keyframes carrying-tail {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+}
+
+@keyframes carrying-ears-left {
+  0%, 100% { transform: rotate(-25deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+@keyframes carrying-ears-right {
+  0%, 100% { transform: rotate(25deg); }
+  50% { transform: rotate(15deg); }
+}
+
+/* Earthquake animation - when scrolling */
+.virtual-cat.earthquake {
+  animation: earthquake-shake 0.1s linear infinite;
+}
+
+.virtual-cat.earthquake .cat-eyes .eye::before {
+  width: 9px;
+  height: 9px;
+  top: 0px;
+  animation: none;
+}
+
+.virtual-cat.earthquake .cat-ears .ear {
+  animation: earthquake-ears 0.05s linear infinite;
+}
+
+.virtual-cat.earthquake .cat-ears .ear.right {
+  animation: earthquake-ears-right 0.05s linear infinite;
+}
+
+.virtual-cat.earthquake .cat-tail {
+  animation: earthquake-tail 0.08s linear infinite !important;
+}
+
+.virtual-cat.earthquake .cat-whiskers .whisker-left,
+.virtual-cat.earthquake .cat-whiskers .whisker-right {
+  animation: earthquake-whiskers 0.06s linear infinite !important;
+}
+
+@keyframes earthquake-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-3px, -2px) rotate(-1deg); }
+  20% { transform: translate(3px, 1px) rotate(1deg); }
+  30% { transform: translate(-2px, 2px) rotate(0deg); }
+  40% { transform: translate(2px, -1px) rotate(1deg); }
+  50% { transform: translate(-3px, 1px) rotate(-1deg); }
+  60% { transform: translate(3px, 2px) rotate(0deg); }
+  70% { transform: translate(-1px, -2px) rotate(-1deg); }
+  80% { transform: translate(2px, 1px) rotate(1deg); }
+  90% { transform: translate(-2px, -1px) rotate(0deg); }
+}
+
+@keyframes earthquake-ears {
+  0%, 100% { transform: rotate(-25deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+@keyframes earthquake-ears-right {
+  0%, 100% { transform: rotate(25deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes earthquake-tail {
+  0%, 100% { transform: rotate(-15deg); }
+  25% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(15deg); }
+}
+
+@keyframes earthquake-whiskers {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+/* Shocked animation - when clicked while sleeping */
+.virtual-cat.shocked {
+  animation: shocked-jump 0.5s ease-out;
+}
+
+.virtual-cat.shocked .cat-body {
+  animation: shocked-body 0.3s ease-out;
+}
+
+.virtual-cat.shocked .cat-head {
+  animation: shocked-head 0.2s ease-out;
+}
+
+.virtual-cat.shocked .cat-eyes .eye::before {
+  width: 10px !important;
+  height: 10px !important;
+  top: -1px !important;
+  border-radius: 50% !important;
+  animation: none !important;
+}
+
+.virtual-cat.shocked .cat-ears .ear.left {
+  animation: shocked-ear-left 0.3s ease-out;
+}
+
+.virtual-cat.shocked .cat-ears .ear.right {
+  animation: shocked-ear-right 0.3s ease-out;
+}
+
+.virtual-cat.shocked .cat-tail {
+  animation: shocked-tail 0.4s ease-out !important;
+}
+
+.virtual-cat.shocked .cat-legs {
+  opacity: 1 !important;
+  transform: translateX(-50%) scaleY(1) !important;
+}
+
+.virtual-cat.shocked .cat-legs .leg {
+  animation: shocked-legs 0.2s ease-out !important;
+}
+
+.virtual-cat.shocked .cat-whiskers .whisker-left,
+.virtual-cat.shocked .cat-whiskers .whisker-right {
+  animation: shocked-whiskers 0.15s ease-out !important;
+}
+
+@keyframes shocked-jump {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes shocked-body {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.1, 0.9); }
+  40% { transform: scale(0.95, 1.05); }
+}
+
+@keyframes shocked-head {
+  0% { transform: translateX(-50%) translateY(0); }
+  30% { transform: translateX(-50%) translateY(-5px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes shocked-ear-left {
+  0% { transform: rotate(-20deg); }
+  30% { transform: rotate(-40deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes shocked-ear-right {
+  0% { transform: rotate(20deg); }
+  30% { transform: rotate(40deg); }
+  100% { transform: rotate(20deg); }
+}
+
+@keyframes shocked-tail {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(45deg); }
+  40% { transform: rotate(-30deg); }
+  60% { transform: rotate(20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes shocked-legs {
+  0%, 100% { transform: scaleY(1); }
+  30% { transform: scaleY(1.3); }
+}
+
+@keyframes shocked-whiskers {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* Punching animation - swipe at cursor */
+.cat-paw-punch {
+  position: absolute;
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+  border-radius: 50% 50% 40% 40%;
+  top: 35px;
+  right: -5px;
+  opacity: 0;
+  transform: rotate(-20deg);
+  z-index: 15;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Paw pads */
+.cat-paw-punch::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 6px;
+  background: #d1d5db;
+  border-radius: 50%;
+}
+
+/* Paw toe beans */
+.cat-paw-punch::after {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  left: 3px;
+  width: 4px;
+  height: 4px;
+  background: #d1d5db;
+  border-radius: 50%;
+  box-shadow: 6px 0 0 #d1d5db, 3px -3px 0 #d1d5db;
+}
+
+/* Impact effect */
+.cat-impact {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 25px;
+  right: -25px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.cat-impact::before,
+.cat-impact::after {
+  content: '';
+  position: absolute;
+  background: #ffcc00;
+  border-radius: 2px;
+}
+
+.cat-impact::before {
+  width: 15px;
+  height: 3px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cat-impact::after {
+  width: 15px;
+  height: 3px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.virtual-cat.punching .cat-paw-punch {
+  opacity: 1;
+  animation: punch-swipe 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.virtual-cat.punching .cat-impact {
+  animation: impact-flash 0.45s ease-out;
+}
+
+.virtual-cat.punching .cat-body {
+  animation: punch-body 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.virtual-cat.punching .cat-body::before {
+  animation: punch-torso 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.virtual-cat.punching .cat-head {
+  animation: punch-head 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.virtual-cat.punching .cat-eyes .eye::before {
+  width: 7px;
+  height: 4px;
+  border-radius: 50% 50% 0 0;
+  top: 2px;
+  animation: punch-eyes 0.45s ease-out;
+}
+
+.virtual-cat.punching .cat-ears .ear.left {
+  animation: punch-ear-back 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.virtual-cat.punching .cat-ears .ear.right {
+  animation: punch-ear-forward 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.virtual-cat.punching .cat-tail {
+  animation: punch-tail 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.virtual-cat.punching .cat-whiskers .whisker-left,
+.virtual-cat.punching .cat-whiskers .whisker-right {
+  animation: punch-whiskers 0.45s ease-out !important;
+}
+
+.virtual-cat.punching .cat-legs {
+  opacity: 1 !important;
+  transform: translateX(-50%) scaleY(1) !important;
+}
+
+.virtual-cat.punching .cat-legs .leg {
+  animation: punch-legs 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+@keyframes punch-swipe {
+  0% { 
+    opacity: 1;
+    transform: rotate(-30deg) translateX(-10px) translateY(5px);
+  }
+  15% {
+    opacity: 1;
+    transform: rotate(-40deg) translateX(-15px) translateY(8px);
+  }
+  40% { 
+    opacity: 1;
+    transform: rotate(45deg) translateX(35px) translateY(-5px);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(35deg) translateX(30px) translateY(0);
+  }
+  100% { 
+    opacity: 0;
+    transform: rotate(-20deg) translateX(0) translateY(0);
+  }
+}
+
+@keyframes impact-flash {
+  0%, 30% { opacity: 0; transform: scale(0.5); }
+  40% { opacity: 1; transform: scale(1.2); }
+  50% { opacity: 1; transform: scale(1); }
+  70% { opacity: 0.5; transform: scale(1.5); }
+  100% { opacity: 0; transform: scale(2); }
+}
+
+@keyframes punch-body {
+  0% { transform: translateX(0) rotate(0deg); }
+  15% { transform: translateX(-5px) rotate(-3deg); }
+  40% { transform: translateX(10px) rotate(5deg); }
+  60% { transform: translateX(5px) rotate(2deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+@keyframes punch-torso {
+  0%, 100% { transform: translateX(-50%) scaleX(1); }
+  15% { transform: translateX(-50%) scaleX(0.95) scaleY(1.05); }
+  40% { transform: translateX(-50%) scaleX(1.1) scaleY(0.95); }
+}
+
+@keyframes punch-head {
+  0% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+  15% { transform: translateX(-50%) rotate(-8deg) translateY(2px); }
+  40% { transform: translateX(-50%) rotate(15deg) translateY(-3px); }
+  60% { transform: translateX(-50%) rotate(5deg) translateY(-1px); }
+  100% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+}
+
+@keyframes punch-eyes {
+  0%, 15% { transform: scaleY(1); }
+  40% { transform: scaleY(0.6); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes punch-ear-back {
+  0% { transform: rotate(-20deg); }
+  15% { transform: rotate(-10deg); }
+  40% { transform: rotate(-40deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes punch-ear-forward {
+  0% { transform: rotate(20deg); }
+  15% { transform: rotate(10deg); }
+  40% { transform: rotate(45deg); }
+  100% { transform: rotate(20deg); }
+}
+
+@keyframes punch-tail {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(20deg); }
+  40% { transform: rotate(-35deg); }
+  70% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes punch-whiskers {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  40% { transform: translateY(-2px) rotate(5deg); }
+}
+
+@keyframes punch-legs {
+  0%, 100% { transform: scaleY(1) translateY(0); }
+  15% { transform: scaleY(1.1) translateY(-2px); }
+  40% { transform: scaleY(0.9) translateY(2px); }
+}
+
+/* Stretching animation - when waking up */
+.virtual-cat.stretching .cat-body {
+  animation: stretch-body 0.8s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-body::before {
+  animation: stretch-torso 0.8s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-head {
+  animation: stretch-head 0.8s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-eyes .eye::before {
+  width: 5px;
+  height: 2px;
+  border-radius: 50%;
+  top: 4px;
+}
+
+.virtual-cat.stretching .cat-legs {
+  opacity: 1;
+  transform: translateX(-50%) scaleY(1);
+}
+
+.virtual-cat.stretching .cat-legs .leg.front-left,
+.virtual-cat.stretching .cat-legs .leg.front-right {
+  animation: stretch-front-legs 0.8s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-legs .leg.back-left,
+.virtual-cat.stretching .cat-legs .leg.back-right {
+  animation: stretch-back-legs 0.8s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-tail {
+  animation: stretch-tail 0.8s ease-in-out !important;
+}
+
+.virtual-cat.stretching .cat-ears .ear {
+  animation: stretch-ears 0.8s ease-in-out;
+}
+
+.virtual-cat.stretching .cat-mouth {
+  width: 10px !important;
+  height: 6px !important;
+  border-radius: 0 0 50% 50% !important;
+}
+
+@keyframes stretch-body {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(5px) scaleX(1.1); }
+  60% { transform: translateY(-3px) scaleX(0.95) scaleY(1.1); }
+}
+
+@keyframes stretch-torso {
+  0%, 100% { transform: translateX(-50%) scaleX(1); }
+  30% { transform: translateX(-50%) scaleX(1.15) scaleY(0.9); }
+  60% { transform: translateX(-50%) scaleX(0.9) scaleY(1.1); }
+}
+
+@keyframes stretch-head {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  30% { transform: translateX(-50%) translateY(3px); }
+  60% { transform: translateX(-50%) translateY(-8px); }
+}
+
+@keyframes stretch-front-legs {
+  0%, 100% { height: 12px; transform: rotate(0deg); }
+  30% { height: 8px; transform: rotate(10deg); }
+  60% { height: 18px; transform: rotate(-5deg); }
+}
+
+@keyframes stretch-back-legs {
+  0%, 100% { height: 12px; transform: rotate(0deg); }
+  30% { height: 15px; transform: rotate(-10deg); }
+  60% { height: 10px; transform: rotate(5deg); }
+}
+
+@keyframes stretch-tail {
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(30deg) translateY(5px); }
+  60% { transform: rotate(-20deg) translateY(-3px); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes stretch-ears {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+/* Idle Animations - random behaviors when not moving */
+.virtual-cat.idle {
+  /* Base idle state - cat stops walking */
+}
+
+/* Grooming idle animation */
+.virtual-cat.idle.grooming .cat-head {
+  animation: grooming-head 1.5s ease-in-out infinite;
+}
+
+.virtual-cat.idle.grooming .cat-legs .leg.front-left {
+  animation: grooming-paw 1.5s ease-in-out infinite !important;
+  height: 16px !important;
+  transform-origin: top center;
+}
+
+@keyframes grooming-head {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(-15deg) translateY(5px); }
+  50% { transform: translateX(-50%) rotate(-10deg) translateY(3px); }
+  75% { transform: translateX(-50%) rotate(-15deg) translateY(5px); }
+}
+
+@keyframes grooming-paw {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(40deg) translateY(-5px); }
+  50% { transform: rotate(30deg) translateY(-3px); }
+  75% { transform: rotate(40deg) translateY(-5px); }
+}
+
+/* Looking around idle animation */
+.virtual-cat.idle.looking .cat-head {
+  animation: looking-head 2s ease-in-out infinite;
+}
+
+.virtual-cat.idle.looking .cat-eyes .eye::before {
+  animation: looking-eyes 2s ease-in-out infinite !important;
+}
+
+.virtual-cat.idle.looking .cat-ears .ear {
+  animation: looking-ears 2s ease-in-out infinite;
+}
+
+.virtual-cat.idle.looking .cat-ears .ear.right {
+  animation-delay: 0.3s;
+}
+
+@keyframes looking-head {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  30% { transform: translateX(-50%) rotate(-10deg); }
+  70% { transform: translateX(-50%) rotate(10deg); }
+}
+
+@keyframes looking-eyes {
+  0%, 100% { transform: translateX(0); }
+  30% { transform: translateX(-2px); }
+  70% { transform: translateX(2px); }
+}
+
+@keyframes looking-ears {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+/* Tail flick idle animation */
+.virtual-cat.idle.tail-flick .cat-tail {
+  animation: idle-tail-flick 0.8s ease-in-out !important;
+}
+
+@keyframes idle-tail-flick {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(25deg); }
+  40% { transform: rotate(-15deg); }
+  60% { transform: rotate(10deg); }
+  80% { transform: rotate(-5deg); }
+}
+
+/* Ear twitch idle animation */
+.virtual-cat.idle.ear-twitch .cat-ears .ear.left {
+  animation: idle-ear-twitch-left 0.6s ease-in-out;
+}
+
+.virtual-cat.idle.ear-twitch .cat-ears .ear.right {
+  animation: idle-ear-twitch-right 0.6s ease-in-out;
+  animation-delay: 0.2s;
+}
+
+@keyframes idle-ear-twitch-left {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-35deg); }
+}
+
+@keyframes idle-ear-twitch-right {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(35deg); }
+}
+
+/* Curious animation - when investigating cursor */
+.virtual-cat.curious .cat-head {
+  animation: curious-head 1s ease-in-out infinite;
+}
+
+.virtual-cat.curious .cat-eyes .eye::before {
+  width: 8px;
+  height: 8px;
+  animation: curious-eyes 1s ease-in-out infinite !important;
+}
+
+.virtual-cat.curious .cat-ears .ear {
+  animation: curious-ears 1s ease-in-out infinite;
+}
+
+.virtual-cat.curious .cat-tail {
+  animation: curious-tail 0.8s ease-in-out infinite !important;
+}
+
+@keyframes curious-head {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-3px); }
+}
+
+@keyframes curious-eyes {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes curious-ears {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(-10deg); }
+}
+
+@keyframes curious-tail {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+/* Happy mood - more animated */
+.virtual-cat.happy .cat-tail {
+  animation: happy-tail-wag 0.5s ease-in-out infinite !important;
+}
+
+.virtual-cat.happy .cat-eyes .eye::before {
+  height: 6px;
+  border-radius: 50% 50% 50% 50%;
+}
+
+@keyframes happy-tail-wag {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(20deg); }
+}
+
+/* Grumpy mood - flat ears, narrow eyes */
+.virtual-cat.grumpy .cat-ears .ear.left {
+  transform: rotate(-35deg);
+}
+
+.virtual-cat.grumpy .cat-ears .ear.right {
+  transform: rotate(35deg);
+}
+
+.virtual-cat.grumpy .cat-eyes .eye::before {
+  height: 4px;
+  top: 3px;
+}
+
+.virtual-cat.grumpy .cat-tail {
+  animation: grumpy-tail 2s ease-in-out infinite !important;
+}
+
+@keyframes grumpy-tail {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+/* Theme change reaction - Dark Mode */
+.virtual-cat.theme-dark {
+  animation: theme-dark-reaction 1.2s ease-out;
+}
+
+.virtual-cat.theme-dark .cat-eyes .eye::before {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  animation: pupils-dilate 1.2s ease-out !important;
+}
+
+.virtual-cat.theme-dark .cat-head {
+  animation: theme-look-around 1.2s ease-in-out;
+}
+
+.virtual-cat.theme-dark .cat-ears .ear {
+  animation: theme-ears-perk 1.2s ease-out;
+}
+
+.virtual-cat.theme-dark .cat-tail {
+  animation: theme-excited-tail 0.4s ease-in-out infinite !important;
+}
+
+@keyframes theme-dark-reaction {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.1) translateY(-5px); }
+  40% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pupils-dilate {
+  0% { width: 6px; height: 6px; }
+  30% { width: 12px; height: 12px; }
+  100% { width: 10px; height: 10px; }
+}
+
+@keyframes theme-look-around {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(-15deg); }
+  75% { transform: translateX(-50%) rotate(15deg); }
+}
+
+@keyframes theme-ears-perk {
+  0% { transform: rotate(-20deg); }
+  30% { transform: rotate(-5deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes theme-excited-tail {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(25deg); }
+}
+
+/* Theme change reaction - Light Mode */
+.virtual-cat.theme-light {
+  animation: theme-light-reaction 1.2s ease-out;
+}
+
+.virtual-cat.theme-light .cat-eyes .eye::before {
+  width: 4px !important;
+  height: 2px !important;
+  border-radius: 50% !important;
+  animation: pupils-squint 1.2s ease-out !important;
+}
+
+.virtual-cat.theme-light .cat-head {
+  animation: theme-squint-head 1.2s ease-in-out;
+}
+
+.virtual-cat.theme-light .cat-ears .ear.left {
+  animation: theme-ears-flatten-left 1.2s ease-out;
+}
+
+.virtual-cat.theme-light .cat-ears .ear.right {
+  animation: theme-ears-flatten-right 1.2s ease-out;
+}
+
+.virtual-cat.theme-light .cat-tail {
+  animation: theme-lazy-tail 1s ease-in-out !important;
+}
+
+@keyframes theme-light-reaction {
+  0% { transform: scale(1); }
+  15% { transform: scale(0.95) translateY(3px); }
+  40% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pupils-squint {
+  0% { width: 6px; height: 6px; }
+  30% { width: 2px; height: 1px; }
+  60% { width: 3px; height: 2px; }
+  100% { width: 4px; height: 2px; }
+}
+
+@keyframes theme-squint-head {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  30% { transform: translateX(-50%) translateY(3px); }
+  60% { transform: translateX(-50%) translateY(-2px); }
+}
+
+@keyframes theme-ears-flatten-left {
+  0% { transform: rotate(-20deg); }
+  30% { transform: rotate(-35deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes theme-ears-flatten-right {
+  0% { transform: rotate(20deg); }
+  30% { transform: rotate(35deg); }
+  100% { transform: rotate(20deg); }
+}
+
+@keyframes theme-lazy-tail {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* Cat Body */
+.cat-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Main Body Shape */
+.cat-body::before {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  border-radius: 50% 50% 45% 45%;
+  z-index: 1;
+  box-shadow: inset -2px -2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Cat Head */
+.cat-head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 38px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 60%, #e9ecef 100%);
+  border-radius: 50% 50% 45% 45%;
+  z-index: 3;
+  box-shadow: inset -3px -3px 8px rgba(0, 0, 0, 0.08),
+              inset 3px 3px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Cheek blush */
+.cat-head::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 12px;
+  background: linear-gradient(90deg, #ffb6c1 0%, transparent 30%, transparent 70%, #ffb6c1 100%);
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+/* Cat Ears */
+.cat-ears {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  z-index: 4;
+}
+
+.cat-ears .ear {
+  position: absolute;
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 70% 70% 20% 20%;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cat-ears .ear::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 10px;
+  background: linear-gradient(180deg, #d1d5db 0%, #9ca3af 100%);
+  border-radius: 50% 50% 30% 30%;
+}
+
+.cat-ears .ear.left {
+  left: -2px;
+  transform: rotate(-20deg);
+}
+
+.cat-ears .ear.right {
+  right: -2px;
+  transform: rotate(20deg);
+}
+
+/* Cat Face */
+.cat-face {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 24px;
+  z-index: 5;
+}
+
+/* Gray muzzle gradient */
+.cat-face::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 16px;
+  background: radial-gradient(ellipse at center top, #d1d5db 0%, #e5e7eb 40%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* Cat Eyes */
+.cat-eyes {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cat-eyes .eye {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.cat-eyes .eye::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 70%);
+  border-radius: 50%;
+  animation: eye-blink 4s ease-in-out infinite;
+}
+
+.cat-eyes .eye::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+}
+
+@keyframes eye-blink {
+  0%, 95%, 100% { transform: translateX(-50%) scaleY(1); }
+  97% { transform: translateX(-50%) scaleY(0.1); }
+}
+
+/* Cat Nose */
+.cat-nose {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 5px;
+  background: linear-gradient(180deg, #9ca3af 0%, #6b7280 100%);
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Cat Mouth - W shape */
+.cat-mouth {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+}
+
+.cat-mouth::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 5px;
+  border: 2px solid #9ca3af;
+  border-top: none;
+  border-left: none;
+  border-radius: 0 0 50% 50%;
+}
+
+.cat-mouth::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6px;
+  height: 5px;
+  border: 2px solid #9ca3af;
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 50% 50%;
+}
+
+/* Cat Tongue - Hidden by default */
+.cat-tongue {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 0;
+  background: #ff9999;
+  border-radius: 0 0 3px 3px;
+  opacity: 0;
+  transition: height 0.2s ease-out, opacity 0.2s ease-out;
+  z-index: 1;
+}
+
+/* Tongue visible when grooming */
+.virtual-cat.grooming-active .cat-tongue {
+  height: 8px;
+  opacity: 1;
+  animation: tongue-lick 0.5s ease-in-out infinite;
+}
+
+@keyframes tongue-lick {
+  0%, 100% {
+    height: 8px;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  25% {
+    height: 10px;
+    transform: translateX(-50%) rotate(-5deg);
+  }
+  50% {
+    height: 6px;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  75% {
+    height: 10px;
+    transform: translateX(-50%) rotate(5deg);
+  }
+}
+
+/* Whiskers */
+.cat-whiskers {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.whisker-left,
+.whisker-right {
+  position: absolute;
+  top: 0;
+  width: 14px;
+  height: 1px;
+  background: #d1d5db;
+}
+
+.whisker-left {
+  left: 0;
+  transform: rotate(0deg);
+}
+
+.whisker-left::before,
+.whisker-left::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 1px;
+  background: #d1d5db;
+  left: 0;
+}
+
+.whisker-left::before {
+  top: -5px;
+  transform: rotate(-10deg);
+  transform-origin: right center;
+}
+
+.whisker-left::after {
+  top: 5px;
+  transform: rotate(10deg);
+  transform-origin: right center;
+}
+
+.whisker-right {
+  right: 0;
+  transform: rotate(0deg);
+}
+
+.whisker-right::before,
+.whisker-right::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 1px;
+  background: #d1d5db;
+  right: 0;
+}
+
+.whisker-right::before {
+  top: -5px;
+  transform: rotate(10deg);
+  transform-origin: left center;
+}
+
+.whisker-right::after {
+  top: 5px;
+  transform: rotate(-10deg);
+  transform-origin: left center;
+}
+
+/* Cat Tail */
+.cat-tail {
+  position: absolute;
+  top: 42px;
+  left: 2px;
+  width: 14px;
+  height: 5px;
+  background: linear-gradient(270deg, #e9ecef 0%, #f8f9fa 60%, #ffffff 100%);
+  border-radius: 10px 3px 3px 10px;
+  transform-origin: right center;
+  animation: tail-wag 1.8s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes tail-wag {
+  0%, 100% { transform: rotate(8deg); }
+  25% { transform: rotate(-12deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+/* Cat Legs */
+.cat-legs {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 14px;
+  z-index: 2;
+}
+
+.cat-legs .leg {
+  position: absolute;
+  width: 8px;
+  height: 14px;
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 60%, #9ca3af 100%);
+  border-radius: 4px 4px 6px 6px;
+  transform-origin: top center;
+}
+
+.cat-legs .leg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 4px;
+  background: #9ca3af;
+  border-radius: 50%;
+}
+
+.cat-legs .leg.front-left {
+  left: 6px;
+  animation: leg-walk 0.4s ease-in-out infinite;
+}
+
+.cat-legs .leg.front-right {
+  left: 14px;
+  animation: leg-walk 0.4s ease-in-out infinite reverse;
+}
+
+.cat-legs .leg.back-left {
+  left: 0px;
+  height: 12px;
+  animation: leg-walk 0.4s ease-in-out infinite 0.1s;
+}
+
+.cat-legs .leg.back-right {
+  right: 0px;
+  left: auto;
+  height: 12px;
+  animation: leg-walk 0.4s ease-in-out infinite reverse 0.1s;
+}
+
+@keyframes leg-walk {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(20deg); }
+  75% { transform: rotate(-20deg); }
+}
+
+/* Walking animation */
+.virtual-cat.walking .cat-legs .leg {
+  animation-duration: 0.35s;
+}
+
+/* Add a subtle bounce when walking */
+.virtual-cat.walking .cat-body {
+  animation: cat-bounce 0.35s ease-in-out infinite;
+}
+
+@keyframes cat-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.virtual-cat.idle .cat-legs .leg {
+  animation: none;
+}
+
+/* Sleeping animation - Cat Loaf Position */
+.virtual-cat.sleeping {
+  cursor: pointer;
+}
+
+.virtual-cat.sleeping .cat-body {
+  animation: sleep-breathe 3s ease-in-out infinite;
+}
+
+/* Hide legs when sleeping (tucked under body like a loaf) */
+.virtual-cat.sleeping .cat-legs {
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0.3);
+  transition: all 0.3s ease;
+}
+
+/* Make body more loaf-like when sleeping */
+.virtual-cat.sleeping .cat-body::before {
+  transform: translateX(-50%) scaleY(1.1) scaleX(1.15);
+  bottom: 8px;
+  border-radius: 45% 45% 50% 50%;
+  transition: all 0.3s ease;
+}
+
+/* Tuck tail around body when sleeping */
+.virtual-cat.sleeping .cat-tail {
+  top: 48px;
+  left: 8px;
+  width: 18px;
+  transform-origin: right center;
+  animation: sleep-tail 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.virtual-cat.sleeping .cat-eyes .eye::before {
+  transform: translateX(-50%) scaleY(0.15);
+  animation: none;
+}
+
+/* Slight head tilt when sleeping */
+.virtual-cat.sleeping .cat-head {
+  transform: translateX(-50%) rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+@keyframes sleep-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(1px) scale(1.02); }
+}
+
+@keyframes sleep-tail {
+  0%, 100% { transform: rotate(5deg); }
+  50% { transform: rotate(-3deg); }
+}
+
+/* Transition back to walking */
+.virtual-cat.walking .cat-legs {
+  opacity: 1;
+  transform: translateX(-50%) scaleY(1);
+  transition: all 0.2s ease;
+}
+
+.virtual-cat.walking .cat-body::before {
+  transition: all 0.2s ease;
+}
+
+.virtual-cat.walking .cat-head {
+  transform: translateX(-50%) rotate(0deg);
+  transition: transform 0.2s ease;
+}
+
+.virtual-cat.walking .cat-tail {
+  top: 42px;
+  left: 2px;
+  width: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Speech Bubble */
+.speech-bubble {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #60a5fa;
+  border-radius: 18px;
+  padding: 8px 14px;
+  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.25),
+              0 2px 6px rgba(0, 0, 0, 0.1);
+  animation: bubble-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  z-index: 1001;
+}
+
+.speech-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.speech-arrow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #60a5fa;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+.speech-arrow::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #ffffff;
+}
+
+@keyframes bubble-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Dark mode adjustments - keep the white cat but add a subtle glow */
+:root[data-theme="dark"] .virtual-cat {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+:root[data-theme="dark"] .cat-head,
+:root[data-theme="dark"] .cat-body::before,
+:root[data-theme="dark"] .cat-ears .ear {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+}
+
+:root[data-theme="dark"] .cat-tail {
+  background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 60%, #ffffff 100%);
+}
+
+:root[data-theme="dark"] .cat-eyes .eye::before {
+  background: radial-gradient(circle at 30% 30%, #93c5fd 0%, #3b82f6 70%);
+}
+
+:root[data-theme="dark"] .cat-legs .leg {
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 60%, #94a3b8 100%);
+}
+
+:root[data-theme="dark"] .cat-legs .leg::after {
+  background: #94a3b8;
+}
+
+:root[data-theme="dark"] .whisker-left,
+:root[data-theme="dark"] .whisker-right {
+  background: linear-gradient(90deg, transparent, #94a3b8, transparent);
+  box-shadow: 0 -4px 0 #94a3b8, 0 4px 0 #94a3b8;
+}
+
+:root[data-theme="dark"] .speech-bubble {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-color: #60a5fa;
+  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3),
+              0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .speech-text {
+  color: #f1f5f9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .speech-arrow {
+  border-top-color: #60a5fa;
+}
+
+:root[data-theme="dark"] .speech-arrow::after {
+  border-top-color: #1e293b;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .virtual-cat {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .cat-body {
+    transform: scale(0.75);
+    transform-origin: center center;
+  }
+
+  .speech-bubble {
+    font-size: 11px;
+    padding: 6px 10px;
+    top: -35px;
+    transform: translateX(-50%) scale(1.33);
+  }
+}
