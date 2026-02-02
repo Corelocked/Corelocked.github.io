@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Support.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import { ThemeContext } from '../context/ThemeContext';
 import umbreonVideo from '../assets/images/umbreon.mp4';
+import spiderGwenVideo from '../assets/images/spider-gwen.mp4';
 
 // Import QR code images
 import mayaQR from '../assets/images/maya-qr.jpg';
@@ -15,6 +17,7 @@ const Support = () => {
   const [activeQR, setActiveQR] = useState(null);
   const [heartClicked, setHeartClicked] = useState(false);
   const [heartPop, setHeartPop] = useState(false);
+  const { darkMode } = useContext(ThemeContext);
 
   const supportOptions = [
     // {
@@ -102,8 +105,23 @@ const Support = () => {
     <section id="support" className="support">
       {/* Video Background */}
       <div className="video-background">
-        <video autoPlay muted loop playsInline>
+        <video 
+          className={`theme-video ${darkMode ? 'active' : ''}`}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
           <source src={umbreonVideo} type="video/mp4" />
+        </video>
+        <video 
+          className={`theme-video ${!darkMode ? 'active' : ''}`}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src={spiderGwenVideo} type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>
@@ -215,7 +233,7 @@ const Support = () => {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ color: heartClicked ? '#e53935' : 'white', transition: 'color 0.3s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ color: heartClicked ? '#e53935' : (darkMode ? 'white' : '#1a1a2e'), transition: 'color 0.3s' }}>
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/>
             </svg>
           </div>

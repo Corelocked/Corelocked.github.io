@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Skills.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import { ThemeContext } from '../context/ThemeContext';
 import umbreonVideo from '../assets/images/umbreon.mp4';
+import spiderGwenVideo from '../assets/images/spider-gwen.mp4';
 // Import SVGs as React components
 import { ReactComponent as FrontendIcon } from '../assets/icons/frontend.svg';
 import { ReactComponent as BackendIcon } from '../assets/icons/backend.svg';
@@ -133,6 +135,7 @@ const Skills = () => {
   const [headerRef, isHeaderVisible] = useScrollReveal({ threshold: 0.2 });
   const [tabsRef, isTabsVisible] = useScrollReveal({ threshold: 0.3 });
   const [gridRef, isGridVisible] = useScrollReveal({ threshold: 0.1 });
+  const { darkMode } = useContext(ThemeContext);
 
   const displayedCategories = activeCategory === 'all' 
     ? skillCategories 
@@ -142,8 +145,23 @@ const Skills = () => {
     <section id="skills" className="skills">
       {/* Video Background */}
       <div className="video-background">
-        <video autoPlay muted loop playsInline>
+        <video 
+          className={`theme-video ${darkMode ? 'active' : ''}`}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
           <source src={umbreonVideo} type="video/mp4" />
+        </video>
+        <video 
+          className={`theme-video ${!darkMode ? 'active' : ''}`}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src={spiderGwenVideo} type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>

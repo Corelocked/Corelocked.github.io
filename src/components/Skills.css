@@ -5,6 +5,11 @@
   clip-path: inset(0);
 }
 
+/* Make background transparent in light mode to show video */
+:root[data-theme="light"] .skills {
+  background-color: transparent;
+}
+
 /* Video Background */
 .skills .video-background {
   position: fixed;
@@ -27,6 +32,16 @@
   filter: blur(3px);
 }
 
+/* Theme video transitions */
+.skills .theme-video {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.skills .theme-video.active {
+  opacity: 1;
+}
+
 .skills .video-background .video-overlay {
   position: absolute;
   top: 0;
@@ -34,6 +49,11 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.85);
+}
+
+/* Lighter overlay for light mode */
+:root[data-theme="light"] .skills .video-background .video-overlay {
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Background decorations */
@@ -500,4 +520,10 @@
   .skill-card {
     padding: 14px;
   }
+}
+
+/* Light mode card adjustments */
+:root[data-theme="light"] .skills .skill-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }

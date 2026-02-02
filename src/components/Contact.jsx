@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import { ThemeContext } from '../context/ThemeContext';
 import umbreonVideo from '../assets/images/umbreon.mp4';
+import spiderGwenVideo from '../assets/images/spider-gwen.mp4';
 
 // EmailJS Configuration
 // To set up EmailJS:
@@ -19,6 +21,7 @@ const Contact = () => {
   const [titleRef, isTitleVisible] = useScrollReveal({ threshold: 0.2 });
   const [infoRef, isInfoVisible] = useScrollReveal({ threshold: 0.2 });
   const [formContainerRef, isFormVisible] = useScrollReveal({ threshold: 0.2 });
+  const { darkMode } = useContext(ThemeContext);
   
   const formRef = useRef();
 
@@ -80,8 +83,23 @@ const Contact = () => {
     <section id="contact" className="contact">
       {/* Video Background */}
       <div className="video-background">
-        <video autoPlay muted loop playsInline>
+        <video 
+          className={`theme-video ${darkMode ? 'active' : ''}`}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
           <source src={umbreonVideo} type="video/mp4" />
+        </video>
+        <video 
+          className={`theme-video ${!darkMode ? 'active' : ''}`}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src={spiderGwenVideo} type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>
