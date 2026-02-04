@@ -142,15 +142,6 @@ const ProjectCard = ({ project }) => {
             )}
           </div>
         </div>
-        {/* Category Badges */}
-        <div className="project-categories">
-          {project.category.map((cat, index) => (
-            <span key={index} className="project-category">{cat}</span>
-          ))}
-          {project.isWIP && (
-            <span className="project-wip-tag">WIP</span>
-          )}
-        </div>
       </div>
 
       {/* Project Info */}
@@ -159,8 +150,20 @@ const ProjectCard = ({ project }) => {
         <p className="project-description">{project.description}</p>
         
         <div className="project-technologies">
+          {/* Category Badges */}
+          {project.category.map((cat, index) => (
+            <span key={`cat-${index}`} className="project-category">{cat}</span>
+          ))}
+          {project.isWIP && (
+            <span className="project-wip-tag">WIP</span>
+          )}
+          {/* Role Tags */}
+          {project.roles && project.roles.map((role, index) => (
+            <span key={`role-${index}`} className="role-tag">{role}</span>
+          ))}
+          {/* Technology Tags */}
           {project.technologies.map((tech, index) => (
-            <span key={index} className="tech-tag">{tech}</span>
+            <span key={`tech-${index}`} className="tech-tag">{tech}</span>
           ))}
         </div>
 
@@ -264,7 +267,8 @@ const projects = [
     title: 'InnSight',
     description: 'An interactive web application designed as a virtual assistant tool, allowing users to inquire about hotel and restaurant-related topics through voice or text input.',
     technologies: ['React', 'Javascript', 'CSS', 'Python', 'HTML'],
-    category: ['Web App','AI/ML'],
+    category: ['Website','AI/ML'],
+    roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/react-voice-enabled-ordering-system.git',
     liveDemo: 'https://voice-order-assistant.web.app/',
     image: require('../assets/images/innsight.png'),
@@ -276,6 +280,7 @@ const projects = [
     description: 'An attempt to create a social media app for my Android App Dev class.',
     technologies: ['Java', 'Firebase', 'XML'],
     category: ['Mobile App'],
+    roles: ['Tech Lead', 'Backend', 'Frontend'],
     githubLink: 'https://github.com/Corelocked/unFriendster2.git',
     liveDemo: 'https://youtube.com/shorts/c1DHCTcY41w',
     image: require('../assets/images/unfriendster.png'),
@@ -286,7 +291,8 @@ const projects = [
     title: 'Ang Pagong at ang Kuneho Game',
     description: 'A recreational game about the story "Ang Pagong at ang Kuneho", a classic Filipino fable that teaches the value of perseverance and humility.',
     technologies: ['Python'],
-    category: ['Game'],
+    category: ['Game', 'Desktop App'],
+    roles: ['Tech Lead', 'Backend', 'Frontend'],
     githubLink: 'https://github.com/Corelocked/Pagong-at-Kuneho.git',
     liveDemo: 'https://youtu.be/TzjV_CaTXyI',
     image: require('../assets/images/ang_pagong_at_ang_kuneho.png'),
@@ -297,7 +303,8 @@ const projects = [
     title: 'Emotion Detector',
     description: 'A program I made using Python that detects your emotion in real-time using a camera.',
     technologies: ['Python'],
-    category: ['AI/ML'],
+    category: ['AI/ML', 'Desktop App'],
+    roles: ['Tech Lead', 'Backend', 'Frontend'],
     githubLink: 'https://github.com/Corelocked/emotion_detector.git',
     liveDemo: 'https://youtu.be/GxW6s2Wpxaw',
     image: require('../assets/images/placeholder.png'),
@@ -308,7 +315,8 @@ const projects = [
     title: 'Moody',
     description: 'An interactive web application that tracks your daily mood and provides insights based on your emotional patterns.',
     technologies: ['Javascript', 'React', 'CSS', 'HTML'],
-    category: ['Web App'],
+    category: ['Website'],
+    roles: ['Tech Lead', 'Backend', 'Frontend'],
     githubLink: 'https://github.com/Corelocked/moody.git',
     liveDemo: 'https://youtu.be/L98Uc9FQ8DU',
     image: require('../assets/images/moody.png'),
@@ -330,7 +338,8 @@ const projects = [
     title: 'Tetris Game',
     description: 'A simple Tetris game made using Java and CSS',
     technologies: ['Java', 'CSS'],
-    category: ['Game'],
+    category: ['Game', 'Desktop App'],
+    roles: ['Tech Lead', 'Backend', 'Frontend'],
     githubLink: 'https://github.com/Corelocked/Tetris.git',
     liveDemo: '#',
     image: require('../assets/images/placeholder.png'),
@@ -353,6 +362,7 @@ const projects = [
     description: 'A mobile inventory app with barcode scanner feature',
     technologies: ['Kotlin'],
     category: ['Mobile App'],
+    roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/E-TALA.git',
     liveDemo: '#',
     image: require('../assets/images/e-tala logo.jpg'),
@@ -363,7 +373,7 @@ const projects = [
     title: 'DOST Website Redesign',
     description: 'A redesign of the Department of Science and Technology (DOST) website using Canva. Created for a web design class project.',
     technologies: ['Canva'],
-    category: ['Creative Design'],
+    category: ['Creative Design','Graphic Design'],
     canvaLink: 'https://www.canva.com/design/DAG2bUOs0xA/1UyWpP2ibUgTOVAQeM9gRQ/edit?utm_content=DAG2bUOs0xA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
     image: require('../assets/images/dost-website-redesign.png'),
     featured: false
@@ -373,7 +383,7 @@ const projects = [
     title: 'Lakbay Logo Design',
     description: 'A logo design for "Lakbay", our Thesis project about a scenic travel mobile app. Created using Canva.',
     technologies: ['Canva', 'Photoshop'],
-    category: ['Creative Design'],
+    category: ['Creative Design','Graphic Design'],
     canvaLink: 'https://www.canva.com/design/DAG3DY7iccM/gGWzD2lJDBGp3n9ekzTcMw/edit?utm_content=DAG3DY7iccM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
     image: require('../assets/images/lakbay-logo.png'),
     featured: false,
@@ -384,6 +394,7 @@ const projects = [
     description: 'A scenic travel mobile app. Created as our Thesis project.',
     technologies: ['Kotlin','Python','Firebase'],
     category: ['Mobile App'],
+    roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git',
     liveDemo: '#',
     image: require('../assets/images/lakbay-logo2.png'),
@@ -396,6 +407,7 @@ const projects = [
     description: 'A social media platform for bloggers to share and connect. Made completely from scratch using Laravel and SQLite for my Dynamic Web Dev class.',
     technologies: ['Laravel', 'SQLite', 'JavaScript', 'CSS'],
     category: ['Website'],
+    roles: ['Tech Lead', 'Backend', 'Frontend'],
     githubLink: 'https://github.com/Corelocked/dywebFinals.git',
     liveDemo: 'https://youtu.be/T-8okZkfd_0',
     image: require('../assets/images/blogshark-logo.png'),
@@ -406,7 +418,7 @@ const projects = [
     title: 'Delirium',
     description: 'A Short film I edited using Premiere Pro for my Social Issues class.',
     technologies: ['Premiere Pro'],
-    category: ['Film Editing','Creative Design'],
+    category: ['Creative Design','Film'],
     githubLink: '#',
     liveDemo: 'https://youtu.be/TAJ7gHYPAGI',
     image: require('../assets/images/placeholder.png'),
@@ -414,7 +426,7 @@ const projects = [
   },
 ];
 
-const categories = ['All', 'Web App', 'Mobile App', 'Desktop App', 'Game', 'AI/ML', 'Creative Design'];
+const categories = ['All', 'Website', 'Mobile App', 'Desktop App', 'Game', 'AI/ML', 'Creative Design'];
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
