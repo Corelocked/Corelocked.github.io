@@ -12,9 +12,9 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <Link to="home" smooth={true} duration={500} className="footer-logo">
-              <span className="logo-bracket">&lt;</span>
+              <span className="logo-bracket">&lt;/</span>
               <span className="logo-text">Cedric</span>
-              <span className="logo-bracket">/&gt;</span>
+              <span className="logo-bracket">&gt;</span>
             </Link>
             <p className="footer-tagline">
               Building digital experiences that make a difference.
