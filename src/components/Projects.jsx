@@ -413,7 +413,7 @@ const projects = [
     image: require('../assets/images/blogshark-logo.png'),
     featured: true
   },
-    {
+  {
     id: 14,
     title: 'Delirium',
     description: 'A Short film I edited using Premiere Pro for my Social Issues class.',
@@ -422,6 +422,18 @@ const projects = [
     githubLink: '#',
     liveDemo: 'https://youtu.be/TAJ7gHYPAGI',
     image: require('../assets/images/placeholder.png'),
+    featured: true
+  },
+  {
+    id: 15,
+    title: 'Budget Book',
+    description: 'A personal finance web app to track incomes, expenses, savings, wallets and lendings with CSV export and realtime Firestore sync. Built for a clean, accessible dashboard and compact tables view.',
+    technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'],
+    category: ['Web App'],
+    roles: ['Frontend', 'Integration', 'DevOps'],
+    githubLink: 'https://github.com/Corelocked/budget-book.git',
+    liveDemo: 'https://budgetbook-5b9c3-de3bd.web.app/#/',
+    image: require('../assets/images/budgetbook.png'),
     featured: true
   },
 ];
