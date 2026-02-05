@@ -429,7 +429,7 @@ const projects = [
     title: 'Budget Book',
     description: 'A personal finance web app to track incomes, expenses, savings, wallets and lendings with CSV export and realtime Firestore sync. Built for a clean, accessible dashboard and compact tables view.',
     technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'],
-    category: ['Web App'],
+    category: ['Website'],
     roles: ['Frontend', 'Integration', 'DevOps'],
     githubLink: 'https://github.com/Corelocked/budget-book.git',
     liveDemo: 'https://budgetbook-5b9c3-de3bd.web.app/#/',
