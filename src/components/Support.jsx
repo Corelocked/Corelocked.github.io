@@ -1,16 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Support.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { ThemeContext } from '../context/ThemeContext';
-import umbreonVideo from '../assets/images/umbreon.mp4';
-import spiderGwenVideo from '../assets/images/spider-gwen.mp4';
+// dynamically load background videos to avoid bundling them into initial chunk
 
 // Import QR code images
 import mayaQR from '../assets/images/maya-qr.jpg';
 //import gcashQR from '../assets/images/maya-qr.jpg';
 
 const Support = () => {
+  const [umbreonSrc, setUmbreonSrc] = useState(null);
+  const [spiderSrc, setSpiderSrc] = useState(null);
   const [titleRef, isTitleVisible] = useScrollReveal({ threshold: 0.2 });
   const [cardsRef, isCardsVisible] = useScrollReveal({ threshold: 0.2 });
   const [messageRef, isMessageVisible] = useScrollReveal({ threshold: 0.2 });
@@ -18,6 +19,13 @@ const Support = () => {
   const [heartClicked, setHeartClicked] = useState(false);
   const [heartPop, setHeartPop] = useState(false);
   const { darkMode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    let mounted = true;
+    import('../assets/images/umbreon.mp4').then((m) => { if (mounted) setUmbreonSrc(m.default || m); }).catch(() => {});
+    import('../assets/images/spider-gwen.mp4').then((m) => { if (mounted) setSpiderSrc(m.default || m); }).catch(() => {});
+    return () => { mounted = false; };
+  }, []);
 
   const supportOptions = [
     // {
@@ -105,24 +113,16 @@ const Support = () => {
     <section id="support" className="support">
       {/* Video Background */}
       <div className="video-background">
-        <video 
-          className={`theme-video ${darkMode ? 'active' : ''}`}
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-        >
-          <source src={umbreonVideo} type="video/mp4" />
-        </video>
-        <video 
-          className={`theme-video ${!darkMode ? 'active' : ''}`}
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-        >
-          <source src={spiderGwenVideo} type="video/mp4" />
-        </video>
+        {umbreonSrc && (
+          <video className={`theme-video ${darkMode ? 'active' : ''}`} autoPlay muted loop playsInline preload="none">
+            <source src={umbreonSrc} type="video/mp4" />
+          </video>
+        )}
+        {spiderSrc && (
+          <video className={`theme-video ${!darkMode ? 'active' : ''}`} autoPlay muted loop playsInline preload="none">
+            <source src={spiderSrc} type="video/mp4" />
+          </video>
+        )}
         <div className="video-overlay"></div>
       </div>
       <div className="container">

@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Skills.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { ThemeContext } from '../context/ThemeContext';
-import umbreonVideo from '../assets/images/umbreon.mp4';
-import spiderGwenVideo from '../assets/images/spider-gwen.mp4';
 // Import SVGs as React components
 import { ReactComponent as FrontendIcon } from '../assets/icons/frontend.svg';
 import { ReactComponent as BackendIcon } from '../assets/icons/backend.svg';
@@ -70,9 +68,9 @@ const skillCategories = [
     name: 'Frontend',
     iconKey: 'frontend',
     skills: [
-      { name: 'JavaScript', level: 80, iconKey: 'javascript' },
-      { name: 'React', level: 90, iconKey: 'react' },
-      { name: 'HTML/CSS', level: 80, iconKey: 'html' },
+      { name: 'JavaScript', iconKey: 'javascript' },
+      { name: 'React', iconKey: 'react' },
+      { name: 'HTML/CSS', iconKey: 'html' },
     ]
   },
   {
@@ -80,9 +78,9 @@ const skillCategories = [
     name: 'Backend',
     iconKey: 'backend',
     skills: [
-      { name: 'NodeJS', level: 90, iconKey: 'nodejs' },
-      { name: 'Python', level: 75, iconKey: 'python' },
-      { name: 'Laravel', level: 85, iconKey: 'laravel' },
+      { name: 'NodeJS', iconKey: 'nodejs' },
+      { name: 'Python', iconKey: 'python' },
+      { name: 'Laravel', iconKey: 'laravel' },
     ]
   },
   {
@@ -90,9 +88,9 @@ const skillCategories = [
     name: 'Mobile',
     iconKey: 'mobile',
     skills: [
-      { name: 'Kotlin', level: 90, iconKey: 'kotlin' },
-      { name: 'Java', level: 50, iconKey: 'java' },
-      { name: 'Dart/Flutter', level: 50, iconKey: 'flutter' },
+      { name: 'Kotlin', iconKey: 'kotlin' },
+      { name: 'Java', iconKey: 'java' },
+      { name: 'Dart/Flutter', iconKey: 'flutter' },
     ]
   },
   {
@@ -100,9 +98,9 @@ const skillCategories = [
     name: 'Creative',
     iconKey: 'creative',
     skills: [
-      { name: 'Canva', level: 95, iconKey: 'canva' },
-      { name: 'Photoshop', level: 70, iconKey: 'photoshop' },
-      { name: 'Premiere Pro', level: 80, iconKey: 'premiere' },
+      { name: 'Canva', iconKey: 'canva' },
+      { name: 'Photoshop', iconKey: 'photoshop' },
+      { name: 'Premiere Pro', iconKey: 'premiere' },
     ]
   },
   {
@@ -110,9 +108,9 @@ const skillCategories = [
     name: 'Productivity',
     iconKey: 'productivity',
     skills: [
-      { name: 'MS Office', level: 95, iconKey: 'msoffice' },
-      { name: 'Google Workspace', level: 95, iconKey: 'google' },
-      { name: 'Power BI', level: 85, iconKey: 'powerbi' },
+      { name: 'MS Office', iconKey: 'msoffice' },
+      { name: 'Google Workspace', iconKey: 'google' },
+      { name: 'Power BI', iconKey: 'powerbi' },
     ]
   },
   {
@@ -120,58 +118,66 @@ const skillCategories = [
     name: 'Dev Tools',
     iconKey: 'tools',
     skills: [
-      { name: 'Git/GitHub', level: 90, iconKey: 'git' },
-      { name: 'Firebase', level: 90, iconKey: 'firebase' },
-      { name: 'MongoDB', level: 75, iconKey: 'mongodb' },
-      { name: 'SQLite', level: 75, iconKey: 'sqlite' },
-      { name: 'Jupyter Notebook', level: 80, iconKey: 'jupyter' },
-      { name: 'Google Colab', level: 90, iconKey: 'colab' },
+      { name: 'Git/GitHub', iconKey: 'git' },
+      { name: 'Firebase', iconKey: 'firebase' },
+      { name: 'MongoDB', iconKey: 'mongodb' },
+      { name: 'SQLite', iconKey: 'sqlite' },
+      { name: 'Jupyter', iconKey: 'jupyter' },
+      { name: 'Google Colab', iconKey: 'colab' },
     ]
   }
 ];
 
 const Skills = () => {
+  const [umbreonSrc, setUmbreonSrc] = useState(null);
+  const [spiderSrc, setSpiderSrc] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all');
   const [headerRef, isHeaderVisible] = useScrollReveal({ threshold: 0.2 });
-  const [tabsRef, isTabsVisible] = useScrollReveal({ threshold: 0.3 });
   const [gridRef, isGridVisible] = useScrollReveal({ threshold: 0.1 });
   const { darkMode } = useContext(ThemeContext);
 
-  const displayedCategories = activeCategory === 'all' 
-    ? skillCategories 
-    : skillCategories.filter(cat => cat.id === activeCategory);
+  useEffect(() => {
+    let mounted = true;
+    import('../assets/images/umbreon.mp4').then((m) => {
+      if (mounted) setUmbreonSrc(m.default || m);
+    }).catch(() => {});
+    import('../assets/images/spider-gwen.mp4').then((m) => {
+      if (mounted) setSpiderSrc(m.default || m);
+    }).catch(() => {});
+    return () => { mounted = false; };
+  }, []);
+
+  /* Flatten all skills when "All" is selected, otherwise show filtered */
+  const allSkills = activeCategory === 'all'
+    ? skillCategories.flatMap(cat => cat.skills)
+    : skillCategories.find(cat => cat.id === activeCategory)?.skills || [];
 
   return (
     <section id="skills" className="skills">
       {/* Video Background */}
       <div className="video-background">
-        <video 
-          className={`theme-video ${darkMode ? 'active' : ''}`}
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-        >
-          <source src={umbreonVideo} type="video/mp4" />
-        </video>
-        <video 
-          className={`theme-video ${!darkMode ? 'active' : ''}`}
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-        >
-          <source src={spiderGwenVideo} type="video/mp4" />
-        </video>
+        {umbreonSrc && (
+          <video
+            className={`theme-video ${darkMode ? 'active' : ''}`}
+            autoPlay muted loop playsInline preload="none"
+          >
+            <source src={umbreonSrc} type="video/mp4" />
+          </video>
+        )}
+        {spiderSrc && (
+          <video
+            className={`theme-video ${!darkMode ? 'active' : ''}`}
+            autoPlay muted loop playsInline preload="none"
+          >
+            <source src={spiderSrc} type="video/mp4" />
+          </video>
+        )}
         <div className="video-overlay"></div>
       </div>
-      {/* Background decoration */}
-      <div className="skills-bg-decoration"></div>
-      <div className="skills-bg-decoration-2"></div>
 
       <div className="container">
         {/* Section Header */}
-        <div 
+        <div
           ref={headerRef}
           className={`skills-header scroll-reveal fade-up ${isHeaderVisible ? 'visible' : ''}`}
         >
@@ -188,15 +194,12 @@ const Skills = () => {
         </div>
 
         {/* Category Tabs */}
-        <div 
-          ref={tabsRef}
-          className={`skills-tabs scroll-reveal fade-up ${isTabsVisible ? 'visible' : ''}`}
-        >
-          <button 
+        <div className="skills-tabs">
+          <button
             className={`tab-btn ${activeCategory === 'all' ? 'active' : ''}`}
             onClick={() => setActiveCategory('all')}
           >
-            All Skills
+            All
           </button>
           {skillCategories.map((category) => (
             <button
@@ -210,48 +213,19 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Skills Grid */}
-        <div 
+        {/* Skills Chip Grid */}
+        <div
           ref={gridRef}
-          className={`skills-categories ${isGridVisible ? 'visible' : ''}`}
+          className={`skills-chip-grid ${isGridVisible ? 'visible' : ''}`}
         >
-          {displayedCategories.map((category, catIndex) => (
-            <div key={category.id} className="skill-category">
-              <div className="category-header">
-                <span className="category-icon">{icons[category.iconKey]}</span>
-                <h3 className="category-title">{category.name}</h3>
-              </div>
-              <div className="skills-grid">
-                {category.skills.map((skill, index) => (
-                  <div 
-                    key={index} 
-                    className="skill-card"
-                    style={{ animationDelay: `${(catIndex * 3 + index) * 0.1}s` }}
-                  >
-                    <div className="skill-header">
-                      <span className="skill-icon">{icons[skill.iconKey]}</span>
-                      <div className="skill-info">
-                        <h4 className="skill-name">{skill.name}</h4>
-                        <span className="skill-level">{skill.level}%</span>
-                      </div>
-                    </div>
-                    <div className="skill-bar">
-                      <div 
-                        className="skill-progress" 
-                        style={{ 
-                          width: isGridVisible ? `${skill.level}%` : '0%',
-                          transitionDelay: `${(catIndex * 3 + index) * 0.1}s`
-                        }}
-                      >
-                        <span className="progress-glow"></span>
-                      </div>
-                    </div>
-                    <div className="skill-label">
-                      <span>{skill.level >= 90 ? 'Confident' : skill.level >= 70 ? 'Average' : skill.level >= 50 ? 'Intermediate' : 'Learning'}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {allSkills.map((skill, index) => (
+            <div
+              key={skill.iconKey}
+              className="skill-chip"
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
+              <span className="chip-icon">{icons[skill.iconKey]}</span>
+              <span className="chip-label">{skill.name}</span>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 /* Support Section */
 .support {
   padding: 100px 0;
-  background: var(--bg-secondary);
+  background: transparent;
   position: relative;
   overflow: hidden;
   clip-path: inset(0);

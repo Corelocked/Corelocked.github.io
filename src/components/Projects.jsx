@@ -399,7 +399,7 @@ const projects = [
     liveDemo: '#',
     image: require('../assets/images/lakbay-logo2.png'),
     featured: false,
-    isWIP: true
+    isWIP: false
   },
   {
     id: 13,
@@ -452,10 +452,6 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects">
-      {/* Background decoration */}
-      <div className="projects-bg-decoration"></div>
-      <div className="projects-bg-decoration-2"></div>
-      
       <div className="container">
         {/* Section Header */}
         <div 
