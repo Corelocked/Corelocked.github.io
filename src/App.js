@@ -25,16 +25,19 @@ function App() {
         <StarryBackground />
       </Suspense>
 
-      <Header />
-      <Hero />
-      <About />
-      <Skills />
-      <Certificates />
-      <Projects />
-      <Contact />
-      <Support />
-      <Footer />
       <Phone />
+
+      <div className="main-content">
+        <Header />
+        <Hero />
+        <About />
+        <Skills />
+        <Certificates />
+        <Projects />
+        <Contact />
+        <Support />
+        <Footer />
+      </div>
     </div>
   );
 }

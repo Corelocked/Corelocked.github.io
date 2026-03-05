@@ -17,7 +17,7 @@
   height: 55%;
   background: radial-gradient(circle, rgba(79, 195, 247, 0.04) 0%, transparent 70%);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 .cert-bg-decoration-2 {
   position: absolute;
@@ -27,12 +27,11 @@
   height: 45%;
   background: radial-gradient(circle, rgba(124, 77, 255, 0.03) 0%, transparent 70%);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 .certificates-section .container {
   position: relative;
-  z-index: 1;
 }
 
 /* ---------- Section header ---------- */
@@ -327,7 +326,10 @@
 /* ================================ */
 .cert-modal {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--phone-sidebar-width, 0px);
   z-index: 1200;
   display: flex;
   align-items: center;
@@ -480,7 +482,10 @@
 /* ================================ */
 .cert-lightbox {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--phone-sidebar-width, 0px);
   z-index: 1300;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
