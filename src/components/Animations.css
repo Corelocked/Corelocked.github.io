@@ -161,7 +161,7 @@
   left: 50%;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color, #007bff), var(--accent-color, #00d4ff));
+  background: linear-gradient(90deg, var(--primary-color, #007bff), var(--accent-color, var(--secondary-color)));
   transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

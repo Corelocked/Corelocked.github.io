@@ -3,7 +3,7 @@
 /* ============================= */
 
 .certificates-section {
-  background-color: var(--section-alt-bg);
+  background-color: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -15,7 +15,7 @@
   right: -12%;
   width: 38%;
   height: 55%;
-  background: radial-gradient(circle, rgba(52, 152, 219, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(79, 195, 247, 0.04) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -25,7 +25,7 @@
   left: -8%;
   width: 30%;
   height: 45%;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 77, 255, 0.03) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -45,14 +45,17 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
-  border: 1px solid rgba(52, 152, 219, 0.2);
+  padding: 6px 16px;
+  background: rgba(79, 195, 247, 0.06);
+  border: 1px solid rgba(79, 195, 247, 0.18);
   border-radius: 50px;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   color: var(--primary-color);
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .certificates-section .section-label .label-icon {
@@ -75,7 +78,7 @@
 }
 
 .certificates-section .gradient-text {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #00d4ff 50%, var(--primary-color) 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -126,7 +129,7 @@
 }
 .cert-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-color), #00d4ff);
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   animation: progressFill 5s linear forwards;
 }
 .cert-progress-bar.paused {
@@ -284,12 +287,12 @@
   transition: background 0.3s ease, transform 0.3s ease;
 }
 .cert-dots .dot.active {
-  background: linear-gradient(135deg, var(--primary-color), #00d4ff);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border-color: transparent;
   transform: scale(1.25);
 }
 .cert-dots .dot:hover:not(.active) {
-  background: rgba(52, 152, 219, 0.35);
+  background: rgba(79, 195, 247, 0.35);
 }
 
 /* View-all button */
@@ -438,7 +441,7 @@
 .grid-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(52, 152, 219, 0.45);
+  background: rgba(79, 195, 247, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;

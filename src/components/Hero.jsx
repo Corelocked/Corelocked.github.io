@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
 import './Hero.css';
 import '../components/Animations.css';
-import hero from '../assets/images/Hero2.JPG';
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,14 +15,18 @@ const Hero = () => {
     <section id="home" className="hero">
       <div className="hero-bg-decoration"></div>
       <div className="container">
-        <div className={`hero-content scroll-reveal fade-left ${isLoaded ? 'visible' : ''}`}>
-          <span className="hero-greeting">Welcome to my portfolio</span>
-          <h1>Hi, I'm <span className="gradient-text">Cedric Joshua Palapuz</span></h1>
+        <div className={`hero-center scroll-reveal fade-up ${isLoaded ? 'visible' : ''}`}>
+          <span className="hero-greeting">
+            <span className="hello-wave">👋</span> Hi there
+          </span>
+          <h1>
+            I'm <span className="gradient-text">Cedric Joshua</span>
+          </h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
-            <span className="tagline-prefix">I'm an</span> Android <span className="tagline-prefix">and</span> Full Stack Developer
+            Android & Full Stack Developer
           </h2>
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
-            I build mobile and web applications that are not only functional but also provide an engaging user experience. Let's create something amazing together!
+            I build mobile and web applications that are not only functional but also provide an engaging user experience.
           </p>
           <div className={`hero-buttons scroll-reveal fade-up delay-400 ${isLoaded ? 'visible' : ''}`}>
             <Link to="projects" smooth={true} duration={500} offset={-80} className="btn btn-primary">
@@ -35,27 +38,6 @@ const Hero = () => {
             <Link to="contact" smooth={true} duration={500} offset={-80} className="btn btn-outline">
               <span>Contact Me</span>
             </Link>
-          </div>
-          <div className={`hero-stats scroll-reveal fade-up delay-500 ${isLoaded ? 'visible' : ''}`}>
-            <div className="stat-item">
-              <span className="stat-number">4+</span>
-              <span className="stat-label">Years Academic Experience</span>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <span className="stat-number">10+</span>
-              <span className="stat-label">Projects Completed</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-image-wrapper">
-          <div className="hero-image-decoration"></div>
-          <div className="hero-image-decoration hero-image-decoration-2"></div>
-          <div className={`hero-image scroll-reveal fade-right delay-300 ${isLoaded ? 'visible' : ''}`}>
-            <div className="image-frame">
-              <img src={hero} alt="Hero" width={400} height={400}/>
-              <div className="image-overlay"></div>
-            </div>
           </div>
         </div>
       </div>

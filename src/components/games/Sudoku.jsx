@@ -1,0 +1,143 @@
+import React, { useState, useCallback } from 'react';
+
+const Sudoku = () => {
+  const [board, setBoard] = useState(null);
+  const [solution, setSolution] = useState(null);
+  const [locked, setLocked] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [errors, setErrors] = useState(new Set());
+  const [won, setWon] = useState(false);
+
+  const generate = useCallback(() => {
+    // Generate a solved board then remove cells
+    const grid = Array.from({length:9},()=>Array(9).fill(0));
+    const isOk = (g,r,c,n) => {
+      for (let i=0;i<9;i++) { if(g[r][i]===n||g[i][c]===n) return false; }
+      const br=Math.floor(r/3)*3, bc=Math.floor(c/3)*3;
+      for (let i=br;i<br+3;i++) for (let j=bc;j<bc+3;j++) if(g[i][j]===n) return false;
+      return true;
+    };
+    const fill = (g) => {
+      for (let r=0;r<9;r++) for (let c=0;c<9;c++) {
+        if (g[r][c]===0) {
+          const nums = [1,2,3,4,5,6,7,8,9].sort(()=>Math.random()-0.5);
+          for (let n of nums) {
+            if (isOk(g,r,c,n)) { g[r][c]=n; if(fill(g)) return true; g[r][c]=0; }
+          }
+          return false;
+        }
+      }
+      return true;
+    };
+    fill(grid);
+    const sol = grid.map(r=>[...r]);
+    // Remove ~45 cells for medium difficulty
+    let removed = 0;
+    const positions = [];
+    for (let r=0;r<9;r++) for (let c=0;c<9;c++) positions.push([r,c]);
+    positions.sort(()=>Math.random()-0.5);
+    for (let [r,c] of positions) {
+      if (removed >= 45) break;
+      grid[r][c] = 0;
+      removed++;
+    }
+    const lock = grid.map(r=>r.map(c=>c!==0));
+    setBoard(grid);
+    setSolution(sol);
+    setLocked(lock);
+    setSelected(null);
+    setErrors(new Set());
+    setWon(false);
+  }, []);
+
+  const handleCellClick = (r,c) => {
+    if (locked && locked[r][c]) return;
+    setSelected([r,c]);
+  };
+
+  const handleNumberInput = (n) => {
+    if (!selected || !board) return;
+    const [r,c] = selected;
+    if (locked[r][c]) return;
+    const b = board.map(r=>[...r]);
+    b[r][c] = n;
+    setBoard(b);
+    // Check errors
+    const errs = new Set();
+    for (let i=0;i<9;i++) for (let j=0;j<9;j++) {
+      if (b[i][j] && b[i][j] !== solution[i][j]) errs.add(`${i}-${j}`);
+    }
+    setErrors(errs);
+    // Check win
+    if (errs.size===0 && b.every(r=>r.every(c=>c!==0))) setWon(true);
+  };
+
+  if (!board) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.title}>Sudoku</div>
+        <div style={styles.sub}>Fill the 9×9 grid</div>
+        <button onClick={generate} style={styles.btn}>New Game</button>
+      </div>
+    );
+  }
+
+  return (
+    <div style={styles.container}>
+      {won && <div style={styles.winText}>🎉 Solved!</div>}
+      <div style={styles.grid}>
+        {board.map((row,r)=>(
+          <div key={r} style={{...styles.row, borderBottom: (r===2||r===5)?'2px solid rgba(79,195,247,0.3)':'none'}}>
+            {row.map((cell,c)=>{
+              const isSel = selected && selected[0]===r && selected[1]===c;
+              const isLocked = locked[r][c];
+              const isError = errors.has(`${r}-${c}`);
+              return (
+                <button
+                  key={c}
+                  onClick={()=>handleCellClick(r,c)}
+                  style={{
+                    ...styles.cell,
+                    borderRight: (c===2||c===5)?'2px solid rgba(79,195,247,0.3)':'1px solid rgba(255,255,255,0.04)',
+                    background: isSel ? 'rgba(79,195,247,0.2)' : isError ? 'rgba(255,107,157,0.15)' : 'transparent',
+                    color: isError ? '#ff6b9d' : isLocked ? 'rgba(255,255,255,0.85)' : '#4fc3f7',
+                    fontWeight: isLocked ? 700 : 500,
+                    cursor: isLocked ? 'default' : 'pointer',
+                  }}
+                >
+                  {cell||''}
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      <div style={styles.numPad}>
+        {[1,2,3,4,5,6,7,8,9].map(n=>(
+          <button key={n} onClick={()=>handleNumberInput(n)} style={styles.numBtn}>{n}</button>
+        ))}
+        <button onClick={()=>handleNumberInput(0)} style={{...styles.numBtn, color:'#ff6b9d'}}>✕</button>
+      </div>
+      <div style={styles.actions}>
+        <button onClick={generate} style={styles.smallBtn}>New Game</button>
+      </div>
+    </div>
+  );
+};
+
+const styles = {
+  container: { display:'flex', flexDirection:'column', alignItems:'center', height:'100%', justifyContent:'center', padding:'2px 0' },
+  title: { fontSize:18, fontWeight:700, color:'#fff', marginBottom:4, fontFamily:'var(--heading-font)' },
+  sub: { fontSize:11, color:'rgba(255,255,255,0.4)', marginBottom:12, fontFamily:'var(--body-font)' },
+  grid: { display:'flex', flexDirection:'column', border:'2px solid rgba(79,195,247,0.3)', borderRadius:4, overflow:'hidden' },
+  row: { display:'flex' },
+  cell: { width:26, height:26, border:'1px solid rgba(255,255,255,0.04)', fontSize:13, display:'flex', alignItems:'center', justifyContent:'center', padding:0, fontFamily:'var(--mono-font)', borderRadius:0 },
+  numPad: { display:'flex', flexWrap:'wrap', gap:4, marginTop:8, justifyContent:'center', maxWidth:220 },
+  numBtn: { width:30, height:30, borderRadius:8, border:'none', background:'rgba(255,255,255,0.06)', color:'#4fc3f7', fontSize:14, fontWeight:700, cursor:'pointer', fontFamily:'var(--mono-font)', display:'flex', alignItems:'center', justifyContent:'center' },
+  actions: { marginTop:6 },
+  smallBtn: { padding:'4px 14px', borderRadius:8, border:'none', background:'rgba(255,255,255,0.06)', color:'rgba(255,255,255,0.5)', fontSize:10, cursor:'pointer', fontFamily:'var(--body-font)' },
+  winText: { fontSize:16, fontWeight:700, color:'#4db6ac', marginBottom:8, fontFamily:'var(--heading-font)' },
+  btn: { padding:'6px 24px', borderRadius:10, border:'none', background:'linear-gradient(135deg,#4fc3f7,#7c4dff)', color:'#fff', fontSize:12, fontWeight:600, cursor:'pointer', fontFamily:'var(--body-font)' },
+};
+
+export default Sudoku;
