@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import Certificates from './components/Certificates';
 import Projects from './components/Projects';
 // import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
@@ -132,6 +133,7 @@ function App() {
       <Hero />
       <About />
       <Skills />
+      <Certificates />
       <Projects />
       {/* <Testimonials /> */}
       <Contact />
