@@ -34,7 +34,7 @@ const FlappyBird = () => {
     pipes: [],
     spawnTimer: 0,
     gravity: 0.24,
-    flapImpulse: -4.25,
+    flapImpulse: -3.5,
     speed: 1.45,
     gap: 34,
     groundH: 12,
