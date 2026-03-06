@@ -313,12 +313,13 @@ const Phone = () => {
   const [yearMenuOpen, setYearMenuOpen] = useState(false); // State for year dropdown menu
   const yearMenuRef = useRef(null);
 
-  // Dock apps (bottom dock)
+  // Dock apps (bottom dock) - ordered per user request
   const dockApps = [
-    apps.find((a) => a.name === 'GitHub'),
-    apps.find((a) => a.name === 'Email'),
-    apps.find((a) => a.name === 'Donate'),
-    apps.find((a) => a.name === 'Games'),
+    apps.find((a) => a.name === 'Certificates'),
+    apps.find((a) => a.name === 'About'),
+    apps.find((a) => a.name === 'Home'),
+    apps.find((a) => a.name === 'Projects'),
+    apps.find((a) => a.name === 'Resume'),
   ].filter(Boolean);
 
   // ===== Effects =====
