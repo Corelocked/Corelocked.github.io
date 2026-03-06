@@ -44,10 +44,12 @@ const SnakeGame = lazy(() => import('./games/Snake'));
 const TetrisGame = lazy(() => import('./games/Tetris'));
 const MinesweeperGame = lazy(() => import('./games/Minesweeper'));
 const SudokuGame = lazy(() => import('./games/Sudoku'));
+const ResumeViewerApp = lazy(() => import('./apps/ResumeViewer'));
 
 // ===== Data =====
 
 const GAMES = [
+  { id: 'resume', name: 'Resume', component: ResumeViewerApp, icon: '📄' },
   { id: 'tictactoe', name: 'Tic Tac Toe', component: TicTacToe, icon: '⭕' },
   { id: 'snake', name: 'Snake', component: SnakeGame, icon: '🐍' },
   { id: 'tetris', name: 'Tetris', component: TetrisGame, icon: '🧱' },
