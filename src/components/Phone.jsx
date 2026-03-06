@@ -55,8 +55,7 @@ const GAMES = [
   { id: 'sudoku', name: 'Sudoku', component: SudokuGame, icon: '🔢' },
 ];
 
-// Years for contributions filter
-const CONTRIBUTION_YEARS = [2024, 2025, 2026];
+// Years for contributions filter (defined elsewhere or unused)
 
 const skillIcons = {
   frontend: <FrontendIcon />, backend: <BackendIcon />, mobile: <MobileIcon />,

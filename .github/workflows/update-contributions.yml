@@ -3,6 +3,10 @@ name: Update contributions and rebuild
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
@@ -27,15 +31,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Debug environment
-        env:
-          GITHUB_TOKEN: ${{ secrets.CONTRIB_PAT }}
-        run: |
-          echo "node: $(node -v)"
-          echo "npm: $(npm -v)"
-          if [ -z "$GITHUB_TOKEN" ]; then echo "GITHUB_TOKEN is empty"; else echo "GITHUB_TOKEN is present"; fi
-          echo "Working dir: $(pwd)"
-          ls -la
+      # Removed debug step
 
       - name: Install dependencies
         run: npm ci

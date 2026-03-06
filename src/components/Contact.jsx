@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
 import '../components/Animations.css';
@@ -13,7 +13,6 @@ const EMAILJS_PUBLIC_KEY = 'R9B6dfHNiMoceaxmX';
 const Contact = () => {
   const [titleRef, isTitleVisible] = useScrollReveal({ threshold: 0.2 });
   const [formContainerRef, isFormVisible] = useScrollReveal({ threshold: 0.2 });
-  const { darkMode } = useContext(ThemeContext);
   
   const formRef = useRef();
 

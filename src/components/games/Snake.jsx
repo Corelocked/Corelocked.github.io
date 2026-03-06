@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 const GRID = 15;
-const CELL = 1;
 const TICK = 140;
 
 const Snake = () => {
   const [snake, setSnake] = useState([[7,7],[7,8],[7,9]]);
   const [food, setFood] = useState([3,3]);
-  const [dir, setDir] = useState([0,-1]);
+  const [, setDir] = useState([0,-1]);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
@@ -17,10 +16,14 @@ const Snake = () => {
 
   const spawnFood = useCallback((snk) => {
     let pos;
-    do {
+    while (true) {
       pos = [Math.floor(Math.random()*GRID), Math.floor(Math.random()*GRID)];
-    } while (snk.some(s => s[0]===pos[0] && s[1]===pos[1]));
-    return pos;
+      let collision = false;
+      for (let i = 0; i < snk.length; i++) {
+        if (snk[i][0] === pos[0] && snk[i][1] === pos[1]) { collision = true; break; }
+      }
+      if (!collision) return pos;
+    }
   }, []);
 
   const reset = () => {
