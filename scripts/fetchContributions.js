@@ -53,7 +53,7 @@ async function fetchForYear(year) {
       out[year][username] = calendar;
     }
 
-    const outPath = path.join(process.cwd(), 'docs', 'contributions.json');
+    const outPath = path.join(process.cwd(), 'public', 'contributions.json');
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, JSON.stringify(out, null, 2), 'utf8');
     console.log('Wrote', outPath);
