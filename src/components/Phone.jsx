@@ -185,6 +185,16 @@ const apps = [
     ),
   },
   {
+    name: 'Resume', type: 'action', action: 'openResume',
+    bg: 'linear-gradient(135deg, #8b5cf6, #3b82f6)', color: '#fff',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+      </svg>
+    ),
+  },
+  {
     name: 'Certificates', type: 'scroll', to: 'certificates',
     bg: '#4caf50', color: '#fff',
     icon: (
@@ -361,6 +371,9 @@ const Phone = () => {
       case 'openGames':
         setGamesOpen(true);
         break;
+        case 'openResume':
+          setActiveView('resume');
+          break;
       case 'openAbout':
         setActiveView('about');
         break;
@@ -444,6 +457,17 @@ const Phone = () => {
 
   const renderDetailView = () => {
     switch (activeView) {
+      case 'resume':
+        return (
+          <div className="phone-detail-view">
+            {renderBackHeader('Resume')}
+            <div className="pv-content">
+              <Suspense fallback={<div className="game-loading">Loading resume...</div>}>
+                <ResumeViewerApp />
+              </Suspense>
+            </div>
+          </div>
+        );
       case 'about':
         return (
           <div className="phone-detail-view">
