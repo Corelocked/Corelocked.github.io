@@ -3,7 +3,6 @@ import emailjs from '@emailjs/browser';
 import './Contact.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
-import { ThemeContext } from '../context/ThemeContext';
 
 // EmailJS Configuration
 const EMAILJS_SERVICE_ID = 'service_18woyam';
