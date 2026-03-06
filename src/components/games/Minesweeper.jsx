@@ -1,8 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 
 const ROWS = 9, COLS = 9, MINES = 10;
 
 const Minesweeper = () => {
+  const containerRef = useRef(null);
+  const [gridSize, setGridSize] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const w = containerRef.current ? containerRef.current.clientWidth : 0;
+      const size = Math.max(180, Math.min(420, Math.floor(w * 0.92)));
+      setGridSize(size);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   const [board, setBoard] = useState(null);
   const [revealed, setRevealed] = useState(null);
   const [flagged, setFlagged] = useState(null);
@@ -82,8 +95,16 @@ const Minesweeper = () => {
   const minesLeft = started && flagged ? MINES - flagged.flat().filter(Boolean).length : MINES;
   const numColors = ['','#4fc3f7','#4db6ac','#ff6b9d','#7c4dff','#ffd54f','#ff8a65','#81c784','#e0e0e0'];
 
+  const cellPx = gridSize ? Math.floor(gridSize / COLS) : 24;
+  const cellStyleDynamic = {
+    width: cellPx,
+    height: cellPx,
+    fontSize: Math.max(10, Math.floor(cellPx * 0.45)),
+    borderRadius: Math.max(3, Math.floor(cellPx * 0.08)),
+  };
+
   return (
-    <div style={styles.container}>
+    <div ref={containerRef} style={styles.container}>
       {!started ? (
         <div style={styles.menu}>
           <div style={styles.title}>Minesweeper</div>
@@ -96,7 +117,7 @@ const Minesweeper = () => {
             <span style={styles.infoText}>💣 {minesLeft}</span>
             {(gameOver||won) && <span style={{...styles.infoText, color: won?'#4db6ac':'#ff6b9d'}}>{won?'You Win!':'Boom!'}</span>}
           </div>
-          <div style={styles.grid}>
+          <div style={{...styles.grid, width: gridSize}}>
             {Array.from({length:ROWS}).map((_,r)=>(
               <div key={r} style={styles.row}>
                 {Array.from({length:COLS}).map((_,c)=>{
@@ -110,11 +131,13 @@ const Minesweeper = () => {
                       onContextMenu={(e)=>handleRightClick(e,r,c)}
                       style={{
                         ...styles.cell,
+                        ...cellStyleDynamic,
                         background: isRevealed
                           ? (val===-1 ? 'rgba(255,107,157,0.25)' : 'rgba(255,255,255,0.04)')
                           : 'rgba(255,255,255,0.08)',
                         color: val===-1 ? '#ff6b9d' : (numColors[val]||'transparent'),
                         cursor: isRevealed ? 'default' : 'pointer',
+                        padding: 0,
                       }}
                     >
                       {isRevealed ? (val===-1?'💣': val>0?val:'') : (isFlagged?'🚩':'')}

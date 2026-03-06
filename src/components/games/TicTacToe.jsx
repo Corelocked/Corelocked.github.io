@@ -1,6 +1,19 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 
 const TicTacToe = () => {
+  const containerRef = useRef(null);
+  const [boardSize, setBoardSize] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const w = containerRef.current ? containerRef.current.clientWidth : 0;
+      const size = Math.max(180, Math.min(420, Math.floor(w * 0.85)));
+      setBoardSize(size);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [scores, setScores] = useState({ X: 0, O: 0 });
@@ -46,22 +59,26 @@ const TicTacToe = () => {
     ? "It's a draw!"
     : `${xIsNext ? 'X' : 'O'}'s turn`;
 
+  const cellSize = Math.max(40, Math.floor(boardSize / 3));
+
   return (
-    <div style={styles.container}>
+    <div ref={containerRef} style={styles.container}>
       <div style={styles.scoreboard}>
         <span style={{...styles.score, color: '#4fc3f7'}}>X: {scores.X}</span>
         <span style={{...styles.score, color: '#ff6b9d'}}>O: {scores.O}</span>
       </div>
-      <div style={{...styles.status, color: winner ? '#4fc3f7' : 'rgba(255,255,255,0.7)'}}>
-        {status}
-      </div>
-      <div style={styles.board}>
+      <div style={{...styles.status, color: winner ? '#4fc3f7' : 'rgba(255,255,255,0.7)'}}>{status}</div>
+      <div style={{...styles.board, width: boardSize, height: boardSize}}>
         {board.map((cell, i) => (
           <button
             key={i}
             onClick={() => handleClick(i)}
             style={{
               ...styles.cell,
+              width: cellSize,
+              height: cellSize,
+              fontSize: Math.max(18, Math.floor(cellSize * 0.5)),
+              borderRadius: Math.max(6, Math.floor(cellSize * 0.08)),
               color: cell === 'X' ? '#4fc3f7' : '#ff6b9d',
               background: winLine.includes(i) ? 'rgba(79,195,247,0.15)' : 'rgba(255,255,255,0.03)',
               cursor: cell || winner ? 'default' : 'pointer',

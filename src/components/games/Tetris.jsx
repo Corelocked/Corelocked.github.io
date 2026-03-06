@@ -14,6 +14,8 @@ const COLORS = ['#4fc3f7','#7c4dff','#ff6b9d','#ffd54f','#4db6ac','#ff8a65','#81
 
 const Tetris = () => {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+  const [canvasSize, setCanvasSize] = useState(COLS*CELL);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [running, setRunning] = useState(false);
@@ -70,17 +72,20 @@ const Tetris = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0,COLS*CELL,ROWS*CELL);
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+    const cell = Math.floor(w / COLS);
     // Board
     boardRef.current.forEach((row,y)=>row.forEach((c,x)=>{
-      if (c) { ctx.fillStyle=COLORS[c-1]; ctx.fillRect(x*CELL+0.5,y*CELL+0.5,CELL-1,CELL-1); }
-      else { ctx.fillStyle='rgba(255,255,255,0.015)'; ctx.fillRect(x*CELL+0.5,y*CELL+0.5,CELL-1,CELL-1); }
+      if (c) { ctx.fillStyle=COLORS[c-1]; ctx.fillRect(x*cell+0.5,y*cell+0.5,cell-1,cell-1); }
+      else { ctx.fillStyle='rgba(255,255,255,0.015)'; ctx.fillRect(x*cell+0.5,y*cell+0.5,cell-1,cell-1); }
     }));
     // Piece
     if (pieceRef.current) {
       ctx.fillStyle = COLORS[colorRef.current];
       pieceRef.current.forEach((row,y)=>row.forEach((c,x)=>{
-        if (c && posRef.current.y+y>=0) ctx.fillRect((posRef.current.x+x)*CELL+0.5,(posRef.current.y+y)*CELL+0.5,CELL-1,CELL-1);
+        if (c && posRef.current.y+y>=0) ctx.fillRect((posRef.current.x+x)*cell+0.5,(posRef.current.y+y)*cell+0.5,cell-1,cell-1);
       }));
     }
   }, []);
@@ -167,9 +172,9 @@ const Tetris = () => {
   };
 
   return (
-    <div style={styles.container} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <div ref={containerRef} style={styles.container} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div style={styles.scoreRow}><span style={styles.scoreText}>Score: {score}</span></div>
-      <canvas ref={canvasRef} width={COLS*CELL} height={ROWS*CELL} style={styles.canvas} />
+      <canvas ref={canvasRef} width={canvasSize} height={Math.floor(canvasSize * (ROWS/COLS))} style={{...styles.canvas, maxWidth: '100%'}} />
       {(!running) && (
         <div style={styles.overlay}>
           <div style={styles.overlayText}>{gameOver ? 'Game Over!' : 'Tetris'}</div>

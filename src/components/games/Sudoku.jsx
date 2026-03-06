@@ -1,6 +1,19 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 
 const Sudoku = () => {
+  const containerRef = useRef(null);
+  const [gridSize, setGridSize] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const w = containerRef.current ? containerRef.current.clientWidth : 0;
+      const size = Math.max(220, Math.min(520, Math.floor(w * 0.9)));
+      setGridSize(size);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   const [board, setBoard] = useState(null);
   const [solution, setSolution] = useState(null);
   const [locked, setLocked] = useState(null);
@@ -74,7 +87,7 @@ const Sudoku = () => {
 
   if (!board) {
     return (
-      <div style={styles.container}>
+      <div ref={containerRef} style={styles.container}>
         <div style={styles.title}>Sudoku</div>
         <div style={styles.sub}>Fill the 9×9 grid</div>
         <button onClick={generate} style={styles.btn}>New Game</button>
@@ -82,10 +95,17 @@ const Sudoku = () => {
     );
   }
 
+  const cellPx = gridSize ? Math.floor(gridSize / 9) : 26;
+  const cellDynamicStyle = {
+    width: cellPx,
+    height: cellPx,
+    fontSize: Math.max(12, Math.floor(cellPx * 0.45)),
+  };
+
   return (
-    <div style={styles.container}>
+    <div ref={containerRef} style={styles.container}>
       {won && <div style={styles.winText}>🎉 Solved!</div>}
-      <div style={styles.grid}>
+      <div style={{...styles.grid, width: gridSize}}>
         {board.map((row,r)=>(
           <div key={r} style={{...styles.row, borderBottom: (r===2||r===5)?'2px solid rgba(79,195,247,0.3)':'none'}}>
             {row.map((cell,c)=>{
@@ -98,11 +118,13 @@ const Sudoku = () => {
                   onClick={()=>handleCellClick(r,c)}
                   style={{
                     ...styles.cell,
+                    ...cellDynamicStyle,
                     borderRight: (c===2||c===5)?'2px solid rgba(79,195,247,0.3)':'1px solid rgba(255,255,255,0.04)',
                     background: isSel ? 'rgba(79,195,247,0.2)' : isError ? 'rgba(255,107,157,0.15)' : 'transparent',
                     color: isError ? '#ff6b9d' : isLocked ? 'rgba(255,255,255,0.85)' : '#4fc3f7',
                     fontWeight: isLocked ? 700 : 500,
                     cursor: isLocked ? 'default' : 'pointer',
+                    padding: 0,
                   }}
                 >
                   {cell||''}
@@ -112,11 +134,11 @@ const Sudoku = () => {
           </div>
         ))}
       </div>
-      <div style={styles.numPad}>
+      <div style={{...styles.numPad, maxWidth: Math.max(220, Math.floor(gridSize * 0.9))}}>
         {[1,2,3,4,5,6,7,8,9].map(n=>(
-          <button key={n} onClick={()=>handleNumberInput(n)} style={styles.numBtn}>{n}</button>
+          <button key={n} onClick={()=>handleNumberInput(n)} style={{...styles.numBtn, width: Math.max(30, Math.floor(cellPx * 0.9)), height: Math.max(30, Math.floor(cellPx * 0.9))}}>{n}</button>
         ))}
-        <button onClick={()=>handleNumberInput(0)} style={{...styles.numBtn, color:'#ff6b9d'}}>✕</button>
+        <button onClick={()=>handleNumberInput(0)} style={{...styles.numBtn, color:'#ff6b9d', width: Math.max(30, Math.floor(cellPx * 0.9)), height: Math.max(30, Math.floor(cellPx * 0.9))}}>✕</button>
       </div>
       <div style={styles.actions}>
         <button onClick={generate} style={styles.smallBtn}>New Game</button>
