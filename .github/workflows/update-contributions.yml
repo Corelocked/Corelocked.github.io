@@ -27,6 +27,16 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Debug environment
+        env:
+          GITHUB_TOKEN: ${{ secrets.CONTRIB_PAT }}
+        run: |
+          echo "node: $(node -v)"
+          echo "npm: $(npm -v)"
+          if [ -z "$GITHUB_TOKEN" ]; then echo "GITHUB_TOKEN is empty"; else echo "GITHUB_TOKEN is present"; fi
+          echo "Working dir: $(pwd)"
+          ls -la
+
       - name: Install dependencies
         run: npm ci
 
@@ -45,7 +55,11 @@ jobs:
           git add public/contributions.json || true
           if ! git diff --staged --quiet; then
             git commit -m "chore: update contributions.json [skip ci]" || true
-            git push
+            # Ensure we integrate any remote changes first to avoid non-fast-forward errors
+            BRANCH=$(git rev-parse --abbrev-ref HEAD)
+            git fetch origin ${BRANCH} || true
+            git pull --rebase --autostash origin ${BRANCH} || true
+            git push origin HEAD:refs/heads/${BRANCH} || git push --force-with-lease origin HEAD:refs/heads/${BRANCH}
           else
             echo "No changes to contributions.json"
           fi
