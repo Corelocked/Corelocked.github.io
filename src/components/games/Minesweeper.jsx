@@ -1,10 +1,20 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-
-const ROWS = 9, COLS = 9, MINES = 10;
+import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import { useGameTheme } from './gameTheme';
 
 const Minesweeper = () => {
   const containerRef = useRef(null);
   const [gridSize, setGridSize] = useState(0);
+  const [mode, setMode] = useState('easy');
+
+  const settings = useMemo(() => {
+    if (mode === 'easy') return { rows: 9, cols: 9, mines: 10 };
+    if (mode === 'hard') return { rows: 16, cols: 16, mines: 40 };
+    return { rows: 12, cols: 12, mines: 20 };
+  }, [mode]);
+  const { rows: ROWS, cols: COLS, mines: MINES } = settings;
+
+  const theme = useGameTheme();
+  const isDark = theme?.isDark;
 
   useEffect(() => {
     const update = () => {
@@ -43,7 +53,7 @@ const Minesweeper = () => {
       b[r][c]=count;
     }
     return b;
-  }, []);
+  }, [ROWS, COLS, MINES]);
 
   const start = () => {
     setBoard(null);
@@ -103,19 +113,64 @@ const Minesweeper = () => {
     borderRadius: Math.max(3, Math.floor(cellPx * 0.08)),
   };
 
+  const baseSmallBtn = {
+    ...(theme ? theme.smallBtn : styles.smallBtn),
+    background: theme ? theme.panelBg : (isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)'),
+    border: theme ? theme.cellBorder : (isDark ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.08)'),
+    color: theme ? theme.titleColor : (isDark ? styles.smallBtn.color : '#111'),
+  };
+
   return (
     <div ref={containerRef} style={styles.container}>
       {!started ? (
         <div style={styles.menu}>
-          <div style={styles.title}>Minesweeper</div>
-          <div style={styles.sub}>9×9 · 10 mines</div>
-          <button onClick={start} style={styles.btn}>Start</button>
+          <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:12}}>
+            <div>
+                <div style={{...styles.title, color: theme ? theme.titleColor : (isDark ? '#fff' : '#111')}}>Minesweeper</div>
+                  <div style={{...styles.sub, color: theme ? theme.subColor : (isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.45)')}}>{ROWS}×{COLS} · {MINES} mines</div>
+            </div>
+            <div style={{display:'flex', gap:8}}>
+                  <button
+                onClick={() => setMode('easy')}
+                style={{
+                      ...baseSmallBtn,
+                      background: mode==='easy' ? theme?.accentGradient || baseSmallBtn.background : baseSmallBtn.background,
+                      color: mode==='easy' ? '#fff' : baseSmallBtn.color,
+                      boxShadow: mode==='easy' ? (theme?.isDark ? '0 6px 18px rgba(76,195,247,0.18)' : '0 6px 18px rgba(76,195,247,0.12)') : baseSmallBtn.boxShadow,
+                      transform: mode==='easy' ? 'translateY(-2px)' : 'none',
+                }}
+              >Easy</button>
+              <button
+                onClick={() => setMode('medium')}
+                style={{
+                  ...baseSmallBtn,
+                  background: mode==='medium' ? (isDark ? 'linear-gradient(135deg,#4fc3f7,#7c4dff)' : 'linear-gradient(135deg,#4fc3f7,#7c4dff)') : baseSmallBtn.background,
+                  color: mode==='medium' ? '#fff' : baseSmallBtn.color,
+                  boxShadow: mode==='medium' ? (isDark ? '0 6px 18px rgba(76,195,247,0.18)' : '0 6px 18px rgba(76,195,247,0.12)') : baseSmallBtn.boxShadow,
+                  transform: mode==='medium' ? 'translateY(-2px)' : 'none',
+                }}
+              >Medium</button>
+              <button
+                onClick={() => setMode('hard')}
+                style={{
+                  ...baseSmallBtn,
+                  background: mode==='hard' ? (isDark ? 'linear-gradient(135deg,#4fc3f7,#7c4dff)' : 'linear-gradient(135deg,#4fc3f7,#7c4dff)') : baseSmallBtn.background,
+                  color: mode==='hard' ? '#fff' : baseSmallBtn.color,
+                  boxShadow: mode==='hard' ? (isDark ? '0 6px 18px rgba(76,195,247,0.18)' : '0 6px 18px rgba(76,195,247,0.12)') : baseSmallBtn.boxShadow,
+                  transform: mode==='hard' ? 'translateY(-2px)' : 'none',
+                }}
+              >Hard</button>
+            </div>
+          </div>
+          <div style={{marginTop:10}}>
+            <button onClick={start} style={{...styles.btn, ...(theme? theme.smallBtn : {})}}>Start</button>
+          </div>
         </div>
       ) : (
         <>
           <div style={styles.info}>
-            <span style={styles.infoText}>💣 {minesLeft}</span>
-            {(gameOver||won) && <span style={{...styles.infoText, color: won?'#4db6ac':'#ff6b9d'}}>{won?'You Win!':'Boom!'}</span>}
+            <span style={{...styles.infoText, color: theme ? theme.titleColor : styles.infoText.color}}>💣 {minesLeft}</span>
+            {(gameOver||won) && <span style={{...styles.infoText, color: won? (theme?.isDark? '#4db6ac':'#4db6ac') : '#ff6b9d'}}>{won?'You Win!':'Boom!'}</span>}
           </div>
           <div style={{...styles.grid, width: gridSize}}>
             {Array.from({length:ROWS}).map((_,r)=>(
@@ -129,16 +184,17 @@ const Minesweeper = () => {
                       key={c}
                       onClick={()=>handleClick(r,c)}
                       onContextMenu={(e)=>handleRightClick(e,r,c)}
-                      style={{
-                        ...styles.cell,
-                        ...cellStyleDynamic,
-                        background: isRevealed
-                          ? (val===-1 ? 'rgba(255,107,157,0.25)' : 'rgba(255,255,255,0.04)')
-                          : 'rgba(255,255,255,0.08)',
-                        color: val===-1 ? '#ff6b9d' : (numColors[val]||'transparent'),
-                        cursor: isRevealed ? 'default' : 'pointer',
-                        padding: 0,
-                      }}
+                          style={{
+                            ...styles.cell,
+                            ...cellStyleDynamic,
+                            background: isRevealed
+                              ? (val===-1 ? (theme ? 'rgba(255,107,157,0.25)' : (isDark ? 'rgba(255,107,157,0.25)' : 'rgba(255,107,157,0.12)')) : (theme ? theme.cellBg : (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)')))
+                              : (theme ? theme.unrevealedCellBg : (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)')),
+                            color: val===-1 ? '#ff6b9d' : (numColors[val]|| (theme ? theme.titleColor : (isDark ? 'rgba(255,255,255,0.7)' : '#222'))),
+                            cursor: isRevealed ? 'default' : 'pointer',
+                            padding: 0,
+                            border: theme ? theme.cellBorder : (isDark ? 'none' : '1px solid rgba(0,0,0,0.06)'),
+                          }}
                     >
                       {isRevealed ? (val===-1?'💣': val>0?val:'') : (isFlagged?'🚩':'')}
                     </button>
@@ -166,6 +222,19 @@ const styles = {
   row: { display:'flex', gap:1 },
   cell: { width:24, height:24, border:'none', borderRadius:3, fontSize:11, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', padding:0, fontFamily:'var(--mono-font)', lineHeight:1 },
   btn: { padding:'6px 24px', borderRadius:10, border:'none', background:'linear-gradient(135deg,#4fc3f7,#7c4dff)', color:'#fff', fontSize:12, fontWeight:600, cursor:'pointer', fontFamily:'var(--body-font)' },
+  smallBtn: {
+    padding:'8px 14px',
+    borderRadius:12,
+    border:'1px solid rgba(255,255,255,0.12)',
+    background:'rgba(255,255,255,0.03)',
+    color:'rgba(255,255,255,0.95)',
+    fontSize:13,
+    fontWeight:700,
+    cursor:'pointer',
+    fontFamily:'var(--body-font)',
+    transition:'all 0.14s ease',
+    boxShadow:'0 2px 6px rgba(0,0,0,0.12) inset',
+  },
   hint: { color:'rgba(255,255,255,0.35)', fontSize:8, marginTop:6, fontFamily:'var(--body-font)' },
 };
 

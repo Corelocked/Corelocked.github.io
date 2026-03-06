@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { useGameTheme } from './gameTheme';
 
 const TicTacToe = () => {
   const containerRef = useRef(null);
@@ -59,6 +60,9 @@ const TicTacToe = () => {
     ? "It's a draw!"
     : `${xIsNext ? 'X' : 'O'}'s turn`;
 
+  const theme = useGameTheme();
+  const isDark = theme?.isDark;
+
   const cellSize = Math.max(40, Math.floor(boardSize / 3));
 
   return (
@@ -67,9 +71,10 @@ const TicTacToe = () => {
         <span style={{...styles.score, color: '#4fc3f7'}}>X: {scores.X}</span>
         <span style={{...styles.score, color: '#ff6b9d'}}>O: {scores.O}</span>
       </div>
-      <div style={{...styles.status, color: winner ? '#4fc3f7' : 'rgba(255,255,255,0.7)'}}>{status}</div>
-      <div style={{...styles.board, width: boardSize, height: boardSize}}>
-        {board.map((cell, i) => (
+      <div style={{...styles.status, color: winner ? '#4fc3f7' : (theme ? theme.titleColor : (isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)'))}}>{status}</div>
+      <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+        <div style={{...styles.board, width: boardSize, height: boardSize, margin: '8px 0'}}>
+          {board.map((cell, i) => (
           <button
             key={i}
             onClick={() => handleClick(i)}
@@ -80,16 +85,18 @@ const TicTacToe = () => {
               fontSize: Math.max(18, Math.floor(cellSize * 0.5)),
               borderRadius: Math.max(6, Math.floor(cellSize * 0.08)),
               color: cell === 'X' ? '#4fc3f7' : '#ff6b9d',
-              background: winLine.includes(i) ? 'rgba(79,195,247,0.15)' : 'rgba(255,255,255,0.03)',
+              background: winLine.includes(i) ? (theme ? (theme.isDark ? 'rgba(79,195,247,0.15)' : 'rgba(76,195,247,0.12)') : (isDark ? 'rgba(79,195,247,0.15)' : 'rgba(76,195,247,0.12)')) : (theme ? theme.unrevealedCellBg : (isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)')) ,
+              border: theme ? theme.cellBorder : (isDark ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(0,0,0,0.06)'),
               cursor: cell || winner ? 'default' : 'pointer',
             }}
           >
             {cell}
           </button>
         ))}
+        </div>
       </div>
       {(winner || isDraw) && (
-        <button onClick={reset} style={styles.resetBtn}>Play Again</button>
+        <button onClick={reset} style={{...styles.resetBtn, ...(theme? theme.smallBtn : {})}}>Play Again</button>
       )}
     </div>
   );
@@ -100,7 +107,7 @@ const styles = {
   scoreboard: { display: 'flex', gap: 20, marginBottom: 6 },
   score: { fontSize: 13, fontWeight: 700, fontFamily: 'var(--mono-font), monospace' },
   status: { fontSize: 12, marginBottom: 10, fontFamily: 'var(--body-font), sans-serif', fontWeight: 600 },
-  board: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4, width: '80%', maxWidth: 200, aspectRatio: '1' },
+  board: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 },
   cell: {
     aspectRatio: '1',
     border: '1px solid rgba(255,255,255,0.08)',

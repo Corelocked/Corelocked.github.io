@@ -1,8 +1,15 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { useGameTheme } from './gameTheme';
 
 const Sudoku = () => {
   const containerRef = useRef(null);
   const [gridSize, setGridSize] = useState(0);
+  const theme = useGameTheme();
+  const isDark = theme?.isDark;
+
+  const [difficulty, setDifficulty] = useState('medium');
+  // Removed cells by difficulty: higher = harder (increased counts)
+  const removedTarget = difficulty === 'easy' ? 36 : difficulty === 'hard' ? 64 : 50;
 
   useEffect(() => {
     const update = () => {
@@ -44,13 +51,13 @@ const Sudoku = () => {
     };
     fill(grid);
     const sol = grid.map(r=>[...r]);
-    // Remove ~45 cells for medium difficulty
+    // Remove cells according to difficulty
     let removed = 0;
     const positions = [];
     for (let r=0;r<9;r++) for (let c=0;c<9;c++) positions.push([r,c]);
     positions.sort(()=>Math.random()-0.5);
     for (let [r,c] of positions) {
-      if (removed >= 45) break;
+      if (removed >= removedTarget) break;
       grid[r][c] = 0;
       removed++;
     }
@@ -61,7 +68,7 @@ const Sudoku = () => {
     setSelected(null);
     setErrors(new Set());
     setWon(false);
-  }, []);
+  }, [removedTarget]);
 
   const handleCellClick = (r,c) => {
     if (locked && locked[r][c]) return;
@@ -85,12 +92,57 @@ const Sudoku = () => {
     if (errs.size===0 && b.every(r=>r.every(c=>c!==0))) setWon(true);
   };
 
+  const baseSmallBtn = {
+    padding: '8px 14px',
+    borderRadius: 12,
+    border: theme ? theme.cellBorder : (isDark ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.08)'),
+    background: theme ? theme.panelBg : (isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)'),
+    color: theme ? theme.titleColor : (isDark ? 'rgba(255,255,255,0.95)' : '#111'),
+    fontSize: 13,
+    fontWeight: 700,
+    cursor: 'pointer',
+    fontFamily: 'var(--body-font)',
+    transition: 'all 0.14s ease',
+  };
+
   if (!board) {
     return (
       <div ref={containerRef} style={styles.container}>
-        <div style={styles.title}>Sudoku</div>
-        <div style={styles.sub}>Fill the 9×9 grid</div>
-        <button onClick={generate} style={styles.btn}>New Game</button>
+        <div style={{...styles.title, color: theme ? theme.titleColor : styles.title.color}}>Sudoku</div>
+        <div style={{...styles.sub, color: theme ? theme.subColor : styles.sub.color}}>Fill the 9×9 grid</div>
+        <div style={{display:'flex', gap:8, marginBottom:8}}>
+            <button
+              onClick={() => setDifficulty('easy')}
+              style={{
+                ...baseSmallBtn,
+                background: difficulty==='easy' ? theme?.accentGradient || baseSmallBtn.background : baseSmallBtn.background,
+                color: difficulty==='easy' ? '#fff' : baseSmallBtn.color,
+                boxShadow: difficulty==='easy' ? (theme?.isDark ? '0 6px 18px rgba(76,195,247,0.18)' : '0 6px 18px rgba(76,195,247,0.12)') : undefined,
+                transform: difficulty==='easy' ? 'translateY(-2px)' : 'none',
+              }}
+            >Easy</button>
+            <button
+              onClick={() => setDifficulty('medium')}
+              style={{
+                ...baseSmallBtn,
+                background: difficulty==='medium' ? (isDark ? 'linear-gradient(135deg,#4fc3f7,#7c4dff)' : 'linear-gradient(135deg,#4fc3f7,#7c4dff)') : baseSmallBtn.background,
+                color: difficulty==='medium' ? '#fff' : baseSmallBtn.color,
+                boxShadow: difficulty==='medium' ? (isDark ? '0 6px 18px rgba(76,195,247,0.18)' : '0 6px 18px rgba(76,195,247,0.12)') : undefined,
+                transform: difficulty==='medium' ? 'translateY(-2px)' : 'none',
+              }}
+            >Medium</button>
+            <button
+              onClick={() => setDifficulty('hard')}
+              style={{
+                ...baseSmallBtn,
+                background: difficulty==='hard' ? theme?.accentGradient || baseSmallBtn.background : baseSmallBtn.background,
+                color: difficulty==='hard' ? '#fff' : baseSmallBtn.color,
+                boxShadow: difficulty==='hard' ? (theme?.isDark ? '0 6px 18px rgba(76,195,247,0.18)' : '0 6px 18px rgba(76,195,247,0.12)') : undefined,
+                transform: difficulty==='hard' ? 'translateY(-2px)' : 'none',
+              }}
+            >Hard</button>
+        </div>
+        <button onClick={generate} style={{...styles.btn, ...(theme? theme.smallBtn : {})}}>New Game</button>
       </div>
     );
   }
@@ -105,7 +157,7 @@ const Sudoku = () => {
   return (
     <div ref={containerRef} style={styles.container}>
       {won && <div style={styles.winText}>🎉 Solved!</div>}
-      <div style={{...styles.grid, width: gridSize}}>
+      <div style={{...styles.grid, width: gridSize, border: theme ? `2px solid ${theme.isDark ? 'rgba(79,195,247,0.3)' : 'rgba(79,195,247,0.3)'}` : styles.grid.border}}>
         {board.map((row,r)=>(
           <div key={r} style={{...styles.row, borderBottom: (r===2||r===5)?'2px solid rgba(79,195,247,0.3)':'none'}}>
             {row.map((cell,c)=>{
@@ -119,9 +171,9 @@ const Sudoku = () => {
                   style={{
                     ...styles.cell,
                     ...cellDynamicStyle,
-                    borderRight: (c===2||c===5)?'2px solid rgba(79,195,247,0.3)':'1px solid rgba(255,255,255,0.04)',
-                    background: isSel ? 'rgba(79,195,247,0.2)' : isError ? 'rgba(255,107,157,0.15)' : 'transparent',
-                    color: isError ? '#ff6b9d' : isLocked ? 'rgba(255,255,255,0.85)' : '#4fc3f7',
+                    borderRight: (c===2||c===5)?'2px solid rgba(79,195,247,0.3)': theme ? theme.cellBorder : '1px solid rgba(255,255,255,0.04)',
+                    background: isSel ? (theme ? 'rgba(79,195,247,0.2)' : 'rgba(79,195,247,0.2)') : isError ? 'rgba(255,107,157,0.15)' : 'transparent',
+                    color: isError ? '#ff6b9d' : isLocked ? (theme ? theme.titleColor : 'rgba(255,255,255,0.85)') : '#4fc3f7',
                     fontWeight: isLocked ? 700 : 500,
                     cursor: isLocked ? 'default' : 'pointer',
                     padding: 0,
@@ -147,7 +199,7 @@ const Sudoku = () => {
   );
 };
 
-const styles = {
+  const styles = {
   container: { display:'flex', flexDirection:'column', alignItems:'center', height:'100%', justifyContent:'center', padding:'2px 0' },
   title: { fontSize:18, fontWeight:700, color:'#fff', marginBottom:4, fontFamily:'var(--heading-font)' },
   sub: { fontSize:11, color:'rgba(255,255,255,0.4)', marginBottom:12, fontFamily:'var(--body-font)' },
@@ -157,7 +209,18 @@ const styles = {
   numPad: { display:'flex', flexWrap:'wrap', gap:4, marginTop:8, justifyContent:'center', maxWidth:220 },
   numBtn: { width:30, height:30, borderRadius:8, border:'none', background:'rgba(255,255,255,0.06)', color:'#4fc3f7', fontSize:14, fontWeight:700, cursor:'pointer', fontFamily:'var(--mono-font)', display:'flex', alignItems:'center', justifyContent:'center' },
   actions: { marginTop:6 },
-  smallBtn: { padding:'4px 14px', borderRadius:8, border:'none', background:'rgba(255,255,255,0.06)', color:'rgba(255,255,255,0.5)', fontSize:10, cursor:'pointer', fontFamily:'var(--body-font)' },
+  smallBtn: {
+    padding:'8px 14px',
+    borderRadius:12,
+    border:'1px solid rgba(255,255,255,0.12)',
+    background:'rgba(255,255,255,0.03)',
+    color:'rgba(255,255,255,0.95)',
+    fontSize:13,
+    fontWeight:700,
+    cursor:'pointer',
+    fontFamily:'var(--body-font)',
+    transition:'all 0.14s ease',
+  },
   winText: { fontSize:16, fontWeight:700, color:'#4db6ac', marginBottom:8, fontFamily:'var(--heading-font)' },
   btn: { padding:'6px 24px', borderRadius:10, border:'none', background:'linear-gradient(135deg,#4fc3f7,#7c4dff)', color:'#fff', fontSize:12, fontWeight:600, cursor:'pointer', fontFamily:'var(--body-font)' },
 };

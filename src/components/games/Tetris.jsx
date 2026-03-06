@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { getHighscore, setHighscore } from '../../utils/highscores';
+import { useGameTheme } from './gameTheme';
 
 const COLS = 10, ROWS = 20, CELL = 12;
 const SHAPES = [
@@ -17,6 +19,7 @@ const Tetris = () => {
   const containerRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState(COLS*CELL);
   const [score, setScore] = useState(0);
+  const [best, setBest] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [running, setRunning] = useState(false);
   const boardRef = useRef(Array.from({length:ROWS},()=>Array(COLS).fill(0)));
@@ -111,6 +114,20 @@ const Tetris = () => {
     draw();
   };
 
+  const theme = useGameTheme();
+
+  // load persisted best score
+  useEffect(() => {
+    try { setBest(getHighscore('tetris')); } catch (e) {}
+  }, []);
+
+  // persist when score increases
+  useEffect(() => {
+    if (score > best) {
+      try { setHighscore('tetris', score); setBest(score); } catch (e) {}
+    }
+  }, [score, best]);
+
   useEffect(() => {
     if (!running) { clearInterval(tickRef.current); return; }
     tickRef.current = setInterval(tick, 500);
@@ -141,6 +158,24 @@ const Tetris = () => {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [running, valid, draw]);
+
+  // Responsive canvas sizing based on container
+  useEffect(() => {
+    const update = () => {
+      const w = containerRef.current ? containerRef.current.clientWidth : 0;
+      // target about half the container width, clamp to sensible range
+      const size = Math.max(160, Math.min(520, Math.floor(w * 0.5)));
+      setCanvasSize(size);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  // Redraw when canvas size changes
+  useEffect(() => {
+    draw();
+  }, [canvasSize, draw]);
 
   // Touch: tap left/right halves, swipe down, tap top = rotate
   const touchStart = useRef(null);
@@ -173,8 +208,11 @@ const Tetris = () => {
 
   return (
     <div ref={containerRef} style={styles.container} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-      <div style={styles.scoreRow}><span style={styles.scoreText}>Score: {score}</span></div>
-      <canvas ref={canvasRef} width={canvasSize} height={Math.floor(canvasSize * (ROWS/COLS))} style={{...styles.canvas, maxWidth: '100%'}} />
+      <div style={styles.scoreRow}>
+        <span style={{...styles.scoreText, color: theme ? theme.titleColor : styles.scoreText.color}}>Score: {score}</span>
+        <span style={{...styles.scoreText, color:'#ff6b9d', marginLeft:12}}>Best: {best}</span>
+      </div>
+      <canvas ref={canvasRef} width={canvasSize} height={Math.floor(canvasSize * (ROWS/COLS))} style={{...styles.canvas, width: canvasSize, height: Math.floor(canvasSize * (ROWS/COLS)), background: theme ? theme.cellBg : styles.canvas.background, border: theme ? theme.cellBorder : styles.canvas.border}} />
       {(!running) && (
         <div style={styles.overlay}>
           <div style={styles.overlayText}>{gameOver ? 'Game Over!' : 'Tetris'}</div>

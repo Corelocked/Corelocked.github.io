@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { getHighscore, setHighscore } from '../../utils/highscores';
+import { useGameTheme } from './gameTheme';
 
 const GRID = 15;
 const TICK = 140;
@@ -9,12 +11,18 @@ const Snake = () => {
   const [, setDir] = useState([0,-1]);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
-  const [best, setBest] = useState(0);
+    const [best, setBest] = useState(0); // Best score
+
+    // load persisted best
+    useEffect(() => {
+      try { const b = getHighscore('snake'); setBest(b); } catch (e) {}
+    }, []);
   const [running, setRunning] = useState(false);
   const dirRef = useRef([0,-1]);
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState(225);
+  const theme = useGameTheme();
 
   const spawnFood = useCallback((snk) => {
     let pos;
@@ -66,7 +74,11 @@ const Snake = () => {
         if (prev.some(s => s[0]===head[0] && s[1]===head[1])) {
           setGameOver(true);
           setRunning(false);
-          setBest(b => Math.max(b, score));
+          setBest(b => {
+            const nb = Math.max(b, score);
+            try { setHighscore('snake', nb); } catch (e) {}
+            return nb;
+          });
           return prev;
         }
         const next = [head, ...prev];
@@ -92,7 +104,7 @@ const Snake = () => {
     ctx.clearRect(0,0,w,w);
 
     // Grid
-    ctx.fillStyle = 'rgba(255,255,255,0.02)';
+    ctx.fillStyle = theme ? theme.unrevealedCellBg : 'rgba(255,255,255,0.02)';
     for (let i=0;i<GRID;i++) for (let j=0;j<GRID;j++) {
       if ((i+j)%2===0) ctx.fillRect(i*cellPx,j*cellPx,cellPx,cellPx);
     }
@@ -112,7 +124,7 @@ const Snake = () => {
       ctx.roundRect(s[0]*cellPx+pad, s[1]*cellPx+pad, cellPx-pad*2, cellPx-pad*2, 3);
       ctx.fill();
     });
-  }, [snake, food, canvasSize]);
+  }, [snake, food, canvasSize, theme]);
 
   // Responsive canvas sizing based on container width
   useEffect(() => {
@@ -148,18 +160,18 @@ const Snake = () => {
 
   return (
     <div style={styles.container} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-      <div ref={containerRef} style={styles.scoresContainer}>
-        <div style={styles.scores}>
-        <span style={styles.scoreText}>Score: {score}</span>
-        <span style={{...styles.scoreText, color: '#ff6b9d'}}>Best: {best}</span>
+        <div ref={containerRef} style={styles.scoresContainer}>
+          <div style={styles.scores}>
+            <span style={{...styles.scoreText, color: theme ? theme.titleColor : styles.scoreText.color}}>Score: {score}</span>
+            <span style={{...styles.scoreText, color: '#ff6b9d'}}>Best: {best}</span>
+          </div>
+          <canvas ref={canvasRef} width={canvasSize} height={canvasSize} style={{...styles.canvas, background: theme ? theme.cellBg : styles.canvas.background, border: theme ? theme.cellBorder : styles.canvas.border}} />
         </div>
-        <canvas ref={canvasRef} width={canvasSize} height={canvasSize} style={styles.canvas} />
-      </div>
       {(!running || gameOver) && (
         <div style={styles.overlay}>
           <div style={styles.overlayText}>{gameOver ? 'Game Over!' : 'Snake'}</div>
-          <button onClick={reset} style={styles.btn}>{gameOver ? 'Retry' : 'Start'}</button>
-          <div style={styles.hint}>Swipe or Arrow keys</div>
+          <button onClick={reset} style={{...styles.btn, ...(theme? theme.smallBtn : {})}}>{gameOver ? 'Retry' : 'Start'}</button>
+          <div style={{...styles.hint, color: theme ? theme.subColor : styles.hint.color}}>Swipe or Arrow keys</div>
         </div>
       )}
     </div>
