@@ -35,7 +35,9 @@
 }
 
 .phone-mockup.game-active {
-  max-width: 570px;
+  /* Make the phone larger when a game is open to give more room for the game canvas */
+  max-width: 720px;
+  height: calc(100vh - 14px);
 }
 
 /* ===== Phone Frame ===== */
@@ -751,10 +753,11 @@
 .game-body {
   flex: 1;
   overflow: auto;
-  padding: 4px 8px;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  /* increase min-height so game area appears larger and centered */
+  min-height: 420px;
 }
 
 .game-loading {
@@ -853,7 +856,7 @@
   }
 
   .phone-mockup.game-active {
-    max-width: 330px;
+    max-width: 380px;
   }
 }
 
@@ -892,7 +895,7 @@
   }
 
   .game-body {
-    min-height: 260px;
+    min-height: 340px;
   }
 }
 
