@@ -13,6 +13,8 @@ const Snake = () => {
   const [running, setRunning] = useState(false);
   const dirRef = useRef([0,-1]);
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+  const [canvasSize, setCanvasSize] = useState(225);
 
   const spawnFood = useCallback((snk) => {
     let pos;
@@ -110,7 +112,21 @@ const Snake = () => {
       ctx.roundRect(s[0]*cellPx+pad, s[1]*cellPx+pad, cellPx-pad*2, cellPx-pad*2, 3);
       ctx.fill();
     });
-  }, [snake, food]);
+  }, [snake, food, canvasSize]);
+
+  // Responsive canvas sizing based on container width
+  useEffect(() => {
+    const updateSize = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const available = Math.floor(container.clientWidth - 32); // padding
+      const size = Math.max(180, Math.min(420, available));
+      setCanvasSize(size);
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   // Touch controls
   const touchStart = useRef(null);
@@ -132,11 +148,13 @@ const Snake = () => {
 
   return (
     <div style={styles.container} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-      <div style={styles.scores}>
+      <div ref={containerRef} style={styles.scoresContainer}>
+        <div style={styles.scores}>
         <span style={styles.scoreText}>Score: {score}</span>
         <span style={{...styles.scoreText, color: '#ff6b9d'}}>Best: {best}</span>
+        </div>
+        <canvas ref={canvasRef} width={canvasSize} height={canvasSize} style={styles.canvas} />
       </div>
-      <canvas ref={canvasRef} width={225} height={225} style={styles.canvas} />
       {(!running || gameOver) && (
         <div style={styles.overlay}>
           <div style={styles.overlayText}>{gameOver ? 'Game Over!' : 'Snake'}</div>
@@ -150,9 +168,10 @@ const Snake = () => {
 
 const styles = {
   container: { display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'center', position: 'relative', padding: '4px 0', touchAction: 'none' },
+  scoresContainer: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' },
   scores: { display: 'flex', gap: 16, marginBottom: 8 },
   scoreText: { fontSize: 12, fontWeight: 700, color: '#4fc3f7', fontFamily: 'var(--mono-font), monospace' },
-  canvas: { borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', maxWidth: '100%' },
+  canvas: { borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', maxWidth: '100%', height: 'auto' },
   overlay: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', borderRadius: 10, backdropFilter: 'blur(4px)' },
   overlayText: { color: '#fff', fontSize: 18, fontWeight: 700, marginBottom: 12, fontFamily: 'var(--heading-font), sans-serif' },
   btn: { padding: '6px 24px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg, #4fc3f7, #7c4dff)', color: '#fff', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--body-font)' },
