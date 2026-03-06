@@ -30,13 +30,12 @@ const About = () => {
         {/* Centered intro text */}
         <div className={`about-intro scroll-reveal fade-up delay-300 ${isVisible ? 'visible' : ''}`}>
           <p className="lead-text">
-            I'm a passionate developer with 4+ years of experience building web applications.
-            I specialize in JavaScript technologies including React, Node.js, and Express.
-            I also have experience in mobile app development using Kotlin and a little bit of Flutter.
+            I'm a Computer Science student and Lead Developer specializing in full-stack web and Android mobile development.
+            I architect scalable solutions using React, Node.js, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
           </p>
           <p className="lead-subtext">
-            I love creating efficient, user-friendly solutions that solve real-world problems.
-            When I'm not coding, I enjoy graphic design and video editing to bring ideas to life visually.
+            I have 4+ years of experience designing and implementing complex systems—from real-time inventory platforms to AI-powered virtual assistants.
+            I'm passionate about creating efficient, maintainable code and solving real-world problems through technology. Beyond development, I explore UI/UX design and game server optimization.
           </p>
         </div>
 
@@ -52,7 +51,8 @@ const About = () => {
             <h3>Education</h3>
             <p className="card-title">BS in Computer Science</p>
             <p className="card-subtitle">CIIT College of Arts and Technology</p>
-            <span className="card-date">2022 - 2026</span>
+            <p style={{fontSize: '0.85rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)'}}>Specialization: Web & Mobile Development</p>
+            <span className="card-date">Expected Oct 2026</span>
           </div>
 
           <div className="about-card">
@@ -63,9 +63,10 @@ const About = () => {
               </svg>
             </div>
             <h3>Experience</h3>
-            <p className="card-title">Work Immersion Intern</p>
-            <p className="card-subtitle">Philippine Nuclear Research Institute</p>
-            <span className="card-date">2020</span>
+            <p className="card-title">Technical Lead</p>
+            <p className="card-subtitle">Full-stack & Mobile Apps</p>
+            <p style={{fontSize: '0.85rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)'}}>React • Node.js • Kotlin • Firebase</p>
+            <span className="card-date">2024 - Present</span>
           </div>
         </div>
 
