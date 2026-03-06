@@ -66,4 +66,5 @@ jobs:
       - name: Deploy to gh-pages
         run: npm run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
