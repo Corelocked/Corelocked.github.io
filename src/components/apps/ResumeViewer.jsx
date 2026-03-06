@@ -1,6 +1,6 @@
 import React from 'react';
 import '../apps/ResumeViewer.css';
-import Resume from '../../Resume';
+import Resume from '../Resume';
 
 const ResumeViewer = () => {
   const handlePrintPDF = () => {
