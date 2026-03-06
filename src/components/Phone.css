@@ -3,7 +3,8 @@
 /* Wrapper - sits outside document flow */
 .phone-widget {
   position: relative;
-  z-index: 100;
+  /* Ensure phone widget sits above header when scrolling */
+  z-index: 1100;
 }
 
 /* ===== Phone Sidebar (Desktop) ===== */
@@ -16,7 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  /* sit above header so header does not visually block the phone */
+  z-index: 1100;
   padding: 14px;
   box-sizing: border-box;
   pointer-events: none;
@@ -93,21 +95,35 @@
   100% { opacity: 0.7; }
 }
 
-/* ===== Notch ===== */
-.phone-notch {
+/* ===== Dynamic Island ===== */
+.phone-dynamic-island {
   display: flex;
   justify-content: center;
-  padding: 10px 0 4px;
+  align-items: center;
+  padding: 8px 0 6px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-.notch-dot {
+.phone-dynamic-island::before {
+  content: '';
+  width: 96px;
+  height: 26px;
+  background: #000;
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.island-camera {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(16px, -50%);
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(circle at 35% 35%, #1a3a5c, #0a1520);
+  box-shadow: inset 0 0 2px rgba(79, 195, 247, 0.3);
 }
 
 /* ===== Status Bar ===== */
@@ -162,6 +178,343 @@
   min-height: 100%;
 }
 
+/* ===== Greeting Section ===== */
+.phone-greeting-section {
+  padding: 2px 4px 10px;
+}
+
+.phone-greeting {
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 2px;
+  font-family: var(--heading-font, 'Plus Jakarta Sans'), sans-serif;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.phone-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--body-font, 'DM Sans'), sans-serif;
+  letter-spacing: 0.3px;
+}
+
+/* ===== GitHub Contributions Widget (Enhanced) ===== */
+.github-contrib-widget {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.04)) !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.2) !important;
+  margin-bottom: 16px !important;
+  padding: 16px 14px 14px !important;
+}
+
+.widget-header-enhanced {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.widget-header-right { display: flex; align-items: center; gap: 8px; }
+
+/* Floating year control inside phone frame */
+
+/* Place year button inside the dynamic island */
+.phone-dynamic-island { position: relative; }
+
+.widget-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.widget-gh-icon-big {
+  width: 18px;
+  height: 18px;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.widget-title-big {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--body-font, 'DM Sans'), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.widget-year-select {
+  padding: 4px 8px;
+  font-size: 11px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 6px;
+  color: rgba(16, 185, 129, 0.9);
+  cursor: pointer;
+  font-weight: 600;
+  font-family: var(--mono-font, 'JetBrains Mono'), monospace;
+  transition: all 0.2s ease;
+}
+
+.widget-year-select:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+/* Subdued small year selector (moved into left header) */
+.widget-year-select.subdued {
+  padding: 2px 6px;
+  font-size: 10px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.65);
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+[data-theme="light"] .widget-year-select.subdued {
+  border: 1px solid rgba(0,0,0,0.06);
+  color: rgba(0,0,0,0.6);
+}
+
+.widget-chart-link {
+  display: block;
+  text-decoration: none;
+}
+
+.widget-chart-big {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.03);
+  padding: 8px;
+}
+
+.widget-chart-img-big {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(1.1) saturate(1.3) hue-rotate(-5deg);
+  border-radius: 6px;
+}
+
+/* Custom year dropdown */
+.widget-year-dropdown { position: relative; display: inline-block; margin-left: 10px; }
+.widget-year-btn {
+  padding: 3px 8px;
+  font-size: 11px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.widget-year-btn:focus { outline: none; box-shadow: 0 0 0 4px rgba(79,195,247,0.06); }
+.widget-year-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 120px;
+  background: linear-gradient(180deg, rgba(5,5,10,0.86), rgba(8,8,14,0.96));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+  z-index: 60;
+}
+.widget-year-option {
+  list-style: none;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.widget-year-option:hover { background: rgba(255,255,255,0.03); }
+.widget-year-option.active { background: rgba(16,185,129,0.12); color: #a7f3d0; font-weight: 700; }
+
+[data-theme="light"] .widget-year-btn { background: rgba(16,185,129,0.06); color: rgba(6,78,59,0.9); border-color: rgba(16,185,129,0.12); }
+[data-theme="light"] .widget-year-menu { background: #ffffff; color: #0f172a; border-color: rgba(6,95,70,0.06); }
+[data-theme="light"] .widget-year-option:hover { background: rgba(59,163,216,0.06); }
+
+.widget-footer-big {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(16, 185, 129, 0.7);
+  font-family: var(--mono-font, 'JetBrains Mono'), monospace;
+  margin-top: 10px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+}
+
+.widget-heatmap-container {
+  overflow: hidden; /* remove horizontal scrollbar */
+  margin: 0 -6px;
+  padding: 0 6px;
+}
+
+/* ===== Phone Dock (Bottom) ===== */
+.phone-app-dock {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 12px 8px 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(79, 195, 247, 0.05) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px 24px 0 0;
+  margin: 0 -14px -14px -14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.phone-app-dock .phone-app {
+  gap: 4px;
+  flex: 1;
+  max-width: 70px;
+}
+
+.phone-app-dock .phone-app-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+}
+
+.phone-app-dock .phone-app-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* ===== GitHub Contributions Widget (Original) ===== */
+.phone-widget-card {
+  display: block;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 12px 14px 10px;
+  margin-top: auto;
+  margin-bottom: 12px;
+  transition: transform 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phone-widget-card:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.phone-widget-card:active {
+  transform: scale(0.98);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.widget-gh-icon {
+  width: 14px;
+  height: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.widget-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--body-font, 'DM Sans'), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.widget-chart {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.widget-chart-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0.85) saturate(1.2);
+  border-radius: 6px;
+}
+
+.widget-footer {
+  display: block;
+  text-align: right;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: var(--mono-font, 'JetBrains Mono'), monospace;
+  margin-top: 8px;
+  letter-spacing: 0.3px;
+}
+
+[data-theme="light"] .phone-widget-card {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .phone-widget-card:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="light"] .widget-gh-icon {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .widget-title {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .widget-chart-img {
+  filter: brightness(1.05) saturate(1.1);
+}
+
+[data-theme="light"] .github-contrib-widget {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(59, 130, 246, 0.03)) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+[data-theme="light"] .widget-gh-icon-big {
+  color: #059669;
+}
+
+[data-theme="light"] .widget-year-select {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: rgba(16, 185, 129, 0.85);
+}
+
+[data-theme="light"] .widget-year-select:hover {
+  background: rgba(16, 185, 129, 0.12);
+}
+
+[data-theme="light"] .widget-chart-big {
+  background: rgba(16, 185, 129, 0.03);
+}
+
+[data-theme="light"] .widget-footer-big {
+  color: rgba(16, 185, 129, 0.6);
+}
+
+[data-theme="light"] .phone-app-dock {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(16, 185, 129, 0.03) 100%);
+  border-top-color: rgba(16, 185, 129, 0.1);
+}
+
 /* ===== App Grid (4 columns) ===== */
 .phone-app-grid {
   display: grid;
@@ -183,11 +536,11 @@
 }
 
 .phone-app:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .phone-app:active {
-  transform: scale(0.92);
+  transform: scale(0.93);
 }
 
 /* Reset for button-type apps */
@@ -204,26 +557,42 @@
 }
 
 .phone-app-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-app-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 14px 14px 0 0;
+  pointer-events: none;
 }
 
 .phone-app-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  z-index: 1;
 }
 
 .phone-app:hover .phone-app-icon {
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .phone-app-name {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.6);
   font-family: var(--body-font, 'DM Sans'), sans-serif;
   white-space: nowrap;
@@ -257,10 +626,10 @@
 }
 
 .home-bar-line {
-  width: 80px;
+  width: 120px;
   height: 4px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* ===== Games Folder View ===== */
@@ -269,14 +638,21 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
+  animation: pvSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .game-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 10px;
+  padding: 12px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(5, 5, 16, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .game-back-btn {
@@ -369,6 +745,7 @@
   height: 100%;
   min-height: 0;
   overflow: hidden;
+  animation: pvSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .game-body {
@@ -501,6 +878,10 @@
     border-radius: 12px;
   }
 
+  .phone-app-icon::after {
+    border-radius: 12px 12px 0 0;
+  }
+
   .phone-app-icon svg {
     width: 20px;
     height: 20px;
@@ -529,11 +910,6 @@
   display: none;
 }
 
-[data-theme="light"] .notch-dot {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.04);
-}
-
 [data-theme="light"] .phone-status-bar {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -556,6 +932,7 @@
 
 [data-theme="light"] .game-header {
   border-bottom-color: rgba(0, 0, 0, 0.06);
+  background: rgba(245, 245, 250, 0.8);
 }
 
 [data-theme="light"] .game-back-btn {
@@ -602,6 +979,18 @@
   background: rgba(245, 245, 250, 0.98);
 }
 
+[data-theme="light"] .phone-dynamic-island::before {
+  background: #1a1a2e;
+}
+
+[data-theme="light"] .phone-greeting {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="light"] .phone-date {
+  color: rgba(0, 0, 0, 0.4);
+}
+
 /* ===== Phone Detail Views ===== */
 
 .phone-detail-view {
@@ -609,6 +998,12 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
+  animation: pvSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pvSlideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .pv-content {
@@ -642,6 +1037,27 @@
   border: 3px solid rgba(79, 195, 247, 0.3);
   object-fit: cover;
   box-shadow: 0 0 30px rgba(79, 195, 247, 0.1);
+}
+
+.pv-about-name {
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  font-family: var(--heading-font, 'Plus Jakarta Sans'), sans-serif;
+  letter-spacing: -0.3px;
+}
+
+.pv-about-role {
+  text-align: center;
+  font-size: 12px;
+  color: var(--primary-color, #4fc3f7);
+  margin: 0;
+  font-family: var(--mono-font, 'JetBrains Mono'), monospace;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .pv-section-text {
@@ -1224,6 +1640,8 @@ a.pv-contact-chip:hover {
 
 [data-theme="light"] .pv-content::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); }
 [data-theme="light"] .pv-about-avatar img { border-color: rgba(124, 77, 255, 0.3); box-shadow: 0 0 30px rgba(124, 77, 255, 0.1); }
+[data-theme="light"] .pv-about-name { color: rgba(0, 0, 0, 0.85); }
+[data-theme="light"] .pv-about-role { color: var(--secondary-color, #7c4dff); }
 [data-theme="light"] .pv-lead { color: rgba(0, 0, 0, 0.75); }
 [data-theme="light"] .pv-sub { color: rgba(0, 0, 0, 0.5); }
 [data-theme="light"] .pv-card { background: rgba(0, 0, 0, 0.03); border-color: rgba(0, 0, 0, 0.06); }
