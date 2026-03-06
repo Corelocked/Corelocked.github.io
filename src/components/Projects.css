@@ -436,6 +436,39 @@
   font-size: 1.1rem;
 }
 
+/* Light Mode */
+:root:not([data-theme="dark"]) .projects-bg-decoration {
+  background: radial-gradient(circle, rgba(59, 163, 216, 0.06) 0%, transparent 70%);
+}
+
+:root:not([data-theme="dark"]) .projects-bg-decoration-2 {
+  background: radial-gradient(circle, rgba(139, 99, 232, 0.05) 0%, transparent 70%);
+}
+
+:root:not([data-theme="dark"]) .section-label {
+  background: linear-gradient(135deg, rgba(59, 163, 216, 0.1), rgba(139, 99, 232, 0.05));
+  border-color: rgba(59, 163, 216, 0.25);
+}
+
+:root:not([data-theme="dark"]) .project-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 244, 249, 0.5));
+  border-color: rgba(59, 163, 216, 0.12);
+  box-shadow: 0 2px 12px rgba(59, 163, 216, 0.06);
+}
+
+:root:not([data-theme="dark"]) .project-card:hover {
+  border-color: rgba(59, 163, 216, 0.25);
+  box-shadow: 0 8px 24px rgba(59, 163, 216, 0.12);
+}
+
+:root:not([data-theme="dark"]) .project-link {
+  box-shadow: 0 2px 12px rgba(59, 163, 216, 0.15);
+}
+
+:root:not([data-theme="dark"]) .project-link:hover {
+  box-shadow: 0 4px 20px rgba(59, 163, 216, 0.3);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .projects {

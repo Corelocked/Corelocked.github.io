@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Link } from 'react-scroll';
 import emailjs from '@emailjs/browser';
+import { useGitHubContributions } from '../hooks/useGitHubContributions';
+import ContributionHeatmap from './ContributionHeatmap';
 import './Phone.css';
 
 // Assets
@@ -52,6 +54,9 @@ const GAMES = [
   { id: 'minesweeper', name: 'Minesweeper', component: MinesweeperGame, icon: '💣' },
   { id: 'sudoku', name: 'Sudoku', component: SudokuGame, icon: '🔢' },
 ];
+
+// Years for contributions filter
+const CONTRIBUTION_YEARS = [2024, 2025, 2026];
 
 const skillIcons = {
   frontend: <FrontendIcon />, backend: <BackendIcon />, mobile: <MobileIcon />,
@@ -289,6 +294,22 @@ const Phone = () => {
   // Support state
   const [activeQR, setActiveQR] = useState(null);
 
+  // Contributions state
+  const [contribYear, setContribYear] = useState(new Date().getFullYear());
+  const { data: contribData, loading: contribLoading, error: contribError } = useGitHubContributions(contribYear);
+  const startYear = 2022;
+  const years = Array.from({ length: new Date().getFullYear() - startYear + 1 }, (_, i) => startYear + i);
+  const [yearMenuOpen, setYearMenuOpen] = useState(false); // State for year dropdown menu
+  const yearMenuRef = useRef(null);
+
+  // Dock apps (bottom dock)
+  const dockApps = [
+    apps.find((a) => a.name === 'GitHub'),
+    apps.find((a) => a.name === 'Email'),
+    apps.find((a) => a.name === 'Donate'),
+    apps.find((a) => a.name === 'Games'),
+  ].filter(Boolean);
+
   // ===== Effects =====
 
   useEffect(() => {
@@ -314,6 +335,17 @@ const Phone = () => {
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [activeGame, gamesOpen, activeView, activeQR]);
+
+  // Close year menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (yearMenuRef && yearMenuRef.current && !yearMenuRef.current.contains(e.target)) {
+        setYearMenuOpen(false);
+      }
+    };
+    if (yearMenuOpen) window.addEventListener('mousedown', handleClickOutside);
+    return () => window.removeEventListener('mousedown', handleClickOutside);
+  }, [yearMenuOpen]);
 
   // ===== Handlers =====
 
@@ -379,6 +411,21 @@ const Phone = () => {
 
   const ActiveGameComponent = activeGame ? GAMES.find((g) => g.id === activeGame)?.component : null;
 
+  // ===== Helpers =====
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good Morning';
+    if (hour < 18) return 'Good Afternoon';
+    return 'Good Evening';
+  };
+
+  const formatDate = () => {
+    return new Date().toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric',
+    });
+  };
+
   // ===== Back Header Helper =====
 
   const renderBackHeader = (title) => (
@@ -404,6 +451,8 @@ const Phone = () => {
               <div className="pv-about-avatar">
                 <img src={aboutImage} alt="Cedric Joshua" />
               </div>
+              <h3 className="pv-about-name">Cedric Joshua Palapuz</h3>
+              <p className="pv-about-role">Full-Stack Developer</p>
               <div className="pv-section-text">
                 <p className="pv-lead">
                   I'm a passionate developer with 4+ years of experience building web applications.
@@ -770,8 +819,70 @@ const Phone = () => {
 
     return (
       <div className="phone-home">
+        <div className="phone-greeting-section">
+          <h2 className="phone-greeting">{getGreeting()}</h2>
+          <span className="phone-date">{formatDate()}</span>
+        </div>
+
         <div className="phone-app-grid">
-          {apps.map(renderApp)}
+          {apps.filter((a) => !dockApps.includes(a)).map(renderApp)}
+        </div>
+
+        {/* GitHub Contributions Widget */}
+        <div className="phone-widget-card github-contrib-widget">
+          <div className="widget-header-enhanced">
+            <div className="widget-header-left">
+              <svg className="widget-gh-icon-big" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span className="widget-title-big">Contributions</span>
+            </div>
+            <div className="widget-header-right">
+              <div className="widget-year-dropdown" ref={yearMenuRef}>
+                <button
+                  className="widget-year-btn subdued"
+                  aria-haspopup="listbox"
+                  aria-expanded={yearMenuOpen}
+                  onClick={() => setYearMenuOpen((s) => !s)}
+                >
+                  {contribYear}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 8 }}>
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+
+                {yearMenuOpen && (
+                  <ul className="widget-year-menu" role="listbox">
+                    {years.slice().reverse().map((y) => (
+                      <li
+                        key={y}
+                        role="option"
+                        aria-selected={contribYear === y}
+                        className={`widget-year-option ${contribYear === y ? 'active' : ''}`}
+                        onClick={() => { setContribYear(y); setYearMenuOpen(false); }}
+                      >
+                        {y}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="widget-heatmap-container">
+            <ContributionHeatmap
+              weeks={contribData?.weeks}
+              totalContributions={contribData?.totalContributions}
+              year={contribYear}
+              loading={contribLoading}
+              error={contribError}
+            />
+          </div>
+        </div>
+
+        {/* Dock at bottom */}
+        <div className="phone-app-dock">
+          {dockApps.map(renderApp)}
         </div>
       </div>
     );
@@ -823,9 +934,11 @@ const Phone = () => {
             {/* Stars inside phone */}
             <div className="phone-stars"></div>
 
-            {/* Notch */}
-            <div className="phone-notch">
-              <span className="notch-dot"></span>
+            {/* Dynamic Island */}
+            <div className="phone-dynamic-island">
+              <span className="island-camera"></span>
+
+            
             </div>
 
             {/* Status bar */}

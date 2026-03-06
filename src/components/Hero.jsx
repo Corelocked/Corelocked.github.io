@@ -23,7 +23,7 @@ const Hero = () => {
             I'm <span className="gradient-text">Cedric Joshua</span>
           </h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
-            Android & Full Stack Developer
+            Fullstack Web & Mobile Developer
           </h2>
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
             I build mobile and web applications that are not only functional but also provide an engaging user experience.

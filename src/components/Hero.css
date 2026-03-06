@@ -202,6 +202,34 @@
   60% { transform: translateX(-50%) translateY(-4px); }
 }
 
+/* Light Mode */
+:root:not([data-theme="dark"]) .hero-bg-decoration {
+  background: radial-gradient(circle, rgba(59, 163, 216, 0.08) 0%, rgba(139, 99, 232, 0.05) 40%, transparent 70%);
+}
+
+:root:not([data-theme="dark"]) .hero-greeting {
+  background: linear-gradient(135deg, rgba(59, 163, 216, 0.1), rgba(139, 99, 232, 0.05));
+  border-color: rgba(59, 163, 216, 0.25);
+}
+
+:root:not([data-theme="dark"]) .hero-buttons .btn-outline {
+  background: rgba(59, 163, 216, 0.06);
+  border-color: rgba(59, 163, 216, 0.25);
+}
+
+:root:not([data-theme="dark"]) .hero-buttons .btn-outline:hover {
+  background: rgba(59, 163, 216, 0.1);
+  box-shadow: 0 4px 20px rgba(59, 163, 216, 0.12);
+}
+
+:root:not([data-theme="dark"]) .hero-buttons .btn-primary {
+  box-shadow: 0 4px 20px rgba(59, 163, 216, 0.2);
+}
+
+:root:not([data-theme="dark"]) .hero-buttons .btn-primary:hover {
+  box-shadow: 0 8px 30px rgba(59, 163, 216, 0.3);
+}
+
 @media (max-width: 768px) {
   .hero {
     min-height: 100dvh;

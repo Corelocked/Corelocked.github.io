@@ -9,27 +9,27 @@
 
 /* Light theme (default) */
 :root {
-  --primary-color: #4fc3f7;
-  --primary-rgb: 79, 195, 247;
-  --secondary-color: #7c4dff;
-  --secondary-rgb: 124, 77, 255;
-  --accent-color: #ff6b9d;
-  --text-color: #1a1a2e;
+  --primary-color: #3ba3d8;
+  --primary-rgb: 59, 163, 216;
+  --secondary-color: #8b63e8;
+  --secondary-rgb: 139, 99, 232;
+  --accent-color: #f85a8e;
+  --text-color: #0f1419;
   --text-light: #fff;
-  --bg-color: #f0f2f5;
-  --bg-deep: #e4e7ec;
+  --bg-color: #f9fafb;
+  --bg-deep: #f3f4f6;
   --section-bg: #ffffff;
-  --section-alt-bg: #f7f8fa;
+  --section-alt-bg: #f0f4f9;
   --card-bg: #ffffff;
   --card-bg-rgb: 255, 255, 255;
-  --border-color: #e2e8f0;
-  --gray-color: #64748b;
-  --shadow-color: rgba(0, 0, 0, 0.08);
+  --border-color: #e5e7eb;
+  --gray-color: #6b7280;
+  --shadow-color: rgba(15, 20, 25, 0.08);
   --transition: all 0.3s ease;
-  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glow-color: rgba(79, 195, 247, 0.15);
+  --box-shadow: 0 2px 12px rgba(15, 20, 25, 0.06), 0 4px 24px rgba(15, 20, 25, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(59, 163, 216, 0.15);
+  --glow-color: rgba(59, 163, 216, 0.12);
   --heading-font: 'Plus Jakarta Sans', 'DM Sans', 'Inter', sans-serif;
   --body-font: 'DM Sans', 'Inter', sans-serif;
   --mono-font: 'JetBrains Mono', 'Fira Code', monospace;
