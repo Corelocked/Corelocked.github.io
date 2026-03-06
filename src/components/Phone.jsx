@@ -44,6 +44,8 @@ const SnakeGame = lazy(() => import('./games/Snake'));
 const TetrisGame = lazy(() => import('./games/Tetris'));
 const MinesweeperGame = lazy(() => import('./games/Minesweeper'));
 const SudokuGame = lazy(() => import('./games/Sudoku'));
+const CookieClicker = lazy(() => import('./games/CookieClicker'));
+const Dinosaur = lazy(() => import('./games/Dinosaur'));
 const ResumeViewerApp = lazy(() => import('./apps/ResumeViewer'));
 
 // ===== Data =====
@@ -54,6 +56,8 @@ const GAMES = [
   { id: 'tetris', name: 'Tetris', component: TetrisGame, icon: '🧱' },
   { id: 'minesweeper', name: 'Minesweeper', component: MinesweeperGame, icon: '💣' },
   { id: 'sudoku', name: 'Sudoku', component: SudokuGame, icon: '🔢' },
+  { id: 'cookie', name: 'Cookie Clicker', component: CookieClicker, icon: '🍪' },
+  { id: 'dino', name: 'Dinosaur', component: Dinosaur, icon: '🦖' },
 ];
 
 // Years for contributions filter (defined elsewhere or unused)
