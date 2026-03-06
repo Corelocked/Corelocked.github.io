@@ -49,7 +49,6 @@ const ResumeViewerApp = lazy(() => import('./apps/ResumeViewer'));
 // ===== Data =====
 
 const GAMES = [
-  { id: 'resume', name: 'Resume', component: ResumeViewerApp, icon: '📄' },
   { id: 'tictactoe', name: 'Tic Tac Toe', component: TicTacToe, icon: '⭕' },
   { id: 'snake', name: 'Snake', component: SnakeGame, icon: '🐍' },
   { id: 'tetris', name: 'Tetris', component: TetrisGame, icon: '🧱' },
