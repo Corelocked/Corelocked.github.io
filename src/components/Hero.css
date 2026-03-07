@@ -18,9 +18,10 @@
   transform: translate(-50%, -50%);
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(79, 195, 247, 0.06) 0%, rgba(124, 77, 255, 0.04) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(79, 195, 247, 0.08) 0%, rgba(124, 77, 255, 0.06) 40%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  filter: blur(20px);
 }
 
 .hero .container {
@@ -45,7 +46,13 @@
   border-radius: 999px;
   padding: 4px;
   background: linear-gradient(135deg, rgba(79, 195, 247, 0.85), rgba(124, 77, 255, 0.85));
-  box-shadow: 0 12px 30px rgba(79, 195, 247, 0.25);
+  box-shadow: 0 20px 50px rgba(79, 195, 247, 0.35), 0 0 60px rgba(79, 195, 247, 0.15);
+  transition: all 0.4s ease;
+}
+
+.hero-avatar:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 70px rgba(79, 195, 247, 0.45), 0 0 80px rgba(79, 195, 247, 0.25);
 }
 
 .hero-avatar img {
@@ -59,17 +66,27 @@
 .hero-greeting {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 22px;
-  background: rgba(79, 195, 247, 0.06);
-  border: 1px solid rgba(79, 195, 247, 0.15);
+  gap: 11px;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(124, 77, 255, 0.05));
+  border: 1.5px solid rgba(79, 195, 247, 0.2);
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: var(--primary-color);
   margin-bottom: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--mono-font);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(79, 195, 247, 0.12);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-greeting:hover {
+  border-color: rgba(79, 195, 247, 0.35);
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.15), rgba(124, 77, 255, 0.1));
+  box-shadow: 0 8px 28px rgba(79, 195, 247, 0.18);
+  transform: translateY(-2px);
 }
 
 .hello-wave {
@@ -159,22 +176,23 @@
 .hero-buttons .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 30px;
+  gap: 9px;
+  padding: 16px 34px;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
-  border-radius: 12px;
-  font-weight: 600;
+  border-radius: 14px;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(79, 195, 247, 0.25);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 30px rgba(79, 195, 247, 0.3), 0 0 40px rgba(79, 195, 247, 0.1);
   font-family: var(--body-font);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  letter-spacing: 0.3px;
 }
 
 .hero-buttons .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(79, 195, 247, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 45px rgba(79, 195, 247, 0.4), 0 0 60px rgba(79, 195, 247, 0.15);
 }
 
 .hero-buttons .btn-primary svg {
@@ -188,24 +206,27 @@
 .hero-buttons .btn-outline {
   display: inline-flex;
   align-items: center;
-  padding: 14px 30px;
-  background: rgba(79, 195, 247, 0.04);
+  padding: 16px 34px;
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.08), rgba(124, 77, 255, 0.04));
   color: var(--text-color);
-  border: 1px solid rgba(79, 195, 247, 0.2);
-  border-radius: 12px;
-  font-weight: 600;
+  border: 1.5px solid rgba(79, 195, 247, 0.2);
+  border-radius: 14px;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(12px);
   font-family: var(--body-font);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 15px rgba(79, 195, 247, 0.1);
 }
 
 .hero-buttons .btn-outline:hover {
-  border-color: var(--primary-color);
+  border-color: rgba(79, 195, 247, 0.4);
   color: var(--primary-color);
-  background: rgba(79, 195, 247, 0.08);
-  box-shadow: 0 4px 20px rgba(79, 195, 247, 0.1);
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.12), rgba(124, 77, 255, 0.08));
+  box-shadow: 0 8px 28px rgba(79, 195, 247, 0.2);
+  transform: translateY(-2px);
 }
 
 .scroll-indicator {

@@ -323,6 +323,10 @@ const Phone = () => {
   // Support state
   const [activeQR, setActiveQR] = useState(null);
 
+  // Swipe state for gesture-based navigation
+  const [swipeStart, setSwipeStart] = useState(null);
+  const phoneScreenRef = useRef(null);
+
   // Contributions state
   const [contribYear, setContribYear] = useState(new Date().getFullYear());
   const { data: contribData, loading: contribLoading, error: contribError } = useGitHubContributions(contribYear);
@@ -379,6 +383,50 @@ const Phone = () => {
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [activeGame, gamesOpen, activeView, activeQR]);
+
+  // Swipe gesture handling for phone navigation
+  useEffect(() => {
+    const phoneScreen = phoneScreenRef.current;
+    if (!phoneScreen) return;
+
+    const handleTouchStart = (e) => {
+      setSwipeStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    };
+
+    const handleTouchEnd = (e) => {
+      if (!swipeStart) return;
+      
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const diffX = swipeStart.x - endX;
+      const diffY = swipeStart.y - endY;
+
+      // Only register horizontal swipes (greater than vertical movement)
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          // Swiped left - go to next app/view or close current view
+          if (activeView) setActiveView(null);
+          else if (activeGame) setActiveGame(null);
+          else if (gamesOpen) setGamesOpen(false);
+        } else {
+          // Swiped right - go to home or back
+          if (activeView) setActiveView(null);
+          else if (activeGame) setActiveGame(null);
+          else if (gamesOpen) setGamesOpen(false);
+        }
+      }
+
+      setSwipeStart(null);
+    };
+
+    phoneScreen.addEventListener('touchstart', handleTouchStart);
+    phoneScreen.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      phoneScreen.removeEventListener('touchstart', handleTouchStart);
+      phoneScreen.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [swipeStart, activeView, activeGame, gamesOpen]);
 
   // Close year menu when clicking outside
   useEffect(() => {

@@ -1,152 +1,116 @@
+/**
+ * ResumeViewer Styles
+ * Optimized wrapper for displaying Resume component in phone app context
+ * Uses BEM naming convention for clarity and maintainability
+ */
+
+/* Main container */
 .resume-viewer {
   display: flex;
   flex-direction: column;
   height: 100%;
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
   color: #fff;
+  position: relative;
 }
 
-.resume-viewer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.3);
-}
-
-.resume-viewer-header h2 {
-  font-size: 1.2rem;
-  margin: 0;
-  flex: 1;
-}
-
-.resume-print-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.resume-print-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-}
-
-.resume-print-btn:active {
-  transform: translateY(0);
-}
-
-.resume-viewer-content {
+/* Content wrapper with custom scrollbar */
+.resume-viewer__content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 1.5rem;
   padding-bottom: 2rem;
 }
 
-/* Scrollbar styling */
-.resume-viewer-content::-webkit-scrollbar {
+/* Custom scrollbar styling */
+.resume-viewer__content::-webkit-scrollbar {
   width: 6px;
 }
 
-.resume-viewer-content::-webkit-scrollbar-track {
+.resume-viewer__content::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
 }
 
-.resume-viewer-content::-webkit-scrollbar-thumb {
+.resume-viewer__content::-webkit-scrollbar-thumb {
   background: rgba(139, 92, 246, 0.4);
   border-radius: 10px;
+  transition: background 0.2s ease;
 }
 
-.resume-viewer-content::-webkit-scrollbar-thumb:hover {
+.resume-viewer__content::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 92, 246, 0.6);
 }
 
-/* Header Section */
-.resume-header-section {
+/* Error state */
+.resume-viewer--error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.resume-viewer__error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   text-align: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+  max-width: 300px;
 }
 
-.resume-header-section h1 {
-  font-size: 1.4rem;
-  margin: 0 0 0.5rem;
-  color: #fff;
+.resume-viewer__error-message svg {
+  color: #ef4444;
+  opacity: 0.8;
 }
 
-.resume-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
+.resume-viewer__error-message h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #ffffff;
+  font-weight: 600;
 }
 
-/* Resume Sections */
-.resume-section-viewer {
-  margin-bottom: 1.2rem;
-}
-
-.resume-section-viewer h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0 0 0.8rem;
-  color: #a78bfa;
-  border-bottom: 1px solid rgba(139, 92, 246, 0.3);
-  padding-bottom: 0.4rem;
-  letter-spacing: 0.5px;
-}
-
-.resume-section-viewer p {
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.5;
-  margin: 0.4rem 0;
+.resume-viewer__error-message p {
   font-size: 0.9rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
 }
 
-/* Skills Section */
-.skills-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  font-size: 0.85rem;
+.resume-viewer__error-message .retry-btn {
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
 }
 
-.skills-section div {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.4;
+.resume-viewer__error-message .retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
-.skills-section strong {
-  color: #a78bfa;
+.resume-viewer__error-message .retry-btn:active {
+  transform: translateY(0);
 }
 
-/* Resume Entry */
-.resume-entry-viewer {
-  margin-bottom: 1rem;
-  padding-left: 0;
-}
-
-.entry-header-viewer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.8rem;
-  margin-bottom: 0.2rem;
-  flex-wrap: wrap;
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .resume-viewer__content {
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .resume-viewer__error-message {
+    padding: 1rem;
+  }
 }
 
 .entry-header-viewer strong {

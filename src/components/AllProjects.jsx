@@ -274,6 +274,19 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
 };
 
 const projects = [
+   {
+    id: 1,
+    title: 'Lakbay',
+    description: 'A scenic travel mobile app. Created as our Thesis project.',
+    technologies: ['Kotlin','Python','Firebase'],
+    category: ['Mobile App'],
+    roles: ['Tech Lead', 'Backend'],
+    githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git',
+    liveDemo: '#',
+    image: require('../assets/images/lakbay-logo2.png'),
+    featured: true,
+    isWIP: false
+  },
   {
     id: 5,
     title: 'InnSight',
@@ -377,19 +390,6 @@ const projects = [
     canvaLink: 'https://www.canva.com/design/DAG3DY7iccM/gGWzD2lJDBGp3n9ekzTcMw/edit?utm_content=DAG3DY7iccM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
     image: require('../assets/images/lakbay-logo.png'),
     featured: false,
-  },
-  {
-    id: 1,
-    title: 'Lakbay',
-    description: 'A scenic travel mobile app. Created as our Thesis project.',
-    technologies: ['Kotlin','Python','Firebase'],
-    category: ['Mobile App'],
-    roles: ['Tech Lead', 'Backend'],
-    githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git',
-    liveDemo: '#',
-    image: require('../assets/images/lakbay-logo2.png'),
-    featured: true,
-    isWIP: false
   },
   {
     id: 2,

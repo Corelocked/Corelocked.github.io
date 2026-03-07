@@ -80,16 +80,23 @@ function ScrollToHash() {
   const { hash, pathname } = useLocation();
 
   React.useEffect(() => {
-    if (!hash) return;
-    const id = hash.replace('#', '');
     // small delay to allow route to mount
     setTimeout(() => {
-      if (id === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
+      if (hash) {
+        const id = hash.replace('#', '');
+        if (id === 'home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
       }
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // No hash (regular route change) — ensure page starts at top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 50);
   }, [hash, pathname]);
 

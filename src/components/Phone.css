@@ -32,24 +32,29 @@
   height: calc(100vh - 28px);
   max-height: none;
   transition: max-width 0.3s ease;
+  border-radius: 44px;
+  overflow: hidden;
+  border: 3px solid rgba(79, 195, 247, 0.15);
+  box-shadow: 0 0 0 1px rgba(79, 195, 247, 0.08),
+              0 0 120px rgba(79, 195, 247, 0.1),
+              0 30px 80px rgba(0, 0, 0, 0.7);
 }
 
 .phone-mockup.game-active {
   /* Make the phone larger when a game is open to give more room for the game canvas */
   max-width: 720px;
   height: calc(100vh - 14px);
+  box-shadow: 0 0 0 1px rgba(79, 195, 247, 0.1),
+              0 0 140px rgba(79, 195, 247, 0.15),
+              0 40px 100px rgba(0, 0, 0, 0.8);
 }
 
 /* ===== Phone Frame ===== */
 .phone-frame {
   background: #050510;
-  border-radius: 40px;
-  border: 2.5px solid rgba(79, 195, 247, 0.12);
   overflow: hidden;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 0 80px rgba(79, 195, 247, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.6);
+    inset 0 0 80px rgba(79, 195, 247, 0.02);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -95,7 +100,7 @@
 }
 
 :root[data-theme="light"] .phone-video-overlay {
-  background: rgba(242, 248, 255, 0.42);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 /* ===== Dynamic Island ===== */
@@ -103,18 +108,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 0 6px;
+  padding: 10px 0 8px;
   position: relative;
   z-index: 2;
+  background: linear-gradient(180deg, rgba(5, 8, 16, 0.9), rgba(5, 8, 16, 0.7));
+  backdrop-filter: blur(20px);
 }
 
 .phone-dynamic-island::before {
   content: '';
-  width: 96px;
-  height: 26px;
-  background: #000;
-  border-radius: 20px;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  width: 120px;
+  height: 32px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(10, 10, 20, 0.8));
+  border-radius: 50px;
+  box-shadow: 0 0 0 1.5px rgba(79, 195, 247, 0.15), inset 0 0 20px rgba(79, 195, 247, 0.05);
+  border: 1px solid rgba(79, 195, 247, 0.08);
 }
 
 .island-camera {
@@ -134,12 +142,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 20px 6px;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.45);
+  padding: 4px 20px 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
   font-family: var(--mono-font, 'JetBrains Mono'), monospace;
   position: relative;
   z-index: 1;
+  background: linear-gradient(180deg, rgba(5, 8, 16, 0.85), rgba(5, 8, 16, 0.5));
+  backdrop-filter: blur(16px);
+  letter-spacing: 0.2px;
 }
 
 .status-icons {
@@ -152,11 +163,14 @@
 /* ===== Phone Screen ===== */
 .phone-screen {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   position: relative;
   z-index: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  touch-action: pan-y;
 }
 
 /* Custom scrollbar inside phone */
@@ -175,7 +189,7 @@
 
 /* ===== Home Screen ===== */
 .phone-home {
-  padding: 12px 14px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -183,7 +197,7 @@
 
 /* ===== Greeting Section ===== */
 .phone-greeting-section {
-  padding: 2px 4px 10px;
+  padding: 6px 4px 12px;
 }
 
 .phone-greeting {
@@ -382,20 +396,21 @@
 }
 
 .phone-app-dock .phone-app {
-  gap: 4px;
+  gap: 6px;
   flex: 1;
-  max-width: 70px;
+  max-width: 80px;
 }
 
 .phone-app-dock .phone-app-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .phone-app-dock .phone-app-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 }
 
 /* ===== GitHub Contributions Widget (Original) ===== */
@@ -403,12 +418,12 @@
   display: block;
   text-decoration: none;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 12px 14px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 14px 16px 12px;
   margin-top: auto;
   margin-bottom: 12px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -416,6 +431,7 @@
 .phone-widget-card:hover {
   transform: scale(1.02);
   background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .phone-widget-card:active {
@@ -526,9 +542,9 @@
 .phone-app-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px 8px;
+  gap: 20px 12px;
   justify-items: center;
-  padding: 4px 0;
+  padding: 8px 4px;
 }
 
 .phone-app {
@@ -543,11 +559,11 @@
 }
 
 .phone-app:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .phone-app:active {
-  transform: scale(0.93);
+  transform: scale(0.92);
 }
 
 /* Reset for button-type apps */
@@ -570,9 +586,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .phone-app-icon::after {
@@ -595,7 +612,7 @@
 }
 
 .phone-app:hover .phone-app-icon {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .phone-app-name {
@@ -647,7 +664,7 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  animation: pvSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: pvSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .game-header {
@@ -754,7 +771,7 @@
   height: 100%;
   min-height: 0;
   overflow: hidden;
-  animation: pvSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: pvSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .game-body {
@@ -907,13 +924,12 @@
 }
 
 /* ===== Light Theme Support ===== */
+[data-theme="light"] .phone-mockup {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
 [data-theme="light"] .phone-frame {
-  background: #f5f5fa;
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.04),
-    0 20px 60px rgba(0, 0, 0, 0.15),
-    0 0 60px rgba(79, 195, 247, 0.05);
+  background: #ffffff;
 }
 
 [data-theme="light"] .phone-stars {
@@ -994,8 +1010,23 @@
   background: rgba(245, 245, 250, 0.98);
 }
 
+[data-theme="light"] .phone-dynamic-island {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+}
+
 [data-theme="light"] .phone-dynamic-island::before {
-  background: #1a1a2e;
+  background: linear-gradient(135deg, rgba(240, 240, 245, 0.95), rgba(250, 250, 255, 0.9));
+  border-color: rgba(200, 200, 210, 0.3);
+  box-shadow: 0 0 0 1.5px rgba(200, 200, 210, 0.2), inset 0 0 20px rgba(200, 200, 210, 0.05);
+}
+
+[data-theme="light"] .phone-status-bar {
+  color: rgba(0, 0, 0, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+}
+
+[data-theme="light"] .status-icons {
+  color: rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="light"] .phone-greeting {
@@ -1013,12 +1044,29 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  animation: pvSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: pvSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes pvSlideIn {
-  from { opacity: 0; transform: translateX(40px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { 
+    opacity: 0; 
+    transform: translateX(40px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+
+@keyframes pvSlideOut {
+  from { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+  to { 
+    opacity: 0; 
+    transform: translateX(-40px);
+  }
 }
 
 .pv-content {
@@ -1098,15 +1146,22 @@
 .pv-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 .pv-card {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 14px;
   text-align: center;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.pv-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .pv-card-emoji {
@@ -1147,18 +1202,25 @@
 .pv-highlights {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
 }
 
 .pv-tag {
   font-size: 13px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
   background: rgba(79, 195, 247, 0.08);
-  border: 1px solid rgba(79, 195, 247, 0.15);
-  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(79, 195, 247, 0.2);
+  color: rgba(255, 255, 255, 0.75);
   font-family: var(--body-font, 'DM Sans'), sans-serif;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.pv-tag:hover {
+  background: rgba(79, 195, 247, 0.12);
+  border-color: rgba(79, 195, 247, 0.3);
 }
 
 /* --- Skills / Projects Tabs --- */
@@ -1166,17 +1228,17 @@
 .pv-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  padding-bottom: 4px;
+  gap: 8px;
+  padding-bottom: 8px;
 }
 
 .pv-tab {
   font-size: 13px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--body-font, 'DM Sans'), sans-serif;
