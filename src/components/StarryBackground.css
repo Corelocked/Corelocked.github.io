@@ -9,6 +9,51 @@
   overflow: hidden;
 }
 
+/* Light mode sky layers */
+.sky-gradient-layer,
+.sky-noise-layer,
+.night-gradient-layer,
+.night-noise-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+[data-theme="light"] .sky-gradient-layer {
+  background:
+    radial-gradient(140% 85% at 50% -30%, rgba(138, 210, 255, 0.78) 0%, rgba(170, 224, 255, 0.42) 40%, rgba(255, 255, 255, 0) 80%),
+    radial-gradient(120% 70% at 85% 8%, rgba(167, 228, 255, 0.35) 0%, rgba(167, 228, 255, 0) 65%),
+    linear-gradient(180deg, rgba(199, 235, 255, 0.92) 0%, rgba(230, 246, 255, 0.64) 48%, rgba(255, 255, 255, 0.18) 100%);
+}
+
+[data-theme="light"] .sky-noise-layer {
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='8' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 280px 280px;
+  animation: skyNoiseDrift 22s linear infinite;
+}
+
+[data-theme="dark"] .night-gradient-layer {
+  background:
+    radial-gradient(130% 80% at 50% -35%, rgba(33, 82, 150, 0.42) 0%, rgba(33, 82, 150, 0.14) 45%, rgba(0, 0, 0, 0) 80%),
+    radial-gradient(120% 70% at 85% 5%, rgba(88, 66, 180, 0.22) 0%, rgba(88, 66, 180, 0) 62%),
+    linear-gradient(180deg, rgba(8, 18, 35, 0.72) 0%, rgba(6, 14, 28, 0.52) 46%, rgba(3, 8, 18, 0.3) 100%);
+}
+
+[data-theme="dark"] .night-noise-layer {
+  opacity: 0.14;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' seed='19' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n2)' opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  animation: skyNoiseDrift 28s linear infinite;
+}
+
+@keyframes skyNoiseDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 280px 180px; }
+}
+
 /* Subtle gradient overlays */
 .star-gradient {
   position: absolute;
@@ -81,7 +126,79 @@
   100% { opacity: 0; }
 }
 
-/* Hide stars in light theme for cleaner look */
-:root:not([data-theme="dark"]) .starry-background {
-  opacity: 0.15;
+/* Cloud styling for light mode */
+.cloud {
+  position: absolute;
+  left: -15%;
+  width: 200px;
+  height: 60px;
+  animation: cloudFloat linear infinite;
+  pointer-events: none;
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateX(0) scale(var(--cloud-scale, 1));
+  }
+  100% {
+    transform: translateX(120vw) scale(var(--cloud-scale, 1));
+  }
+}
+
+.cloud-part {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(151, 176, 204, 0.2);
+  border-radius: 50%;
+  box-shadow: 0 8px 22px rgba(68, 99, 130, 0.15);
+}
+
+.cloud-part-1 {
+  width: 60px;
+  height: 60px;
+  top: 0;
+  left: 10px;
+}
+
+.cloud-part-2 {
+  width: 70px;
+  height: 70px;
+  top: -10px;
+  left: 40px;
+}
+
+.cloud-part-3 {
+  width: 50px;
+  height: 50px;
+  top: 5px;
+  left: 80px;
+}
+
+.cloud-part-4 {
+  width: 40px;
+  height: 40px;
+  top: 10px;
+  left: 110px;
+}
+
+/* Light theme: show clouds, hide stars */
+[data-theme="light"] .star,
+[data-theme="light"] .shooting-star,
+[data-theme="light"] .star-gradient {
+  display: none;
+}
+
+/* Dark theme: show stars, hide clouds */
+[data-theme="dark"] .cloud {
+  display: none;
+}
+
+[data-theme="dark"] .sky-gradient-layer,
+[data-theme="dark"] .sky-noise-layer {
+  display: none;
+}
+
+[data-theme="light"] .night-gradient-layer,
+[data-theme="light"] .night-noise-layer {
+  display: none;
 }

@@ -306,6 +306,8 @@ const Phone = () => {
   const [activeView, setActiveView] = useState(null); // 'about'|'skills'|'projects'|'contact'|'support'
   const [currentTime, setCurrentTime] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [phoneNightVideoSrc, setPhoneNightVideoSrc] = useState(null);
+  const [phoneDayVideoSrc, setPhoneDayVideoSrc] = useState(null);
 
   // Skills state
   const [activeSkillCat, setActiveSkillCat] = useState('all');
@@ -351,6 +353,17 @@ const Phone = () => {
     updateTime();
     const interval = setInterval(updateTime, 10000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    import('../assets/images/umbreon.mp4').then((m) => {
+      if (mounted) setPhoneNightVideoSrc(m.default || m);
+    }).catch(() => {});
+    import('../assets/images/spider-gwen.mp4').then((m) => {
+      if (mounted) setPhoneDayVideoSrc(m.default || m);
+    }).catch(() => {});
+    return () => { mounted = false; };
   }, []);
 
   useEffect(() => {
@@ -786,31 +799,54 @@ const Phone = () => {
 
   const renderApp = (app) => {
     const isThemeApp = app.action === 'toggleTheme';
-    const appIcon = isThemeApp
-      ? (
-        darkMode ? (
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3c0 .13-.01.26-.01.39A7.5 7.5 0 0 0 18.61 10.8c.13 0 .26-.01.39-.01z" />
-          </svg>
-        ) : (
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-          </svg>
-        )
-      )
-      : app.icon;
+    const isHomeApp = app.name === 'Home';
+    
+    let appIcon;
+    if (isThemeApp) {
+      appIcon = darkMode ? (
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3c0 .13-.01.26-.01.39A7.5 7.5 0 0 0 18.61 10.8c.13 0 .26-.01.39-.01z" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg>
+      );
+    } else if (isHomeApp) {
+      // Use outline style for both themes, color changes via computedIconColor
+      appIcon = (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      );
+    } else {
+      appIcon = app.icon;
+    }
     const appBg = isThemeApp
       ? (darkMode ? 'linear-gradient(135deg,#263249,#182235)' : 'linear-gradient(135deg,#ffd86b,#ffb347)')
+      : isHomeApp
+      ? (darkMode ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.75)')
       : app.bg;
-    const appColor = isThemeApp
-      ? (darkMode ? '#c7d2fe' : '#6b2e00')
-      : app.color;
+
+    // Compute icon color.
+    // - Theme toggle: sun = gold, moon = white
+    // - Home app: light/dark inversion handled separately
+    // - Other apps: prefer their configured color, otherwise fall back to theme default.
+    let computedIconColor;
+    if (isThemeApp) {
+      computedIconColor = darkMode ? '#FFD700' : '#ffffff';
+    } else if (app.name === 'Home') {
+      computedIconColor = darkMode ? '#000000' : '#ffffff';
+    } else {
+      computedIconColor = app.color || (darkMode ? '#ffffff' : '#000000');
+    }
 
     if (app.type === 'link') {
       return (
         <a key={app.name} href={app.url} target="_blank" rel="noopener noreferrer" className="phone-app">
-          <div className="phone-app-icon" style={{ background: appBg, color: appColor }}>{appIcon}</div>
+          <div className="phone-app-icon" style={{ background: appBg, color: computedIconColor }}>{appIcon}</div>
           <span className="phone-app-name">{app.name}</span>
         </a>
       );
@@ -818,7 +854,7 @@ const Phone = () => {
     if (app.type === 'scroll') {
       return (
         <Link key={app.name} to={app.to} smooth={true} duration={500} offset={-80} className="phone-app" onClick={() => setMobileOpen(false)}>
-          <div className="phone-app-icon" style={{ background: appBg, color: appColor }}>{appIcon}</div>
+          <div className="phone-app-icon" style={{ background: appBg, color: computedIconColor }}>{appIcon}</div>
           <span className="phone-app-name">{app.name}</span>
         </Link>
       );
@@ -826,7 +862,7 @@ const Phone = () => {
     if (app.type === 'action') {
       return (
         <button key={app.name} className="phone-app phone-app-btn" onClick={() => handleAppAction(app.action)}>
-          <div className="phone-app-icon" style={{ background: appBg, color: appColor }}>{appIcon}</div>
+          <div className="phone-app-icon" style={{ background: appBg, color: computedIconColor }}>{appIcon}</div>
           <span className="phone-app-name">{app.name}</span>
         </button>
       );
@@ -1001,8 +1037,20 @@ const Phone = () => {
       <div className={`phone-sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className={`phone-mockup ${activeGame ? 'game-active' : ''}`}>
           <div className="phone-frame">
-            {/* Stars inside phone */}
-            <div className="phone-stars"></div>
+            {/* Theme video background inside phone */}
+            <div className="phone-video-background" aria-hidden="true">
+              {phoneNightVideoSrc && (
+                <video className={`phone-theme-video night-video ${darkMode ? 'active' : ''}`} autoPlay muted loop playsInline preload="none">
+                  <source src={phoneNightVideoSrc} type="video/mp4" />
+                </video>
+              )}
+              {phoneDayVideoSrc && (
+                <video className={`phone-theme-video ${!darkMode ? 'active' : ''}`} autoPlay muted loop playsInline preload="none">
+                  <source src={phoneDayVideoSrc} type="video/mp4" />
+                </video>
+              )}
+              <div className="phone-video-overlay"></div>
+            </div>
 
             {/* Dynamic Island */}
             <div className="phone-dynamic-island">

@@ -1,11 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.d8d8f554.css",
-    "main.js": "/static/js/main.660822d1.js",
-    "static/css/55.7e039d97.chunk.css": "/static/css/55.7e039d97.chunk.css",
-    "static/js/55.8b1cace0.chunk.js": "/static/js/55.8b1cace0.chunk.js",
-    "static/js/6.f53f8ca9.chunk.js": "/static/js/6.f53f8ca9.chunk.js",
-    "static/js/705.22c8ecb8.chunk.js": "/static/js/705.22c8ecb8.chunk.js",
+    "main.css": "/static/css/main.56c5aa1b.css",
+    "main.js": "/static/js/main.6b949a42.js",
+    "static/css/55.ed26a88b.chunk.css": "/static/css/55.ed26a88b.chunk.css",
+    "static/js/55.d5cda839.chunk.js": "/static/js/55.d5cda839.chunk.js",
     "static/js/103.67858234.chunk.js": "/static/js/103.67858234.chunk.js",
     "static/js/67.ae1a602b.chunk.js": "/static/js/67.ae1a602b.chunk.js",
     "static/js/672.cdf3fe1b.chunk.js": "/static/js/672.cdf3fe1b.chunk.js",
@@ -16,10 +14,12 @@
     "static/js/946.39e4ae7f.chunk.js": "/static/js/946.39e4ae7f.chunk.js",
     "static/css/767.84f85e51.chunk.css": "/static/css/767.84f85e51.chunk.css",
     "static/js/767.91d87271.chunk.js": "/static/js/767.91d87271.chunk.js",
-    "static/media/umbreon.mp4": "/static/media/umbreon.b892936d7038e158985c.mp4",
-    "static/media/blogshark-featured.mp4": "/static/media/blogshark-featured.a95d40b4c26d8bdace69.mp4",
+    "static/js/6.e4c7017f.chunk.js": "/static/js/6.e4c7017f.chunk.js",
+    "static/js/705.a8d85860.chunk.js": "/static/js/705.a8d85860.chunk.js",
+    "static/media/blogshark-featured.mp4": "/static/media/blogshark-featured.d3f04274a35451d80582.mp4",
+    "static/media/umbreon.mp4": "/static/media/umbreon.8dd9b558816dfcd8abdd.mp4",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
-    "static/media/spider-gwen.mp4": "/static/media/spider-gwen.98f052310c564895d34e.mp4",
+    "static/media/spider-gwen.mp4": "/static/media/spider-gwen.e3643805d1b86104132a.mp4",
     "static/media/budgetbook.png": "/static/media/budgetbook.575a991dac664672decf.png",
     "static/media/lakbay-logo.png": "/static/media/lakbay-logo.9cf5d63c416306baa9b1.png",
     "static/media/pnri-logo.png": "/static/media/pnri-logo.36f1b101016140b88176.png",
@@ -63,10 +63,10 @@
     "static/media/flutter.svg": "/static/media/flutter.40ebc8d1e3a656f9b768dae63926e23e.svg",
     "static/media/frontend.svg": "/static/media/frontend.461654c87faa7248814c04f7ce731844.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
-    "main.d8d8f554.css.map": "/static/css/main.d8d8f554.css.map",
-    "main.660822d1.js.map": "/static/js/main.660822d1.js.map",
-    "55.7e039d97.chunk.css.map": "/static/css/55.7e039d97.chunk.css.map",
-    "55.8b1cace0.chunk.js.map": "/static/js/55.8b1cace0.chunk.js.map",
+    "main.56c5aa1b.css.map": "/static/css/main.56c5aa1b.css.map",
+    "main.6b949a42.js.map": "/static/js/main.6b949a42.js.map",
+    "55.ed26a88b.chunk.css.map": "/static/css/55.ed26a88b.chunk.css.map",
+    "55.d5cda839.chunk.js.map": "/static/js/55.d5cda839.chunk.js.map",
     "103.67858234.chunk.js.map": "/static/js/103.67858234.chunk.js.map",
     "67.ae1a602b.chunk.js.map": "/static/js/67.ae1a602b.chunk.js.map",
     "672.cdf3fe1b.chunk.js.map": "/static/js/672.cdf3fe1b.chunk.js.map",
@@ -79,7 +79,7 @@
     "767.91d87271.chunk.js.map": "/static/js/767.91d87271.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d8d8f554.css",
-    "static/js/main.660822d1.js"
+    "static/css/main.56c5aa1b.css",
+    "static/js/main.6b949a42.js"
   ]
 }

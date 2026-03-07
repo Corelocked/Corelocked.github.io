@@ -15,7 +15,7 @@ const ThemeToggle = () => {
       {darkMode ? (
         <FaSun style={{ color: '#FFD700' }} />
       ) : (
-        <FaMoon style={{ color: '#333' }} />
+        <FaMoon style={{ color: '#ffffff' }} />
       )}
     </button>
   );

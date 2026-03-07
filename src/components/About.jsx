@@ -299,7 +299,7 @@ const About = () => {
 
             <div className="about-intro">
               <p className="lead-text">
-                I'm a Computer Science student and Lead Developer specializing in full-stack web and Android mobile development.
+                I'm a Computer Science student from the Philippines, specializing in Full-stack Web and Android mobile development.
                 I architect scalable solutions using React, Node.js, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
               </p>
               <p className="lead-subtext">

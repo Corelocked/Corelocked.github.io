@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Skills.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
-import { ThemeContext } from '../context/ThemeContext';
 // Import SVGs as React components
 import { ReactComponent as FrontendIcon } from '../assets/icons/frontend.svg';
 import { ReactComponent as BackendIcon } from '../assets/icons/backend.svg';
@@ -129,23 +128,9 @@ const skillCategories = [
 ];
 
 const Skills = () => {
-  const [umbreonSrc, setUmbreonSrc] = useState(null);
-  const [spiderSrc, setSpiderSrc] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all');
   const [headerRef, isHeaderVisible] = useScrollReveal({ threshold: 0.2 });
   const [gridRef, isGridVisible] = useScrollReveal({ threshold: 0.1 });
-  const { darkMode } = useContext(ThemeContext);
-
-  useEffect(() => {
-    let mounted = true;
-    import('../assets/images/umbreon.mp4').then((m) => {
-      if (mounted) setUmbreonSrc(m.default || m);
-    }).catch(() => {});
-    import('../assets/images/spider-gwen.mp4').then((m) => {
-      if (mounted) setSpiderSrc(m.default || m);
-    }).catch(() => {});
-    return () => { mounted = false; };
-  }, []);
 
   /* Flatten all skills when "All" is selected, otherwise show filtered */
   const allSkills = activeCategory === 'all'
@@ -154,27 +139,6 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills">
-      {/* Video Background */}
-      <div className="video-background">
-        {umbreonSrc && (
-          <video
-            className={`theme-video ${darkMode ? 'active' : ''}`}
-            autoPlay muted loop playsInline preload="none"
-          >
-            <source src={umbreonSrc} type="video/mp4" />
-          </video>
-        )}
-        {spiderSrc && (
-          <video
-            className={`theme-video ${!darkMode ? 'active' : ''}`}
-            autoPlay muted loop playsInline preload="none"
-          >
-            <source src={spiderSrc} type="video/mp4" />
-          </video>
-        )}
-        <div className="video-overlay"></div>
-      </div>
-
       <div className="container">
         {/* Section Header */}
         <div
