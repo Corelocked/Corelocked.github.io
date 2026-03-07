@@ -35,7 +35,7 @@ const isVideoDemo = (url) => {
 };
 
 // ProjectCard component with video hover functionality
-const ProjectCard = ({ project, hideDetails = false, onFeaturedClick }) => {
+const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoUrl = getVideoPreviewUrl(project.liveDemo);
   const hasVideo = isVideoDemo(project.liveDemo);
@@ -44,6 +44,7 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick }) => {
   return (
     <div 
       className={`project-card ${project.featured ? 'featured' : ''} ${hideDetails ? 'media-only' : ''}`}
+      style={style}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -274,7 +275,7 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick }) => {
 
 const projects = [
   {
-    id: 1,
+    id: 5,
     title: 'InnSight',
     description: 'An interactive web application designed as a virtual assistant tool, allowing users to inquire about hotel and restaurant-related topics through voice or text input.',
     technologies: ['React', 'Javascript', 'CSS', 'Python', 'HTML'],
@@ -286,7 +287,7 @@ const projects = [
     featured: false
   },
   {
-    id: 2,
+    id: 12,
     title: 'unFriendster',
     description: 'An attempt to create a social media app for my Android App Dev class.',
     technologies: ['Java', 'Firebase', 'XML'],
@@ -298,7 +299,7 @@ const projects = [
     featured: false
   },
   {
-    id: 3,
+    id: 14,
     title: 'Ang Pagong at ang Kuneho Game',
     description: 'A recreational game about the story "Ang Pagong at ang Kuneho", a classic Filipino fable that teaches the value of perseverance and humility.',
     technologies: ['Python'],
@@ -322,7 +323,7 @@ const projects = [
     featured: false
   },
   {
-    id: 5,
+    id: 15,
     title: 'Moody',
     description: 'An interactive web application that tracks your daily mood and provides insights based on your emotional patterns.',
     technologies: ['Javascript', 'React', 'CSS', 'HTML'],
@@ -378,7 +379,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 12,
+    id: 1,
     title: 'Lakbay',
     description: 'A scenic travel mobile app. Created as our Thesis project.',
     technologies: ['Kotlin','Python','Firebase'],
@@ -391,7 +392,7 @@ const projects = [
     isWIP: false
   },
   {
-    id: 13,
+    id: 2,
     title: 'BlogShark',
     description: 'A social media platform for bloggers to share and connect. Made completely from scratch using Laravel and SQLite for my Dynamic Web Dev class.',
     technologies: ['Laravel', 'SQLite', 'JavaScript', 'CSS'],
@@ -414,7 +415,7 @@ const projects = [
     featured: false
   },
   {
-    id: 15,
+    id: 3,
     title: 'Budget Book',
     description: 'A personal finance web app to track incomes, expenses, savings, wallets and lendings with CSV export and realtime Firestore sync. Built for a clean, accessible dashboard and compact tables view.',
     technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'],
@@ -506,7 +507,12 @@ const AllProjects = () => {
           className={`projects-grid stagger-children ${isGridVisible ? 'visible' : ''}`}
         >
           {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} onFeaturedClick={() => setShowFeaturedModal(true)} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onFeaturedClick={() => setShowFeaturedModal(true)}
+              style={{ order: project.id }}
+            />
           ))}
         </div>
 

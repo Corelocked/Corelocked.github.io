@@ -38,9 +38,9 @@ function App() {
               <Header />
               <Hero />
               <About />
+              <Projects />
               <Skills />
               <Certificates />
-              <Projects />
               <Footer />
             </div>
           } />

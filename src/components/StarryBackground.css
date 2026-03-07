@@ -94,7 +94,8 @@
   position: absolute;
   width: 120px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(79,195,247,0.8), transparent);
+  /* head on the opposite end: transparent -> color so orientation is reversed */
+  background: linear-gradient(90deg, transparent, rgba(79,195,247,0.9));
   border-radius: 50%;
   opacity: 0;
   animation: shootingStar 8s ease-in-out infinite;
@@ -102,27 +103,27 @@
 
 .shooting-star-1 {
   top: 15%;
-  left: 10%;
-  transform: rotate(-35deg);
+  left: 8%;
+  --rot: -35deg;
   animation-delay: 0s;
 }
 .shooting-star-2 {
   top: 35%;
-  left: 60%;
-  transform: rotate(-25deg);
+  left: 22%;
+  --rot: -25deg;
   animation-delay: 3s;
 }
 .shooting-star-3 {
   top: 55%;
-  left: 30%;
-  transform: rotate(-40deg);
+  left: 36%;
+  --rot: -40deg;
   animation-delay: 6s;
 }
 
 @keyframes shootingStar {
-  0% { opacity: 0; transform: translateX(0) rotate(-35deg); }
+  0% { opacity: 0; transform: translateX(0) rotate(var(--rot)); }
   2% { opacity: 1; }
-  5% { opacity: 0; transform: translateX(300px) rotate(-35deg); }
+  5% { opacity: 0; transform: translateX(300px) rotate(var(--rot)); }
   100% { opacity: 0; }
 }
 

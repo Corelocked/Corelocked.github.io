@@ -49,10 +49,7 @@ const StarryBackground = () => {
           <div className="star-gradient star-gradient-top"></div>
           <div className="star-gradient star-gradient-bottom"></div>
 
-          {/* Shooting stars */}
-          <div className="shooting-star shooting-star-1"></div>
-          <div className="shooting-star shooting-star-2"></div>
-          <div className="shooting-star shooting-star-3"></div>
+          {/* Shooting stars removed */}
 
           {/* Star layers */}
           {layers.small.map((s) => (

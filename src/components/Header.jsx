@@ -31,6 +31,50 @@ const Header = () => {
     navigate(`/#${target}`);
   };
 
+  // determine which nav item should be highlighted based on location
+  const computeActiveKey = () => {
+    if (location.pathname === '/' || location.pathname === '') {
+      const h = (location.hash || '').replace('#', '');
+      return h || 'home';
+    }
+    if (location.pathname.startsWith('/projects')) return 'projects';
+    if (location.pathname.startsWith('/contact')) return 'contact';
+    if (location.pathname.startsWith('/support')) return 'support';
+    return '';
+  };
+
+  const [activeKey, setActiveKey] = useState(computeActiveKey());
+
+  // keep activeKey in sync when the route/hash changes
+  useEffect(() => {
+    setActiveKey(computeActiveKey());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname, location.hash]);
+
+  // when on the home page, observe section visibility to highlight nav accordingly
+  useEffect(() => {
+    if (location.pathname !== '/') return undefined;
+
+    const ids = ['home', 'about', 'skills'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // pick the first intersecting entry (most visible due to rootMargin)
+        const visible = entries.find((e) => e.isIntersecting);
+        if (visible && visible.target && visible.target.id) {
+          setActiveKey(visible.target.id || 'home');
+        }
+      },
+      { root: null, rootMargin: '0px 0px -55% 0px', threshold: 0.25 }
+    );
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
   return (
     <>
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
@@ -52,11 +96,31 @@ const Header = () => {
         </button>
         
         <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
-          <button type="button" className="nav-link" onClick={() => handleNav('about')}>About</button>
-          <button type="button" className="nav-link" onClick={() => handleNav('skills')}>Skills</button>
-          <RouterLink to="/projects" onClick={closeMenu} className="nav-link">Projects</RouterLink>
-          <RouterLink to="/contact" onClick={closeMenu} className="nav-link">Contact</RouterLink>
-          <RouterLink to="/support" onClick={closeMenu} className="nav-link nav-link-cta">Support</RouterLink>
+          <button
+            type="button"
+            className={`nav-link ${activeKey === 'about' ? 'active' : ''}`}
+            onClick={() => handleNav('about')}
+          >About</button>
+          <button
+            type="button"
+            className={`nav-link ${activeKey === 'skills' ? 'active' : ''}`}
+            onClick={() => handleNav('skills')}
+          >Skills</button>
+          <RouterLink
+            to="/projects"
+            onClick={closeMenu}
+            className={`nav-link ${location.pathname !== '/' && activeKey === 'projects' ? 'active' : ''}`}
+          >Projects</RouterLink>
+          <RouterLink
+            to="/contact"
+            onClick={closeMenu}
+            className={`nav-link ${location.pathname !== '/' && activeKey === 'contact' ? 'active' : ''}`}
+          >Contact</RouterLink>
+          <RouterLink
+            to="/support"
+            onClick={closeMenu}
+            className={`nav-link nav-link-cta ${location.pathname !== '/' && activeKey === 'support' ? 'active' : ''}`}
+          >Support</RouterLink>
         </nav>
       </div>
       
