@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
@@ -20,7 +21,7 @@ const Footer = () => {
             <Link to="about" smooth={true} duration={500} offset={-80}>About</Link>
             <Link to="skills" smooth={true} duration={500} offset={-80}>Skills</Link>
             <Link to="projects" smooth={true} duration={500} offset={-80}>Projects</Link>
-            <Link to="contact" smooth={true} duration={500} offset={-80}>Contact</Link>
+            <RouterLink to="/contact">Contact</RouterLink>
           </div>
 
           <div className="footer-social">

@@ -2,20 +2,61 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
 import './Hero.css';
 import '../components/Animations.css';
+import heroImage from '../assets/images/Hero2.JPG';
+
+const ROLES = ['Web Developer', 'Android Developer'];
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [typedRole, setTypedRole] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const currentRole = ROLES[roleIndex];
+    const doneTyping = typedRole === currentRole;
+    const doneDeleting = typedRole === '';
+
+    let delay = isDeleting ? 55 : 95;
+    if (!isDeleting && doneTyping) delay = 1100;
+    if (isDeleting && doneDeleting) delay = 250;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && !doneTyping) {
+        setTypedRole(currentRole.slice(0, typedRole.length + 1));
+        return;
+      }
+
+      if (!isDeleting && doneTyping) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isDeleting && !doneDeleting) {
+        setTypedRole(currentRole.slice(0, typedRole.length - 1));
+        return;
+      }
+
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [typedRole, isDeleting, roleIndex]);
+
   return (
     <section id="home" className="hero">
       <div className="hero-bg-decoration"></div>
       <div className="container">
         <div className={`hero-center scroll-reveal fade-up ${isLoaded ? 'visible' : ''}`}>
+          <div className="hero-avatar" aria-hidden="true">
+            <img src={heroImage} alt="Cedric Joshua" />
+          </div>
           <span className="hero-greeting">
             <span className="hello-wave">👋</span> Hi there
           </span>
@@ -23,7 +64,9 @@ const Hero = () => {
             I'm <span className="gradient-text">Cedric Joshua</span>
           </h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
-            Fullstack Web & Mobile Developer
+            <span className="hero-typewriter-label">Fullstack </span>
+            <span className="hero-typewriter-text">{typedRole}</span>
+            <span className="hero-typewriter-caret" aria-hidden="true">|</span>
           </h2>
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
             I build mobile and web applications that are not only functional but also provide an engaging user experience.

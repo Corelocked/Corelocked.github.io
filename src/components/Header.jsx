@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-scroll';
-import ThemeToggle from './ThemeToggle';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import { useState, useEffect } from 'react';
 
@@ -16,17 +15,31 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleNav = (target) => {
+    closeMenu();
+    if (location.pathname === '/') {
+      const el = document.getElementById(target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    // navigate to home with hash so App can scroll on route change
+    navigate(`/#${target}`);
+  };
 
   return (
     <>
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <Link to="home" smooth={true} duration={500} className="logo">
+        <button className="logo" onClick={() => handleNav('home')} aria-label="Home">
           <span className="logo-bracket">&lt;/</span>
           <span className="logo-text">Cedric</span>
           <span className="logo-bracket">&gt;</span>
-        </Link>
+        </button>
         
         <button 
           className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
@@ -39,14 +52,11 @@ const Header = () => {
         </button>
         
         <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
-          <Link to="about" smooth={true} duration={500} onClick={closeMenu} className="nav-link">About</Link>
-          <Link to="skills" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Skills</Link>
-          <Link to="projects" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Projects</Link>
-          <Link to="contact" smooth={true} duration={500} onClick={closeMenu} className="nav-link">Contact</Link>
-          <Link to="support" smooth={true} duration={500} onClick={closeMenu} className="nav-link nav-link-cta">Support</Link>
-          <div className="desktop-theme-toggle">
-            <ThemeToggle />
-          </div>
+          <button type="button" className="nav-link" onClick={() => handleNav('about')}>About</button>
+          <button type="button" className="nav-link" onClick={() => handleNav('skills')}>Skills</button>
+          <RouterLink to="/projects" onClick={closeMenu} className="nav-link">Projects</RouterLink>
+          <RouterLink to="/contact" onClick={closeMenu} className="nav-link">Contact</RouterLink>
+          <RouterLink to="/support" onClick={closeMenu} className="nav-link nav-link-cta">Support</RouterLink>
         </nav>
       </div>
       
@@ -54,10 +64,6 @@ const Header = () => {
       {isMenuOpen && <div className="nav-overlay" onClick={closeMenu}></div>}
     </header>
     
-    {/* Mobile theme toggle - completely outside header for proper fixed positioning */}
-    <div className="mobile-theme-toggle">
-      <ThemeToggle />
-    </div>
   </>
   );
 };

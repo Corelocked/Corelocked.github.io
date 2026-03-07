@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.45f55f44.css",
-    "main.js": "/static/js/main.ce4e1050.js",
+    "main.css": "/static/css/main.d8d8f554.css",
+    "main.js": "/static/js/main.660822d1.js",
     "static/css/55.7e039d97.chunk.css": "/static/css/55.7e039d97.chunk.css",
     "static/js/55.8b1cace0.chunk.js": "/static/js/55.8b1cace0.chunk.js",
     "static/js/6.f53f8ca9.chunk.js": "/static/js/6.f53f8ca9.chunk.js",
@@ -17,20 +17,23 @@
     "static/css/767.84f85e51.chunk.css": "/static/css/767.84f85e51.chunk.css",
     "static/js/767.91d87271.chunk.js": "/static/js/767.91d87271.chunk.js",
     "static/media/umbreon.mp4": "/static/media/umbreon.b892936d7038e158985c.mp4",
+    "static/media/blogshark-featured.mp4": "/static/media/blogshark-featured.a95d40b4c26d8bdace69.mp4",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
     "static/media/spider-gwen.mp4": "/static/media/spider-gwen.98f052310c564895d34e.mp4",
     "static/media/budgetbook.png": "/static/media/budgetbook.575a991dac664672decf.png",
+    "static/media/lakbay-logo.png": "/static/media/lakbay-logo.9cf5d63c416306baa9b1.png",
+    "static/media/pnri-logo.png": "/static/media/pnri-logo.36f1b101016140b88176.png",
     "static/media/dometrain-csharp-certificate.jpg": "/static/media/dometrain-csharp-certificate.4bd791f26e4cda282857.jpg",
     "static/media/dost-website-redesign.png": "/static/media/dost-website-redesign.aa9c930501c6aeced629.png",
     "static/media/e-tala logo.jpg": "/static/media/e-tala logo.dd6975ccfd0c225fe328.jpg",
     "static/media/simplilearn-powerbi-certificate.jpg": "/static/media/simplilearn-powerbi-certificate.bea6b0d2118accd24cdd.jpg",
     "static/media/moody.png": "/static/media/moody.e94182da2101b7376f07.png",
     "static/media/maya-qr.jpg": "/static/media/maya-qr.5e366ecd54df159a2a02.jpg",
+    "static/media/Hero2.JPG": "/static/media/Hero2.0d357a76c0a4d354dcee.JPG",
     "static/media/innsight.png": "/static/media/innsight.5bfb070f3692f6499c00.png",
     "static/media/blogshark-logo.png": "/static/media/blogshark-logo.720ad82c886b8b99c18c.png",
     "static/media/ang_pagong_at_ang_kuneho.png": "/static/media/ang_pagong_at_ang_kuneho.ff3b66e2edc72b7b2125.png",
     "static/media/lakbay-logo2.png": "/static/media/lakbay-logo2.f7af4a19b81999b15f5c.png",
-    "static/media/lakbay-logo.png": "/static/media/lakbay-logo.e18181af57495b87e91b.png",
     "static/media/placeholder.png": "/static/media/placeholder.6ba783a6d3cba2fee64f.png",
     "static/media/laravel.svg": "/static/media/laravel.1c0d91ff70269cd7160f32f86923c3f7.svg",
     "static/media/dev-tools.svg": "/static/media/dev-tools.44882e19623830339fa8f0b25f2b146a.svg",
@@ -60,8 +63,8 @@
     "static/media/flutter.svg": "/static/media/flutter.40ebc8d1e3a656f9b768dae63926e23e.svg",
     "static/media/frontend.svg": "/static/media/frontend.461654c87faa7248814c04f7ce731844.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
-    "main.45f55f44.css.map": "/static/css/main.45f55f44.css.map",
-    "main.ce4e1050.js.map": "/static/js/main.ce4e1050.js.map",
+    "main.d8d8f554.css.map": "/static/css/main.d8d8f554.css.map",
+    "main.660822d1.js.map": "/static/js/main.660822d1.js.map",
     "55.7e039d97.chunk.css.map": "/static/css/55.7e039d97.chunk.css.map",
     "55.8b1cace0.chunk.js.map": "/static/js/55.8b1cace0.chunk.js.map",
     "103.67858234.chunk.js.map": "/static/js/103.67858234.chunk.js.map",
@@ -76,7 +79,7 @@
     "767.91d87271.chunk.js.map": "/static/js/767.91d87271.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.45f55f44.css",
-    "static/js/main.ce4e1050.js"
+    "static/css/main.d8d8f554.css",
+    "static/js/main.660822d1.js"
   ]
 }

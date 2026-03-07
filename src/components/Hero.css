@@ -38,6 +38,24 @@
   margin: 0 auto;
 }
 
+.hero-avatar {
+  width: clamp(120px, 20vw, 170px);
+  height: clamp(120px, 20vw, 170px);
+  margin: 0 auto 1.5rem;
+  border-radius: 999px;
+  padding: 4px;
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.85), rgba(124, 77, 255, 0.85));
+  box-shadow: 0 12px 30px rgba(79, 195, 247, 0.25);
+}
+
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+  display: block;
+}
+
 .hero-greeting {
   display: inline-flex;
   align-items: center;
@@ -100,6 +118,26 @@
   margin-bottom: 1.5rem;
   font-family: var(--heading-font);
   letter-spacing: 0.02em;
+}
+
+.hero-typewriter-label {
+  color: var(--gray-color);
+}
+
+.hero-typewriter-text {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.hero-typewriter-caret {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--primary-color);
+  animation: heroCaretBlink 0.9s step-start infinite;
+}
+
+@keyframes heroCaretBlink {
+  50% { opacity: 0; }
 }
 
 .hero-description {

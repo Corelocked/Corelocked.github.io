@@ -1,0 +1,55 @@
+/* Import base Projects styles */
+@import './Projects.css';
+
+/* All Projects Page Specific Styles */
+.all-projects {
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(79, 195, 247, 0.08);
+  border: 1px solid rgba(79, 195, 247, 0.2);
+  border-radius: 50px;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  font-family: var(--body-font);
+}
+
+.back-btn:hover {
+  background: rgba(79, 195, 247, 0.15);
+  border-color: rgba(79, 195, 247, 0.4);
+  transform: translateX(-5px);
+}
+
+.back-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.back-btn:hover svg {
+  transform: translateX(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .all-projects {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .back-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+}

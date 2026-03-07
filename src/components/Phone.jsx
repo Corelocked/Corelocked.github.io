@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense, useContext } from 'react';
 import { Link } from 'react-scroll';
 import emailjs from '@emailjs/browser';
 import { useGitHubContributions } from '../hooks/useGitHubContributions';
 import ContributionHeatmap from './ContributionHeatmap';
+import { ThemeContext } from '../context/ThemeContext';
 import './Phone.css';
 
 // Assets
@@ -218,6 +219,16 @@ const apps = [
     ),
   },
   {
+    name: 'Theme', type: 'action', action: 'toggleTheme',
+    bg: 'linear-gradient(135deg,#ffd86b,#ff6bcb)', color: '#111',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+    ),
+  },
+  {
     name: 'LinkedIn', type: 'link', url: 'https://www.linkedin.com/in/cedric-joshua-palapuz-85645524a/',
     bg: '#0a66c2', color: '#fff',
     icon: (
@@ -318,6 +329,9 @@ const Phone = () => {
   const [yearMenuOpen, setYearMenuOpen] = useState(false); // State for year dropdown menu
   const yearMenuRef = useRef(null);
 
+  // Theme context for toggling dark/light mode from phone app
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
   // Dock apps (bottom dock) - ordered per user request
   const dockApps = [
     apps.find((a) => a.name === 'Certificates'),
@@ -397,6 +411,9 @@ const Phone = () => {
         break;
       case 'openSupport':
         setActiveView('support');
+        break;
+      case 'toggleTheme':
+        if (toggleDarkMode) toggleDarkMode();
         break;
       default:
         break;
@@ -768,10 +785,32 @@ const Phone = () => {
   // ===== App Renderer =====
 
   const renderApp = (app) => {
+    const isThemeApp = app.action === 'toggleTheme';
+    const appIcon = isThemeApp
+      ? (
+        darkMode ? (
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3c0 .13-.01.26-.01.39A7.5 7.5 0 0 0 18.61 10.8c.13 0 .26-.01.39-.01z" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+        )
+      )
+      : app.icon;
+    const appBg = isThemeApp
+      ? (darkMode ? 'linear-gradient(135deg,#263249,#182235)' : 'linear-gradient(135deg,#ffd86b,#ffb347)')
+      : app.bg;
+    const appColor = isThemeApp
+      ? (darkMode ? '#c7d2fe' : '#6b2e00')
+      : app.color;
+
     if (app.type === 'link') {
       return (
         <a key={app.name} href={app.url} target="_blank" rel="noopener noreferrer" className="phone-app">
-          <div className="phone-app-icon" style={{ background: app.bg, color: app.color }}>{app.icon}</div>
+          <div className="phone-app-icon" style={{ background: appBg, color: appColor }}>{appIcon}</div>
           <span className="phone-app-name">{app.name}</span>
         </a>
       );
@@ -779,7 +818,7 @@ const Phone = () => {
     if (app.type === 'scroll') {
       return (
         <Link key={app.name} to={app.to} smooth={true} duration={500} offset={-80} className="phone-app" onClick={() => setMobileOpen(false)}>
-          <div className="phone-app-icon" style={{ background: app.bg, color: app.color }}>{app.icon}</div>
+          <div className="phone-app-icon" style={{ background: appBg, color: appColor }}>{appIcon}</div>
           <span className="phone-app-name">{app.name}</span>
         </Link>
       );
@@ -787,7 +826,7 @@ const Phone = () => {
     if (app.type === 'action') {
       return (
         <button key={app.name} className="phone-app phone-app-btn" onClick={() => handleAppAction(app.action)}>
-          <div className="phone-app-icon" style={{ background: app.bg, color: app.color }}>{app.icon}</div>
+          <div className="phone-app-icon" style={{ background: appBg, color: appColor }}>{appIcon}</div>
           <span className="phone-app-name">{app.name}</span>
         </button>
       );

@@ -1,11 +1,280 @@
-import React from 'react';
+    import React, { useState, useEffect, useRef } from 'react';
 import './About.css';
 import '../components/Animations.css';
 import about from '../assets/images/Hero.png';
 import useScrollReveal from '../hooks/useScrollReveal';
+import ciitLogo from '../assets/images/ciit-logo.png';
+import pnriLogo from '../assets/images/pnri-logo.png';
+import lakbayLogo from '../assets/images/lakbay-logo.png';
+import etalaLogo from '../assets/images/e-tala logo.jpg';
+import blogsharkLogo from '../assets/images/blogshark-logo.png';
+import blogsharkFeaturedVideo from '../assets/images/blogshark-featured.mp4';
+import innsightLogo from '../assets/images/innsight.png';
+
+const WORK_ENTRIES = [
+  {
+    id: 'lakbay',
+    badge: 'LK',
+    logo: lakbayLogo,
+    org: 'Lakbay: Scenic Route Navigation',
+    role: 'Technical Lead',
+    date: 'Oct 2025 - Feb 2026',
+    bullets: [
+      'Developed a route generation system based on traveler preferences and historical data.',
+      'Architected backend logic for real-time route updates and profile management.'
+    ],
+    tags: ['Project', 'Mobile', 'Backend', 'Thesis']
+  },
+  {
+    id: 'e-tala',
+    badge: 'ET',
+    logo: etalaLogo,
+    org: 'E-TALA: Inventory Management System',
+    role: 'Technical Lead',
+    date: 'Oct 2025 - Nov 2025',
+    bullets: [
+      'Led development of a mobile inventory platform for small businesses.',
+      'Implemented secure auth, realtime stock updates, and automated alerts.'
+    ],
+    tags: ['Project', 'Kotlin', 'Firebase']
+  },
+  {
+    id: 'blogshark',
+    badge: 'BS',
+    logo: blogsharkLogo,
+    org: 'BlogShark: Blogging Website',
+    role: 'Technical Lead',
+    date: 'May 2025 - Aug 2025',
+    bullets: [
+      'Built an interactive blogging platform with media posting and in-app communication.',
+      'Designed role-based layouts and permission controls for secure content flow.'
+    ],
+    tags: ['Project', 'Laravel', 'SQLite', 'Featured']
+  },
+  {
+    id: 'innsight',
+    badge: 'IN',
+    logo: innsightLogo,
+    org: 'InnSight: AI Virtual Assistant',
+    role: 'Technical Lead',
+    date: 'Sep 2024 - Nov 2024',
+    bullets: [
+      'Built a voice and text assistant for hospitality customer support.',
+      'Integrated speech recognition and ML models for intent and sentiment analysis.'
+    ],
+    tags: ['Project', 'AI', 'React', 'Python']
+  },
+  {
+    id: 'pnri',
+    badge: 'PN',
+    logo: pnriLogo,
+    org: 'Philippine Nuclear Research Institute (PNRI)',
+    role: 'Work Immersion Intern',
+    date: 'Feb 2020',
+    bullets: [
+      'Encoded 1,000+ newspaper records into the institutional database in a 40-hour window.'
+    ],
+    tags: ['Internship']
+  }
+];
+
+const EDUCATION_ENTRIES = [
+  {
+    id: 'ciit',
+    badge: 'CI',
+    logo: ciitLogo,
+    org: 'CIIT College of Arts and Technology',
+    role: 'Bachelor of Science in Computer Science',
+    date: 'Expected Oct 2026',
+    bullets: [
+      'Specialization in Web and Mobile Development.',
+      'Focus areas: full-stack systems, Android engineering, and practical product delivery.'
+    ],
+    tags: ['Computer Science', 'Web', 'Mobile']
+  }
+];
+
+const TimelineTabs = () => {
+  const [activeTab, setActiveTab] = useState('work');
+  const [showFeaturedModal, setShowFeaturedModal] = useState(false);
+  const videoRef = useRef(null);
+  const entries = activeTab === 'work' ? WORK_ENTRIES : EDUCATION_ENTRIES;
+
+  const openFeaturedModal = () => {
+    setShowFeaturedModal(true);
+  };
+
+  const closeFeaturedModal = () => {
+    if (videoRef.current) {
+      try {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+      } catch (e) {}
+    }
+    setShowFeaturedModal(false);
+  };
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape' && showFeaturedModal) closeFeaturedModal();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showFeaturedModal]);
+
+  return (
+    <div className="about-timeline-shell">
+      <div className="about-timeline-tabs" role="tablist" aria-label="Experience categories">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'work'}
+          className={`about-timeline-tab ${activeTab === 'work' ? 'active' : ''}`}
+          onClick={() => setActiveTab('work')}
+        >
+          Work
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'education'}
+          className={`about-timeline-tab ${activeTab === 'education' ? 'active' : ''}`}
+          onClick={() => setActiveTab('education')}
+        >
+          Education
+        </button>
+      </div>
+
+      <div className="about-timeline-track">
+        {entries.map((entry) => (
+          <article key={entry.id} className="about-timeline-item">
+            <div className="about-timeline-marker" aria-hidden="true">
+              {entry.logo ? (
+                <img src={entry.logo} alt={`${entry.org} logo`} />
+              ) : (
+                <span>{entry.badge}</span>
+              )}
+            </div>
+
+            <div className="about-timeline-card">
+              <header className="about-timeline-card-header">
+                <div>
+                  <h4 className="about-timeline-org">{entry.org}</h4>
+                  <p className="about-timeline-role">{entry.role}</p>
+                </div>
+                <span className="about-timeline-date">{entry.date}</span>
+              </header>
+
+              <ul className="about-timeline-bullets">
+                {entry.bullets.map((item, index) => (
+                  <li key={`${entry.id}-${index}`}>{item}</li>
+                ))}
+              </ul>
+
+              <div className="about-timeline-tags" aria-label="skills and labels">
+                {entry.tags.map((tag) => {
+                  const isBlogsharkFeatured = entry.id === 'blogshark' && tag === 'Featured';
+
+                  if (isBlogsharkFeatured) {
+                    return (
+                      <button
+                        key={`${entry.id}-${tag}`}
+                        type="button"
+                        className="about-timeline-tag about-timeline-tag-featured"
+                        onClick={openFeaturedModal}
+                        aria-expanded={showFeaturedModal}
+                        aria-label="Open BlogShark featured video"
+                      >
+                        {tag}
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <span key={`${entry.id}-${tag}`} className="about-timeline-tag">
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {showFeaturedModal && (
+        <div
+          className="about-featured-modal-backdrop"
+          onClick={closeFeaturedModal}
+        >
+          <div className="about-featured-modal" role="dialog" aria-label="BlogShark featured post" onClick={(e) => e.stopPropagation()}>
+            <div className="about-featured-modal-header">
+              <div>
+                <p className="about-featured-modal-title">BlogShark Featured Post</p>
+                <p className="about-featured-modal-subtitle">Preview of the actual featured post content</p>
+              </div>
+              <button className="about-featured-close" onClick={closeFeaturedModal} aria-label="Close preview">✕</button>
+            </div>
+
+            <div className="about-featured-media">
+              <video
+                ref={videoRef}
+                src={blogsharkFeaturedVideo}
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+              />
+            </div>
+
+            <div className="about-featured-actions">
+              <a
+                href="https://www.instagram.com/p/DUVf_PRDOQG/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-featured-link"
+              >
+                Show on Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const About = () => {
   const [sectionRef, isVisible] = useScrollReveal({ threshold: 0.2 });
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+
+  useEffect(() => {
+    const applyMatch = () => {
+      if (!leftRef.current || !rightRef.current) return;
+      const leftHeight = leftRef.current.offsetHeight;
+      // set maxHeight on right panel to match left and allow scrolling
+      rightRef.current.style.maxHeight = `${leftHeight}px`;
+      rightRef.current.style.overflow = 'auto';
+      rightRef.current.style.overflowX = 'hidden';
+    };
+
+    // Initial apply
+    applyMatch();
+
+    // Recompute on resize
+    window.addEventListener('resize', applyMatch);
+    // Also observe mutations in left panel to update when content changes
+    const ro = new MutationObserver(applyMatch);
+    if (leftRef.current) ro.observe(leftRef.current, { childList: true, subtree: true, characterData: true });
+
+    return () => {
+      window.removeEventListener('resize', applyMatch);
+      ro.disconnect();
+    };
+  }, []);
 
   return (
     <section id="about" className="about">
@@ -20,69 +289,46 @@ const About = () => {
           </h2>
         </div>
 
-        {/* Centered profile image */}
-        <div className={`about-avatar scroll-reveal fade-up delay-200 ${isVisible ? 'visible' : ''}`}>
-          <div className="avatar-frame">
-            <img src={about} alt="Cedric Joshua" width={160} height={160} />
-          </div>
-        </div>
-
-        {/* Centered intro text */}
-        <div className={`about-intro scroll-reveal fade-up delay-300 ${isVisible ? 'visible' : ''}`}>
-          <p className="lead-text">
-            I'm a Computer Science student and Lead Developer specializing in full-stack web and Android mobile development.
-            I architect scalable solutions using React, Node.js, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
-          </p>
-          <p className="lead-subtext">
-            I have 4+ years of experience designing and implementing complex systems—from real-time inventory platforms to AI-powered virtual assistants.
-            I'm passionate about creating efficient, maintainable code and solving real-world problems through technology. Beyond development, I explore UI/UX design and game server optimization.
-          </p>
-        </div>
-
-        {/* Cards row */}
-        <div className={`about-cards scroll-reveal fade-up delay-400 ${isVisible ? 'visible' : ''}`}>
-          <div className="about-card">
-            <div className="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-              </svg>
+        <div className="about-content-grid">
+          <div ref={leftRef} className={`about-left-panel scroll-reveal fade-right delay-200 ${isVisible ? 'visible' : ''}`}>
+            <div className="about-avatar">
+              <div className="avatar-frame">
+                <img src={about} alt="Cedric Joshua" width={160} height={160} />
+              </div>
             </div>
-            <h3>Education</h3>
-            <p className="card-title">BS in Computer Science</p>
-            <p className="card-subtitle">CIIT College of Arts and Technology</p>
-            <p style={{fontSize: '0.85rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)'}}>Specialization: Web & Mobile Development</p>
-            <span className="card-date">Expected Oct 2026</span>
-          </div>
 
-          <div className="about-card">
-            <div className="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-              </svg>
+            <div className="about-intro">
+              <p className="lead-text">
+                I'm a Computer Science student and Lead Developer specializing in full-stack web and Android mobile development.
+                I architect scalable solutions using React, Node.js, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
+              </p>
+              <p className="lead-subtext">
+                I have 4+ years of experience designing and implementing complex systems from realtime inventory platforms to AI-powered virtual assistants.
+                Based in the Philippines, I bring a practical and globally minded approach to building digital products.
+                I'm passionate about maintainable code, practical product thinking, and solving real-world problems through technology.
+              </p>
             </div>
-            <h3>Experience</h3>
-            <p className="card-title">Technical Lead</p>
-            <p className="card-subtitle">Full-stack & Mobile Apps</p>
-            <p style={{fontSize: '0.85rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)'}}>React • Node.js • Kotlin • Firebase</p>
-            <span className="card-date">2024 - Present</span>
-          </div>
-        </div>
 
-        {/* Highlights */}
-        <div className={`about-highlights scroll-reveal fade-up delay-500 ${isVisible ? 'visible' : ''}`}>
-          <div className="highlight-item">
-            <span className="highlight-icon">🎯</span>
-            <span>Problem Solver</span>
+            <div className="about-highlights">
+              <div className="highlight-item">
+                <span className="highlight-icon">PS</span>
+                <span>Problem Solver</span>
+              </div>
+              <div className="highlight-item">
+                <span className="highlight-icon">CT</span>
+                <span>Creative Thinker</span>
+              </div>
+              <div className="highlight-item">
+                <span className="highlight-icon">FL</span>
+                <span>Fast Learner</span>
+              </div>
+            </div>
           </div>
-          <div className="highlight-item">
-            <span className="highlight-icon">💡</span>
-            <span>Creative Thinker</span>
-          </div>
-          <div className="highlight-item">
-            <span className="highlight-icon">🚀</span>
-            <span>Fast Learner</span>
+
+          <div ref={rightRef} className={`about-right-panel scroll-reveal fade-left delay-300 ${isVisible ? 'visible' : ''}`}>
+            <div className="about-timeline">
+              <TimelineTabs />
+            </div>
           </div>
         </div>
       </div>
