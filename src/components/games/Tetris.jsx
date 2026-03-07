@@ -217,8 +217,8 @@ const Tetris = () => {
         <div style={styles.overlay}>
           <div style={styles.overlayText}>{gameOver ? 'Game Over!' : 'Tetris'}</div>
           {gameOver && <div style={styles.finalScore}>Score: {score}</div>}
-          <button onClick={start} style={styles.btn}>{gameOver ? 'Retry' : 'Start'}</button>
-          <div style={styles.hint}>Tap sides / Swipe down</div>
+          <button onClick={start} style={theme ? theme.primaryBtn : styles.btn}>{gameOver ? 'Retry' : 'Start'}</button>
+          <div style={{...(theme ? theme.hint : styles.hint)}}>Tap sides / Swipe down</div>
         </div>
       )}
     </div>

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './AllProjects.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
@@ -439,7 +438,6 @@ const AllProjects = () => {
   const [headerRef, isHeaderVisible] = useScrollReveal({ threshold: 0.2 });
   const [filterRef, isFilterVisible] = useScrollReveal({ threshold: 0.3 });
   const [gridRef, isGridVisible] = useScrollReveal({ threshold: 0.05 });
-  const navigate = useNavigate();
 
   const filteredProjects = activeCategory === 'All' 
     ? projects 
@@ -462,12 +460,12 @@ const AllProjects = () => {
     <section id="all-projects" className="all-projects">
       <div className="container">
         {/* Back Button */}
-        <button className="back-btn" onClick={() => navigate('/')}>
+        {/* <button className="back-btn" onClick={() => navigate('/')}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           Back to Home
-        </button>
+        </button> */}
 
         {/* Section Header */}
         <div 

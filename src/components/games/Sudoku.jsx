@@ -142,7 +142,7 @@ const Sudoku = () => {
               }}
             >Hard</button>
         </div>
-        <button onClick={generate} style={{...styles.btn, ...(theme? theme.smallBtn : {})}}>New Game</button>
+        <button onClick={generate} style={theme ? theme.primaryBtn : {...styles.btn, ...(theme? theme.smallBtn : {})}}>New Game</button>
       </div>
     );
   }
@@ -193,7 +193,7 @@ const Sudoku = () => {
         <button onClick={()=>handleNumberInput(0)} style={{...styles.numBtn, color:'#ff6b9d', width: Math.max(30, Math.floor(cellPx * 0.9)), height: Math.max(30, Math.floor(cellPx * 0.9))}}>✕</button>
       </div>
       <div style={styles.actions}>
-        <button onClick={generate} style={styles.smallBtn}>New Game</button>
+        <button onClick={generate} style={theme ? theme.primaryBtn : styles.smallBtn}>New Game</button>
       </div>
     </div>
   );

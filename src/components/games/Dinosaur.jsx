@@ -461,7 +461,7 @@ const Dinosaur = () => {
     <div ref={containerRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '8px', gap: 10 }}>
       <canvas ref={canvasRef} style={{ marginTop: 0, borderRadius: 10, border: `1px solid ${theme?.cellBorder || '#333'}`, boxShadow: theme?.isDark ? '0 10px 20px rgba(0,0,0,0.35)' : '0 10px 20px rgba(0,0,0,0.12)' }} />
 
-      <div style={{ display: 'flex', gap: 10, marginTop: 8, padding: '6px 10px', borderRadius: 999, background: theme?.isDark ? 'rgba(15,23,42,0.45)' : 'rgba(255,255,255,0.72)', border: `1px solid ${theme?.cellBorder || '#333'}` }}>
+      <div style={{ display: 'flex', gap: 10, marginTop: 8, padding: '6px 10px', borderRadius: 999, background: theme?.panelBg ?? 'rgba(15,23,42,0.45)', border: theme?.cellBorder ?? '1px solid #333' }}>
         <button onClick={start} style={{ ...theme?.smallBtn, fontWeight: 700, padding: '8px 14px' }}>Start</button>
         <button onClick={reset} style={{ ...theme?.smallBtn, fontWeight: 700, padding: '8px 14px' }}>Reset</button>
       </div>
@@ -501,7 +501,7 @@ const Dinosaur = () => {
         </button>
       </div>
 
-      <div style={{ marginTop: 8, fontSize: '11px', color: theme?.subColor, background: theme?.isDark ? 'rgba(15,23,42,0.4)' : 'rgba(255,255,255,0.65)', border: `1px solid ${theme?.cellBorder || '#333'}`, borderRadius: 999, padding: '4px 10px' }}>Tip: Space/tap to jump, Down arrow to crouch</div>
+      <div style={{ ...theme?.hint, marginTop: 8, background: theme?.panelBg ?? 'rgba(15,23,42,0.4)', border: theme?.cellBorder ?? '1px solid #333', borderRadius: 999, padding: '4px 10px' }}>Tip: Space/tap to jump, Down arrow to crouch</div>
     </div>
   );
 };

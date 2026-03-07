@@ -382,25 +382,24 @@ const FlappyBird = () => {
           marginTop: 2,
           padding: '6px 10px',
           borderRadius: 999,
-          background: theme?.isDark ? 'rgba(15,23,42,0.45)' : 'rgba(255,255,255,0.72)',
-          border: `1px solid ${theme?.cellBorder || '#333'}`,
+          background: theme?.panelBg ?? 'rgba(15,23,42,0.45)',
+          border: theme?.cellBorder ?? '1px solid #333',
         }}
       >
-        <button onClick={start} style={{ ...(theme?.smallBtn || {}), fontWeight: 700, padding: '8px 14px' }}>
+        <button onClick={start} style={theme?.smallBtn ?? { fontWeight: 700, padding: '8px 14px' }}>
           Start
         </button>
-        <button onClick={flap} style={{ ...(theme?.smallBtn || {}), fontWeight: 700, padding: '8px 14px' }}>
+        <button onClick={flap} style={theme?.smallBtn ?? { fontWeight: 700, padding: '8px 14px' }}>
           Flap
         </button>
       </div>
 
       <div
         style={{
+          ...theme?.hint,
           marginTop: 2,
-          fontSize: '11px',
-          color: theme?.subColor,
-          background: theme?.isDark ? 'rgba(15,23,42,0.4)' : 'rgba(255,255,255,0.65)',
-          border: `1px solid ${theme?.cellBorder || '#333'}`,
+          background: theme?.panelBg ?? 'rgba(15,23,42,0.4)',
+          border: theme?.cellBorder ?? '1px solid #333',
           borderRadius: 999,
           padding: '4px 10px',
         }}

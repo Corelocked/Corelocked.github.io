@@ -70,7 +70,7 @@
   margin-bottom: 3rem;
 }
 
-.section-label {
+.projects .section-label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -87,7 +87,7 @@
   letter-spacing: 1.5px;
 }
 
-.label-icon {
+.projects .label-icon {
   font-size: 1rem;
 }
 
@@ -111,7 +111,7 @@
   50% { background-position: 100% center; }
 }
 
-.section-subtitle {
+.projects .section-subtitle {
   color: var(--gray-color);
   font-size: clamp(1rem, 2vw, 1.15rem);
   max-width: 600px;
@@ -549,7 +549,7 @@
   background: radial-gradient(circle, rgba(139, 99, 232, 0.06) 0%, transparent 70%);
 }
 
-:root:not([data-theme="dark"]) .section-label {
+:root:not([data-theme="dark"]) .projects .section-label {
   background: linear-gradient(135deg, rgba(59, 163, 216, 0.12), rgba(139, 99, 232, 0.06));
   border-color: rgba(59, 163, 216, 0.3);
 }
@@ -593,12 +593,12 @@
     padding: 0 15px;
   }
 
-  .section-label {
+  .projects .section-label {
     padding: 8px 14px;
     font-size: 0.8rem;
   }
 
-  .section-subtitle {
+  .projects .section-subtitle {
     font-size: 1rem;
     padding: 0 15px;
   }

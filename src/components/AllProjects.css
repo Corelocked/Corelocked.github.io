@@ -8,6 +8,28 @@
   padding-bottom: 100px;
 }
 
+.all-projects .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(79, 195, 247, 0.06);
+  border: 1px solid rgba(79, 195, 247, 0.18);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+:root:not([data-theme="dark"]) .all-projects .section-label {
+  background: linear-gradient(135deg, rgba(59, 163, 216, 0.12), rgba(139, 99, 232, 0.06));
+  border-color: rgba(59, 163, 216, 0.3);
+}
+
 /* Back Button */
 .back-btn {
   display: inline-flex;

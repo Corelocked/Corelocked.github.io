@@ -163,7 +163,7 @@ const Minesweeper = () => {
             </div>
           </div>
           <div style={{marginTop:10}}>
-            <button onClick={start} style={{...styles.btn, ...(theme? theme.smallBtn : {})}}>Start</button>
+            <button onClick={start} style={theme ? theme.primaryBtn : {...styles.btn, ...(theme? theme.smallBtn : {})}}>Start</button>
           </div>
         </div>
       ) : (
@@ -203,8 +203,8 @@ const Minesweeper = () => {
               </div>
             ))}
           </div>
-          {(gameOver||won) && <button onClick={start} style={{...styles.btn, marginTop:8}}>Play Again</button>}
-          {!gameOver && !won && <div style={styles.hint}>Long-press or right-click to flag</div>}
+          {(gameOver||won) && <button onClick={start} style={{...(theme? theme.primaryBtn : styles.btn), marginTop:8}}>Play Again</button>}
+          {!gameOver && !won && <div style={{...(theme? theme.hint : styles.hint)}}>Long-press or right-click to flag</div>}
         </>
       )}
     </div>

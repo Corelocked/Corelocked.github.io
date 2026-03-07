@@ -9,9 +9,21 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(59, 130, 246, 0.12) 50%, rgba(79, 195, 247, 0.08) 100%);
   color: #fff;
   position: relative;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Content wrapper with custom scrollbar */
@@ -21,6 +33,7 @@
   overflow-x: hidden;
   padding: 1.5rem;
   padding-bottom: 2rem;
+  scroll-behavior: smooth;
 }
 
 /* Custom scrollbar styling */
@@ -79,21 +92,22 @@
   line-height: 1.5;
 }
 
-.resume-viewer__error-message .retry-btn {
-  padding: 0.6rem 1.5rem;
+.resume-viewer__error-message .retry-btn {padding: 0.25rem 1.75rem;
   background: linear-gradient(135deg, #8b5cf6, #3b82f6);
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
 }
 
 .resume-viewer__error-message .retry-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16Y(-2px);
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 

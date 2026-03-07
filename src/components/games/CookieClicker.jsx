@@ -56,13 +56,13 @@ const CookieClicker = () => {
           🍪
         </button>
       </div>
-      <div style={{marginTop:12, fontFamily:'var(--mono-font)', color: theme?.subColor, fontSize:16}}>Cookies: {cookies}</div>
+      <div style={{marginTop:12, fontFamily:'var(--mono-font)', color: theme?.titleColor ?? '#fff', fontSize:18, fontWeight: 700}}>Cookies: {cookies}</div>
       <div style={{display:'flex', gap:8, marginTop:12}}>
-        <button onClick={buyUpgrade} style={{...(theme?.smallBtn || {} )}}>Upgrade (+1)</button>
-        <button onClick={reset} style={{...(theme?.smallBtn || {} )}}>Reset</button>
+        <button onClick={buyUpgrade} style={theme?.smallBtn ?? {}}>Upgrade (+1)</button>
+        <button onClick={reset} style={theme?.smallBtn ?? {}}>Reset</button>
       </div>
-      <div style={{marginTop:10, fontSize:12, color: theme?.subColor}}>Per click: {perClick} · Next cost: {cost}</div>
-      <div style={{marginTop:8, fontSize:12, color: '#ff6b9d'}}>Best: {best}</div>
+      <div style={{...(theme?.hint ?? {}), marginTop:10}}>Per click: {perClick} · Next cost: {cost}</div>
+      <div style={{marginTop:8, fontSize:12, color: '#ff6b9d', fontFamily: 'var(--mono-font)', fontWeight: 700}}>Best: {best}</div>
     </div>
   );
 };

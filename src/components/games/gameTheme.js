@@ -25,6 +25,43 @@ export function useGameTheme() {
     transition: 'all 0.14s ease',
   };
 
+  const primaryBtn = {
+    padding: '10px 28px',
+    borderRadius: 12,
+    border: 'none',
+    background: accentGradient,
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 700,
+    cursor: 'pointer',
+    fontFamily: 'var(--body-font)',
+    boxShadow: '0 6px 18px rgba(79,195,247,0.18)',
+    transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px'
+  };
+
+  const panel = {
+    background: panelBg,
+    borderRadius: 12,
+    border: cellBorder,
+    padding: 12,
+    boxShadow: isDark ? '0 6px 18px rgba(0,0,0,0.6)' : '0 6px 18px rgba(0,0,0,0.06)'
+  };
+
+  const heading = {
+    color: titleColor,
+    fontFamily: 'var(--heading-font)',
+    fontWeight: 800,
+    fontSize: 18
+  };
+
+  const hint = {
+    color: subColor,
+    fontSize: 12,
+    fontFamily: 'var(--body-font)'
+  };
+
   const styles = {
     isDark,
     accentGradient,
@@ -35,6 +72,10 @@ export function useGameTheme() {
     cellBg,
     unrevealedCellBg,
     smallBtn,
+    primaryBtn,
+    panel,
+    heading,
+    hint,
   };
 
   return styles;

@@ -162,16 +162,23 @@ const Snake = () => {
     <div style={styles.container} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <div ref={containerRef} style={styles.scoresContainer}>
           <div style={styles.scores}>
-            <span style={{...styles.scoreText, color: theme ? theme.titleColor : styles.scoreText.color}}>Score: {score}</span>
-            <span style={{...styles.scoreText, color: '#ff6b9d'}}>Best: {best}</span>
+              <div style={{...styles.scoreCard, background: theme?.panelBg ?? styles.scoreCard.background, border: theme?.cellBorder ?? styles.scoreCard.border}}>
+                <span style={{...styles.scoreLabel}}>Score</span>
+                <span style={{...styles.scoreValue, color: '#4fc3f7'}}>{score}</span>
+              </div>
+              <div style={{...styles.scoreCard, background: theme?.panelBg ?? styles.scoreCard.background, border: theme?.cellBorder ?? styles.scoreCard.border}}>
+                <span style={{...styles.scoreLabel}}>Best</span>
+                <span style={{...styles.scoreValue, color: '#ff6b9d'}}>{best}</span>
+              </div>
           </div>
-          <canvas ref={canvasRef} width={canvasSize} height={canvasSize} style={{...styles.canvas, background: theme ? theme.cellBg : styles.canvas.background, border: theme ? theme.cellBorder : styles.canvas.border}} />
+          <canvas ref={canvasRef} width={canvasSize} height={canvasSize} style={{...styles.canvas, background: theme ? theme.cellBg : styles.canvas.background, border: theme ? theme.cellBorder : styles.canvas.border, boxShadow: running ? '0 8px 24px rgba(79, 195, 247, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.2)'}} />
         </div>
       {(!running || gameOver) && (
         <div style={styles.overlay}>
-          <div style={styles.overlayText}>{gameOver ? 'Game Over!' : 'Snake'}</div>
-          <button onClick={reset} style={{...styles.btn, ...(theme? theme.smallBtn : {})}}>{gameOver ? 'Retry' : 'Start'}</button>
-          <div style={{...styles.hint, color: theme ? theme.subColor : styles.hint.color}}>Swipe or Arrow keys</div>
+          <div style={{...styles.overlayText, fontSize: gameOver ? 22 : 24}}>{gameOver ? '🐍 Game Over!' : '🐍 Snake'}</div>
+          {gameOver && <div style={styles.finalScore}>Score: {score}</div>}
+              <button onClick={reset} style={theme ? theme.primaryBtn : styles.btn}>{gameOver ? '🔄 Retry' : '▶️ Start'}</button>
+          <div style={{...styles.hint, color: theme ? theme.subColor : styles.hint.color}}>Use Arrow Keys or Swipe to Move</div>
         </div>
       )}
     </div>
@@ -179,15 +186,114 @@ const Snake = () => {
 };
 
 const styles = {
-  container: { display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'center', position: 'relative', padding: '4px 0', touchAction: 'none' },
-  scoresContainer: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' },
-  scores: { display: 'flex', gap: 16, marginBottom: 8 },
+  container: { 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    height: '100%', 
+    justifyContent: 'center', 
+    position: 'relative', 
+    padding: '8px 0', 
+    touchAction: 'none',
+    animation: 'fadeIn 0.4s ease-out'
+  },
+  scoresContainer: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', gap: 10 },
+  scores: { 
+    display: 'flex', 
+    gap: 12, 
+    marginBottom: 6,
+    width: '100%',
+    maxWidth: '420px',
+    justifyContent: 'center'
+  },
+  scoreCard: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '8px 20px',
+    background: 'rgba(255, 255, 255, 0.04)',
+    borderRadius: 12,
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    backdropFilter: 'blur(8px)',
+    minWidth: '70px',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
+  },
+  scoreLabel: {
+    fontSize: 10,
+    fontWeight: 600,
+    color: 'rgba(255, 255, 255, 0.5)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+    marginBottom: 2,
+    fontFamily: 'var(--body-font), sans-serif'
+  },
+  scoreValue: {
+    fontSize: 16,
+    fontWeight: 800,
+    fontFamily: 'var(--mono-font), monospace',
+    textShadow: '0 2px 8px currentColor'
+  },
   scoreText: { fontSize: 12, fontWeight: 700, color: '#4fc3f7', fontFamily: 'var(--mono-font), monospace' },
-  canvas: { borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', maxWidth: '100%', height: 'auto' },
-  overlay: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', borderRadius: 10, backdropFilter: 'blur(4px)' },
-  overlayText: { color: '#fff', fontSize: 18, fontWeight: 700, marginBottom: 12, fontFamily: 'var(--heading-font), sans-serif' },
-  btn: { padding: '6px 24px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg, #4fc3f7, #7c4dff)', color: '#fff', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--body-font)' },
-  hint: { color: 'rgba(255,255,255,0.4)', fontSize: 9, marginTop: 8, fontFamily: 'var(--body-font)' },
+  canvas: { 
+    borderRadius: 14, 
+    border: '2px solid rgba(255,255,255,0.1)', 
+    background: 'rgba(0,0,0,0.25)', 
+    maxWidth: '100%', 
+    height: 'auto',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+  },
+  overlay: { 
+    position: 'absolute', 
+    inset: 0, 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    background: 'rgba(0,0,0,0.75)', 
+    borderRadius: 14, 
+    backdropFilter: 'blur(8px)',
+    animation: 'fadeIn 0.3s ease-out'
+  },
+  overlayText: { 
+    color: '#fff', 
+    fontSize: 24, 
+    fontWeight: 800, 
+    marginBottom: 8, 
+    fontFamily: 'var(--heading-font), sans-serif',
+    textShadow: '0 2px 12px rgba(79, 195, 247, 0.5)'
+  },
+  finalScore: {
+    color: '#4fc3f7',
+    fontSize: 18,
+    fontWeight: 700,
+    marginBottom: 16,
+    fontFamily: 'var(--mono-font), monospace',
+    textShadow: '0 2px 8px rgba(79, 195, 247, 0.4)'
+  },
+  btn: { 
+    padding: '10px 32px', 
+    borderRadius: 12, 
+    border: 'none', 
+    background: 'linear-gradient(135deg, #4fc3f7, #7c4dff)', 
+    color: '#fff', 
+    fontSize: 14, 
+    fontWeight: 700, 
+    cursor: 'pointer', 
+    fontFamily: 'var(--body-font)',
+    boxShadow: '0 4px 12px rgba(79, 195, 247, 0.3)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px'
+  },
+  hint: { 
+    color: 'rgba(255,255,255,0.45)', 
+    fontSize: 11, 
+    marginTop: 12, 
+    fontFamily: 'var(--body-font)',
+    textAlign: 'center',
+    lineHeight: 1.4
+  },
 };
 
 export default Snake;
