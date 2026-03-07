@@ -8,6 +8,8 @@ import Skills from './components/Skills';
 import Certificates from './components/Certificates';
 import Projects from './components/Projects';
 import AllProjects from './components/AllProjects';
+import ProjectPage from './components/ProjectPage';
+import FullProjectView from './components/FullProjectView';
 import Contact from './components/Contact';
 import Support from './components/Support';
 import Footer from './components/Footer';
@@ -22,55 +24,85 @@ function App() {
   return (
     <Router>
       <ScrollToHash />
-      <div className="App">
-        {isLoading && <LoadingScreen onFinished={() => setIsLoading(false)} />}
+      <AppContent isLoading={isLoading} setIsLoading={setIsLoading} />
+    </Router>
+  );
+}
 
+function AppContent({ isLoading, setIsLoading }) {
+  const { pathname } = useLocation();
+  // Treat /projects/:slug and /projects/:slug/view as full-project views (hide app chrome)
+  const isFullProjectView = /^\/projects\/[^/]+(?:\/view)?$/.test(pathname);
+
+  return (
+    <div className="App">
+      {!isFullProjectView && isLoading && <LoadingScreen onFinished={() => setIsLoading(false)} />}
+
+      {!isFullProjectView && (
         <Suspense fallback={null}>
           <StarryBackground />
         </Suspense>
+      )}
 
-        <Phone />
+      {!isFullProjectView && <Phone />}
 
-        <Routes>
-          {/* Home Route */}
-          <Route path="/" element={
-            <div className="main-content">
-              <Header />
-              <Hero />
-              <About />
-              <Projects />
-              <Skills />
-              <Certificates />
-              <Footer />
-            </div>
-          } />
-          
-          {/* All Projects Route */}
-          <Route path="/projects" element={
-            <div className="main-content">
-              <Header />
-              <AllProjects />
-            </div>
-          } />
+      <Routes>
+        {/* Home Route */}
+        <Route path="/" element={
+          <div className="main-content">
+            <Header />
+            <Hero />
+            <About />
+            <Projects />
+            <Skills />
+            <Certificates />
+            <Footer />
+          </div>
+        } />
+        
+        {/* All Projects Route */}
+        <Route path="/projects" element={
+          <div className="main-content">
+            <Header />
+            <AllProjects />
+          </div>
+        } />
 
-          {/* Contact Route */}
-          <Route path="/contact" element={
-            <div className="main-content">
-              <Header />
-              <Contact />
-            </div>
-          } />
+        {/* Fullscreen project demo (no header or global chrome) at /projects/:slug */}
+        <Route path="/projects/:slug" element={
+          <FullProjectView />
+        } />
 
-          {/* Support Route */}
-          <Route path="/support" element={
-            <div className="main-content">
-              <Header />
-              <Support />
-            </div>
-          } />
-        </Routes>
-      </div>
-    </Router>
+        {/* Per-project details (with header) moved to /projects/:slug/info */}
+        <Route path="/projects/:slug/info" element={
+          <div className="main-content">
+            <Header />
+            <ProjectPage />
+          </div>
+        } />
+
+        {/* keep explicit /view route for backwards-compat */}
+        <Route path="/projects/:slug/view" element={
+          <FullProjectView />
+        } />
+
+        {/* Contact Route */}
+        <Route path="/contact" element={
+          <div className="main-content">
+            <Header />
+            <Contact />
+          </div>
+        } />
+
+        {/* Support Route */}
+        <Route path="/support" element={
+          <div className="main-content">
+            <Header />
+            <Support />
+          </div>
+        } />
+      </Routes>
+    </div>
   );
 }
 

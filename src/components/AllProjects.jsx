@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './AllProjects.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
@@ -104,17 +105,29 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
                   </a>
                 )}
                 {project.liveDemo && project.liveDemo !== '#' && (
-                  <a 
-                    href={project.liveDemo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="overlay-btn"
-                    aria-label="Watch Video"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </a>
+                  project.slug ? (
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      className="overlay-btn"
+                      aria-label="View project"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </Link>
+                  ) : (
+                    <a 
+                      href={project.liveDemo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="overlay-btn"
+                      aria-label="Watch Video"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </a>
+                  )
                 )}
               </>
             ) : (
@@ -131,19 +144,33 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
                   </svg>
                 </a>
                 {project.liveDemo !== '#' && (
-                  <a 
-                    href={project.liveDemo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="overlay-btn"
-                    aria-label="View Demo"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                  </a>
+                  project.slug ? (
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      className="overlay-btn"
+                      aria-label="View project"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </Link>
+                  ) : (
+                    <a 
+                      href={project.liveDemo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="overlay-btn"
+                      aria-label="View Demo"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  )
                 )}
               </>
             )}
@@ -209,17 +236,26 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
                   </a>
                 )}
                 {project.liveDemo && project.liveDemo !== '#' && (
-                  <a 
-                    href={project.liveDemo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="project-link primary"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    Watch Video
-                  </a>
+                  project.slug ? (
+                    <Link to={`/projects/${project.slug}`} className="project-link primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                      Watch Video
+                    </Link>
+                  ) : (
+                    <a 
+                      href={project.liveDemo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-link primary"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                      Watch Video
+                    </a>
+                  )
                 )}
               </>
             ) : (
@@ -236,32 +272,52 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
                   View Code
                 </a>
                 {project.liveDemo !== '#' && isVideoDemo(project.liveDemo) && (
-                  <a 
-                    href={project.liveDemo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="project-link primary"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    Watch Demo
-                  </a>
+                  project.slug ? (
+                    <Link to={`/projects/${project.slug}`} className="project-link primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                      Watch Demo
+                    </Link>
+                  ) : (
+                    <a 
+                      href={project.liveDemo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-link primary"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                      Watch Demo
+                    </a>
+                  )
                 )}
-                {project.liveDemo !== '#' && !isVideoDemo(project.liveDemo) && (
-                  <a 
-                    href={project.liveDemo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="project-link primary"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
-                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    </svg>
-                    View Website
-                  </a>
+                {project.website && project.website !== '#' && (
+                  project.slug ? (
+                    <Link to={`/projects/${project.slug}/view?target=website`} className="project-link primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                      View Website
+                    </Link>
+                  ) : (
+                    <a 
+                      href={project.website} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-link primary"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                      View Website
+                    </a>
+                  )
                 )}
               </>
             )}
@@ -295,7 +351,9 @@ const projects = [
     roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/react-voice-enabled-ordering-system.git',
     liveDemo: 'https://voice-order-assistant.web.app/',
+    website: 'https://voice-order-assistant.web.app/',
     image: require('../assets/images/innsight.png'),
+    slug: 'innsight',
     featured: false
   },
   {
@@ -400,6 +458,8 @@ const projects = [
     githubLink: 'https://github.com/Corelocked/dywebFinals.git',
     liveDemo: 'https://youtu.be/T-8okZkfd_0',
     image: require('../assets/images/blogshark-logo.png'),
+    website: 'https://blogshark.vercel.app/',
+    slug: 'blogshark',
     featured: true
   },
   {
@@ -422,7 +482,9 @@ const projects = [
     roles: ['Frontend', 'Integration', 'DevOps'],
     githubLink: 'https://github.com/Corelocked/budget-book.git',
     liveDemo: 'https://budgetbook-5b9c3-de3bd.web.app/#/',
+    website: 'https://budgetbook-5b9c3-de3bd.web.app/#/',
     image: require('../assets/images/budgetbook.png'),
+    slug: 'budget-book',
     featured: false
   },
 ];
