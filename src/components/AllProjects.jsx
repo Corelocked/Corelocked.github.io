@@ -350,8 +350,8 @@ const projects = [
     category: ['Website','AI/ML'],
     roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/react-voice-enabled-ordering-system.git',
-    liveDemo: 'https://voice-order-assistant.web.app/',
-    website: 'https://voice-order-assistant.web.app/',
+    liveDemo: 'https://innsight-mauve.vercel.app/',
+    website: 'https://innsight-mauve.vercel.app/',
     image: require('../assets/images/innsight.png'),
     slug: 'innsight',
     featured: false
