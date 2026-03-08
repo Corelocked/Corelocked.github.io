@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.04d2c588.css",
-    "main.js": "/static/js/main.f02ea386.js",
+    "main.js": "/static/js/main.593e7eb4.js",
     "static/css/55.ee235b72.chunk.css": "/static/css/55.ee235b72.chunk.css",
     "static/js/55.9bca51aa.chunk.js": "/static/js/55.9bca51aa.chunk.js",
     "static/js/103.22123cdd.chunk.js": "/static/js/103.22123cdd.chunk.js",
@@ -16,6 +16,7 @@
     "static/js/767.be3ca393.chunk.js": "/static/js/767.be3ca393.chunk.js",
     "static/js/6.e4c7017f.chunk.js": "/static/js/6.e4c7017f.chunk.js",
     "static/js/705.a8d85860.chunk.js": "/static/js/705.a8d85860.chunk.js",
+    "static/media/lakbay-showcase.mp4": "/static/media/lakbay-showcase.d7750f5d53007c92a08f.mp4",
     "static/media/blogshark-featured.mp4": "/static/media/blogshark-featured.d3f04274a35451d80582.mp4",
     "static/media/umbreon.mp4": "/static/media/umbreon.8dd9b558816dfcd8abdd.mp4",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
@@ -74,7 +75,7 @@
     "static/media/html.svg": "/static/media/html.4e0a0261ff5a4468be5344d27bfa4217.svg",
     "static/media/vercel.svg": "/static/media/vercel.34c4f388b4a7a51d1f4232d792d55c6d.svg",
     "main.04d2c588.css.map": "/static/css/main.04d2c588.css.map",
-    "main.f02ea386.js.map": "/static/js/main.f02ea386.js.map",
+    "main.593e7eb4.js.map": "/static/js/main.593e7eb4.js.map",
     "55.ee235b72.chunk.css.map": "/static/css/55.ee235b72.chunk.css.map",
     "55.9bca51aa.chunk.js.map": "/static/js/55.9bca51aa.chunk.js.map",
     "103.22123cdd.chunk.js.map": "/static/js/103.22123cdd.chunk.js.map",
@@ -90,6 +91,6 @@
   },
   "entrypoints": [
     "static/css/main.04d2c588.css",
-    "static/js/main.f02ea386.js"
+    "static/js/main.593e7eb4.js"
   ]
 }

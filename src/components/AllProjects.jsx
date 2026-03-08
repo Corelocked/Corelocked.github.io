@@ -38,7 +38,7 @@ const isVideoDemo = (url) => {
 const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoUrl = getVideoPreviewUrl(project.liveDemo);
-  const hasVideo = isVideoDemo(project.liveDemo);
+  const hasVideo = isVideoDemo(project.liveDemo) || Boolean(project.preview);
   const showVideoPreview = hasVideo && (isHovered || hideDetails);
 
   return (
@@ -63,14 +63,28 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
           <div className="video-badge unavailable">Preview Unavailable</div>
         )}
         {showVideoPreview && (
-          <iframe
-            className="video-preview"
-            src={videoUrl}
-            title={`${project.title} preview`}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          />
+          project.preview ? (
+            <video
+              className="video-preview"
+              src={project.preview}
+              title={`${project.title} preview`}
+              controls={false}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            />
+          ) : (
+            <iframe
+              className="video-preview"
+              src={videoUrl}
+              title={`${project.title} preview`}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          )
         )}
         <div className={`image-overlay ${isHovered && hasVideo ? 'video-active' : ''}`}>
           <div className="overlay-links">
@@ -338,6 +352,7 @@ const projects = [
     roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git',
     liveDemo: '#',
+    preview: require('../assets/images/lakbay-showcase.mp4'),
     image: require('../assets/images/lakbay-logo2.png'),
     featured: true,
     isWIP: false
