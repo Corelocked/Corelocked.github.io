@@ -566,9 +566,9 @@ const AllProjects = () => {
           ref={gridRef}
           className={`projects-grid stagger-children ${isGridVisible ? 'visible' : ''}`}
         >
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, idx) => (
             <ProjectCard
-              key={project.id}
+              key={`${project.id}-${idx}`}
               project={project}
               onFeaturedClick={() => setShowFeaturedModal(true)}
               style={{ order: project.id }}

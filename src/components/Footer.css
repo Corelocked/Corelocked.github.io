@@ -4,13 +4,18 @@
   position: relative;
   overflow: hidden;
   border-top: 1px solid var(--border-color);
+  z-index: 900;
+  /* Extend footer full-width behind phone by canceling parent margin */
+  margin-left: calc(-1 * var(--phone-sidebar-width));
+  width: 100vw;
 }
 
 .footer-decoration {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  /* limit decoration to the main content area (don't run under the phone sidebar) */
+  left: calc(var(--phone-sidebar-width, 600px) + clamp(12px, 2vw, 24px));
+  right: clamp(16px, 4vw, 56px);
   height: 2px;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
   background-size: 200% 100%;
@@ -25,6 +30,10 @@
 .footer .container {
   padding-top: 50px;
   padding-bottom: 40px;
+  /* Start footer content to the right of the phone sidebar, matching header layout */
+  padding-left: calc(var(--phone-sidebar-width, 600px) + clamp(12px, 2vw, 24px));
+  padding-right: clamp(16px, 4vw, 56px);
+  box-sizing: border-box;
 }
 
 .footer-center {
@@ -112,10 +121,35 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  /* Reset footer width when phone sidebar is hidden */
+  .footer {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .footer .container {
+    padding-left: clamp(12px, 2vw, 24px);
+    padding-right: clamp(16px, 4vw, 56px);
+  }
+
+  .footer-decoration {
+    left: clamp(12px, 2vw, 24px);
+    right: clamp(16px, 4vw, 56px);
+  }
+}
+
 @media (max-width: 768px) {
   .footer .container {
     padding-top: 40px;
     padding-bottom: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .footer-decoration {
+    left: 1rem;
+    right: 1rem;
   }
 
   .footer-center {

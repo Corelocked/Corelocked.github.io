@@ -607,8 +607,8 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 3.5rem;
-  padding-top: 2.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(79, 195, 247, 0.15);
   width: 100%;
 }

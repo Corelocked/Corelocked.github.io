@@ -36,6 +36,7 @@
 .hero-center {
   text-align: center;
   max-width: 720px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -112,6 +113,9 @@
   font-weight: 800;
   font-family: var(--heading-font);
   letter-spacing: -0.03em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .gradient-text {
@@ -135,6 +139,9 @@
   margin-bottom: 1.5rem;
   font-family: var(--heading-font);
   letter-spacing: 0.02em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .hero-typewriter-label {
@@ -164,6 +171,8 @@
   line-height: 1.8;
   max-width: 560px;
   opacity: 0.85;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero-buttons {
@@ -219,6 +228,7 @@
   font-size: 0.98rem;
   letter-spacing: 0.3px;
   box-shadow: 0 4px 15px rgba(79, 195, 247, 0.1);
+  margin-left: 0;
 }
 
 .hero-buttons .btn-outline:hover {
@@ -293,16 +303,81 @@
   .hero {
     min-height: 100dvh;
     padding-top: 100px;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .hero-greeting {
-    font-size: 0.88rem;
-    padding: 8px 16px;
+  .hero-center {
+    max-width: 100%;
+    padding: 0 8px;
+    width: 100%;
   }
 
   .hero-center h1 {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+    margin-bottom: 1.2rem;
+    line-height: 1.15;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1.1rem, 4vw, 1.35rem);
+    margin-bottom: 1.8rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .hero-typewriter-label,
+  .hero-typewriter-text {
+    display: block;
+  }
+
+  .hero-typewriter-caret {
+    display: inline-block;
+  }
+
+  .hero-avatar {
+    width: clamp(140px, 28vw, 180px);
+    height: clamp(140px, 28vw, 180px);
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-greeting {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin-bottom: 1.8rem;
+    gap: 8px;
+  }
+
+  .hello-wave {
+    font-size: 1.2rem;
+  }
+
+  .hero-description {
+    font-size: clamp(1.05rem, 2.2vw, 1.15rem);
+    line-height: 1.7;
+    margin-bottom: 2.2rem;
+    padding: 0 4px;
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    gap: 14px;
+    padding: 0 4px;
+    width: 100%;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-outline {
+    padding: 15px 28px;
+    font-size: 1rem;
+    border-radius: 12px;
   }
 
   .scroll-indicator {
@@ -312,25 +387,77 @@
 
 @media (max-width: 576px) {
   .hero {
-    padding-top: 90px;
-    padding-bottom: 50px;
+    padding-top: 85px;
+    padding-bottom: 60px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-center {
+    padding: 0 4px;
+    width: 100%;
+  }
+
+  .hero-avatar {
+    width: clamp(130px, 32vw, 160px);
+    height: clamp(130px, 32vw, 160px);
+    margin-bottom: 1.6rem;
   }
 
   .hero-greeting {
-    font-size: 0.82rem;
-    padding: 7px 14px;
+    font-size: 0.88rem;
+    padding: 9px 18px;
+    margin-bottom: 1.6rem;
+  }
+
+  .hero-center h1 {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    margin-bottom: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    padding: 0 2px;
+  }
+
+  .hero-typewriter-label,
+  .hero-typewriter-text {
+    display: block;
+  }
+
+  .hero-typewriter-caret {
+    display: inline-block;
+  }
+
+  .hero-description {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    line-height: 1.65;
+    margin-bottom: 2rem;
+    padding: 0 4px;
   }
 
   .hero-buttons {
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     width: 100%;
+    padding: 0 4px;
   }
 
   .hero-buttons .btn-primary,
   .hero-buttons .btn-outline {
     width: 100%;
     justify-content: center;
-    padding: 13px 24px;
+    padding: 16px 28px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin-left: 0;
   }
 }
