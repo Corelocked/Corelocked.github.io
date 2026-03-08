@@ -30,6 +30,13 @@ import { ReactComponent as MongodbIcon } from '../assets/icons/mongodb.svg';
 import { ReactComponent as SqliteIcon } from '../assets/icons/sqlite.svg';
 import { ReactComponent as JupyterIcon } from '../assets/icons/jupyter.svg';
 import { ReactComponent as ColabIcon } from '../assets/icons/colab.svg';
+import { ReactComponent as TailwindIcon } from '../assets/icons/tailwind.svg';
+import { ReactComponent as ViteIcon } from '../assets/icons/vite.svg';
+import { ReactComponent as PhpIcon } from '../assets/icons/php.svg';
+import { ReactComponent as CssIcon } from '../assets/icons/css.svg';
+import { ReactComponent as ExpressIcon } from '../assets/icons/express.svg';
+import { ReactComponent as CsharpIcon } from '../assets/icons/csharp.svg';
+import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
 
 const icons = {
   frontend: <FrontendIcon />,
@@ -59,26 +66,53 @@ const icons = {
   sqlite: <SqliteIcon />,
   jupyter: <JupyterIcon />,
   colab: <ColabIcon />,
+  tailwind: <TailwindIcon />,
+  vite: <ViteIcon />,
+  php: <PhpIcon />,
+  css: <CssIcon />,
+  express: <ExpressIcon />,
+  csharp: <CsharpIcon />,
+  vercel: <VercelIcon />,
 };
 
 const skillCategories = [
   {
+    id: 'languages',
+    name: 'Languages',
+    iconKey: 'frontend',
+    color: '#f7df1e',
+    gradient: 'linear-gradient(135deg, #f7df1e, #ffa000)',
+    skills: [
+      { name: 'JavaScript', iconKey: 'javascript' },
+      { name: 'Python', iconKey: 'python', featured: true },
+      { name: 'PHP', iconKey: 'php' },
+      { name: 'C#', iconKey: 'csharp' },
+      { name: 'Kotlin', iconKey: 'kotlin' },
+      { name: 'Java', iconKey: 'java' },
+    ]
+  },
+  {
     id: 'frontend',
     name: 'Frontend',
     iconKey: 'frontend',
+    color: '#61dafb',
+    gradient: 'linear-gradient(135deg, #61dafb, #4da7d8)',
     skills: [
-      { name: 'JavaScript', iconKey: 'javascript' },
-      { name: 'React', iconKey: 'react' },
-      { name: 'HTML/CSS', iconKey: 'html' },
+      { name: 'React', iconKey: 'react', featured: true },
+      { name: 'HTML', iconKey: 'html' },
+      { name: 'CSS', iconKey: 'css' },
+      { name: 'Tailwind CSS', iconKey: 'tailwind', featured: true },
     ]
   },
   {
     id: 'backend',
     name: 'Backend',
     iconKey: 'backend',
+    color: '#68a063',
+    gradient: 'linear-gradient(135deg, #68a063, #4a7a43)',
     skills: [
       { name: 'NodeJS', iconKey: 'nodejs' },
-      { name: 'Python', iconKey: 'python' },
+      { name: 'Express.js', iconKey: 'express' },
       { name: 'Laravel', iconKey: 'laravel' },
     ]
   },
@@ -86,16 +120,54 @@ const skillCategories = [
     id: 'mobile',
     name: 'Mobile',
     iconKey: 'mobile',
+    color: '#02569b',
+    gradient: 'linear-gradient(135deg, #02569b, #014578)',
     skills: [
-      { name: 'Kotlin', iconKey: 'kotlin' },
-      { name: 'Java', iconKey: 'java' },
-      { name: 'Dart/Flutter', iconKey: 'flutter' },
+      { name: 'Flutter', iconKey: 'flutter' },
     ]
   },
   {
-    id: 'creative',
-    name: 'Creative',
+    id: 'database',
+    name: 'Databases',
+    iconKey: 'backend',
+    color: '#ff6f00',
+    gradient: 'linear-gradient(135deg, #ff6f00, #c43e00)',
+    skills: [
+      { name: 'Firebase', iconKey: 'firebase', featured: true },
+      { name: 'MongoDB', iconKey: 'mongodb' },
+      { name: 'SQLite', iconKey: 'sqlite' },
+    ]
+  },
+  {
+    id: 'devops',
+    name: 'DevOps & Cloud',
+    iconKey: 'tools',
+    color: '#6cc644',
+    gradient: 'linear-gradient(135deg, #6cc644, #4a9134)',
+    skills: [
+      { name: 'Git/GitHub', iconKey: 'git', featured: true },
+      { name: 'Vercel', iconKey: 'vercel', featured: true },
+      { name: 'Vite', iconKey: 'vite' },
+    ]
+  },
+  {
+    id: 'data',
+    name: 'Data & Analytics',
+    iconKey: 'tools',
+    color: '#f37726',
+    gradient: 'linear-gradient(135deg, #f37726, #d35813)',
+    skills: [
+      { name: 'Jupyter', iconKey: 'jupyter' },
+      { name: 'Google Colab', iconKey: 'colab' },
+      { name: 'Power BI', iconKey: 'powerbi' },
+    ]
+  },
+  {
+    id: 'design',
+    name: 'Design',
     iconKey: 'creative',
+    color: '#00c4cc',
+    gradient: 'linear-gradient(135deg, #00c4cc, #0097a7)',
     skills: [
       { name: 'Canva', iconKey: 'canva' },
       { name: 'Photoshop', iconKey: 'photoshop' },
@@ -106,23 +178,11 @@ const skillCategories = [
     id: 'productivity',
     name: 'Productivity',
     iconKey: 'productivity',
+    color: '#d83b01',
+    gradient: 'linear-gradient(135deg, #d83b01, #a92c00)',
     skills: [
       { name: 'MS Office', iconKey: 'msoffice' },
       { name: 'Google Workspace', iconKey: 'google' },
-      { name: 'Power BI', iconKey: 'powerbi' },
-    ]
-  },
-  {
-    id: 'tools',
-    name: 'Dev Tools',
-    iconKey: 'tools',
-    skills: [
-      { name: 'Git/GitHub', iconKey: 'git' },
-      { name: 'Firebase', iconKey: 'firebase' },
-      { name: 'MongoDB', iconKey: 'mongodb' },
-      { name: 'SQLite', iconKey: 'sqlite' },
-      { name: 'Jupyter', iconKey: 'jupyter' },
-      { name: 'Google Colab', iconKey: 'colab' },
     ]
   }
 ];
@@ -177,21 +237,47 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Skills Chip Grid */}
+        {/* Creative Skills Grid */}
         <div
           ref={gridRef}
           className={`skills-chip-grid ${isGridVisible ? 'visible' : ''}`}
         >
-          {allSkills.map((skill, index) => (
-            <div
-              key={skill.iconKey}
-              className="skill-chip"
-              style={{ animationDelay: `${index * 0.05}s` }}
-            >
-              <span className="chip-icon">{icons[skill.iconKey]}</span>
-              <span className="chip-label">{skill.name}</span>
-            </div>
-          ))}
+          {allSkills.map((skill, index) => {
+            const category = skillCategories.find(cat => 
+              cat.skills.some(s => s.iconKey === skill.iconKey)
+            );
+            
+            return (
+              <div
+                key={skill.iconKey}
+                className={`skill-chip ${skill.featured ? 'featured' : ''}`}
+                style={{ 
+                  animationDelay: `${index * 0.05}s`,
+                  '--category-color': category?.color || '#4fc3f7',
+                  '--category-gradient': category?.gradient || 'linear-gradient(135deg, #4fc3f7, #7c4dff)'
+                }}
+              >
+                <div className="skill-chip-bg"></div>
+                <div className="skill-chip-glow"></div>
+                
+                <div className="chip-icon-container">
+                  <div className="chip-icon">
+                    {icons[skill.iconKey]}
+                  </div>
+                </div>
+                
+                <div className="chip-label">{skill.name}</div>
+                
+                {skill.featured && (
+                  <div className="featured-indicator">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

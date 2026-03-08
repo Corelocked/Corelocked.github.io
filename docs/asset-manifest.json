@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e995173c.css",
-    "main.js": "/static/js/main.76c6e2db.js",
+    "main.css": "/static/css/main.c568a90a.css",
+    "main.js": "/static/js/main.35ee2718.js",
     "static/css/55.ee235b72.chunk.css": "/static/css/55.ee235b72.chunk.css",
     "static/js/55.9bca51aa.chunk.js": "/static/js/55.9bca51aa.chunk.js",
     "static/js/103.22123cdd.chunk.js": "/static/js/103.22123cdd.chunk.js",
@@ -40,7 +40,6 @@
     "static/media/placeholder.png": "/static/media/placeholder.6ba783a6d3cba2fee64f.png",
     "static/media/laravel.svg": "/static/media/laravel.1c0d91ff70269cd7160f32f86923c3f7.svg",
     "static/media/dev-tools.svg": "/static/media/dev-tools.44882e19623830339fa8f0b25f2b146a.svg",
-    "static/media/html.svg": "/static/media/html.8d5db57709bfae0188f912349d19e447.svg",
     "static/media/java.svg": "/static/media/java.9374ab1255cb2331415759a2d43897a1.svg",
     "static/media/premiere.svg": "/static/media/premiere.1b0d62d9bac8485c223149992084e782.svg",
     "static/media/sqlite.svg": "/static/media/sqlite.23dbca3174302b88025e2b440667dd25.svg",
@@ -52,22 +51,30 @@
     "static/media/photoshop.svg": "/static/media/photoshop.420c7ad272a21ff9244bbcecb5f28308.svg",
     "static/media/jupyter.svg": "/static/media/jupyter.e18f1c8c2b796ee3a57d09c0bdba25e7.svg",
     "static/media/colab.svg": "/static/media/colab.8d22580adc5f07678468c69302df8d5c.svg",
+    "static/media/css.svg": "/static/media/css.f5072db6b5dcc2be01a589c757027a5c.svg",
     "static/media/node-js.svg": "/static/media/node-js.a670f5a7b626356dc925573299f71f3f.svg",
     "static/media/canva.svg": "/static/media/canva.9f563cbd66d7d729fd59510bd688df9d.svg",
+    "static/media/php.svg": "/static/media/php.065f0d75749e943a95c69d99de3e7190.svg",
+    "static/media/csharp.svg": "/static/media/csharp.01e4c38bf8212664e2ba94a3afa0d2cd.svg",
     "static/media/productivity.svg": "/static/media/productivity.f96beb338501fa63ba63424546b2feac.svg",
     "static/media/creative.svg": "/static/media/creative.6f09124d8a66651afdd74eb6ebcedd43.svg",
+    "static/media/javascript.svg": "/static/media/javascript.bad2aec9c578dcf437ee5cb9ba3e73ea.svg",
     "static/media/mongodb.svg": "/static/media/mongodb.a6d9fbeeb2b7c76b73fc36612c398d28.svg",
     "static/media/msoffice.svg": "/static/media/msoffice.9ea540ee34df41b513b33e8cdbee457e.svg",
     "static/media/powerbi.svg": "/static/media/powerbi.09959ae198366c9442a96c40cd067ae4.svg",
     "static/media/mobile.svg": "/static/media/mobile.c78930f7835606700b212dcf17d9fc6a.svg",
-    "static/media/javascript.svg": "/static/media/javascript.9b9fea6f8c72d9e7fe48db75817dea67.svg",
+    "static/media/express.svg": "/static/media/express.1c5d515afb78be3eaa7d39e02c2870d1.svg",
     "static/media/backend.svg": "/static/media/backend.53904191078b0d3e1f79a63dc7b9f894.svg",
+    "static/media/tailwind.svg": "/static/media/tailwind.f76d1f6faefc35913712bee2eeb1e230.svg",
     "static/media/firebase.svg": "/static/media/firebase.7c9c997f8205931fd86cc8049a724f88.svg",
+    "static/media/vite.svg": "/static/media/vite.6a90d5c6f6b490d4ee7456b5d7228ce0.svg",
     "static/media/flutter.svg": "/static/media/flutter.40ebc8d1e3a656f9b768dae63926e23e.svg",
     "static/media/frontend.svg": "/static/media/frontend.461654c87faa7248814c04f7ce731844.svg",
     "static/media/kotlin.svg": "/static/media/kotlin.aa9bd44f7bbb9bac4f3051bd7961bce4.svg",
-    "main.e995173c.css.map": "/static/css/main.e995173c.css.map",
-    "main.76c6e2db.js.map": "/static/js/main.76c6e2db.js.map",
+    "static/media/html.svg": "/static/media/html.4e0a0261ff5a4468be5344d27bfa4217.svg",
+    "static/media/vercel.svg": "/static/media/vercel.34c4f388b4a7a51d1f4232d792d55c6d.svg",
+    "main.c568a90a.css.map": "/static/css/main.c568a90a.css.map",
+    "main.35ee2718.js.map": "/static/js/main.35ee2718.js.map",
     "55.ee235b72.chunk.css.map": "/static/css/55.ee235b72.chunk.css.map",
     "55.9bca51aa.chunk.js.map": "/static/js/55.9bca51aa.chunk.js.map",
     "103.22123cdd.chunk.js.map": "/static/js/103.22123cdd.chunk.js.map",
@@ -82,7 +89,7 @@
     "767.be3ca393.chunk.js.map": "/static/js/767.be3ca393.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e995173c.css",
-    "static/js/main.76c6e2db.js"
+    "static/css/main.c568a90a.css",
+    "static/js/main.35ee2718.js"
   ]
 }

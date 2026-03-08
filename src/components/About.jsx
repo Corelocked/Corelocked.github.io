@@ -10,6 +10,13 @@ import etalaLogo from '../assets/images/e-tala logo.jpg';
 import blogsharkLogo from '../assets/images/blogshark-logo.png';
 import blogsharkFeaturedVideo from '../assets/images/blogshark-featured.mp4';
 import innsightLogo from '../assets/images/innsight.png';
+// Import Current Stack icons
+import { ReactComponent as ReactIcon } from '../assets/icons/react.svg';
+import { ReactComponent as TailwindIcon } from '../assets/icons/tailwind.svg';
+import { ReactComponent as PythonIcon } from '../assets/icons/python.svg';
+import { ReactComponent as GitIcon } from '../assets/icons/github.svg';
+import { ReactComponent as FirebaseIcon } from '../assets/icons/firebase.svg';
+import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
 
 const WORK_ENTRIES = [
   {
@@ -92,6 +99,15 @@ const EDUCATION_ENTRIES = [
     ],
     tags: ['Computer Science', 'Web', 'Mobile']
   }
+];
+
+const CURRENT_STACK = [
+  { name: 'React', icon: <ReactIcon /> },
+  { name: 'Tailwind CSS', icon: <TailwindIcon /> },
+  { name: 'Python', icon: <PythonIcon /> },
+  { name: 'Git/GitHub', icon: <GitIcon /> },
+  { name: 'Firebase', icon: <FirebaseIcon /> },
+  { name: 'Vercel', icon: <VercelIcon /> }
 ];
 
 const TimelineTabs = () => {
@@ -329,6 +345,24 @@ const About = () => {
             <div className="about-timeline">
               <TimelineTabs />
             </div>
+          </div>
+        </div>
+
+        {/* Current Stack Footer */}
+        <div className="current-stack-footer">
+          <h3 className="current-stack-title">Current Stack</h3>
+          <div className="current-stack-list">
+            {CURRENT_STACK.map((tech, i) => (
+              <div
+                key={`stack-${i}`}
+                className="current-item"
+                role="button"
+                tabIndex={0}
+              >
+                <span className="current-icon">{tech.icon}</span>
+                <span className="current-label">{tech.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
