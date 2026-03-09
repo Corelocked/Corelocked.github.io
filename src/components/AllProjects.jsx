@@ -490,16 +490,16 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Budget Book',
+    title: 'Pitaka',
     description: 'A personal finance web app to track incomes, expenses, savings, wallets and lendings with CSV export and realtime Firestore sync. Built for a clean, accessible dashboard and compact tables view.',
     technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'],
     category: ['Website'],
     roles: ['Frontend', 'Integration', 'DevOps'],
     githubLink: 'https://github.com/Corelocked/budget-book.git',
-    liveDemo: 'https://budgetbook-5b9c3-de3bd.web.app/#/',
-    website: 'https://budgetbook-5b9c3-de3bd.web.app/#/',
-    image: require('../assets/images/budgetbook.png'),
-    slug: 'budget-book',
+    liveDemo: 'https://pitaka-sigma.vercel.app/',
+    website: 'https://pitaka-sigma.vercel.app/',
+    image: require('../assets/images/pitaka-logo.png'),
+    slug: 'pitaka',
     featured: false
   },
 ];

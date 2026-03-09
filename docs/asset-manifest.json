@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.04d2c588.css",
-    "main.js": "/static/js/main.593e7eb4.js",
+    "main.js": "/static/js/main.c41c3a75.js",
     "static/css/55.ee235b72.chunk.css": "/static/css/55.ee235b72.chunk.css",
     "static/js/55.9bca51aa.chunk.js": "/static/js/55.9bca51aa.chunk.js",
     "static/js/103.22123cdd.chunk.js": "/static/js/103.22123cdd.chunk.js",
@@ -21,7 +21,6 @@
     "static/media/umbreon.mp4": "/static/media/umbreon.8dd9b558816dfcd8abdd.mp4",
     "static/media/Hero.png": "/static/media/Hero.06fe755f35a9c44e98dd.png",
     "static/media/spider-gwen.mp4": "/static/media/spider-gwen.e3643805d1b86104132a.mp4",
-    "static/media/budgetbook.png": "/static/media/budgetbook.575a991dac664672decf.png",
     "static/media/lakbay-logo.png": "/static/media/lakbay-logo.9cf5d63c416306baa9b1.png",
     "static/media/pnri-logo.png": "/static/media/pnri-logo.36f1b101016140b88176.png",
     "static/media/dometrain-csharp-certificate.jpg": "/static/media/dometrain-csharp-certificate.4bd791f26e4cda282857.jpg",
@@ -39,6 +38,7 @@
     "static/media/blogshark-logo.png": "/static/media/blogshark-logo.720ad82c886b8b99c18c.png",
     "static/media/ang_pagong_at_ang_kuneho.png": "/static/media/ang_pagong_at_ang_kuneho.ff3b66e2edc72b7b2125.png",
     "static/media/placeholder.png": "/static/media/placeholder.6ba783a6d3cba2fee64f.png",
+    "static/media/pitaka-logo.png": "/static/media/pitaka-logo.95c59cce96b80c16e0b0.png",
     "static/media/laravel.svg": "/static/media/laravel.1c0d91ff70269cd7160f32f86923c3f7.svg",
     "static/media/dev-tools.svg": "/static/media/dev-tools.44882e19623830339fa8f0b25f2b146a.svg",
     "static/media/java.svg": "/static/media/java.9374ab1255cb2331415759a2d43897a1.svg",
@@ -75,7 +75,7 @@
     "static/media/html.svg": "/static/media/html.4e0a0261ff5a4468be5344d27bfa4217.svg",
     "static/media/vercel.svg": "/static/media/vercel.34c4f388b4a7a51d1f4232d792d55c6d.svg",
     "main.04d2c588.css.map": "/static/css/main.04d2c588.css.map",
-    "main.593e7eb4.js.map": "/static/js/main.593e7eb4.js.map",
+    "main.c41c3a75.js.map": "/static/js/main.c41c3a75.js.map",
     "55.ee235b72.chunk.css.map": "/static/css/55.ee235b72.chunk.css.map",
     "55.9bca51aa.chunk.js.map": "/static/js/55.9bca51aa.chunk.js.map",
     "103.22123cdd.chunk.js.map": "/static/js/103.22123cdd.chunk.js.map",
@@ -91,6 +91,6 @@
   },
   "entrypoints": [
     "static/css/main.04d2c588.css",
-    "static/js/main.593e7eb4.js"
+    "static/js/main.c41c3a75.js"
   ]
 }
