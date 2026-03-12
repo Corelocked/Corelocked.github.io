@@ -84,7 +84,7 @@ const skillCategories = [
     gradient: 'linear-gradient(135deg, #f7df1e, #ffa000)',
     skills: [
       { name: 'JavaScript', iconKey: 'javascript' },
-      { name: 'Python', iconKey: 'python', featured: true },
+      { name: 'Python', iconKey: 'python', featured: false },
       { name: 'PHP', iconKey: 'php' },
       { name: 'C#', iconKey: 'csharp' },
       { name: 'Kotlin', iconKey: 'kotlin' },
