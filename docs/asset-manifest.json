@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.b07eda94.css",
-    "main.js": "/static/js/main.86de9e4a.js",
+    "main.js": "/static/js/main.4bffa3b6.js",
     "static/css/55.ee235b72.chunk.css": "/static/css/55.ee235b72.chunk.css",
     "static/js/55.9bca51aa.chunk.js": "/static/js/55.9bca51aa.chunk.js",
     "static/js/103.22123cdd.chunk.js": "/static/js/103.22123cdd.chunk.js",
@@ -32,6 +32,7 @@
     "static/media/Resume_DataEngineer.pdf": "/static/media/Resume_DataEngineer.23158ae740759639fb53.pdf",
     "static/media/maya-qr.jpg": "/static/media/maya-qr.5e366ecd54df159a2a02.jpg",
     "static/media/Resume_QA.pdf": "/static/media/Resume_QA.69bfcdcdc18e4ba86a71.pdf",
+    "static/media/megacat-logo.jpg": "/static/media/megacat-logo.284aa825d127415a32ce.jpg",
     "static/media/Resume_WebDev.pdf": "/static/media/Resume_WebDev.197be7955bd415004ae4.pdf",
     "static/media/Hero2.JPG": "/static/media/Hero2.0d357a76c0a4d354dcee.JPG",
     "static/media/innsight.png": "/static/media/innsight.5bfb070f3692f6499c00.png",
@@ -75,7 +76,7 @@
     "static/media/html.svg": "/static/media/html.4e0a0261ff5a4468be5344d27bfa4217.svg",
     "static/media/vercel.svg": "/static/media/vercel.34c4f388b4a7a51d1f4232d792d55c6d.svg",
     "main.b07eda94.css.map": "/static/css/main.b07eda94.css.map",
-    "main.86de9e4a.js.map": "/static/js/main.86de9e4a.js.map",
+    "main.4bffa3b6.js.map": "/static/js/main.4bffa3b6.js.map",
     "55.ee235b72.chunk.css.map": "/static/css/55.ee235b72.chunk.css.map",
     "55.9bca51aa.chunk.js.map": "/static/js/55.9bca51aa.chunk.js.map",
     "103.22123cdd.chunk.js.map": "/static/js/103.22123cdd.chunk.js.map",
@@ -91,6 +92,6 @@
   },
   "entrypoints": [
     "static/css/main.b07eda94.css",
-    "static/js/main.86de9e4a.js"
+    "static/js/main.4bffa3b6.js"
   ]
 }

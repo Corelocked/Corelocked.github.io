@@ -10,6 +10,7 @@ import etalaLogo from '../assets/images/e-tala logo.jpg';
 import blogsharkLogo from '../assets/images/blogshark-logo.png';
 import blogsharkFeaturedVideo from '../assets/images/blogshark-featured.mp4';
 import innsightLogo from '../assets/images/innsight.png';
+import megacatLogo from '../assets/images/megacat-logo.jpg';
 // Import Current Stack icons
 import { ReactComponent as ReactIcon } from '../assets/icons/react.svg';
 import { ReactComponent as TailwindIcon } from '../assets/icons/tailwind.svg';
@@ -19,6 +20,19 @@ import { ReactComponent as FirebaseIcon } from '../assets/icons/firebase.svg';
 import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
 
 const WORK_ENTRIES = [
+  {
+    id: 'megacat',
+    badge: 'MC',
+    logo: megacatLogo,
+    org: 'Mega Cat Studios',
+    role: 'Incoming Web Developer Intern',
+    date: 'Starts April 2026',
+    bullets: [
+      'Joining the team as a Web Developer Intern to contribute to web experiences and front-end implementation.',
+      'Preparing to support production tasks, collaboration workflows, and feature delivery in a professional development environment.'
+    ],
+    tags: ['Internship', 'Web Development', 'Incoming']
+  },
   {
     id: 'lakbay',
     badge: 'LK',
