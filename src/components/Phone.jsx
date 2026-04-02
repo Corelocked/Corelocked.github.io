@@ -38,6 +38,18 @@ import { ReactComponent as MongodbIcon } from '../assets/icons/mongodb.svg';
 import { ReactComponent as SqliteIcon } from '../assets/icons/sqlite.svg';
 import { ReactComponent as JupyterIcon } from '../assets/icons/jupyter.svg';
 import { ReactComponent as ColabIcon } from '../assets/icons/colab.svg';
+import { ReactComponent as TailwindIcon } from '../assets/icons/tailwind.svg';
+import { ReactComponent as ViteIcon } from '../assets/icons/vite.svg';
+import { ReactComponent as PhpIcon } from '../assets/icons/php.svg';
+import { ReactComponent as CssIcon } from '../assets/icons/css.svg';
+import { ReactComponent as ExpressIcon } from '../assets/icons/express.svg';
+import { ReactComponent as CsharpIcon } from '../assets/icons/csharp.svg';
+import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
+import { ReactComponent as ExpoIcon } from '../assets/icons/expo.svg';
+import { ReactComponent as NextjsIcon } from '../assets/icons/nextjs.svg';
+import { ReactComponent as NativeWindIcon } from '../assets/icons/nativewind.svg';
+import { ReactComponent as SupabaseIcon } from '../assets/icons/supabase.svg';
+import { ReactComponent as EasIcon } from '../assets/icons/eas.svg';
 
 // Lazy load games
 const TicTacToe = lazy(() => import('./games/TicTacToe'));
@@ -75,28 +87,44 @@ const skillIcons = {
   msoffice: <MsofficeIcon />, google: <GoogleIcon />, powerbi: <PowerbiIcon />,
   git: <GitIcon />, firebase: <FirebaseIcon />, mongodb: <MongodbIcon />,
   sqlite: <SqliteIcon />, jupyter: <JupyterIcon />, colab: <ColabIcon />,
+  tailwind: <TailwindIcon />, vite: <ViteIcon />, php: <PhpIcon />,
+  css: <CssIcon />, express: <ExpressIcon />, csharp: <CsharpIcon />,
+  vercel: <VercelIcon />, expo: <ExpoIcon />, nextjs: <NextjsIcon />,
+  nativewind: <NativeWindIcon />, supabase: <SupabaseIcon />, eas: <EasIcon />,
 };
 
 const SKILL_CATEGORIES = [
-  { id: 'frontend', name: 'Frontend', iconKey: 'frontend', skills: [
-    { name: 'JavaScript', iconKey: 'javascript' }, { name: 'React', iconKey: 'react' }, { name: 'HTML/CSS', iconKey: 'html' },
+  { id: 'languages', name: 'Programming Languages', iconKey: 'frontend', skills: [
+    { name: 'JavaScript', iconKey: 'javascript' }, { name: 'Python', iconKey: 'python' },
+    { name: 'PHP', iconKey: 'php' }, { name: 'C#', iconKey: 'csharp' },
+    { name: 'Java', iconKey: 'java' }, { name: 'Kotlin', iconKey: 'kotlin' },
   ]},
-  { id: 'backend', name: 'Backend', iconKey: 'backend', skills: [
-    { name: 'NodeJS', iconKey: 'nodejs' }, { name: 'Python', iconKey: 'python' }, { name: 'Laravel', iconKey: 'laravel' },
+  { id: 'frontend', name: 'Frontend & UI', iconKey: 'frontend', skills: [
+    { name: 'React', iconKey: 'react' }, { name: 'Next.js', iconKey: 'nextjs' },
+    { name: 'HTML', iconKey: 'html' }, { name: 'CSS', iconKey: 'css' },
+    { name: 'Tailwind CSS', iconKey: 'tailwind' }, { name: 'NativeWind', iconKey: 'nativewind' },
   ]},
-  { id: 'mobile', name: 'Mobile', iconKey: 'mobile', skills: [
-    { name: 'Kotlin', iconKey: 'kotlin' }, { name: 'Java', iconKey: 'java' }, { name: 'Dart/Flutter', iconKey: 'flutter' },
+  { id: 'backend', name: 'Backend & APIs', iconKey: 'backend', skills: [
+    { name: 'NodeJS', iconKey: 'nodejs' }, { name: 'Express.js', iconKey: 'express' }, { name: 'Laravel', iconKey: 'laravel' },
   ]},
-  { id: 'creative', name: 'Creative', iconKey: 'creative', skills: [
+  { id: 'database', name: 'Databases & Backend Services', iconKey: 'backend', skills: [
+    { name: 'Firebase', iconKey: 'firebase' }, { name: 'Supabase', iconKey: 'supabase' },
+    { name: 'MongoDB', iconKey: 'mongodb' }, { name: 'SQLite', iconKey: 'sqlite' },
+  ]},
+  { id: 'tools', name: 'Dev Tools & Deployment', iconKey: 'tools', skills: [
+    { name: 'Git/GitHub', iconKey: 'git' }, { name: 'Vite', iconKey: 'vite' }, { name: 'Vercel', iconKey: 'vercel' },
+  ]},
+  { id: 'mobile', name: 'Mobile Development', iconKey: 'mobile', skills: [
+    { name: 'Expo', iconKey: 'expo' }, { name: 'Flutter', iconKey: 'flutter' }, { name: 'EAS', iconKey: 'eas' },
+  ]},
+  { id: 'data', name: 'Data & Analytics', iconKey: 'tools', skills: [
+    { name: 'Jupyter', iconKey: 'jupyter' }, { name: 'Google Colab', iconKey: 'colab' }, { name: 'Power BI', iconKey: 'powerbi' },
+  ]},
+  { id: 'creative', name: 'Creative Tools', iconKey: 'creative', skills: [
     { name: 'Canva', iconKey: 'canva' }, { name: 'Photoshop', iconKey: 'photoshop' }, { name: 'Premiere Pro', iconKey: 'premiere' },
   ]},
-  { id: 'productivity', name: 'Productivity', iconKey: 'productivity', skills: [
-    { name: 'MS Office', iconKey: 'msoffice' }, { name: 'Google Workspace', iconKey: 'google' }, { name: 'Power BI', iconKey: 'powerbi' },
-  ]},
-  { id: 'tools', name: 'Dev Tools', iconKey: 'tools', skills: [
-    { name: 'Git/GitHub', iconKey: 'git' }, { name: 'Firebase', iconKey: 'firebase' },
-    { name: 'MongoDB', iconKey: 'mongodb' }, { name: 'SQLite', iconKey: 'sqlite' },
-    { name: 'Jupyter', iconKey: 'jupyter' }, { name: 'Google Colab', iconKey: 'colab' },
+  { id: 'productivity', name: 'Productivity Tools', iconKey: 'productivity', skills: [
+    { name: 'MS Office', iconKey: 'msoffice' }, { name: 'Google Workspace', iconKey: 'google' },
   ]},
 ];
 

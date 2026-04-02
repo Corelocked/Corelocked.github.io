@@ -86,7 +86,7 @@ const Header = () => {
   useEffect(() => {
     if (location.pathname !== '/') return undefined;
 
-    const ids = ['home', 'about', 'skills'];
+    const ids = ['home', 'about', 'projects', 'skills'];
     const observer = new IntersectionObserver(
       (entries) => {
         // pick the first intersecting entry (most visible due to rootMargin)
@@ -140,7 +140,7 @@ const Header = () => {
           <RouterLink
             to="/projects"
             onClick={closeMenu}
-            className={`nav-link ${location.pathname !== '/' && activeKey === 'projects' ? 'active' : ''}`}
+            className={`nav-link ${activeKey === 'projects' ? 'active' : ''}`}
           >Projects</RouterLink>
           <RouterLink
             to="/contact"

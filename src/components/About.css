@@ -624,6 +624,14 @@
   text-transform: uppercase;
 }
 
+.current-stack-subtitle {
+  max-width: 760px;
+  margin: -0.5rem auto 0;
+  text-align: center;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 .current-stack-list {
   display: flex;
   gap: 16px;

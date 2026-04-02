@@ -624,6 +624,16 @@
   box-shadow: 0 6px 20px rgba(59, 163, 216, 0.15);
 }
 
+:root:not([data-theme="dark"]) .projects-spotlight {
+  background: linear-gradient(135deg, rgba(59, 163, 216, 0.08), rgba(139, 99, 232, 0.04));
+  border-color: rgba(59, 163, 216, 0.14);
+}
+
+:root:not([data-theme="dark"]) .projects-spotlight-chip.muted {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(59, 163, 216, 0.12);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .projects {
@@ -1095,6 +1105,103 @@
   margin-top: 22px;
 }
 
+.projects-spotlight {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 22px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(79, 195, 247, 0.12);
+  background: linear-gradient(135deg, rgba(79, 195, 247, 0.06), rgba(124, 77, 255, 0.03));
+}
+
+.projects-spotlight-copy {
+  text-align: left;
+  max-width: 700px;
+}
+
+.projects-spotlight-label {
+  display: inline-flex;
+  margin-bottom: 10px;
+  font-size: 0.74rem;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--primary-color);
+}
+
+.projects-spotlight h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
+  color: var(--text-color);
+}
+
+.projects-spotlight p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+.projects-spotlight-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.projects-spotlight-chip {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(79, 195, 247, 0.12);
+  border: 1px solid rgba(79, 195, 247, 0.18);
+  color: var(--primary-color);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.projects-spotlight-chip.muted {
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.projects-spotlight-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.projects-spotlight-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(79, 195, 247, 0.18);
+  background: rgba(79, 195, 247, 0.07);
+  color: var(--text-color);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.projects-spotlight-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(79, 195, 247, 0.32);
+  box-shadow: 0 8px 24px rgba(79, 195, 247, 0.18);
+}
+
+.projects-spotlight-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-color: transparent;
+  color: #fff;
+}
+
 .projects-dots {
   display: flex;
   gap: 10px;
@@ -1206,6 +1313,20 @@
     align-items: center;
     gap: 14px;
     margin-top: 20px;
+  }
+
+  .projects-spotlight {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+  }
+
+  .projects-spotlight-actions {
+    justify-content: stretch;
+  }
+
+  .projects-spotlight-btn {
+    width: 100%;
   }
 
   .projects-dots .dot {

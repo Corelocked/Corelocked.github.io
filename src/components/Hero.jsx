@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 import './Hero.css';
 import '../components/Animations.css';
 import heroImage from '../assets/images/Hero2.JPG';
 
 const ROLES = ['Web Developer', 'Android Developer'];
+const HERO_HIGHLIGHTS = [
+  { label: 'Published apps', value: '3+' },
+  { label: 'Focus', value: 'Web + Mobile' },
+  { label: 'Next step', value: 'Web Dev Intern' }
+];
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -71,6 +77,14 @@ const Hero = () => {
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
             I build mobile and web applications that are not only functional but also provide an engaging user experience.
           </p>
+          <div className={`hero-highlights scroll-reveal fade-up delay-350 ${isLoaded ? 'visible' : ''}`}>
+            {HERO_HIGHLIGHTS.map((item) => (
+              <div key={item.label} className="hero-highlight-pill">
+                <span className="hero-highlight-value">{item.value}</span>
+                <span className="hero-highlight-label">{item.label}</span>
+              </div>
+            ))}
+          </div>
           <div className={`hero-buttons scroll-reveal fade-up delay-400 ${isLoaded ? 'visible' : ''}`}>
             <Link to="projects" smooth={true} duration={500} offset={-80} className="btn btn-primary">
               <span>View My Works</span>
@@ -78,9 +92,9 @@ const Hero = () => {
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </Link>
-            <Link to="contact" smooth={true} duration={500} offset={-80} className="btn btn-outline">
+            <RouterLink to="/contact" className="btn btn-outline">
               <span>Contact Me</span>
-            </Link>
+            </RouterLink>
           </div>
         </div>
       </div>

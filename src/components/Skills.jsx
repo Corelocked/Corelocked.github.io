@@ -37,6 +37,11 @@ import { ReactComponent as CssIcon } from '../assets/icons/css.svg';
 import { ReactComponent as ExpressIcon } from '../assets/icons/express.svg';
 import { ReactComponent as CsharpIcon } from '../assets/icons/csharp.svg';
 import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
+import { ReactComponent as ExpoIcon } from '../assets/icons/expo.svg';
+import { ReactComponent as NextjsIcon } from '../assets/icons/nextjs.svg';
+import { ReactComponent as NativeWindIcon } from '../assets/icons/nativewind.svg';
+import { ReactComponent as SupabaseIcon } from '../assets/icons/supabase.svg';
+import { ReactComponent as EasIcon } from '../assets/icons/eas.svg';
 
 const icons = {
   frontend: <FrontendIcon />,
@@ -73,12 +78,17 @@ const icons = {
   express: <ExpressIcon />,
   csharp: <CsharpIcon />,
   vercel: <VercelIcon />,
+  expo: <ExpoIcon />,
+  nextjs: <NextjsIcon />,
+  nativewind: <NativeWindIcon />,
+  supabase: <SupabaseIcon />,
+  eas: <EasIcon />,
 };
 
 const skillCategories = [
   {
     id: 'languages',
-    name: 'Languages',
+    name: 'Programming Languages',
     iconKey: 'frontend',
     color: '#f7df1e',
     gradient: 'linear-gradient(135deg, #f7df1e, #ffa000)',
@@ -93,20 +103,22 @@ const skillCategories = [
   },
   {
     id: 'frontend',
-    name: 'Frontend',
+    name: 'Frontend & UI',
     iconKey: 'frontend',
     color: '#61dafb',
     gradient: 'linear-gradient(135deg, #61dafb, #4da7d8)',
     skills: [
       { name: 'React', iconKey: 'react', featured: true },
+      { name: 'Next.js', iconKey: 'nextjs', featured: true },
       { name: 'HTML', iconKey: 'html' },
       { name: 'CSS', iconKey: 'css' },
       { name: 'Tailwind CSS', iconKey: 'tailwind', featured: true },
+      { name: 'NativeWind', iconKey: 'nativewind', featured: true },
     ]
   },
   {
     id: 'backend',
-    name: 'Backend',
+    name: 'Backend & APIs',
     iconKey: 'backend',
     color: '#68a063',
     gradient: 'linear-gradient(135deg, #68a063, #4a7a43)',
@@ -117,37 +129,40 @@ const skillCategories = [
     ]
   },
   {
-    id: 'mobile',
-    name: 'Mobile',
-    iconKey: 'mobile',
-    color: '#02569b',
-    gradient: 'linear-gradient(135deg, #02569b, #014578)',
-    skills: [
-      { name: 'Flutter', iconKey: 'flutter' },
-    ]
-  },
-  {
     id: 'database',
-    name: 'Databases',
+    name: 'Databases & Backend Services',
     iconKey: 'backend',
     color: '#ff6f00',
     gradient: 'linear-gradient(135deg, #ff6f00, #c43e00)',
     skills: [
       { name: 'Firebase', iconKey: 'firebase', featured: true },
+      { name: 'Supabase', iconKey: 'supabase', featured: true },
       { name: 'MongoDB', iconKey: 'mongodb' },
       { name: 'SQLite', iconKey: 'sqlite' },
     ]
   },
   {
-    id: 'devops',
-    name: 'DevOps & Cloud',
+    id: 'devtools',
+    name: 'Dev Tools & Deployment',
     iconKey: 'tools',
     color: '#6cc644',
     gradient: 'linear-gradient(135deg, #6cc644, #4a9134)',
     skills: [
       { name: 'Git/GitHub', iconKey: 'git', featured: true },
-      { name: 'Vercel', iconKey: 'vercel', featured: true },
       { name: 'Vite', iconKey: 'vite' },
+      { name: 'Vercel', iconKey: 'vercel', featured: true },
+    ]
+  },
+  {
+    id: 'mobile',
+    name: 'Mobile Development',
+    iconKey: 'mobile',
+    color: '#02569b',
+    gradient: 'linear-gradient(135deg, #02569b, #014578)',
+    skills: [
+      { name: 'Expo', iconKey: 'expo', featured: true },
+      { name: 'Flutter', iconKey: 'flutter' },
+      { name: 'EAS', iconKey: 'eas', featured: true },
     ]
   },
   {
@@ -164,7 +179,7 @@ const skillCategories = [
   },
   {
     id: 'design',
-    name: 'Design',
+    name: 'Creative Tools',
     iconKey: 'creative',
     color: '#00c4cc',
     gradient: 'linear-gradient(135deg, #00c4cc, #0097a7)',
@@ -176,7 +191,7 @@ const skillCategories = [
   },
   {
     id: 'productivity',
-    name: 'Productivity',
+    name: 'Productivity Tools',
     iconKey: 'productivity',
     color: '#d83b01',
     gradient: 'linear-gradient(135deg, #d83b01, #a92c00)',
@@ -192,10 +207,21 @@ const Skills = () => {
   const [headerRef, isHeaderVisible] = useScrollReveal({ threshold: 0.2 });
   const [gridRef, isGridVisible] = useScrollReveal({ threshold: 0.1 });
 
-  /* Flatten all skills when "All" is selected, otherwise show filtered */
+  // Attach category metadata once so chip styles are accurate and stable.
+  const categorizedSkills = skillCategories.flatMap((cat) =>
+    cat.skills.map((skill) => ({
+      ...skill,
+      categoryId: cat.id,
+      categoryColor: cat.color,
+      categoryGradient: cat.gradient,
+    }))
+  );
+
+  const activeCategoryData = skillCategories.find((cat) => cat.id === activeCategory);
+
   const allSkills = activeCategory === 'all'
-    ? skillCategories.flatMap(cat => cat.skills)
-    : skillCategories.find(cat => cat.id === activeCategory)?.skills || [];
+    ? categorizedSkills
+    : categorizedSkills.filter((skill) => skill.categoryId === activeCategoryData?.id);
 
   return (
     <section id="skills" className="skills">
@@ -243,18 +269,14 @@ const Skills = () => {
           className={`skills-chip-grid ${isGridVisible ? 'visible' : ''}`}
         >
           {allSkills.map((skill, index) => {
-            const category = skillCategories.find(cat => 
-              cat.skills.some(s => s.iconKey === skill.iconKey)
-            );
-            
             return (
               <div
                 key={skill.iconKey}
                 className={`skill-chip ${skill.featured ? 'featured' : ''}`}
                 style={{ 
                   animationDelay: `${index * 0.05}s`,
-                  '--category-color': category?.color || '#4fc3f7',
-                  '--category-gradient': category?.gradient || 'linear-gradient(135deg, #4fc3f7, #7c4dff)'
+                  '--category-color': skill.categoryColor || '#4fc3f7',
+                  '--category-gradient': skill.categoryGradient || 'linear-gradient(135deg, #4fc3f7, #7c4dff)'
                 }}
               >
                 <div className="skill-chip-bg"></div>

@@ -12,12 +12,16 @@ import blogsharkFeaturedVideo from '../assets/images/blogshark-featured.mp4';
 import innsightLogo from '../assets/images/innsight.png';
 import megacatLogo from '../assets/images/megacat-logo.jpg';
 // Import Current Stack icons
-import { ReactComponent as ReactIcon } from '../assets/icons/react.svg';
-import { ReactComponent as TailwindIcon } from '../assets/icons/tailwind.svg';
 import { ReactComponent as PythonIcon } from '../assets/icons/python.svg';
 import { ReactComponent as GitIcon } from '../assets/icons/github.svg';
 import { ReactComponent as FirebaseIcon } from '../assets/icons/firebase.svg';
 import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
+import { ReactComponent as ViteIcon } from '../assets/icons/vite.svg';
+import { ReactComponent as ExpoIcon } from '../assets/icons/expo.svg';
+import { ReactComponent as NextjsIcon } from '../assets/icons/nextjs.svg';
+import { ReactComponent as NativeWindIcon } from '../assets/icons/nativewind.svg';
+import { ReactComponent as SupabaseIcon } from '../assets/icons/supabase.svg';
+import { ReactComponent as EasIcon } from '../assets/icons/eas.svg';
 
 const WORK_ENTRIES = [
   {
@@ -116,12 +120,16 @@ const EDUCATION_ENTRIES = [
 ];
 
 const CURRENT_STACK = [
-  { name: 'React', icon: <ReactIcon /> },
-  { name: 'Tailwind CSS', icon: <TailwindIcon /> },
-  { name: 'Python', icon: <PythonIcon /> },
-  { name: 'Git/GitHub', icon: <GitIcon /> },
+  { name: 'Expo', icon: <ExpoIcon /> },
+  { name: 'Next.js', icon: <NextjsIcon /> },
+  { name: 'NativeWind', icon: <NativeWindIcon /> },
+  { name: 'Supabase', icon: <SupabaseIcon /> },
   { name: 'Firebase', icon: <FirebaseIcon /> },
-  { name: 'Vercel', icon: <VercelIcon /> }
+  { name: 'Vercel', icon: <VercelIcon /> },
+  { name: 'EAS', icon: <EasIcon /> },
+  { name: 'Git/GitHub', icon: <GitIcon /> },
+  { name: 'Python', icon: <PythonIcon /> },
+  { name: 'Vite', icon: <ViteIcon /> }
 ];
 
 const TimelineTabs = () => {
@@ -330,12 +338,12 @@ const About = () => {
             <div className="about-intro">
               <p className="lead-text">
                 I'm a Computer Science student from the Philippines, specializing in Full-stack Web and Android mobile development.
-                I architect scalable solutions using React, Node.js, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
+                I architect scalable solutions using React, Next.js, Expo, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
               </p>
               <p className="lead-subtext">
                 I have 4+ years of experience designing and implementing complex systems from realtime inventory platforms to AI-powered virtual assistants.
                 Based in the Philippines, I bring a practical and globally minded approach to building digital products.
-                I'm passionate about maintainable code, practical product thinking, and solving real-world problems through technology.
+                I work across both Firebase and Supabase depending on the product, and I'm passionate about maintainable code, practical product thinking, and solving real-world problems through technology.
               </p>
             </div>
 
@@ -365,6 +373,9 @@ const About = () => {
         {/* Current Stack Footer */}
         <div className="current-stack-footer">
           <h3 className="current-stack-title">Current Stack</h3>
+          <p className="current-stack-subtitle">
+            Expo + Next.js + NativeWind for the front end, with both Firebase and Supabase in my backend toolkit.
+          </p>
           <div className="current-stack-list">
             {CURRENT_STACK.map((tech, i) => (
               <div

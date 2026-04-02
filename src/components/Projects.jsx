@@ -15,6 +15,7 @@ const Projects = () => {
   // Only show featured projects in carousel
   const featuredProjects = projects.filter(project => project.featured);
   const filteredProjects = featuredProjects;
+  const activeProject = filteredProjects[currentIndex];
 
   useEffect(() => {
     if (currentIndex > filteredProjects.length - 1) {
@@ -96,6 +97,60 @@ const Projects = () => {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </button>
+
+            {activeProject && (
+              <div className="projects-spotlight">
+                <div className="projects-spotlight-copy">
+                  <span className="projects-spotlight-label">Featured Project</span>
+                  <h3>{activeProject.title}</h3>
+                  <p>{activeProject.description}</p>
+                  <div className="projects-spotlight-tags" aria-label="active project categories and technologies">
+                    {activeProject.category.slice(0, 2).map((item) => (
+                      <span key={`${activeProject.id}-${item}`} className="projects-spotlight-chip">
+                        {item}
+                      </span>
+                    ))}
+                    {activeProject.technologies.slice(0, 3).map((item) => (
+                      <span key={`${activeProject.id}-tech-${item}`} className="projects-spotlight-chip muted">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="projects-spotlight-actions">
+                  <button
+                    className="projects-spotlight-btn primary"
+                    onClick={() => navigate('/projects')}
+                  >
+                    Browse all projects
+                  </button>
+                  {(activeProject.website || activeProject.liveDemo) && (
+                    <button
+                      className="projects-spotlight-btn"
+                      onClick={() => {
+                        if (activeProject.slug) {
+                          if (activeProject.website && activeProject.website !== '#') {
+                            navigate(`/projects/${activeProject.slug}/view?target=website`);
+                            return;
+                          }
+
+                          navigate(`/projects/${activeProject.slug}`);
+                          return;
+                        }
+
+                        const targetUrl = activeProject.website || activeProject.liveDemo;
+                        if (targetUrl && targetUrl !== '#') {
+                          window.open(targetUrl, '_blank', 'noopener,noreferrer');
+                        }
+                      }}
+                    >
+                      Open featured project
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
 
             <div className="projects-controls">
               <div className="projects-dots">
