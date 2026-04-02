@@ -4094,7 +4094,7 @@
   },
   "2026": {
     "Corelocked": {
-      "totalContributions": 381,
+      "totalContributions": 389,
       "weeks": [
         {
           "contributionDays": [
@@ -4601,12 +4601,12 @@
               "weekday": 2
             },
             {
-              "contributionCount": 1,
+              "contributionCount": 5,
               "date": "2026-04-01",
               "weekday": 3
             },
             {
-              "contributionCount": 0,
+              "contributionCount": 4,
               "date": "2026-04-02",
               "weekday": 4
             },
