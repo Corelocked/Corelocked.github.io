@@ -513,7 +513,7 @@ const projects = [
     technologies: ['React', 'JavaScript', 'CSS'],
     category: ['Website'],
     roles: ['Frontend', 'Product Design'],
-    githubLink: '#',
+    githubLink: 'https://github.com/Corelocked/taskflow.git',
     liveDemo: 'https://taskflow-pied-five.vercel.app/',
     website: 'https://taskflow-pied-five.vercel.app/',
     image: require('../assets/images/placeholder.png'),
