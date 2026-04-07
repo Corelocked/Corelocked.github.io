@@ -22,13 +22,13 @@ try {
   }
 
   if (hasDocsChanges) {
-    run('git commit -m "Deploy site"');
+    run('git commit -m "chore: deploy docs [skip ci]"');
+    console.log(`Committed docs changes on ${currentBranch}.`);
   } else {
     console.log('No docs changes to deploy.');
   }
 
-  run(`git pull --rebase --autostash origin ${currentBranch}`);
-  run(`git push origin ${currentBranch}`);
+  console.log(`Next step: git push origin ${currentBranch}`);
 } catch (error) {
   console.error(error.message || error);
   process.exit(1);
