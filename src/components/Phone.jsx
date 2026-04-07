@@ -14,37 +14,18 @@ import mayaQR from '../assets/images/maya-qr.jpg';
 import { ReactComponent as FrontendIcon } from '../assets/icons/frontend.svg';
 import { ReactComponent as BackendIcon } from '../assets/icons/backend.svg';
 import { ReactComponent as MobileIcon } from '../assets/icons/mobile.svg';
-import { ReactComponent as CreativeIcon } from '../assets/icons/creative.svg';
-import { ReactComponent as ProductivityIcon } from '../assets/icons/productivity.svg';
-import { ReactComponent as ToolsIcon } from '../assets/icons/dev-tools.svg';
 import { ReactComponent as JavascriptIcon } from '../assets/icons/javascript.svg';
 import { ReactComponent as ReactIcon } from '../assets/icons/react.svg';
 import { ReactComponent as HtmlIcon } from '../assets/icons/html.svg';
 import { ReactComponent as NodejsIcon } from '../assets/icons/node-js.svg';
-import { ReactComponent as PythonIcon } from '../assets/icons/python.svg';
-import { ReactComponent as LaravelIcon } from '../assets/icons/laravel.svg';
 import { ReactComponent as KotlinIcon } from '../assets/icons/kotlin.svg';
-import { ReactComponent as JavaIcon } from '../assets/icons/java.svg';
 import { ReactComponent as FlutterIcon } from '../assets/icons/flutter.svg';
-import { ReactComponent as CanvaIcon } from '../assets/icons/canva.svg';
-import { ReactComponent as PhotoshopIcon } from '../assets/icons/photoshop.svg';
-import { ReactComponent as PremiereIcon } from '../assets/icons/premiere.svg';
-import { ReactComponent as MsofficeIcon } from '../assets/icons/msoffice.svg';
-import { ReactComponent as GoogleIcon } from '../assets/icons/google.svg';
-import { ReactComponent as PowerbiIcon } from '../assets/icons/powerbi.svg';
-import { ReactComponent as GitIcon } from '../assets/icons/github.svg';
 import { ReactComponent as FirebaseIcon } from '../assets/icons/firebase.svg';
-import { ReactComponent as MongodbIcon } from '../assets/icons/mongodb.svg';
 import { ReactComponent as SqliteIcon } from '../assets/icons/sqlite.svg';
-import { ReactComponent as JupyterIcon } from '../assets/icons/jupyter.svg';
-import { ReactComponent as ColabIcon } from '../assets/icons/colab.svg';
 import { ReactComponent as TailwindIcon } from '../assets/icons/tailwind.svg';
 import { ReactComponent as ViteIcon } from '../assets/icons/vite.svg';
-import { ReactComponent as PhpIcon } from '../assets/icons/php.svg';
 import { ReactComponent as CssIcon } from '../assets/icons/css.svg';
 import { ReactComponent as ExpressIcon } from '../assets/icons/express.svg';
-import { ReactComponent as CsharpIcon } from '../assets/icons/csharp.svg';
-import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
 import { ReactComponent as ExpoIcon } from '../assets/icons/expo.svg';
 import { ReactComponent as NextjsIcon } from '../assets/icons/nextjs.svg';
 import { ReactComponent as NativeWindIcon } from '../assets/icons/nativewind.svg';
@@ -79,52 +60,30 @@ const GAMES = [
 
 const skillIcons = {
   frontend: <FrontendIcon />, backend: <BackendIcon />, mobile: <MobileIcon />,
-  creative: <CreativeIcon />, productivity: <ProductivityIcon />, tools: <ToolsIcon />,
   javascript: <JavascriptIcon />, react: <ReactIcon />, html: <HtmlIcon />,
-  nodejs: <NodejsIcon />, python: <PythonIcon />, laravel: <LaravelIcon />,
-  kotlin: <KotlinIcon />, java: <JavaIcon />, flutter: <FlutterIcon />,
-  canva: <CanvaIcon />, photoshop: <PhotoshopIcon />, premiere: <PremiereIcon />,
-  msoffice: <MsofficeIcon />, google: <GoogleIcon />, powerbi: <PowerbiIcon />,
-  git: <GitIcon />, firebase: <FirebaseIcon />, mongodb: <MongodbIcon />,
-  sqlite: <SqliteIcon />, jupyter: <JupyterIcon />, colab: <ColabIcon />,
-  tailwind: <TailwindIcon />, vite: <ViteIcon />, php: <PhpIcon />,
-  css: <CssIcon />, express: <ExpressIcon />, csharp: <CsharpIcon />,
-  vercel: <VercelIcon />, expo: <ExpoIcon />, nextjs: <NextjsIcon />,
+  nodejs: <NodejsIcon />, kotlin: <KotlinIcon />, flutter: <FlutterIcon />,
+  firebase: <FirebaseIcon />, sqlite: <SqliteIcon />,
+  tailwind: <TailwindIcon />, vite: <ViteIcon />, css: <CssIcon />,
+  express: <ExpressIcon />, expo: <ExpoIcon />, nextjs: <NextjsIcon />,
   nativewind: <NativeWindIcon />, supabase: <SupabaseIcon />, eas: <EasIcon />,
 };
 
 const SKILL_CATEGORIES = [
-  { id: 'languages', name: 'Programming Languages', iconKey: 'frontend', skills: [
-    { name: 'JavaScript', iconKey: 'javascript' }, { name: 'Python', iconKey: 'python' },
-    { name: 'PHP', iconKey: 'php' }, { name: 'C#', iconKey: 'csharp' },
-    { name: 'Java', iconKey: 'java' }, { name: 'Kotlin', iconKey: 'kotlin' },
-  ]},
-  { id: 'frontend', name: 'Frontend & UI', iconKey: 'frontend', skills: [
+  { id: 'web', name: 'Web Development', iconKey: 'frontend', skills: [
+    { name: 'JavaScript', iconKey: 'javascript' },
     { name: 'React', iconKey: 'react' }, { name: 'Next.js', iconKey: 'nextjs' },
     { name: 'HTML', iconKey: 'html' }, { name: 'CSS', iconKey: 'css' },
-    { name: 'Tailwind CSS', iconKey: 'tailwind' }, { name: 'NativeWind', iconKey: 'nativewind' },
-  ]},
-  { id: 'backend', name: 'Backend & APIs', iconKey: 'backend', skills: [
-    { name: 'NodeJS', iconKey: 'nodejs' }, { name: 'Express.js', iconKey: 'express' }, { name: 'Laravel', iconKey: 'laravel' },
-  ]},
-  { id: 'database', name: 'Databases & Backend Services', iconKey: 'backend', skills: [
-    { name: 'Firebase', iconKey: 'firebase' }, { name: 'Supabase', iconKey: 'supabase' },
-    { name: 'MongoDB', iconKey: 'mongodb' }, { name: 'SQLite', iconKey: 'sqlite' },
-  ]},
-  { id: 'tools', name: 'Dev Tools & Deployment', iconKey: 'tools', skills: [
-    { name: 'Git/GitHub', iconKey: 'git' }, { name: 'Vite', iconKey: 'vite' }, { name: 'Vercel', iconKey: 'vercel' },
+    { name: 'Tailwind CSS', iconKey: 'tailwind' }, { name: 'Vite', iconKey: 'vite' },
   ]},
   { id: 'mobile', name: 'Mobile Development', iconKey: 'mobile', skills: [
-    { name: 'Expo', iconKey: 'expo' }, { name: 'Flutter', iconKey: 'flutter' }, { name: 'EAS', iconKey: 'eas' },
+    { name: 'Expo', iconKey: 'expo' }, { name: 'NativeWind', iconKey: 'nativewind' },
+    { name: 'EAS', iconKey: 'eas' }, { name: 'Kotlin', iconKey: 'kotlin' },
+    { name: 'Flutter', iconKey: 'flutter' },
   ]},
-  { id: 'data', name: 'Data & Analytics', iconKey: 'tools', skills: [
-    { name: 'Jupyter', iconKey: 'jupyter' }, { name: 'Google Colab', iconKey: 'colab' }, { name: 'Power BI', iconKey: 'powerbi' },
-  ]},
-  { id: 'creative', name: 'Creative Tools', iconKey: 'creative', skills: [
-    { name: 'Canva', iconKey: 'canva' }, { name: 'Photoshop', iconKey: 'photoshop' }, { name: 'Premiere Pro', iconKey: 'premiere' },
-  ]},
-  { id: 'productivity', name: 'Productivity Tools', iconKey: 'productivity', skills: [
-    { name: 'MS Office', iconKey: 'msoffice' }, { name: 'Google Workspace', iconKey: 'google' },
+  { id: 'services', name: 'Backend Services', iconKey: 'backend', skills: [
+    { name: 'NodeJS', iconKey: 'nodejs' }, { name: 'Express.js', iconKey: 'express' },
+    { name: 'Firebase', iconKey: 'firebase' }, { name: 'Supabase', iconKey: 'supabase' },
+    { name: 'SQLite', iconKey: 'sqlite' },
   ]},
 ];
 
@@ -136,16 +95,13 @@ const PHONE_PROJECTS = [
   { id: 5, title: 'Moody', description: 'An interactive web application that tracks your daily mood and provides insights based on your emotional patterns.', technologies: ['Javascript', 'React', 'CSS', 'HTML'], category: ['Website'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/moody.git', liveDemo: 'https://youtu.be/L98Uc9FQ8DU', featured: false },
   { id: 7, title: 'Tetris Game', description: 'A simple Tetris game made using Java and CSS.', technologies: ['Java', 'CSS'], category: ['Game', 'Desktop App'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/Tetris.git', liveDemo: '#', featured: false },
   { id: 9, title: 'E-Tala', description: 'A mobile inventory app with barcode scanner feature.', technologies: ['Kotlin'], category: ['Mobile App'], roles: ['Tech Lead', 'Backend'], githubLink: 'https://github.com/Corelocked/E-TALA.git', liveDemo: '#', featured: false },
-  { id: 10, title: 'DOST Website Redesign', description: 'A redesign of the Department of Science and Technology (DOST) website using Canva.', technologies: ['Canva'], category: ['Creative Design', 'Graphic Design'], canvaLink: 'https://www.canva.com/design/DAG2bUOs0xA/1UyWpP2ibUgTOVAQeM9gRQ/edit', liveDemo: '#', featured: false },
-  { id: 11, title: 'Lakbay Logo Design', description: 'A logo design for "Lakbay", our Thesis project about a scenic travel mobile app.', technologies: ['Canva', 'Photoshop'], category: ['Creative Design', 'Graphic Design'], canvaLink: 'https://www.canva.com/design/DAG3DY7iccM/gGWzD2lJDBGp3n9ekzTcMw/edit', liveDemo: '#', featured: false },
   { id: 12, title: 'Lakbay', description: 'A scenic travel mobile app. Created as our Thesis project.', technologies: ['Kotlin', 'Python', 'Firebase'], category: ['Mobile App'], roles: ['Tech Lead', 'Backend'], githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git', liveDemo: '#', featured: false },
   { id: 13, title: 'BlogShark', description: 'A social media platform for bloggers to share and connect. Made completely from scratch using Laravel and SQLite.', technologies: ['Laravel', 'SQLite', 'JavaScript', 'CSS'], category: ['Website'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/dywebFinals.git', liveDemo: 'https://youtu.be/T-8okZkfd_0', featured: true },
-  { id: 14, title: 'Delirium', description: 'A Short film I edited using Premiere Pro for my Social Issues class.', technologies: ['Premiere Pro'], category: ['Creative Design', 'Film'], githubLink: '#', liveDemo: 'https://youtu.be/TAJ7gHYPAGI', featured: true },
   { id: 15, title: 'Pitaka', description: 'A publicly available personal finance web app for tracking income, expenses, savings, wallets, and lendings with CSV export and realtime Firestore sync.', technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'], category: ['Website'], roles: ['Frontend', 'Integration', 'DevOps'], githubLink: 'https://github.com/Corelocked/budget-book.git', liveDemo: 'https://pitaka-sigma.vercel.app/', featured: true },
   { id: 16, title: 'TaskFlow', description: 'A task management web app built to help users organize tasks, track progress, and keep day-to-day workflow moving smoothly.', technologies: ['React', 'JavaScript', 'CSS'], category: ['Website'], roles: ['Frontend', 'Product Design'], githubLink: 'https://github.com/Corelocked/taskflow.git', liveDemo: 'https://taskflow-pied-five.vercel.app/', featured: false },
 ];
 
-const PROJECT_CATEGORIES = ['All', 'Website', 'Mobile App', 'Desktop App', 'Game', 'AI/ML', 'Creative Design'];
+const PROJECT_CATEGORIES = ['All', 'Website', 'Mobile App', 'Desktop App', 'Game', 'AI/ML'];
 
 const SUPPORT_OPTIONS = [
   {
@@ -590,16 +546,16 @@ const Phone = () => {
                 <img src={aboutImage} alt="Cedric Joshua" />
               </div>
               <h3 className="pv-about-name">Cedric Joshua Palapuz</h3>
-              <p className="pv-about-role">Full-Stack Developer</p>
+              <p className="pv-about-role">Web & Mobile Developer</p>
               <div className="pv-section-text">
                 <p className="pv-lead">
-                  I'm a passionate developer with 4+ years of experience building web applications.
-                  I specialize in JavaScript technologies including React, Node.js, and Express.
-                  I also have experience in mobile app development using Kotlin and a little bit of Flutter.
+                  I'm a web and mobile developer focused on building practical, user-friendly products.
+                  I work mainly with React and Next.js for web, plus Expo and Kotlin for mobile.
+                  I also use Firebase and Supabase to ship full features quickly.
                 </p>
                 <p className="pv-sub">
-                  I love creating efficient, user-friendly solutions that solve real-world problems.
-                  When I'm not coding, I enjoy graphic design and video editing to bring ideas to life visually.
+                  I enjoy turning ideas into polished apps with clear UX and reliable workflows.
+                  My goal is to build software people actually use and enjoy.
                 </p>
               </div>
               <div className="pv-cards">

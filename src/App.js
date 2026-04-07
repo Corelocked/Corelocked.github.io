@@ -15,6 +15,7 @@ import Support from './components/Support';
 import Footer from './components/Footer';
 import Phone from './components/Phone';
 import LoadingScreen from './components/LoadingScreen';
+import SeoManager from './components/SeoManager';
 /* eslint-disable-next-line import/first */
 const StarryBackground = React.lazy(() => import('./components/StarryBackground'));
 
@@ -36,6 +37,8 @@ function AppContent({ isLoading, setIsLoading }) {
 
   return (
     <div className="App">
+      <SeoManager />
+
       {!isFullProjectView && isLoading && <LoadingScreen onFinished={() => setIsLoading(false)} />}
 
       {!isFullProjectView && (

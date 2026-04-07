@@ -103,7 +103,7 @@ const Projects = () => {
                 <div className="projects-spotlight-copy">
                   <span className="projects-spotlight-label">Featured Project</span>
                   <h3>{activeProject.title}</h3>
-                  <p>{activeProject.description}</p>
+                  <p>{activeProject.tagline || activeProject.impact || activeProject.description}</p>
                   <div className="projects-spotlight-tags" aria-label="active project categories and technologies">
                     {activeProject.category.slice(0, 2).map((item) => (
                       <span key={`${activeProject.id}-${item}`} className="projects-spotlight-chip">
@@ -121,11 +121,17 @@ const Projects = () => {
                 <div className="projects-spotlight-actions">
                   <button
                     className="projects-spotlight-btn primary"
-                    onClick={() => navigate('/projects')}
+                    onClick={() => {
+                      if (activeProject.slug) {
+                        navigate(`/projects/${activeProject.slug}/info`);
+                        return;
+                      }
+                      navigate('/projects');
+                    }}
                   >
-                    Browse all projects
+                    Read case study
                   </button>
-                  {(activeProject.website || activeProject.liveDemo) && (
+                  {(activeProject.website || activeProject.liveDemo || activeProject.githubLink) && (
                     <button
                       className="projects-spotlight-btn"
                       onClick={() => {
@@ -139,13 +145,17 @@ const Projects = () => {
                           return;
                         }
 
-                        const targetUrl = activeProject.website || activeProject.liveDemo;
+                        const targetUrl = activeProject.website || activeProject.liveDemo || activeProject.githubLink;
                         if (targetUrl && targetUrl !== '#') {
                           window.open(targetUrl, '_blank', 'noopener,noreferrer');
                         }
                       }}
                     >
-                      Open featured project
+                      {activeProject.website && activeProject.website !== '#'
+                        ? 'Open featured project'
+                        : activeProject.liveDemo && activeProject.liveDemo !== '#'
+                          ? 'Watch featured demo'
+                          : 'View repository'}
                     </button>
                   )}
                 </div>
