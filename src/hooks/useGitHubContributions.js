@@ -14,6 +14,14 @@ export const useGitHubContributions = (year, username = 'Corelocked') => {
 
   useEffect(() => {
     let mounted = true;
+    const isPrerender = typeof navigator !== 'undefined' && navigator.userAgent === 'ReactSnap';
+
+    if (isPrerender) {
+      setLoading(false);
+      return () => {
+        mounted = false;
+      };
+    }
 
     const fetchFromStatic = async () => {
       try {
