@@ -1,0 +1,4 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /projects/*/view
+Sitemap: https://corelocked.github.io/sitemap.xml
