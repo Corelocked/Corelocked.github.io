@@ -4094,7 +4094,7 @@
   },
   "2026": {
     "Corelocked": {
-      "totalContributions": 389,
+      "totalContributions": 415,
       "weeks": [
         {
           "contributionDays": [
@@ -4591,12 +4591,12 @@
               "weekday": 0
             },
             {
-              "contributionCount": 10,
+              "contributionCount": 18,
               "date": "2026-03-30",
               "weekday": 1
             },
             {
-              "contributionCount": 0,
+              "contributionCount": 1,
               "date": "2026-03-31",
               "weekday": 2
             },
@@ -4606,17 +4606,17 @@
               "weekday": 3
             },
             {
-              "contributionCount": 4,
+              "contributionCount": 14,
               "date": "2026-04-02",
               "weekday": 4
             },
             {
-              "contributionCount": 0,
+              "contributionCount": 5,
               "date": "2026-04-03",
               "weekday": 5
             },
             {
-              "contributionCount": 0,
+              "contributionCount": 2,
               "date": "2026-04-04",
               "weekday": 6
             }
