@@ -1,6 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
 Disallow: /projects/*/view
-Host: https://corelocked.github.io
 Sitemap: https://corelocked.github.io/sitemap.xml
