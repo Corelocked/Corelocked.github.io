@@ -175,9 +175,9 @@ const Snake = () => {
         </div>
       {(!running || gameOver) && (
         <div style={styles.overlay}>
-          <div style={{...styles.overlayText, fontSize: gameOver ? 22 : 24}}>{gameOver ? '🐍 Game Over!' : '🐍 Snake'}</div>
+          <div style={{...styles.overlayText, fontSize: gameOver ? 22 : 24}}>{gameOver ? 'Game Over!' : 'Snake'}</div>
           {gameOver && <div style={styles.finalScore}>Score: {score}</div>}
-              <button onClick={reset} style={theme ? theme.primaryBtn : styles.btn}>{gameOver ? '🔄 Retry' : '▶️ Start'}</button>
+              <button onClick={reset} style={theme ? theme.primaryBtn : styles.btn}>{gameOver ? 'Retry' : 'Start'}</button>
           <div style={{...styles.hint, color: theme ? theme.subColor : styles.hint.color}}>Use Arrow Keys or Swipe to Move</div>
         </div>
       )}

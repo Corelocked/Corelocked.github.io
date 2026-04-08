@@ -43,17 +43,126 @@ const Dinosaur = lazy(() => import('./games/Dinosaur'));
 const FlappyBird = lazy(() => import('./games/FlappyBird'));
 const ResumeViewerApp = lazy(() => import('./apps/ResumeViewer'));
 
+const TicTacToeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M8 4v16M16 4v16M4 8h16M4 16h16" />
+    <circle cx="8" cy="8" r="1.5" />
+    <path d="M14.5 14.5l3 3M17.5 14.5l-3 3" />
+  </svg>
+);
+
+const SnakeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M5 15c2-6 6-7 9-4s4 4 7 2" />
+    <circle cx="18" cy="9" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const TetrisIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <rect x="4" y="4" width="5" height="5" rx="1" fill="currentColor" stroke="none" />
+    <rect x="10" y="4" width="5" height="5" rx="1" fill="currentColor" stroke="none" opacity="0.85" />
+    <rect x="10" y="10" width="5" height="5" rx="1" fill="currentColor" stroke="none" opacity="0.7" />
+    <rect x="16" y="10" width="4" height="5" rx="1" fill="currentColor" stroke="none" opacity="0.55" />
+  </svg>
+);
+
+const MinesweeperIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <circle cx="12" cy="13" r="5.5" />
+    <path d="M12 4v3M9.2 5.2l1.5 2M14.8 5.2l-1.5 2M7 11l-2-1M17 11l2-1" />
+    <circle cx="14" cy="12" r="0.9" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const SudokuIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M4 8h16M4 16h16M8 4v16M16 4v16" />
+    <path d="M10.5 9.5h2.5v5h-2.5" />
+  </svg>
+);
+
+const CookieIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+    <circle cx="12" cy="12" r="8.5" />
+    <circle cx="9" cy="8.5" r="1.1" fill="#050510" opacity="0.55" />
+    <circle cx="15.5" cy="9.5" r="0.9" fill="#050510" opacity="0.55" />
+    <circle cx="14" cy="15" r="1" fill="#050510" opacity="0.55" />
+    <circle cx="10" cy="14" r="0.8" fill="#050510" opacity="0.55" />
+  </svg>
+);
+
+const DinosaurIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M5 14c1.6-3.6 4.8-6 8.3-6H17l2.2 2.2-1.7 1.7H15l-.8 2.1c-.4 1.1-1.5 1.9-2.7 1.9H10l-1.1 3.1H6.1l.9-3.1H5.4c-.8 0-1.3-.9-.9-1.9z" />
+    <path d="M15.5 8.2l1.8-2.2M18.5 10.5l1.8-1" />
+    <circle cx="16.5" cy="11" r="0.6" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const FlappyBirdIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M6 15c2.2-3.7 5.2-5.8 8.8-5.8 1.4 0 2.9.3 4.2.8-1.2 1.4-2.2 2.8-3 4.2-1.1 1.9-2.7 3.1-4.9 3.1-2 0-3.8-.7-5.1-2.3z" />
+    <path d="M13.5 9.4l1.9-2.4" />
+    <circle cx="15.2" cy="8.5" r="0.8" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const CoffeeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M6 9h10v5.2a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V11a2 2 0 0 1 2-2z" />
+    <path d="M16 10h1.5a2 2 0 0 1 0 4H16" />
+    <path d="M7 4c0 1 .8 1.4.8 2.2S7 7.1 7 8" />
+    <path d="M10 4c0 1 .8 1.4.8 2.2S10 7.1 10 8" />
+  </svg>
+);
+
+const CardIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <rect x="4" y="6" width="16" height="12" rx="2" />
+    <path d="M4 10h16M7 15h4" />
+  </svg>
+);
+
+const MayaIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <rect x="6" y="3.5" width="12" height="17" rx="2.8" />
+    <path d="M9 7h6M9 11h6M9 15h3" />
+  </svg>
+);
+
+const GraduationIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M3 10l9-4 9 4-9 4-9-4z" />
+    <path d="M7 11v3c0 1.8 2.2 3.2 5 3.2s5-1.4 5-3.2v-3" />
+    <path d="M21 10v5" />
+  </svg>
+);
+
+const BriefcaseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <rect x="4" y="7" width="16" height="12" rx="2" />
+    <path d="M9 7V6a3 3 0 0 1 6 0v1M4 12h16" />
+  </svg>
+);
+
+const PhoneMiniIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M7 4h3l2 5-2 1.5c1.2 2.4 3.1 4.4 5.5 5.5L17 14l3 2v3c0 .6-.4 1-1 1C10.8 20 4 13.2 4 5c0-.6.4-1 1-1h2z" />
+  </svg>
+);
+
 // ===== Data =====
 
 const GAMES = [
-  { id: 'tictactoe', name: 'Tic Tac Toe', component: TicTacToe, icon: '⭕' },
-  { id: 'snake', name: 'Snake', component: SnakeGame, icon: '🐍' },
-  { id: 'tetris', name: 'Tetris', component: TetrisGame, icon: '🧱' },
-  { id: 'minesweeper', name: 'Minesweeper', component: MinesweeperGame, icon: '💣' },
-  { id: 'sudoku', name: 'Sudoku', component: SudokuGame, icon: '🔢' },
-  { id: 'cookie', name: 'Cookie Clicker', component: CookieClicker, icon: '🍪' },
-  { id: 'dino', name: 'Dinosaur', component: Dinosaur, icon: '🦖' },
-  { id: 'flappy', name: 'Flappy Bird', component: FlappyBird, icon: '🐦' },
+  { id: 'tictactoe', name: 'Tic Tac Toe', component: TicTacToe, icon: <TicTacToeIcon />, color: '#4fc3f7', background: 'linear-gradient(135deg, rgba(79, 195, 247, 0.18), rgba(79, 195, 247, 0.08))' },
+  { id: 'snake', name: 'Snake', component: SnakeGame, icon: <SnakeIcon />, color: '#4caf50', background: 'linear-gradient(135deg, rgba(76, 175, 80, 0.18), rgba(76, 175, 80, 0.08))' },
+  { id: 'tetris', name: 'Tetris', component: TetrisGame, icon: <TetrisIcon />, color: '#ff9800', background: 'linear-gradient(135deg, rgba(255, 152, 0, 0.18), rgba(255, 152, 0, 0.08))' },
+  { id: 'minesweeper', name: 'Minesweeper', component: MinesweeperGame, icon: <MinesweeperIcon />, color: '#ff6b9d', background: 'linear-gradient(135deg, rgba(255, 107, 157, 0.18), rgba(255, 107, 157, 0.08))' },
+  { id: 'sudoku', name: 'Sudoku', component: SudokuGame, icon: <SudokuIcon />, color: '#7c4dff', background: 'linear-gradient(135deg, rgba(124, 77, 255, 0.18), rgba(124, 77, 255, 0.08))' },
+  { id: 'cookie', name: 'Cookie Clicker', component: CookieClicker, icon: <CookieIcon />, color: '#ffd54f', background: 'linear-gradient(135deg, rgba(255, 213, 79, 0.18), rgba(255, 213, 79, 0.08))' },
+  { id: 'dino', name: 'Dinosaur', component: Dinosaur, icon: <DinosaurIcon />, color: '#81c784', background: 'linear-gradient(135deg, rgba(129, 199, 132, 0.18), rgba(129, 199, 132, 0.08))' },
+  { id: 'flappy', name: 'Flappy Bird', component: FlappyBird, icon: <FlappyBirdIcon />, color: '#4dd0e1', background: 'linear-gradient(135deg, rgba(77, 208, 225, 0.18), rgba(77, 208, 225, 0.08))' },
 ];
 
 // Years for contributions filter (defined elsewhere or unused)
@@ -103,36 +212,78 @@ const PHONE_PROJECTS = [
 
 const PROJECT_CATEGORIES = ['All', 'Website', 'Mobile App', 'Desktop App', 'Game', 'AI/ML'];
 
+const BOT_QUICK_QUESTIONS = [
+  'Who is Cedric?',
+  'What are your top skills?',
+  'Which projects are featured?',
+  'How can I contact you?',
+  'What tools do you use for mobile apps?'
+];
+
+const BOT_CONTEXT_SUGGESTIONS = {
+  profile: [
+    'What are your top skills?',
+    'Which projects are featured?',
+    'What are you currently focused on?'
+  ],
+  skills: [
+    'Tell me more about your web stack',
+    'What tools do you use for mobile apps?',
+    'Which skills are strongest for internships?'
+  ],
+  projects: [
+    'Which featured project should I view first?',
+    'Tell me more about Pitaka',
+    'Tell me more about BlogShark'
+  ],
+  contact: [
+    'Are you open for internships?',
+    'What should I include in my message?',
+    'Do you prefer email or LinkedIn?'
+  ],
+  resume: [
+    'Which resume fits web development roles?',
+    'What is your strongest role right now?',
+    'Do you have freelance availability?'
+  ],
+  smalltalk: [
+    'What are your top skills?',
+    'Which projects are featured?',
+    'How can I contact you?'
+  ],
+  policy: [
+    'Which projects are featured?',
+    'What are your top skills?',
+    'How can I contact you?'
+  ],
+  clarify: BOT_QUICK_QUESTIONS
+};
+
+const PROFILE_BOT_GREETING = {
+  id: 'bot-welcome',
+  role: 'bot',
+  text:
+    'Hi, I am Cedric. Ask me about my skills, projects, experience, and contact details.',
+};
+
 const SUPPORT_OPTIONS = [
   {
-    id: 2, name: 'Ko-fi', emoji: '☕',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/>
-      </svg>
-    ),
+    id: 2, name: 'Ko-fi',
+    icon: <CoffeeIcon />,
     description: 'One-time or monthly support on Ko-fi',
     link: 'https://ko-fi.com/corelocked',
     color: '#FF5E5B',
   },
   {
-    id: 3, name: 'PayPal', emoji: '💳',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/>
-      </svg>
-    ),
+    id: 3, name: 'PayPal',
+    icon: <CardIcon />,
     description: 'Direct support via PayPal donation',
     link: 'https://paypal.me/Corelocked',
     color: '#00A0FF',
   },
   {
-    id: 4, name: 'Maya', emoji: '📱',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-      </svg>
-    ),
+    id: 4, name: 'Maya',
+    icon: <MayaIcon />,
     description: 'Send via Maya QR code (Philippines)',
     qrImage: mayaQR,
     isQR: true,
@@ -260,6 +411,17 @@ const apps = [
     ),
   },
   {
+    name: 'Assistant', type: 'action', action: 'openAssistant',
+    bg: 'linear-gradient(135deg, #22d3ee, #3b82f6)', color: '#fff',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="7" width="16" height="10" rx="4" />
+        <path d="M9 12h.01M15 12h.01" />
+        <path d="M12 3v4M8 3h8" />
+      </svg>
+    ),
+  },
+  {
     name: 'Games', type: 'action', action: 'openGames',
     bg: 'linear-gradient(135deg, #7c4dff, #4fc3f7)', color: '#fff',
     icon: (
@@ -288,7 +450,7 @@ const Phone = () => {
   // Navigation state
   const [gamesOpen, setGamesOpen] = useState(false);
   const [activeGame, setActiveGame] = useState(null);
-  const [activeView, setActiveView] = useState(null); // 'about'|'skills'|'projects'|'contact'|'support'
+  const [activeView, setActiveView] = useState(null); // 'about'|'skills'|'projects'|'contact'|'support'|'assistant'
   const [currentTime, setCurrentTime] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [phoneNightVideoSrc, setPhoneNightVideoSrc] = useState(null);
@@ -307,6 +469,17 @@ const Phone = () => {
 
   // Support state
   const [activeQR, setActiveQR] = useState(null);
+
+  // Assistant chat state
+  const [chatInput, setChatInput] = useState('');
+  const [chatMessages, setChatMessages] = useState(() => [
+    {
+      ...PROFILE_BOT_GREETING,
+      timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    }
+  ]);
+  const [botContext, setBotContext] = useState({ lastIntent: 'profile', lastTopic: 'intro' });
+  const chatEndRef = useRef(null);
 
   // Swipe state for gesture-based navigation
   const [swipeStart, setSwipeStart] = useState(null);
@@ -368,6 +541,43 @@ const Phone = () => {
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [activeGame, gamesOpen, activeView, activeQR]);
+
+  useEffect(() => {
+    if (!window.visualViewport) return undefined;
+
+    const root = document.documentElement;
+    const updateKeyboardOffset = () => {
+      const viewport = window.visualViewport;
+      const maybeKeyboardOffset = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop);
+      const isTouchDevice = window.matchMedia('(pointer:coarse)').matches;
+      const isMobileViewport = window.matchMedia('(max-width: 1024px)').matches;
+      const focusedElement = document.activeElement;
+      const isTextInputFocused =
+        focusedElement &&
+        (focusedElement.tagName === 'INPUT' || focusedElement.tagName === 'TEXTAREA');
+      const keyboardOffset =
+        isTouchDevice && isMobileViewport && isTextInputFocused && maybeKeyboardOffset > 110
+          ? maybeKeyboardOffset
+          : 0;
+      root.style.setProperty('--phone-keyboard-offset', `${keyboardOffset}px`);
+    };
+
+    updateKeyboardOffset();
+    window.visualViewport.addEventListener('resize', updateKeyboardOffset);
+    window.visualViewport.addEventListener('scroll', updateKeyboardOffset);
+
+    return () => {
+      window.visualViewport.removeEventListener('resize', updateKeyboardOffset);
+      window.visualViewport.removeEventListener('scroll', updateKeyboardOffset);
+      root.style.setProperty('--phone-keyboard-offset', '0px');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (activeView === 'assistant' && chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, [chatMessages, activeView]);
 
   // Swipe gesture handling for phone navigation
   useEffect(() => {
@@ -458,6 +668,9 @@ const Phone = () => {
       case 'openSupport':
         setActiveView('support');
         break;
+      case 'openAssistant':
+        setActiveView('assistant');
+        break;
       case 'toggleTheme':
         if (toggleDarkMode) toggleDarkMode();
         break;
@@ -480,6 +693,266 @@ const Phone = () => {
     }
   };
 
+  const buildMixedToneReply = ({ professional, casual, technical, prompt }) => {
+    return [professional, casual, technical, prompt].filter(Boolean).join(' ');
+  };
+
+  const getProfileBotReply = (rawQuestion, context) => {
+    const question = rawQuestion.toLowerCase();
+    const featuredProjects = PHONE_PROJECTS.filter((project) => project.featured).map((project) => project.title);
+    const matchedProject = PHONE_PROJECTS.find((project) => question.includes(project.title.toLowerCase()));
+    const isGreeting = /\b(hi|hello|hey|yo|good\s+morning|good\s+afternoon|good\s+evening)\b/.test(question);
+    const isThanks = /\b(thanks|thank\s+you|ty|appreciate\s+it)\b/.test(question);
+    const asksHowAreYou = /how\s+are\s+you/.test(question);
+    const wantsMore = /\b(tell me more|elaborate|more details|expand|what else|can you explain|go deeper|more about that)\b/.test(question);
+
+    const portfolioKeywords = [
+      'portfolio', 'project', 'projects', 'skills', 'stack', 'tech', 'technology', 'contact', 'email', 'hire',
+      'resume', 'cv', 'experience', 'education', 'work', 'featured', 'react', 'next.js', 'nextjs', 'expo',
+      'kotlin', 'firebase', 'supabase', 'laravel', 'blogshark', 'pitaka', 'lakbay', 'innsight', 'taskflow',
+      'unfriendster', 'emotion detector', 'tetris', 'e-tala', 'cedric'
+    ];
+
+    const privatePersonalKeywords = [
+      'age', 'birthday', 'birthdate', 'address', 'home address', 'religion', 'politics', 'political',
+      'relationship', 'girlfriend', 'boyfriend', 'wife', 'husband', 'family', 'parents', 'siblings',
+      'income', 'salary', 'net worth', 'private life', 'personal life', 'secret', 'password'
+    ];
+
+    const isPrivatePersonalQuestion = privatePersonalKeywords.some((keyword) => question.includes(keyword));
+    const isPortfolioRelated = portfolioKeywords.some((keyword) => question.includes(keyword)) || Boolean(matchedProject);
+    const isGeneralSmallTalk = isGreeting || isThanks || asksHowAreYou;
+
+    if (isPrivatePersonalQuestion || (!isPortfolioRelated && !isGeneralSmallTalk && !wantsMore)) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'I can only answer questions directly related to my portfolio and listed projects.',
+          casual: 'I keep things focused on what is publicly shared here.',
+          technical: 'That includes my stack, shipped work, contact channels, and role-relevant experience shown in the portfolio.',
+          prompt: 'Try asking about my projects, skills, or how to contact me.'
+        }),
+        intent: 'policy',
+        topic: 'scope'
+      };
+    }
+
+    if (isGreeting) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'Great to connect with you.',
+          casual: 'Happy to chat and keep things practical.',
+          technical: 'I can walk through my stack, project architecture, and delivery approach.',
+          prompt: 'What should we start with?'
+        }),
+        intent: 'smalltalk',
+        topic: 'greeting'
+      };
+    }
+
+    if (asksHowAreYou) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'I am doing well, thanks for asking.',
+          casual: 'I am focused on portfolio work and project quality.',
+          technical: 'Lately that means React and Next.js on web, plus Expo and Kotlin on mobile.',
+          prompt: 'Want a quick breakdown of my recent projects?'
+        }),
+        intent: 'smalltalk',
+        topic: 'status'
+      };
+    }
+
+    if (isThanks) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'You are welcome.',
+          casual: 'Glad that helped.',
+          technical: 'If useful, I can next map my skills directly to internship or freelance role requirements.',
+          prompt: ''
+        }),
+        intent: 'smalltalk',
+        topic: 'gratitude'
+      };
+    }
+
+    if (wantsMore) {
+      switch (context.lastIntent) {
+        case 'projects':
+          return {
+            text: buildMixedToneReply({
+              professional: 'Here is a deeper project view.',
+              casual: 'I prioritize products that feel usable, not just demo-ready.',
+              technical: 'My featured work spans Laravel + SQLite, React + Firebase, and cross-platform mobile delivery with Expo and Kotlin.',
+              prompt: 'If you want, I can compare two projects side by side.'
+            }),
+            intent: 'projects',
+            topic: 'projects-deeper'
+          };
+        case 'skills':
+          return {
+            text: buildMixedToneReply({
+              professional: 'Absolutely, here is more depth on my stack.',
+              casual: 'I like tools that ship fast but stay maintainable.',
+              technical: 'Web: React, Next.js, CSS systems. Mobile: Expo, NativeWind, EAS, Kotlin. Backend integrations: Firebase, Supabase, and lightweight API layers.',
+              prompt: 'Want me to tailor this to a specific role like frontend or mobile intern?'
+            }),
+            intent: 'skills',
+            topic: 'skills-deeper'
+          };
+        case 'contact':
+          return {
+            text: buildMixedToneReply({
+              professional: 'I am open to internships, freelance builds, and collaborations.',
+              casual: 'Best way to reach me is still direct and simple.',
+              technical: 'Email gives the fastest turnaround for project scope, stack fit, and timeline discussions.',
+              prompt: 'You can also message me through the Contact app form here.'
+            }),
+            intent: 'contact',
+            topic: 'contact-deeper'
+          };
+        default:
+          return {
+            text: buildMixedToneReply({
+              professional: 'Sure, I can expand further.',
+              casual: 'Just point me to the topic you care about most.',
+              technical: 'I can go deeper on project architecture, stack decisions, or delivery workflow.',
+              prompt: ''
+            }),
+            intent: 'clarify',
+            topic: 'needs-topic'
+          };
+      }
+    }
+
+    if (matchedProject) {
+      return {
+        text: buildMixedToneReply({
+          professional: `${matchedProject.title} is one of my key portfolio projects.`,
+          casual: 'It is a build I am genuinely proud of.',
+          technical: `I developed it with ${matchedProject.technologies.join(', ')} and centered the implementation on ${matchedProject.description.toLowerCase()}`,
+          prompt: 'Open the Projects app here if you want links and a full walkthrough.'
+        }),
+        intent: 'projects',
+        topic: matchedProject.title
+      };
+    }
+
+    if (question.includes('who') || question.includes('about') || question.includes('cedric')) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'I am Cedric Joshua Palapuz, a web and mobile developer focused on practical, production-ready products.',
+          casual: 'I like shipping things people can actually use.',
+          technical: 'My core stack includes React, Next.js, Expo, Kotlin, Firebase, and Supabase.',
+          prompt: ''
+        }),
+        intent: 'profile',
+        topic: 'intro'
+      };
+    }
+
+    if (question.includes('skill') || question.includes('stack') || question.includes('tech')) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'Here are my strongest skills.',
+          casual: 'These are the tools I use the most in real builds.',
+          technical: `Top stack items: ${SKILL_CATEGORIES.flatMap((cat) => cat.skills.map((skill) => skill.name)).slice(0, 8).join(', ')}.`,
+          prompt: 'I can break this down by frontend, mobile, or backend next.'
+        }),
+        intent: 'skills',
+        topic: 'stack'
+      };
+    }
+
+    if (question.includes('project') || question.includes('built') || question.includes('work')) {
+      return {
+        text: buildMixedToneReply({
+          professional: `My featured projects include ${featuredProjects.join(', ')}.`,
+          casual: 'Each one reflects a different kind of problem-solving style.',
+          technical: 'The portfolio covers web, mobile, and full-stack product workflows with deployment-ready implementations.',
+          prompt: 'Open the Projects app and I can guide you on which one to review first.'
+        }),
+        intent: 'projects',
+        topic: 'featured'
+      };
+    }
+
+    if (question.includes('contact') || question.includes('email') || question.includes('hire') || question.includes('reach')) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'You can reach me directly for internships, freelance work, or collaboration.',
+          casual: 'I am approachable, so feel free to send a quick message.',
+          technical: 'Primary contact: cedricjoshua.palapuz@gmail.com, or phone (+63) 999-405-1077 for direct coordination.',
+          prompt: 'You can also use the Contact app form here for structured project details.'
+        }),
+        intent: 'contact',
+        topic: 'reachout'
+      };
+    }
+
+    if (question.includes('mobile') || question.includes('android') || question.includes('expo') || question.includes('kotlin')) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'My mobile workflow is centered on reliability and rapid iteration.',
+          casual: 'I keep the tooling practical so shipping does not get blocked.',
+          technical: 'I commonly use Expo, NativeWind, EAS, and Kotlin, with Firebase or Supabase for backend services.',
+          prompt: 'If you want, I can map which stack I use for MVP vs production scale.'
+        }),
+        intent: 'skills',
+        topic: 'mobile-stack'
+      };
+    }
+
+    if (question.includes('resume') || question.includes('cv')) {
+      return {
+        text: buildMixedToneReply({
+          professional: 'I maintain targeted resume versions for different roles.',
+          casual: 'So you can check the one that matches what you are hiring for.',
+          technical: 'Available tracks: Web Developer, QA, and Data Engineer, each tuned to role-specific skills and project evidence.',
+          prompt: 'Open the Resume app in the dock to view them.'
+        }),
+        intent: 'resume',
+        topic: 'resume'
+      };
+    }
+
+    return {
+      text: buildMixedToneReply({
+        professional: 'I can definitely help with that.',
+        casual: 'Let us narrow it down so I can give you the best answer.',
+        technical: 'I can cover stack choices, project architecture, contact options, and role-fit details.',
+        prompt: 'Tell me whether you want skills, projects, or availability first.'
+      }),
+      intent: 'clarify',
+      topic: 'unknown'
+    };
+  };
+
+  const sendChatMessage = (message) => {
+    const trimmedMessage = message.trim();
+    if (!trimmedMessage) return;
+    const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+    const userMessage = {
+      id: `user-${Date.now()}`,
+      role: 'user',
+      text: trimmedMessage,
+      timestamp,
+    };
+
+    const reply = getProfileBotReply(trimmedMessage, botContext);
+
+    const botMessage = {
+      id: `bot-${Date.now() + 1}`,
+      role: 'bot',
+      text: reply.text,
+      timestamp,
+    };
+
+    setChatMessages((prev) => [...prev, userMessage, botMessage]);
+    setBotContext({ lastIntent: reply.intent, lastTopic: reply.topic });
+    setChatInput('');
+  };
+
   // ===== Computed =====
 
   const filteredSkills =
@@ -493,6 +966,7 @@ const Phone = () => {
       : PHONE_PROJECTS.filter((p) => p.category.includes(activeProjectCat));
 
   const ActiveGameComponent = activeGame ? GAMES.find((g) => g.id === activeGame)?.component : null;
+  const contextualSuggestions = BOT_CONTEXT_SUGGESTIONS[botContext.lastIntent] || BOT_QUICK_QUESTIONS;
 
   // ===== Helpers =====
 
@@ -560,14 +1034,14 @@ const Phone = () => {
               </div>
               <div className="pv-cards">
                 <div className="pv-card">
-                  <span className="pv-card-emoji">🎓</span>
+                  <span className="pv-card-icon"><GraduationIcon /></span>
                   <h4>Education</h4>
                   <p className="pv-card-title">BS in Computer Science</p>
                   <p className="pv-card-sub">CIIT College of Arts and Technology</p>
                   <span className="pv-card-date">2022 - 2026</span>
                 </div>
                 <div className="pv-card">
-                  <span className="pv-card-emoji">💼</span>
+                  <span className="pv-card-icon"><BriefcaseIcon /></span>
                   <h4>Experience</h4>
                   <p className="pv-card-title">Work Immersion Intern</p>
                   <p className="pv-card-sub">Philippine Nuclear Research Institute</p>
@@ -575,9 +1049,9 @@ const Phone = () => {
                 </div>
               </div>
               <div className="pv-highlights">
-                <span className="pv-tag">🎯 Problem Solver</span>
-                <span className="pv-tag">💡 Creative Thinker</span>
-                <span className="pv-tag">🚀 Fast Learner</span>
+                <span className="pv-tag">Problem Solver</span>
+                <span className="pv-tag">Creative Thinker</span>
+                <span className="pv-tag">Fast Learner</span>
               </div>
             </div>
           </div>
@@ -683,9 +1157,9 @@ const Phone = () => {
             {renderBackHeader('Email')}
             <div className="pv-content">
               <div className="pv-contact-chips">
-                <span className="pv-contact-chip">📧 cedricjoshua.palapuz@gmail.com</span>
-                <span className="pv-contact-chip">📱 (+63) 999-405-1077</span>
-                <span className="pv-contact-chip">📍 Philippines</span>
+                <span className="pv-contact-chip">cedricjoshua.palapuz@gmail.com</span>
+                <span className="pv-contact-chip"><PhoneMiniIcon /> (+63) 999-405-1077</span>
+                <span className="pv-contact-chip">Philippines</span>
               </div>
 
               <form ref={formRef} onSubmit={handleContactSubmit} className="pv-form">
@@ -816,9 +1290,75 @@ const Phone = () => {
                       )
                     )}
                   </div>
-                  <p className="pv-support-thanks">Your support means the world! ❤️</p>
+                  <p className="pv-support-thanks">Your support means the world!</p>
                 </>
               )}
+            </div>
+          </div>
+        );
+
+      case 'assistant':
+        return (
+          <div className="phone-detail-view">
+            {renderBackHeader('Cedric Assistant')}
+            <div className="pv-assistant-shell">
+              <div className="pv-bot-scroll">
+                <div className="pv-bot-messages" role="log" aria-live="polite">
+                  {chatMessages.map((message) => (
+                    <div key={message.id} className={`pv-bot-row ${message.role === 'user' ? 'user' : 'bot'}`}>
+                      <span className={`pv-bot-avatar ${message.role === 'user' ? 'user' : 'bot'}`}>
+                        {message.role === 'user' ? 'You' : 'Cedric'}
+                      </span>
+                      <div className="pv-bot-message-content">
+                        <div className={`pv-bot-bubble ${message.role === 'user' ? 'user' : 'bot'}`}>
+                          {message.text}
+                        </div>
+                        <span className="pv-bot-time">{message.timestamp}</span>
+                      </div>
+                    </div>
+                  ))}
+                  <div ref={chatEndRef} />
+                </div>
+              </div>
+
+              <div className="pv-bot-quick-grid">
+                {contextualSuggestions.map((prompt) => (
+                  <button
+                    key={prompt}
+                    type="button"
+                    className="pv-bot-quick-btn"
+                    onClick={() => sendChatMessage(prompt)}
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+
+              <div className="pv-bot-composer-wrap">
+                <form
+                  className="pv-bot-input-row"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    sendChatMessage(chatInput);
+                  }}
+                >
+                  <input
+                    type="text"
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onFocus={() => {
+                      if (chatEndRef.current) {
+                        setTimeout(() => {
+                          chatEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                        }, 120);
+                      }
+                    }}
+                    placeholder="Ask about skills, projects, or contact info"
+                    aria-label="Ask Cedric assistant"
+                  />
+                  <button type="submit">Send</button>
+                </form>
+              </div>
             </div>
           </div>
         );
@@ -940,7 +1480,7 @@ const Phone = () => {
           <div className="games-list">
             {GAMES.map((game) => (
               <button key={game.id} className="game-list-item" onClick={() => setActiveGame(game.id)}>
-                <span className="game-list-icon">{game.icon}</span>
+                <span className="game-list-icon" style={{ color: game.color, background: game.background }}>{game.icon}</span>
                 <span className="game-list-name">{game.name}</span>
                 <svg className="game-list-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6" />

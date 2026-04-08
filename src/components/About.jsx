@@ -331,7 +331,14 @@ const About = () => {
           <div ref={leftRef} className={`about-left-panel scroll-reveal fade-right delay-200 ${isVisible ? 'visible' : ''}`}>
             <div className="about-avatar">
               <div className="avatar-frame">
-                <img src={about} alt="Cedric Joshua" width={160} height={160} />
+                <img
+                  src={about}
+                  alt="Cedric Joshua Palapuz profile"
+                  width={160}
+                  height={160}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
 

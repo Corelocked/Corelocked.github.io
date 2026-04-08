@@ -12,6 +12,7 @@ import ProjectPage from './components/ProjectPage';
 import FullProjectView from './components/FullProjectView';
 import Contact from './components/Contact';
 import Support from './components/Support';
+import AuthorProfile from './components/AuthorProfile';
 import Footer from './components/Footer';
 import Phone from './components/Phone';
 import LoadingScreen from './components/LoadingScreen';
@@ -102,6 +103,15 @@ function AppContent({ isLoading, setIsLoading }) {
           <div className="main-content">
             <Header />
             <Support />
+          </div>
+        } />
+
+        {/* Name SEO Route */}
+        <Route path="/cedric-joshua-palapuz" element={
+          <div className="main-content">
+            <Header />
+            <AuthorProfile />
+            <Footer />
           </div>
         } />
       </Routes>

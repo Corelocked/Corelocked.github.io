@@ -1,6 +1,21 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { useGameTheme } from './gameTheme';
 
+const BombIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false" {...props}>
+    <circle cx="12" cy="13" r="5.5" />
+    <path d="M12 4v3M9.2 5.2l1.5 2M14.8 5.2l-1.5 2M7 11l-2-1M17 11l2-1" />
+    <circle cx="14" cy="12" r="0.9" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const FlagIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false" {...props}>
+    <path d="M6 20V5" />
+    <path d="M6 6c2.2-1.1 4.7-1.1 7 0s4.8 1.1 7 0v8c-2.2 1.1-4.8 1.1-7 0s-4.8-1.1-7 0" />
+  </svg>
+);
+
 const Minesweeper = () => {
   const containerRef = useRef(null);
   const [gridSize, setGridSize] = useState(0);
@@ -106,6 +121,7 @@ const Minesweeper = () => {
   const numColors = ['','#4fc3f7','#4db6ac','#ff6b9d','#7c4dff','#ffd54f','#ff8a65','#81c784','#e0e0e0'];
 
   const cellPx = gridSize ? Math.floor(gridSize / COLS) : 24;
+  const cellIconSize = Math.max(12, Math.floor(cellPx * 0.55));
   const cellStyleDynamic = {
     width: cellPx,
     height: cellPx,
@@ -169,7 +185,7 @@ const Minesweeper = () => {
       ) : (
         <>
           <div style={styles.info}>
-            <span style={{...styles.infoText, color: theme ? theme.titleColor : styles.infoText.color}}>💣 {minesLeft}</span>
+            <span style={{...styles.infoText, color: theme ? theme.titleColor : styles.infoText.color}}><BombIcon style={{width: 12, height: 12}} /> {minesLeft}</span>
             {(gameOver||won) && <span style={{...styles.infoText, color: won? (theme?.isDark? '#4db6ac':'#4db6ac') : '#ff6b9d'}}>{won?'You Win!':'Boom!'}</span>}
           </div>
           <div style={{...styles.grid, width: gridSize}}>
@@ -196,7 +212,7 @@ const Minesweeper = () => {
                             border: theme ? theme.cellBorder : (isDark ? 'none' : '1px solid rgba(0,0,0,0.06)'),
                           }}
                     >
-                      {isRevealed ? (val===-1?'💣': val>0?val:'') : (isFlagged?'🚩':'')}
+                      {isRevealed ? (val===-1 ? <BombIcon style={{width: cellIconSize, height: cellIconSize}} /> : val>0 ? val : '') : (isFlagged ? <FlagIcon style={{width: cellIconSize, height: cellIconSize}} /> : '')}
                     </button>
                   );
                 })}

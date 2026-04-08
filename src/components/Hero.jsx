@@ -61,13 +61,21 @@ const Hero = () => {
       <div className="container">
         <div className={`hero-center scroll-reveal fade-up ${isLoaded ? 'visible' : ''}`}>
           <div className="hero-avatar" aria-hidden="true">
-            <img src={heroImage} alt="Cedric Joshua" />
+            <img
+              src={heroImage}
+              alt="Portrait of Cedric Joshua Palapuz"
+              width={170}
+              height={170}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
           </div>
           <span className="hero-greeting">
             <span className="hello-wave">👋</span> Hi there
           </span>
           <h1>
-            I'm <span className="gradient-text">Cedric Joshua</span>
+            I'm <span className="gradient-text">Cedric Joshua Palapuz</span>
           </h1>
           <h2 className={`hero-tagline scroll-reveal fade-up delay-200 ${isLoaded ? 'visible' : ''}`}>
             <span className="hero-typewriter-label">Fullstack </span>

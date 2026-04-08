@@ -21,6 +21,7 @@ const Footer = () => {
             <Link to="about" smooth={true} duration={500} offset={-80}>About</Link>
             <Link to="skills" smooth={true} duration={500} offset={-80}>Skills</Link>
             <Link to="projects" smooth={true} duration={500} offset={-80}>Projects</Link>
+            <RouterLink to="/cedric-joshua-palapuz">Profile</RouterLink>
             <RouterLink to="/contact">Contact</RouterLink>
           </div>
 

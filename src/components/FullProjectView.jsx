@@ -35,9 +35,11 @@ export default function FullProjectView() {
     <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 2147483647 }}>
       {!iframeBlocked && (
         <iframe
-          title={project.title}
+          title={`${project.title} project view`}
           src={viewUrl}
           style={{ width: '100%', height: '100%', border: 0 }}
+          loading="eager"
+          referrerPolicy="strict-origin-when-cross-origin"
           onError={() => setIframeBlocked(true)}
         />
       )}

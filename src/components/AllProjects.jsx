@@ -104,8 +104,12 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
       <div className={`project-image ${hideDetails ? 'media-only-image' : ''} ${hasVideo ? 'has-video' : ''}`}>
         <img
           src={project.image}
-          alt={project.title}
+          alt={`${project.title} project preview`}
           className={`${showVideoPreview ? 'hidden' : ''} ${hideDetails ? 'native-media' : ''}`.trim()}
+          width={1200}
+          height={675}
+          loading={hideDetails ? 'eager' : 'lazy'}
+          decoding="async"
         />
         {hasVideo && <div className="video-badge">Preview</div>}
         {!hasVideo && !project.website && !project.liveDemo && <div className="video-badge unavailable">Case Study</div>}
@@ -116,6 +120,7 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
               className="video-preview"
               src={project.preview}
               title={`${project.title} preview`}
+              aria-label={`${project.title} preview video`}
               controls={false}
               autoPlay
               muted
@@ -130,6 +135,8 @@ const ProjectCard = ({ project, hideDetails = false, onFeaturedClick, style }) =
               title={`${project.title} preview`}
               frameBorder="0"
               allow="autoplay; encrypted-media"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
           )
@@ -640,7 +647,18 @@ const AllProjects = () => {
               </div>
 
               <div className="about-featured-media">
-                <video ref={videoRef} src={blogsharkFeaturedVideo} controls autoPlay muted loop playsInline preload="metadata" />
+                <video
+                  ref={videoRef}
+                  src={blogsharkFeaturedVideo}
+                  title="BlogShark featured post preview"
+                  aria-label="BlogShark featured post preview video"
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
               </div>
 
               <div className="about-featured-actions">

@@ -1,0 +1,90 @@
+.author-profile-page {
+  min-height: 100vh;
+  padding: 140px 0 90px;
+}
+
+.author-profile-shell {
+  max-width: 980px;
+}
+
+.author-kicker {
+  margin: 0 0 12px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: var(--mono-font);
+  font-size: 0.78rem;
+}
+
+.author-profile-shell h1 {
+  margin: 0 0 14px;
+  color: var(--text-color);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.author-summary {
+  margin: 0 0 28px;
+  color: var(--text-secondary);
+  max-width: 760px;
+  line-height: 1.8;
+}
+
+.author-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.author-card {
+  border: 1px solid rgba(79, 195, 247, 0.2);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(79, 195, 247, 0.06);
+}
+
+.author-card h2 {
+  margin: 0 0 10px;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.author-card p,
+.author-card li,
+.author-card a {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.author-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.author-actions {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.author-btn {
+  padding: 11px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(79, 195, 247, 0.25);
+  text-decoration: none;
+  color: var(--text-color);
+  background: rgba(79, 195, 247, 0.08);
+  font-weight: 600;
+}
+
+.author-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .author-profile-page {
+    padding-top: 118px;
+  }
+}

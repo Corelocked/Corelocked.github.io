@@ -62,7 +62,12 @@ export default function ProjectPage() {
 
           <div className="project-page-visual">
             <div className="project-page-image-card">
-              <img src={project.image} alt={project.title} />
+              <img
+                src={project.image}
+                alt={`${project.title} project cover`}
+                loading="eager"
+                decoding="async"
+              />
             </div>
           </div>
         </div>

@@ -35,6 +35,7 @@
     "crawl": false,
     "include": [
       "/",
+      "/cedric-joshua-palapuz",
       "/projects",
       "/contact",
       "/support",

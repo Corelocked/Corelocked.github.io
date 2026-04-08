@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { getHighscore, setHighscore } from '../../utils/highscores';
 import { useGameTheme } from './gameTheme';
 
+const CookieIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+    <circle cx="12" cy="12" r="8.5" />
+    <circle cx="9" cy="8.5" r="1.1" fill="#050510" opacity="0.55" />
+    <circle cx="15.5" cy="9.5" r="0.9" fill="#050510" opacity="0.55" />
+    <circle cx="14" cy="15" r="1" fill="#050510" opacity="0.55" />
+    <circle cx="10" cy="14" r="0.8" fill="#050510" opacity="0.55" />
+  </svg>
+);
+
 const CookieClicker = () => {
   const theme = useGameTheme();
   const [cookies, setCookies] = useState(0);
@@ -30,7 +40,6 @@ const CookieClicker = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 108,
     border: 'none',
     background: 'transparent',
     boxShadow: 'none',
@@ -38,6 +47,7 @@ const CookieClicker = () => {
     transform: pressed ? 'scale(0.96)' : 'scale(1)',
     transition: 'transform 0.08s ease',
     padding: 6,
+    lineHeight: 0,
   };
 
   return (
@@ -53,7 +63,7 @@ const CookieClicker = () => {
           aria-label="cookie button"
           style={cookieStyle}
         >
-          🍪
+          <CookieIcon />
         </button>
       </div>
       <div style={{marginTop:12, fontFamily:'var(--mono-font)', color: theme?.titleColor ?? '#fff', fontSize:18, fontWeight: 700}}>Cookies: {cookies}</div>
