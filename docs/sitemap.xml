@@ -21,6 +21,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://corelocked.github.io/cedric-joshua-palapuz</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://corelocked.github.io/projects/lakbay</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
