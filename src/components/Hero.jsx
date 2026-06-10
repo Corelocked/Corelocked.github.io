@@ -5,11 +5,11 @@ import './Hero.css';
 import '../components/Animations.css';
 import heroImage from '../assets/images/Hero2.JPG';
 
-const ROLES = ['Web Developer', 'Android Developer'];
+const ROLES = ['Web Developer', 'Data Engineer', 'Full-Stack Developer'];
 const HERO_HIGHLIGHTS = [
   { label: 'Published apps', value: '3+' },
-  { label: 'Focus', value: 'Web + Mobile' },
-  { label: 'Next step', value: 'Web Dev Intern' }
+  { label: 'Focus', value: 'Data + Full-Stack' },
+  { label: 'Current role', value: 'Web Developer' }
 ];
 
 const Hero = () => {
@@ -83,7 +83,7 @@ const Hero = () => {
             <span className="hero-typewriter-caret" aria-hidden="true">|</span>
           </h2>
           <p className={`hero-description scroll-reveal fade-up delay-300 ${isLoaded ? 'visible' : ''}`}>
-            I build mobile and web applications that are not only functional but also provide an engaging user experience.
+            I build scalable web, mobile, and data-driven applications with practical UX, reliable backend architecture, and clear reporting workflows.
           </p>
           <div className={`hero-highlights scroll-reveal fade-up delay-350 ${isLoaded ? 'visible' : ''}`}>
             {HERO_HIGHLIGHTS.map((item) => (

@@ -1,4 +1,4 @@
-    import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './About.css';
 import '../components/Animations.css';
 import about from '../assets/images/Hero.png';
@@ -10,18 +10,12 @@ import etalaLogo from '../assets/images/e-tala logo.jpg';
 import blogsharkLogo from '../assets/images/blogshark-logo.png';
 import blogsharkFeaturedVideo from '../assets/images/blogshark-featured.mp4';
 import innsightLogo from '../assets/images/innsight.png';
+import inabelAwardsPreview from '../assets/images/inabel-awards-2026-innsight.jpg';
 import megacatLogo from '../assets/images/megacat-logo.jpg';
+import pitakaLogo from '../assets/images/pitaka-logo.png';
 // Import Current Stack icons
-import { ReactComponent as PythonIcon } from '../assets/icons/python.svg';
-import { ReactComponent as GitIcon } from '../assets/icons/github.svg';
-import { ReactComponent as FirebaseIcon } from '../assets/icons/firebase.svg';
-import { ReactComponent as VercelIcon } from '../assets/icons/vercel.svg';
-import { ReactComponent as ViteIcon } from '../assets/icons/vite.svg';
-import { ReactComponent as ExpoIcon } from '../assets/icons/expo.svg';
-import { ReactComponent as NextjsIcon } from '../assets/icons/nextjs.svg';
-import { ReactComponent as NativeWindIcon } from '../assets/icons/nativewind.svg';
-import { ReactComponent as SupabaseIcon } from '../assets/icons/supabase.svg';
-import { ReactComponent as EasIcon } from '../assets/icons/eas.svg';
+import { ReactComponent as JavascriptIcon } from '../assets/icons/javascript.svg';
+import { ReactComponent as PhpIcon } from '../assets/icons/php.svg';
 
 const WORK_ENTRIES = [
   {
@@ -29,13 +23,26 @@ const WORK_ENTRIES = [
     badge: 'MC',
     logo: megacatLogo,
     org: 'Mega Cat Studios',
-    role: 'Incoming Web Developer Intern',
-    date: 'Starts April 2026',
+    role: 'Web Developer',
+    date: 'Apr 2026 - Present',
     bullets: [
-      'Joining the team as a Web Developer Intern to contribute to web experiences and front-end implementation.',
-      'Preparing to support production tasks, collaboration workflows, and feature delivery in a professional development environment.'
+      'Manage and maintain Shopify storefronts with a focus on technical performance and user experience.',
+      'Execute technical SEO work, including alt text audits and collection page title optimization.'
     ],
-    tags: ['Internship', 'Web Development', 'Incoming']
+    tags: ['Web Development', 'Shopify', 'Technical SEO']
+  },
+  {
+    id: 'pitaka',
+    badge: 'PT',
+    logo: pitakaLogo,
+    org: 'Pitaka',
+    role: 'Lead Developer',
+    date: 'Mar 2026 - Present',
+    bullets: [
+      'Designed and launched a personal finance and budget tracker tailored for the Philippine market.',
+      'Ported the web application to mobile platforms while keeping feature parity for on-the-go expense tracking.'
+    ],
+    tags: ['Project', 'Finance', 'Web', 'Mobile']
   },
   {
     id: 'lakbay',
@@ -46,7 +53,7 @@ const WORK_ENTRIES = [
     date: 'Oct 2025 - Feb 2026',
     bullets: [
       'Developed a route generation system based on traveler preferences and historical data.',
-      'Architected backend logic for real-time route updates and profile management.'
+      'Architected backend logic for real-time route adjustments and complex user profile management.'
     ],
     tags: ['Project', 'Mobile', 'Backend', 'Thesis']
   },
@@ -71,8 +78,8 @@ const WORK_ENTRIES = [
     role: 'Technical Lead',
     date: 'May 2025 - Aug 2025',
     bullets: [
-      'Built an interactive blogging platform with media posting and in-app communication.',
-      'Designed role-based layouts and permission controls for secure content flow.'
+      'Designed a schema for multimedia content, categories, and tags to organize unstructured data.',
+      'Architected role-based layouts and permissions for secure, organized data distribution.'
     ],
     tags: ['Project', 'Laravel', 'SQLite', 'Featured']
   },
@@ -84,10 +91,10 @@ const WORK_ENTRIES = [
     role: 'Technical Lead',
     date: 'Sep 2024 - Nov 2024',
     bullets: [
-      'Built a voice and text assistant for hospitality customer support.',
-      'Integrated speech recognition and ML models for intent and sentiment analysis.'
+      'Engineered a dual-input system for real-time voice-to-text transcription and text-based querying.',
+      'Implemented machine learning models to analyze sentiment and intent in customer inquiry datasets.'
     ],
-    tags: ['Project', 'AI', 'React', 'Python']
+    tags: ['Project', 'Inabel Awards 2026: IoT Innovation', 'AI']
   },
   {
     id: 'pnri',
@@ -110,7 +117,7 @@ const EDUCATION_ENTRIES = [
     logo: ciitLogo,
     org: 'CIIT College of Arts and Technology',
     role: 'Bachelor of Science in Computer Science',
-    date: 'Expected Oct 2026',
+    date: 'Expected Oct 2027',
     bullets: [
       'Specialization in Web and Mobile Development.',
       'Focus areas: full-stack systems, Android engineering, and practical product delivery.'
@@ -120,45 +127,65 @@ const EDUCATION_ENTRIES = [
 ];
 
 const CURRENT_STACK = [
-  { name: 'Expo', icon: <ExpoIcon /> },
-  { name: 'Next.js', icon: <NextjsIcon /> },
-  { name: 'NativeWind', icon: <NativeWindIcon /> },
-  { name: 'Supabase', icon: <SupabaseIcon /> },
-  { name: 'Firebase', icon: <FirebaseIcon /> },
-  { name: 'Vercel', icon: <VercelIcon /> },
-  { name: 'EAS', icon: <EasIcon /> },
-  { name: 'Git/GitHub', icon: <GitIcon /> },
-  { name: 'Python', icon: <PythonIcon /> },
-  { name: 'Vite', icon: <ViteIcon /> }
+  { name: 'Shopify', icon: <span className="current-icon-text">SF</span> },
+  { name: 'PageFly', icon: <span className="current-icon-text">PF</span> },
+  { name: 'WordPress', icon: <span className="current-icon-text">WP</span> },
+  { name: 'Elementor', icon: <span className="current-icon-text">EL</span> },
+  { name: 'PHP', icon: <PhpIcon /> },
+  { name: 'JavaScript', icon: <JavascriptIcon /> },
+  { name: 'Liquid', icon: <span className="current-icon-text">LQ</span> }
 ];
+
+const FEATURED_PREVIEWS = {
+  blogshark: {
+    kind: 'video',
+    title: 'BlogShark Featured Post',
+    subtitle: 'Preview of the actual featured post content',
+    ariaLabel: 'BlogShark featured post',
+    mediaSrc: blogsharkFeaturedVideo,
+    mediaAlt: 'BlogShark featured post preview',
+    actionHref: 'https://www.instagram.com/p/DUVf_PRDOQG/',
+    actionLabel: 'Show on Instagram'
+  },
+  innsight: {
+    kind: 'image',
+    title: 'InnSight Inabel Awards Preview',
+    subtitle: 'Preview of the Inabel Awards 2026: IoT Innovation entry',
+    ariaLabel: 'InnSight Inabel Awards preview',
+    mediaSrc: inabelAwardsPreview,
+    mediaAlt: 'Inabel Awards 2026: IoT Innovation preview for InnSight',
+    actionHref: '/projects/innsight/info',
+    actionLabel: 'Open Project'
+  }
+};
 
 const TimelineTabs = () => {
   const [activeTab, setActiveTab] = useState('work');
-  const [showFeaturedModal, setShowFeaturedModal] = useState(false);
+  const [preview, setPreview] = useState(null);
   const videoRef = useRef(null);
   const entries = activeTab === 'work' ? WORK_ENTRIES : EDUCATION_ENTRIES;
 
-  const openFeaturedModal = () => {
-    setShowFeaturedModal(true);
+  const openPreview = (entryId) => {
+    setPreview(FEATURED_PREVIEWS[entryId]);
   };
 
-  const closeFeaturedModal = () => {
+  const closePreview = () => {
     if (videoRef.current) {
       try {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
       } catch (e) {}
     }
-    setShowFeaturedModal(false);
+    setPreview(null);
   };
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'Escape' && showFeaturedModal) closeFeaturedModal();
+      if (e.key === 'Escape' && preview) closePreview();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [showFeaturedModal]);
+  }, [preview]);
 
   return (
     <div className="about-timeline-shell">
@@ -211,17 +238,18 @@ const TimelineTabs = () => {
 
               <div className="about-timeline-tags" aria-label="skills and labels">
                 {entry.tags.map((tag) => {
-                  const isBlogsharkFeatured = entry.id === 'blogshark' && tag === 'Featured';
+                  const previewEntry = FEATURED_PREVIEWS[entry.id];
+                  const isPreviewTag = previewEntry && ((entry.id === 'blogshark' && tag === 'Featured') || (entry.id === 'innsight' && tag === 'Inabel Awards 2026: IoT Innovation'));
 
-                  if (isBlogsharkFeatured) {
+                  if (isPreviewTag) {
                     return (
                       <button
                         key={`${entry.id}-${tag}`}
                         type="button"
                         className="about-timeline-tag about-timeline-tag-featured"
-                        onClick={openFeaturedModal}
-                        aria-expanded={showFeaturedModal}
-                        aria-label="Open BlogShark featured video"
+                        onClick={() => openPreview(entry.id)}
+                        aria-expanded={preview?.ariaLabel === previewEntry.ariaLabel}
+                        aria-label={`Open ${previewEntry.title}`}
                       >
                         {tag}
                       </button>
@@ -240,41 +268,45 @@ const TimelineTabs = () => {
         ))}
       </div>
 
-      {showFeaturedModal && (
+      {preview && (
         <div
           className="about-featured-modal-backdrop"
-          onClick={closeFeaturedModal}
+          onClick={closePreview}
         >
-          <div className="about-featured-modal" role="dialog" aria-label="BlogShark featured post" onClick={(e) => e.stopPropagation()}>
+          <div className="about-featured-modal" role="dialog" aria-label={preview.ariaLabel} onClick={(e) => e.stopPropagation()}>
             <div className="about-featured-modal-header">
               <div>
-                <p className="about-featured-modal-title">BlogShark Featured Post</p>
-                <p className="about-featured-modal-subtitle">Preview of the actual featured post content</p>
+                <p className="about-featured-modal-title">{preview.title}</p>
+                <p className="about-featured-modal-subtitle">{preview.subtitle}</p>
               </div>
-              <button className="about-featured-close" onClick={closeFeaturedModal} aria-label="Close preview">✕</button>
+              <button className="about-featured-close" onClick={closePreview} aria-label="Close preview">✕</button>
             </div>
 
             <div className="about-featured-media">
-              <video
-                ref={videoRef}
-                src={blogsharkFeaturedVideo}
-                controls
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
+              {preview.kind === 'video' ? (
+                <video
+                  ref={videoRef}
+                  src={preview.mediaSrc}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                <img src={preview.mediaSrc} alt={preview.mediaAlt} loading="lazy" decoding="async" />
+              )}
             </div>
 
             <div className="about-featured-actions">
               <a
-                href="https://www.instagram.com/p/DUVf_PRDOQG/"
+                href={preview.actionHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="about-featured-link"
               >
-                Show on Instagram
+                {preview.actionLabel}
               </a>
             </div>
           </div>
@@ -344,11 +376,11 @@ const About = () => {
 
             <div className="about-intro">
               <p className="lead-text">
-                I'm a Computer Science student from the Philippines, specializing in Full-stack Web and Android mobile development.
-                I architect scalable solutions using React, Next.js, Expo, and Kotlin, with proven expertise in integrating machine learning models and building user-centric applications.
+                I'm a Computer Science student from the Philippines and a Web Developer specializing in Data Engineering and Full-Stack Architecture.
+                I design scalable database solutions, real-time reporting systems, and user-focused products across web and mobile.
               </p>
               <p className="lead-subtext">
-                I have 4+ years of experience designing and implementing complex systems from realtime inventory platforms to AI-powered virtual assistants.
+                I have experience designing and implementing complex systems from finance dashboards and route engines to AI-powered virtual assistants and Shopify storefronts.
                 Based in the Philippines, I bring a practical and globally minded approach to building digital products.
                 I work across both Firebase and Supabase depending on the product, and I'm passionate about maintainable code, practical product thinking, and solving real-world problems through technology.
               </p>
@@ -381,7 +413,7 @@ const About = () => {
         <div className="current-stack-footer">
           <h3 className="current-stack-title">Current Stack</h3>
           <p className="current-stack-subtitle">
-            Expo + Next.js + NativeWind for the front end, with both Firebase and Supabase in my backend toolkit.
+            Shopify, PageFly, WordPress, Elementor, PHP, JavaScript, and Liquid for storefront and CMS development.
           </p>
           <div className="current-stack-list">
             {CURRENT_STACK.map((tech, i) => (

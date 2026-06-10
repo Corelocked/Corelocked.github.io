@@ -5,13 +5,33 @@ import { projects } from './AllProjects';
 // Timeline entries derived from Resume.jsx (Experience & School Technical Projects)
 const timelineEntries = [
   {
+    id: 'megacat',
+    title: 'Mega Cat Studios',
+    date: 'Apr 2026 - Present',
+    role: 'Web Developer',
+    details: [
+      'Manage and maintain Shopify storefronts for technical performance and user experience.',
+      'Execute technical SEO strategies, including alt text audits and collection page title optimization.'
+    ]
+  },
+  {
+    id: 'pitaka',
+    title: 'Pitaka',
+    date: 'Mar 2026 - Present',
+    role: 'Lead Developer',
+    details: [
+      'Designed and launched a personal finance and budget tracker web application tailored for the Philippine market.',
+      'Ported the web application to mobile platforms while maintaining feature parity for on-the-go expense tracking.'
+    ]
+  },
+  {
     id: 'lakbay',
     title: 'Lakbay: Scenic Route Navigation',
     date: 'Oct 2025 - Feb 2026',
     role: 'Technical Lead',
     details: [
-      'Developed a mobile app system that generates personalized travel routes based on user preferences and historical data.',
-      'Architected backend logic for real-time route adjustments and user profile management.'
+      'Developed a system that generates personalized travel routes based on curated user preferences and historical data.',
+      'Architected backend logic for real-time route adjustments and complex user profile management.'
     ]
   },
   {
@@ -30,8 +50,8 @@ const timelineEntries = [
     date: 'May 2025 - Aug 2025',
     role: 'Technical Lead',
     details: [
-      'Built an interactive blogging site that supports videos, images, in-app messaging, categories and tags.',
-      'Designed role-based layouts and permissions for secure content distribution.'
+      'Designed a database capable of handling multimedia content, categories, and tags for unstructured data.',
+      'Architected role-based layouts and permissions for secure, organized data distribution.'
     ]
   },
   {
@@ -40,8 +60,8 @@ const timelineEntries = [
     date: 'Sep 2024 - Nov 2024',
     role: 'Technical Lead',
     details: [
-      'Created a voice- and text-enabled assistant for hospitality customer support.',
-      'Integrated speech recognition and ML models for intent recognition and sentiment analysis.'
+      'Engineered a dual-input system for real-time voice-to-text transcription and text-based querying.',
+      'Implemented ML models to analyze sentiment and intent within customer inquiry datasets.'
     ]
   },
   {

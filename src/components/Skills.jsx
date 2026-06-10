@@ -60,6 +60,7 @@ const skillCategories = [
       { name: 'JavaScript', iconKey: 'javascript' },
       { name: 'React', iconKey: 'react', featured: true },
       { name: 'Next.js', iconKey: 'nextjs', featured: true },
+      { name: 'Laravel', iconKey: 'backend' },
       { name: 'HTML', iconKey: 'html' },
       { name: 'CSS', iconKey: 'css' },
       { name: 'Tailwind CSS', iconKey: 'tailwind', featured: true },
@@ -92,6 +93,22 @@ const skillCategories = [
       { name: 'Firebase', iconKey: 'firebase', featured: true },
       { name: 'Supabase', iconKey: 'supabase', featured: true },
       { name: 'SQLite', iconKey: 'sqlite' }
+    ]
+  },
+  {
+    id: 'data-cms',
+    name: 'Data & CMS',
+    iconKey: 'tools',
+    color: '#8f6a2a',
+    gradient: 'linear-gradient(135deg, #8f6a2a, #b78a35)',
+    skills: [
+      { name: 'Python', iconKey: 'tools', featured: true },
+      { name: 'Power BI', iconKey: 'tools', featured: true },
+      { name: 'Jupyter Notebook', iconKey: 'tools' },
+      { name: 'Shopify', iconKey: 'tools', featured: true },
+      { name: 'PageFly', iconKey: 'tools' },
+      { name: 'WordPress', iconKey: 'tools' },
+      { name: 'Elementor', iconKey: 'tools' }
     ]
   }
 ];
@@ -128,10 +145,10 @@ const Skills = () => {
             Expertise
           </span>
           <h2 className="section-title">
-            Web & Mobile <span className="gradient-text">Stack</span>
+            Data, Web & Mobile <span className="gradient-text">Stack</span>
           </h2>
           <p className="section-subtitle">
-            I build modern web and mobile apps with this core stack.
+            I build modern apps, CMS storefronts, and data workflows with this core stack.
           </p>
         </div>
 

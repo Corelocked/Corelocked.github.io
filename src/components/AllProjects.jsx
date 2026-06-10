@@ -252,8 +252,8 @@ const projects = [
     year: '2026',
     eyebrow: 'Finance Dashboard',
     tagline: 'A personal finance app focused on clarity, fast entry, and practical day-to-day tracking.',
-    description: 'A publicly available personal finance web app for tracking income, expenses, savings, wallets, and lendings with CSV export and realtime Firestore sync.',
-    impact: 'Shaped the UI around practical financial workflows while wiring together deployment, realtime sync, and compact dashboard patterns.',
+    description: 'A personal finance and budget tracker tailored for the Philippine market to replace manual spreadsheet tracking, with mobile parity for on-the-go expense tracking.',
+    impact: 'Led the web launch and mobile port while shaping practical financial workflows, realtime sync, and compact dashboard patterns.',
     technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'],
     category: ['Website', 'Mobile App'],
     roles: ['Frontend', 'Integration', 'DevOps'],
@@ -264,9 +264,10 @@ const projects = [
     featured: true,
     status: 'Shipped',
     highlights: [
+      'Philippine-market budgeting workflows',
       'Realtime Firestore sync',
       'CSV export for portability',
-      'Accessible dashboard and compact tables workflow'
+      'Mobile port with feature parity'
     ]
   },
   {
@@ -285,7 +286,7 @@ const projects = [
     liveDemo: '#',
     website: '#',
     image: require('../assets/images/nebuladm-logo.png'),
-    featured: true,
+    featured: false,
     status: 'Shipped',
     isWIP: true,
     highlights: [
@@ -299,22 +300,23 @@ const projects = [
     title: 'InnSight',
     slug: 'innsight',
     year: '2025',
-    eyebrow: 'Voice + Text Assistant',
+    eyebrow: 'Inabel Awards 2026 Winner',
     tagline: 'A hospitality assistant that lets users ask hotel and restaurant questions by voice or text.',
-    description: 'An interactive web application designed as a virtual assistant tool, allowing users to inquire about hotel and restaurant-related topics through voice or text input.',
+    description: 'An award-winning AI virtual assistant for hospitality inquiries, built with voice-to-text transcription, text-based querying, and customer intent analysis.',
+    impact: 'Won Inabel Awards 2026 under Internet of Things Innovation for its dual-input inquiry system and applied sentiment analysis workflow.',
     technologies: ['React', 'JavaScript', 'CSS', 'Python', 'HTML'],
-    category: ['Website', 'AI/ML'],
+    category: ['Inabel Awards 2026 Winner', 'IoT Innovation', 'Website', 'AI/ML'],
     roles: ['Tech Lead', 'Backend'],
     githubLink: 'https://github.com/Corelocked/react-voice-enabled-ordering-system.git',
     liveDemo: 'https://innsight-mauve.vercel.app/',
     website: 'https://innsight-mauve.vercel.app/',
     image: require('../assets/images/innsight.png'),
-    featured: false,
+    featured: true,
     status: 'Shipped',
     highlights: [
+      'Inabel Awards 2026 Winner: Internet of Things Innovation',
       'Supports voice or text-based interaction',
-      'Combines frontend UI and Python-backed logic',
-      'Explores conversational UX for hospitality use cases'
+      'Analyzes customer inquiry sentiment and intent'
     ]
   },
   {
@@ -559,7 +561,7 @@ const AllProjects = () => {
             <h3>Products with clear UX, real workflows, and enough technical depth to feel substantial.</h3>
             <p>
               The strongest through-line in my portfolio is turning ideas into usable experiences, whether that means a finance dashboard,
-              a native download manager, a blogging platform, or a mobile thesis app.
+              an award-winning AI assistant, a blogging platform, or a mobile thesis app.
             </p>
           </div>
           <div className="projects-editorial-stats">

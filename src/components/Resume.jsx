@@ -118,9 +118,9 @@ const Resume = () => {
               Summary
             </h2>
             <p className="summary-card">
-              Computer Science student and Lead Developer specializing in full-stack web and Android mobile development.
-              Proven track record of architecting scalable solutions, integrating machine learning models, and leading technical teams to deliver user-centric applications.
-              Expertise in React, Node.js, and Kotlin. Seeking to leverage advanced proficiency in full-stack web and Android development in a challenging developer role.
+              Computer Science student and Lead Developer specializing in Data Engineering and Full-Stack Architecture.
+              Simplilearn Certified in Power BI, with a proven track record of designing scalable database solutions and real-time reporting systems.
+              Seeking to leverage advanced proficiency in Node.js, Python, and SQL-based environments to optimize data pipelines and drive actionable insights.
             </p>
           </section>
 
@@ -145,6 +145,7 @@ const Resume = () => {
                 </h3>
                 <span className="skill-badge advanced">React</span>
                 <span className="skill-badge advanced">Node.js</span>
+                <span className="skill-badge">Express.js</span>
                 <span className="skill-badge">JavaScript</span>
                 <span className="skill-badge">Laravel</span>
                 <span className="skill-badge">HTML/CSS</span>
@@ -174,6 +175,7 @@ const Resume = () => {
                 <span className="skill-badge">MongoDB</span>
                 <span className="skill-badge">SQLite</span>
                 <span className="skill-badge">Python</span>
+                <span className="skill-badge">Git</span>
               </div>
               <div className="skill-category">
                 <h3>
@@ -185,8 +187,11 @@ const Resume = () => {
                   Data & Productivity
                 </h3>
                 <span className="skill-badge">Power BI</span>
-                <span className="skill-badge">Google Workspace</span>
                 <span className="skill-badge">Jupyter Notebook</span>
+                <span className="skill-badge">Shopify</span>
+                <span className="skill-badge">PageFly</span>
+                <span className="skill-badge">WordPress</span>
+                <span className="skill-badge">Elementor</span>
               </div>
             </div>
           </section>
@@ -203,7 +208,7 @@ const Resume = () => {
             <article className="resume-entry entry-card">
               <header className="entry-header">
                 <h3>CIIT College of Arts and Technology</h3>
-                <span className="date">Expected Oct 2026</span>
+                <span className="date">Expected Oct 2027</span>
               </header>
               <p className="entry-subtitle">Bachelor of Science in Computer Science</p>
               <p className="entry-detail">Specialization: Web and Mobile Development</p>
@@ -221,13 +226,37 @@ const Resume = () => {
             </h2>
             <article className="resume-entry entry-card">
               <header className="entry-header">
+                <h3>Mega Cat Studios</h3>
+                <span className="date">Apr 2026 - Present</span>
+              </header>
+              <p className="entry-subtitle">Web Developer</p>
+              <ul>
+                <li>Manage and maintain Shopify storefronts, ensuring optimal technical performance and user experience.</li>
+                <li>Execute technical SEO strategies, including comprehensive alt text audits and collection page title optimizations to improve search engine visibility.</li>
+              </ul>
+            </article>
+
+            <article className="resume-entry entry-card">
+              <header className="entry-header">
+                <h3>Pitaka</h3>
+                <span className="date">Mar 2026 - Present</span>
+              </header>
+              <p className="entry-subtitle">Lead Developer</p>
+              <ul>
+                <li>Designed and launched a personal finance and budget tracker web application tailored specifically for the Philippine market to replace manual spreadsheet tracking.</li>
+                <li>Successfully ported the web application to mobile platforms, ensuring feature parity and providing users with on-the-go expense tracking capabilities.</li>
+              </ul>
+            </article>
+
+            <article className="resume-entry entry-card">
+              <header className="entry-header">
                 <h3>Lakbay: Scenic Route Navigation</h3>
                 <span className="date">Oct 2025 - Feb 2026</span>
               </header>
               <p className="entry-subtitle">Technical Lead</p>
               <ul>
-                <li>Developed a system for a mobile application that generates personalized travel routes based on curated user preferences and historical data.</li>
-                <li>Architected the backend logic to handle real-time route adjustments and user profile management, ensuring a seamless user experience.</li>
+                <li>Developed a system that generates personalized travel routes based on the analysis of curated user preferences and historical data.</li>
+                <li>Architected the backend to handle real-time route adjustments and complex user profile management.</li>
               </ul>
             </article>
 
@@ -250,7 +279,7 @@ const Resume = () => {
               </header>
               <p className="entry-subtitle">Technical Lead</p>
               <ul>
-                <li>Developed and designed an interactive blogging site that handles posting videos and images, in-app messaging, creation of categories and tags.</li>
+                <li>Designed a database capable of handling diverse multimedia content, categories, and tags to organize unstructured data effectively.</li>
                 <li>Architected a system with distinct layouts and permissions for different user roles, ensuring secure and organized data distribution.</li>
                 <li><strong>Featured in CIIT's social media platforms</strong> | February 4, 2026</li>
               </ul>
@@ -261,11 +290,10 @@ const Resume = () => {
                 <h3>InnSight: AI Virtual Assistant</h3>
                 <span className="date">Sep 2024 - Nov 2024</span>
               </header>
-              <p className="entry-subtitle">Technical Lead</p>
+              <p className="entry-subtitle">Technical Lead | Inabel Awards 2026: Internet of Things Innovation</p>
               <ul>
-                <li>Developed an interactive web application designed to automate customer service inquiries for the hospitality industry.</li>
-                <li>Engineered a dual-input system utilizing Python's speech recognition library for real-time voice-to-text transcription and text-based querying.</li>
-                <li>Implemented Machine Learning models to achieve intent recognition and sentiment analysis.</li>
+                <li>Engineered a dual-input system for real-time voice-to-text transcription and text-based querying using Python.</li>
+                <li>Implemented Machine Learning models to analyze sentiment and intent within customer inquiry datasets.</li>
               </ul>
             </article>
 

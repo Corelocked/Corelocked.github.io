@@ -5,8 +5,19 @@ import useScrollReveal from '../hooks/useScrollReveal';
 
 import cert1 from '../assets/images/certificates/dometrain-csharp-certificate.jpg';
 import cert2 from '../assets/images/certificates/simplilearn-powerbi-certificate.jpg';
+import inabelAward from '../assets/images/inabel-awards-2026-innsight.jpg';
 
 const certificates = [
+  {
+    type: 'achievement',
+    src: inabelAward,
+    alt: 'Inabel Awards 2026 Internet of Things Innovation Award',
+    title: 'Inabel Awards 2026 — Internet of Things Innovation',
+    description:
+      'Winner recognition for InnSight, an AI virtual assistant with voice-to-text, text querying, and customer inquiry analysis.',
+    badge: 'Winner',
+    project: 'InnSight',
+  },
   {
     src: cert1,
     alt: 'Dometrain C# Certificate',
@@ -141,18 +152,28 @@ const Certificates = () => {
           </button>
 
           <div className="cert-slides">
-            {certificates.map((img, i) => (
+            {certificates.map((item, i) => (
               <div
                 key={i}
                 className={`cert-slide ${i === index ? 'active' : ''} ${direction}`}
                 aria-hidden={i !== index}
               >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  onClick={() => setLightboxIdx(i)}
-                  title="Click to enlarge"
-                />
+                {item.src ? (
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    onClick={() => setLightboxIdx(i)}
+                    title="Click to enlarge"
+                  />
+                ) : (
+                  <article className="achievement-slide" aria-label={item.alt}>
+                    <span className="achievement-badge">{item.badge}</span>
+                    <p className="achievement-kicker">Achievement</p>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <span className="achievement-project">{item.project}</span>
+                  </article>
+                )}
               </div>
             ))}
           </div>
@@ -202,21 +223,28 @@ const Certificates = () => {
                 </button>
               </div>
               <div className="cert-grid">
-                {certificates.map((img, i) => (
+                {certificates.map((item, i) => (
                   <button
                     key={i}
                     className="cert-grid-item"
                     onClick={() => goToAndClose(i)}
                   >
                     <div className="grid-img-wrap">
-                      <img src={img.src} alt={img.alt} />
+                      {item.src ? (
+                        <img src={item.src} alt={item.alt} />
+                      ) : (
+                        <div className="achievement-grid-card" aria-label={item.alt}>
+                          <span>{item.badge}</span>
+                          <strong>{item.project}</strong>
+                        </div>
+                      )}
                       <div className="grid-overlay">
                         <span>View</span>
                       </div>
                     </div>
                     <div className="grid-meta">
-                      <strong>{img.title}</strong>
-                      <span>{img.description}</span>
+                      <strong>{item.title}</strong>
+                      <span>{item.description}</span>
                     </div>
                   </button>
                 ))}
@@ -226,7 +254,7 @@ const Certificates = () => {
         )}
 
         {/* Lightbox */}
-        {lightboxIdx !== null && (
+        {lightboxIdx !== null && certificates[lightboxIdx].src && (
           <div className="cert-lightbox" onClick={() => setLightboxIdx(null)}>
             <img
               src={certificates[lightboxIdx].src}
