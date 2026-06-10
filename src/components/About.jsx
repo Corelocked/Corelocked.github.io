@@ -20,7 +20,7 @@ import { ReactComponent as PhpIcon } from '../assets/icons/php.svg';
 const WORK_ENTRIES = [
   {
     id: 'megacat',
-    badge: 'MC',
+    badge: 'MCS',
     logo: megacatLogo,
     org: 'Mega Cat Studios',
     role: 'Web Developer',
