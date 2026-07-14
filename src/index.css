@@ -73,6 +73,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -85,6 +87,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
+}
+
+img,
+video,
+canvas {
   max-width: 100%;
 }
 
@@ -218,6 +226,12 @@ section {
 /* ==================== */
 
 @media (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
   section {
     padding: 70px 0;
   }
@@ -261,5 +275,35 @@ section {
   ::-webkit-scrollbar-thumb {
     background: rgba(79, 195, 247, 0.3);
     border-radius: 3px;
+  }
+}
+
+@media (pointer: coarse) {
+  .tab-btn,
+  .filter-btn,
+  .project-page-action,
+  .projects-cta-btn,
+  .projects-spotlight-btn,
+  .projects-view-all-btn,
+  .submit-btn,
+  .social-btn,
+  .view-all-btn,
+  .phone-mobile-toggle {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
-import { projects, ProjectCard } from './AllProjects';
+import { ProjectCard } from './AllProjects';
+import { projects } from '../data/projects';
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -76,15 +77,14 @@ const Projects = () => {
             </button>
 
             <div className="projects-slides">
-              {filteredProjects.map((project, idx) => (
+              {activeProject && (
                 <div
-                  key={project.id}
-                  className={`projects-slide ${idx === currentIndex ? 'active' : ''} ${direction}`}
-                  aria-hidden={idx !== currentIndex}
+                  key={activeProject.id}
+                  className={`projects-slide active ${direction}`}
                 >
-                  <ProjectCard project={project} hideDetails={true} />
+                  <ProjectCard project={activeProject} hideDetails={true} />
                 </div>
-              ))}
+              )}
             </div>
 
             <button

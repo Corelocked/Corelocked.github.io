@@ -344,6 +344,7 @@
 
 .about-timeline-tag-featured {
   cursor: pointer;
+  min-height: 24px;
   border-color: rgba(251, 191, 36, 0.5);
   color: #fde68a;
   background: rgba(146, 64, 14, 0.45);
@@ -359,14 +360,23 @@
 .about-featured-modal-backdrop {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
   z-index: 1200;
   background: rgba(2, 6, 23, 0.55);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+  border: 0;
   padding: 1rem;
+}
+
+.about-featured-modal-backdrop[open] {
+  display: flex;
 }
 
 .about-featured-modal {
@@ -678,25 +688,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(59, 130, 246, 0.14);
+  border-radius: 12px;
+  background: rgba(14, 165, 233, 0.1);
 }
 
 .current-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.current-icon-text {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: rgba(14, 165, 233, 0.14);
-  color: var(--primary-color);
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0;
+  width: 26px;
+  height: 26px;
 }
 
 .current-label {
@@ -726,7 +725,9 @@
   .about-featured-modal {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     max-height: 100vh;
+    max-height: 100dvh;
     border-radius: 0;
     padding: 0.6rem;
     justify-content: stretch;
@@ -735,6 +736,7 @@
   .about-featured-media {
     aspect-ratio: unset;
     height: calc(100vh - 160px);
+    height: calc(100dvh - 160px);
   }
 
   .about-featured-media video {

@@ -4,10 +4,10 @@
 /* All Projects Page Specific Styles */
 .all-projects {
   min-height: 100vh;
+  min-height: 100dvh;
   padding-top: 120px;
   padding-bottom: 100px;
 }
-
 .all-projects .section-label {
   display: inline-flex;
   align-items: center;
@@ -196,147 +196,24 @@
   border-color: rgba(79, 195, 247, 0.35);
 }
 
-.projects-hire-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(2, 6, 20, 0.66);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2200;
-  padding: 18px;
-}
 
-.projects-hire-modal {
-  width: min(760px, 100%);
-  border-radius: 20px;
-  border: 1px solid rgba(79, 195, 247, 0.2);
-  background: linear-gradient(160deg, rgba(10, 14, 30, 0.96), rgba(10, 10, 20, 0.96));
-  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.45);
-  padding: 18px;
-}
 
-.projects-hire-modal-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
 
-.projects-hire-modal-header h3 {
-  margin: 0 0 4px;
-  font-size: 1.1rem;
-  color: var(--text-color);
-}
 
-.projects-hire-modal-header p {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
 
-.projects-hire-close {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  border: 1px solid rgba(79, 195, 247, 0.24);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-color);
-  font-size: 1rem;
-  cursor: pointer;
-}
 
-.projects-hire-form {
-  display: grid;
-  gap: 12px;
-}
 
-.projects-hire-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
 
-.projects-hire-row:nth-of-type(2) {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 
-.projects-hire-form label {
-  display: grid;
-  gap: 6px;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  font-weight: 600;
-}
 
-.projects-hire-form input,
-.projects-hire-form select,
-.projects-hire-form textarea {
-  width: 100%;
-  border: 1px solid rgba(79, 195, 247, 0.24);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-color);
-  border-radius: 10px;
-  padding: 10px;
-  font: inherit;
-}
 
-.projects-hire-form select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 34px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a7b1c8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 14px;
-}
 
-.projects-hire-form select:focus,
-.projects-hire-form input:focus,
-.projects-hire-form textarea:focus {
-  outline: none;
-  border-color: rgba(79, 195, 247, 0.45);
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.14);
-}
 
-.projects-hire-form select option,
-.projects-hire-form select optgroup {
-  color: #0f172a;
-  background: #ffffff;
-}
 
-.projects-hire-form textarea {
-  resize: vertical;
-}
 
-.projects-hire-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
 
-.projects-hire-success {
-  margin: 0;
-  color: #67e8f9;
-  font-size: 0.82rem;
-  text-align: right;
-}
 
-.projects-hire-error {
-  margin: 0;
-  color: #fda4af;
-  font-size: 0.82rem;
-  text-align: right;
-}
 
-.projects-hire-actions .projects-cta-btn[disabled] {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
 
 .project-outcome {
   margin: 0;
@@ -612,23 +489,9 @@
     flex: 1;
   }
 
-  .projects-hire-modal {
-    padding: 14px;
-  }
 
-  .projects-hire-row,
-  .projects-hire-row:nth-of-type(2) {
-    grid-template-columns: 1fr;
-  }
 
-  .projects-hire-actions {
-    width: 100%;
-    justify-content: stretch;
-  }
 
-  .projects-hire-actions .projects-cta-btn {
-    flex: 1;
-  }
 
   .projects-editorial-copy {
     padding: 28px;
@@ -718,17 +581,8 @@
     font-size: 0.84rem;
   }
 
-  .projects-hire-modal-backdrop {
-    padding: 12px;
-  }
 
-  .projects-hire-modal-header h3 {
-    font-size: 1rem;
-  }
 
-  .projects-hire-modal-header p {
-    font-size: 0.84rem;
-  }
 
   .projects-editorial-copy {
     padding: 24px;

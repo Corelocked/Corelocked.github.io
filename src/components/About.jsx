@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './About.css';
 import '../components/Animations.css';
-import about from '../assets/images/Hero.png';
+import about from '../assets/images/Hero-512.png';
 import useScrollReveal from '../hooks/useScrollReveal';
 import ciitLogo from '../assets/images/ciit-logo.png';
 import pnriLogo from '../assets/images/pnri-logo.png';
 import lakbayLogo from '../assets/images/lakbay-logo.png';
 import etalaLogo from '../assets/images/e-tala logo.jpg';
 import blogsharkLogo from '../assets/images/blogshark-logo.png';
-import blogsharkFeaturedVideo from '../assets/images/blogshark-featured.mp4';
+import blogsharkFeaturedVideoWebm from '../assets/images/blogshark-featured.webm';
+import blogsharkFeaturedVideoMp4 from '../assets/images/blogshark-featured.mp4';
 import innsightLogo from '../assets/images/innsight.png';
 import inabelAwardsPreview from '../assets/images/inabel-awards-2026-innsight.jpg';
 import megacatLogo from '../assets/images/megacat-logo.jpg';
@@ -16,6 +17,11 @@ import pitakaLogo from '../assets/images/pitaka-logo.png';
 // Import Current Stack icons
 import { ReactComponent as JavascriptIcon } from '../assets/icons/javascript.svg';
 import { ReactComponent as PhpIcon } from '../assets/icons/php.svg';
+import { ReactComponent as ShopifyIcon } from '../assets/icons/shopify.svg';
+import { ReactComponent as PageFlyIcon } from '../assets/icons/pagefly.svg';
+import { ReactComponent as WordPressIcon } from '../assets/icons/wordpress.svg';
+import { ReactComponent as ElementorIcon } from '../assets/icons/elementor.svg';
+import { ReactComponent as LiquidIcon } from '../assets/icons/liquid.svg';
 
 const WORK_ENTRIES = [
   {
@@ -120,20 +126,20 @@ const EDUCATION_ENTRIES = [
     date: 'Expected Oct 2027',
     bullets: [
       'Specialization in Web and Mobile Development.',
-      'Focus areas: full-stack systems, Android engineering, and practical product delivery.'
+      'Focus areas: full-stack web architecture, responsive interfaces, and practical product delivery.'
     ],
-    tags: ['Computer Science', 'Web', 'Mobile']
+    tags: ['Computer Science', 'Web', 'Full-Stack']
   }
 ];
 
 const CURRENT_STACK = [
-  { name: 'Shopify', icon: <span className="current-icon-text">SF</span> },
-  { name: 'PageFly', icon: <span className="current-icon-text">PF</span> },
-  { name: 'WordPress', icon: <span className="current-icon-text">WP</span> },
-  { name: 'Elementor', icon: <span className="current-icon-text">EL</span> },
+  { name: 'Shopify', icon: <ShopifyIcon /> },
+  { name: 'PageFly', icon: <PageFlyIcon /> },
+  { name: 'WordPress', icon: <WordPressIcon /> },
+  { name: 'Elementor', icon: <ElementorIcon /> },
   { name: 'PHP', icon: <PhpIcon /> },
   { name: 'JavaScript', icon: <JavascriptIcon /> },
-  { name: 'Liquid', icon: <span className="current-icon-text">LQ</span> }
+  { name: 'Liquid', icon: <LiquidIcon /> }
 ];
 
 const FEATURED_PREVIEWS = {
@@ -142,7 +148,10 @@ const FEATURED_PREVIEWS = {
     title: 'BlogShark Featured Post',
     subtitle: 'Preview of the actual featured post content',
     ariaLabel: 'BlogShark featured post',
-    mediaSrc: blogsharkFeaturedVideo,
+    mediaSources: [
+      { src: blogsharkFeaturedVideoWebm, type: 'video/webm' },
+      { src: blogsharkFeaturedVideoMp4, type: 'video/mp4' }
+    ],
     mediaAlt: 'BlogShark featured post preview',
     actionHref: 'https://www.instagram.com/p/DUVf_PRDOQG/',
     actionLabel: 'Show on Instagram'
@@ -162,6 +171,7 @@ const FEATURED_PREVIEWS = {
 const TimelineTabs = () => {
   const [activeTab, setActiveTab] = useState('work');
   const [preview, setPreview] = useState(null);
+  const dialogRef = useRef(null);
   const videoRef = useRef(null);
   const entries = activeTab === 'work' ? WORK_ENTRIES : EDUCATION_ENTRIES;
 
@@ -180,11 +190,9 @@ const TimelineTabs = () => {
   };
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape' && preview) closePreview();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    const dialog = dialogRef.current;
+    if (preview && !dialog.open) dialog.showModal();
+    if (!preview && dialog.open) dialog.close();
   }, [preview]);
 
   return (
@@ -268,15 +276,20 @@ const TimelineTabs = () => {
         ))}
       </div>
 
-      {preview && (
-        <div
-          className="about-featured-modal-backdrop"
-          onClick={closePreview}
-        >
-          <div className="about-featured-modal" role="dialog" aria-label={preview.ariaLabel} onClick={(e) => e.stopPropagation()}>
+      <dialog
+        ref={dialogRef}
+        className="about-featured-modal-backdrop"
+        aria-labelledby="about-preview-title"
+        onCancel={closePreview}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) closePreview();
+        }}
+      >
+        {preview && (
+          <div className="about-featured-modal">
             <div className="about-featured-modal-header">
               <div>
-                <p className="about-featured-modal-title">{preview.title}</p>
+                <p id="about-preview-title" className="about-featured-modal-title">{preview.title}</p>
                 <p className="about-featured-modal-subtitle">{preview.subtitle}</p>
               </div>
               <button className="about-featured-close" onClick={closePreview} aria-label="Close preview">✕</button>
@@ -286,14 +299,17 @@ const TimelineTabs = () => {
               {preview.kind === 'video' ? (
                 <video
                   ref={videoRef}
-                  src={preview.mediaSrc}
                   controls
                   autoPlay
                   muted
                   loop
                   playsInline
-                  preload="metadata"
-                />
+                  preload="none"
+                >
+                  {preview.mediaSources.map((source) => (
+                    <source key={source.type} src={source.src} type={source.type} />
+                  ))}
+                </video>
               ) : (
                 <img src={preview.mediaSrc} alt={preview.mediaAlt} loading="lazy" decoding="async" />
               )}
@@ -310,8 +326,8 @@ const TimelineTabs = () => {
               </a>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </dialog>
     </div>
   );
 };
@@ -376,8 +392,8 @@ const About = () => {
 
             <div className="about-intro">
               <p className="lead-text">
-                I'm a Computer Science student from the Philippines and a Web Developer specializing in Data Engineering and Full-Stack Architecture.
-                I design scalable database solutions, real-time reporting systems, and user-focused products across web and mobile.
+                I'm a Computer Science student from the Philippines and a Full-Stack Web Developer.
+                I build responsive interfaces, reliable backend services, and scalable data-driven applications.
               </p>
               <p className="lead-subtext">
                 I have experience designing and implementing complex systems from finance dashboards and route engines to AI-powered virtual assistants and Shopify storefronts.
@@ -416,12 +432,10 @@ const About = () => {
             Shopify, PageFly, WordPress, Elementor, PHP, JavaScript, and Liquid for storefront and CMS development.
           </p>
           <div className="current-stack-list">
-            {CURRENT_STACK.map((tech, i) => (
+            {CURRENT_STACK.map((tech) => (
               <div
-                key={`stack-${i}`}
+                key={tech.name}
                 className="current-item"
-                role="button"
-                tabIndex={0}
               >
                 <span className="current-icon">{tech.icon}</span>
                 <span className="current-label">{tech.name}</span>

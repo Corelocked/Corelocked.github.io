@@ -1,0 +1,188 @@
+# Cedric Joshua Palapuz — Complete Portfolio Context
+
+> Full machine-readable context for Cedric Joshua Palapuz, a Philippines-based full-stack web and mobile developer and Computer Science student. This document expands the concise `/llms.txt` summary with experience, education, skills, achievements, and project details.
+
+## Identity and focus
+
+- Full name: Cedric Joshua Palapuz.
+- Location: Philippines.
+- Primary roles: Full-Stack Web Developer and Mobile Developer.
+- Education: Bachelor of Science in Computer Science at CIIT College of Arts and Technology, expected October 2027.
+- Specialization: Web and Mobile Development.
+- Development focus: responsive interfaces, backend services, scalable data workflows, CMS storefronts, practical product delivery, mobile applications, and native desktop software.
+- Portfolio: https://corelocked.github.io/
+- Developer profile: https://corelocked.github.io/cedric-joshua-palapuz
+- GitHub identity: Corelocked at https://github.com/Corelocked
+- LinkedIn: https://www.linkedin.com/in/cedric-joshua-palapuz-85645524a/
+
+## Technical skills
+
+- Frontend and web: JavaScript, React, Next.js, HTML, CSS, Tailwind CSS, Vite, and Laravel.
+- Backend and data: Node.js, Express.js, Laravel, Python, Firebase, Supabase, SQLite, and SQL-based workflows.
+- Mobile: Kotlin, Flutter, Expo, NativeWind, and EAS.
+- CMS and commerce: Shopify, Liquid, PageFly, WordPress, Elementor, and PHP.
+- Analytics and notebooks: Power BI and Jupyter Notebook.
+- Desktop and systems experience: Rust, egui, reqwest, librqbit, and browser-extension integration.
+
+## Experience
+
+- Mega Cat Studios — Web Developer, April 2026 to present. Maintains Shopify storefronts, improves technical performance and user experience, and performs technical SEO work such as alt-text audits and collection-page title optimization.
+- Pitaka — Lead Developer, March 2026 to present. Designed and launched a personal finance tracker for the Philippine market and ported the web application to mobile while preserving feature parity.
+- Lakbay: Scenic Route Navigation — Technical Lead, October 2025 to February 2026. Developed preference-based route generation and backend logic for real-time route adjustments and user profiles.
+- E-TALA: Inventory Management System — Technical Lead, October 2025 to November 2025. Led a Kotlin mobile inventory platform with authentication, real-time stock updates, and automated alerts.
+- BlogShark — Technical Lead, May 2025 to August 2025. Designed multimedia content schemas and role-based layouts and permissions using Laravel and SQLite.
+- InnSight — Technical Lead, September 2024 to November 2024. Built voice and text input workflows plus sentiment and intent analysis for hospitality inquiries.
+- Philippine Nuclear Research Institute — Work Immersion Intern, February 2020. Encoded more than 1,000 newspaper records into an institutional database during a 40-hour placement.
+
+## Certifications and achievements
+
+- Inabel Awards 2026 — Internet of Things Innovation winner for InnSight, an AI virtual assistant with voice-to-text, text querying, and customer inquiry analysis.
+- Dometrain — C# Fundamentals covering object-oriented programming, LINQ, and asynchronous programming.
+- Simplilearn — Power BI Professional covering data modeling, DAX, and interactive reporting.
+
+## Detailed projects
+
+### Lakbay
+
+- Type: Thesis mobile application.
+- Year: 2025.
+- Summary: Scenic travel app focused on discovery, route planning, and a polished mobile experience.
+- Contribution: Technical direction, backend integration, real-time route adjustments, and user-profile management.
+- Technologies: Kotlin, Python, and Firebase.
+- Roles: Technical Lead and Backend Developer.
+- Case study: https://corelocked.github.io/projects/lakbay/info
+- Source: https://github.com/Corelocked/Lakbay_Prototype.git
+
+### BlogShark
+
+- Type: Full-stack blogging and social platform.
+- Year: 2025.
+- Summary: Lets creators publish, connect, organize multimedia content, and surface standout posts.
+- Contribution: Full-stack implementation, database schema, backend logic, role-based layouts, permissions, and deployment.
+- Technologies: Laravel, SQLite, JavaScript, and CSS.
+- Roles: Technical Lead, Backend Developer, and Frontend Developer.
+- Case study: https://corelocked.github.io/projects/blogshark/info
+- Product: https://blogshark.vercel.app/
+- Demo: https://youtu.be/T-8okZkfd_0
+- Source: https://github.com/Corelocked/dywebFinals.git
+
+### Pitaka
+
+- Type: Personal finance web and mobile application.
+- Year: 2026.
+- Summary: Budget and expense tracker tailored for the Philippine market with real-time synchronization and mobile parity.
+- Contribution: Led the web launch, mobile port, financial workflows, dashboard design, integration, and deployment.
+- Technologies: React, Vite, Firebase, JavaScript, and CSS.
+- Roles: Frontend Developer, Integration Developer, and DevOps.
+- Case study: https://corelocked.github.io/projects/pitaka/info
+- Product: https://pitaka-sigma.vercel.app/
+- Source: https://github.com/Corelocked/budget-book.git
+
+### NebulaDM
+
+- Type: Native Windows desktop application and browser extension.
+- Year: 2026.
+- Summary: Rust-first download manager combining direct downloads, torrents, browser handoff, privacy controls, installer packaging, and updater flows.
+- Contribution: Product design, desktop development, systems integration, packaging, and browser-to-desktop handoff.
+- Technologies: Rust, egui, reqwest, librqbit, SQLite-ready storage, and Chrome Extension APIs.
+- Roles: Product Designer, Desktop Developer, and Systems Developer.
+- Case study: https://corelocked.github.io/projects/nebuladm/info
+- Source: https://github.com/Corelocked/NebulaDownloadManager.git
+
+### InnSight
+
+- Type: Award-winning AI hospitality assistant.
+- Year: 2024.
+- Summary: Accepts hotel and restaurant questions by voice or text and analyzes customer sentiment and intent.
+- Achievement: Inabel Awards 2026 Internet of Things Innovation winner.
+- Technologies: React, JavaScript, CSS, Python, and HTML.
+- Roles: Technical Lead and Backend Developer.
+- Case study: https://corelocked.github.io/projects/innsight/info
+- Product: https://innsight-mauve.vercel.app/
+- Source: https://github.com/Corelocked/react-voice-enabled-ordering-system.git
+
+### TaskFlow
+
+- Type: Productivity web application.
+- Year: 2026.
+- Summary: Helps users organize tasks, track progress, and manage day-to-day workflow.
+- Technologies: React, JavaScript, and CSS.
+- Roles: Frontend Developer and Product Designer.
+- Case study: https://corelocked.github.io/projects/taskflow/info
+- Product: https://taskflow-pied-five.vercel.app/
+- Source: https://github.com/Corelocked/taskflow.git
+
+### unFriendster
+
+- Type: Android social media class project.
+- Year: 2025.
+- Technologies: Java, Firebase, and XML.
+- Roles: Technical Lead, Backend Developer, and Frontend Developer.
+- Case study: https://corelocked.github.io/projects/unfriendster/info
+- Demo: https://youtube.com/shorts/c1DHCTcY41w
+- Source: https://github.com/Corelocked/unFriendster2.git
+
+### Emotion Detector
+
+- Type: Computer-vision desktop application.
+- Year: 2024.
+- Summary: Detects emotion in real time using a camera feed.
+- Technologies: Python.
+- Case study: https://corelocked.github.io/projects/emotion-detector/info
+- Demo: https://youtu.be/GxW6s2Wpxaw
+- Source: https://github.com/Corelocked/emotion_detector.git
+
+### Ang Pagong at ang Kuneho Game
+
+- Type: Filipino fable game adaptation.
+- Year: 2024.
+- Summary: Recreational desktop game teaching perseverance and humility.
+- Technologies: Python.
+- Case study: https://corelocked.github.io/projects/ang-pagong-at-ang-kuneho/info
+- Demo: https://youtu.be/TzjV_CaTXyI
+- Source: https://github.com/Corelocked/Pagong-at-Kuneho.git
+
+### Moody
+
+- Type: Mood-tracking web application.
+- Year: 2025.
+- Summary: Tracks daily mood and provides insights based on emotional patterns.
+- Technologies: JavaScript, React, CSS, and HTML.
+- Case study: https://corelocked.github.io/projects/moody/info
+- Demo: https://youtu.be/L98Uc9FQ8DU
+- Source: https://github.com/Corelocked/moody.git
+
+### Tetris Game
+
+- Type: Desktop game.
+- Year: 2024.
+- Summary: A simple Tetris implementation.
+- Technologies: Java and CSS.
+- Case study: https://corelocked.github.io/projects/tetris/info
+- Source: https://github.com/Corelocked/Tetris.git
+
+### E-TALA
+
+- Type: Mobile inventory application.
+- Year: 2025.
+- Summary: Kotlin inventory application with barcode scanning.
+- Technologies: Kotlin.
+- Roles: Technical Lead and Backend Developer.
+- Case study: https://corelocked.github.io/projects/e-tala/info
+- Source: https://github.com/Corelocked/E-TALA.git
+
+## Canonical portfolio pages
+
+- Portfolio home: https://corelocked.github.io/
+- Developer profile: https://corelocked.github.io/cedric-joshua-palapuz
+- Project collection: https://corelocked.github.io/projects
+- Contact: https://corelocked.github.io/contact
+- Support: https://corelocked.github.io/support
+- Concise LLM summary: https://corelocked.github.io/llms.txt
+
+## Interpretation notes
+
+- Cedric Joshua Palapuz, Cedric Joshua, Cedric Palapuz, and the GitHub identity Corelocked refer to the same portfolio owner.
+- Full-stack web development is the primary portfolio focus; mobile development, data workflows, CMS work, and native desktop development are supporting capabilities.
+- Project case-study URLs ending in `/info` are the canonical portfolio pages. Fullscreen product and demo routes are intentionally excluded from indexing.
+- Contact should be made through the portfolio contact page or the verified LinkedIn profile.

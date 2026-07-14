@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef, lazy, Suspense, useContext } from 'react';
 import { Link } from 'react-scroll';
-import emailjs from '@emailjs/browser';
 import { useGitHubContributions } from '../hooks/useGitHubContributions';
 import ContributionHeatmap from './ContributionHeatmap';
 import { ThemeContext } from '../context/ThemeContext';
+import { projects } from '../data/projects';
+import { sendContactForm } from '../utils/sendContactForm';
 import './Phone.css';
 
 // Assets
-import aboutImage from '../assets/images/Hero.png';
+import aboutImage from '../assets/images/Hero-512.png';
 import mayaQR from '../assets/images/maya-qr.jpg';
 
 // Import skill SVG icons
@@ -196,19 +197,7 @@ const SKILL_CATEGORIES = [
   ]},
 ];
 
-const PHONE_PROJECTS = [
-  { id: 1, title: 'InnSight', description: 'An interactive web application designed as a virtual assistant tool, allowing users to inquire about hotel and restaurant-related topics through voice or text input.', technologies: ['React', 'Javascript', 'CSS', 'Python', 'HTML'], category: ['Website', 'AI/ML'], roles: ['Tech Lead', 'Backend'], githubLink: 'https://github.com/Corelocked/react-voice-enabled-ordering-system.git', liveDemo: 'https://voice-order-assistant.web.app/', featured: true },
-  { id: 2, title: 'unFriendster', description: 'An attempt to create a social media app for my Android App Dev class.', technologies: ['Java', 'Firebase', 'XML'], category: ['Mobile App'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/unFriendster2.git', liveDemo: 'https://youtube.com/shorts/c1DHCTcY41w', featured: true },
-  { id: 3, title: 'Ang Pagong at ang Kuneho Game', description: 'A recreational game about the story "Ang Pagong at ang Kuneho", a classic Filipino fable that teaches the value of perseverance and humility.', technologies: ['Python'], category: ['Game', 'Desktop App'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/Pagong-at-Kuneho.git', liveDemo: 'https://youtu.be/TzjV_CaTXyI', featured: true },
-  { id: 4, title: 'Emotion Detector', description: 'A program I made using Python that detects your emotion in real-time using a camera.', technologies: ['Python'], category: ['AI/ML', 'Desktop App'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/emotion_detector.git', liveDemo: 'https://youtu.be/GxW6s2Wpxaw', featured: false },
-  { id: 5, title: 'Moody', description: 'An interactive web application that tracks your daily mood and provides insights based on your emotional patterns.', technologies: ['Javascript', 'React', 'CSS', 'HTML'], category: ['Website'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/moody.git', liveDemo: 'https://youtu.be/L98Uc9FQ8DU', featured: false },
-  { id: 7, title: 'Tetris Game', description: 'A simple Tetris game made using Java and CSS.', technologies: ['Java', 'CSS'], category: ['Game', 'Desktop App'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/Tetris.git', liveDemo: '#', featured: false },
-  { id: 9, title: 'E-Tala', description: 'A mobile inventory app with barcode scanner feature.', technologies: ['Kotlin'], category: ['Mobile App'], roles: ['Tech Lead', 'Backend'], githubLink: 'https://github.com/Corelocked/E-TALA.git', liveDemo: '#', featured: false },
-  { id: 12, title: 'Lakbay', description: 'A scenic travel mobile app. Created as our Thesis project.', technologies: ['Kotlin', 'Python', 'Firebase'], category: ['Mobile App'], roles: ['Tech Lead', 'Backend'], githubLink: 'https://github.com/Corelocked/Lakbay_Prototype.git', liveDemo: '#', featured: false },
-  { id: 13, title: 'BlogShark', description: 'A social media platform for bloggers to share and connect. Made completely from scratch using Laravel and SQLite.', technologies: ['Laravel', 'SQLite', 'JavaScript', 'CSS'], category: ['Website'], roles: ['Tech Lead', 'Backend', 'Frontend'], githubLink: 'https://github.com/Corelocked/dywebFinals.git', liveDemo: 'https://youtu.be/T-8okZkfd_0', featured: true },
-  { id: 15, title: 'Pitaka', description: 'A publicly available personal finance web app for tracking income, expenses, savings, wallets, and lendings with CSV export and realtime Firestore sync.', technologies: ['React', 'Vite', 'Firebase', 'JavaScript', 'CSS'], category: ['Website'], roles: ['Frontend', 'Integration', 'DevOps'], githubLink: 'https://github.com/Corelocked/budget-book.git', liveDemo: 'https://pitaka-sigma.vercel.app/', featured: true },
-  { id: 16, title: 'TaskFlow', description: 'A task management web app built to help users organize tasks, track progress, and keep day-to-day workflow moving smoothly.', technologies: ['React', 'JavaScript', 'CSS'], category: ['Website'], roles: ['Frontend', 'Product Design'], githubLink: 'https://github.com/Corelocked/taskflow.git', liveDemo: 'https://taskflow-pied-five.vercel.app/', featured: false },
-];
+const PHONE_PROJECTS = projects;
 
 const PROJECT_CATEGORIES = ['All', 'Website', 'Mobile App', 'Desktop App', 'Game', 'AI/ML'];
 
@@ -290,11 +279,6 @@ const SUPPORT_OPTIONS = [
     color: '#00D563',
   },
 ];
-
-// EmailJS Config
-const EMAILJS_SERVICE_ID = 'service_18woyam';
-const EMAILJS_TEMPLATE_ID = 'template_320vcsc';
-const EMAILJS_PUBLIC_KEY = 'R9B6dfHNiMoceaxmX';
 
 // ===== App Grid =====
 
@@ -446,15 +430,14 @@ const apps = [
 
 // ===== Phone Component =====
 
-const Phone = () => {
+const Phone = ({ initiallyOpen = false }) => {
   // Navigation state
   const [gamesOpen, setGamesOpen] = useState(false);
   const [activeGame, setActiveGame] = useState(null);
   const [activeView, setActiveView] = useState(null); // 'about'|'skills'|'projects'|'contact'|'support'|'assistant'
   const [currentTime, setCurrentTime] = useState('');
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [phoneNightVideoSrc, setPhoneNightVideoSrc] = useState(null);
-  const [phoneDayVideoSrc, setPhoneDayVideoSrc] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(initiallyOpen);
+  const [phoneVideoSources, setPhoneVideoSources] = useState(null);
 
   // Skills state
   const [activeSkillCat, setActiveSkillCat] = useState('all');
@@ -487,9 +470,12 @@ const Phone = () => {
 
   // Contributions state
   const [contribYear, setContribYear] = useState(new Date().getFullYear());
-  const { data: contribData, loading: contribLoading, error: contribError } = useGitHubContributions(contribYear);
-  const startYear = 2022;
-  const years = Array.from({ length: new Date().getFullYear() - startYear + 1 }, (_, i) => startYear + i);
+  const {
+    data: contribData,
+    loading: contribLoading,
+    error: contribError,
+    availableYears,
+  } = useGitHubContributions(contribYear);
   const [yearMenuOpen, setYearMenuOpen] = useState(false); // State for year dropdown menu
   const yearMenuRef = useRef(null);
 
@@ -518,15 +504,34 @@ const Phone = () => {
   }, []);
 
   useEffect(() => {
-    let mounted = true;
-    import('../assets/images/umbreon.mp4').then((m) => {
-      if (mounted) setPhoneNightVideoSrc(m.default || m);
+    let cancelled = false;
+    const videos = darkMode
+      ? Promise.all([
+          import('../assets/images/umbreon.webm'),
+          import('../assets/images/umbreon.mp4')
+        ])
+      : Promise.all([
+          import('../assets/images/spider-gwen.webm'),
+          import('../assets/images/spider-gwen.mp4')
+        ]);
+
+    videos.then(([webm, mp4]) => {
+      if (!cancelled) {
+        setPhoneVideoSources({
+          webm: webm.default || webm,
+          mp4: mp4.default || mp4
+        });
+      }
     }).catch(() => {});
-    import('../assets/images/spider-gwen.mp4').then((m) => {
-      if (mounted) setPhoneDayVideoSrc(m.default || m);
-    }).catch(() => {});
-    return () => { mounted = false; };
-  }, []);
+
+    return () => { cancelled = true; };
+  }, [darkMode]);
+
+  useEffect(() => {
+    if (availableYears.length && !availableYears.includes(contribYear)) {
+      setContribYear(availableYears[0]);
+    }
+  }, [availableYears, contribYear]);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -683,13 +688,17 @@ const Phone = () => {
     e.preventDefault();
     setFormStatus({ submitting: true, submitted: false, error: null });
     try {
-      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY);
+      await sendContactForm(formRef.current);
       setFormStatus({ submitting: false, submitted: true, error: null });
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setFormStatus((prev) => ({ ...prev, submitted: false })), 5000);
     } catch (error) {
       console.error('EmailJS Error:', error);
-      setFormStatus({ submitting: false, submitted: false, error: 'Failed to send message. Please try again.' });
+      setFormStatus({
+        submitting: false,
+        submitted: false,
+        error: error?.status === 429 ? 'Please wait one minute before sending another message.' : 'Failed to send message. Please try again.',
+      });
     }
   };
 
@@ -840,9 +849,9 @@ const Phone = () => {
     if (question.includes('who') || question.includes('about') || question.includes('cedric')) {
       return {
         text: buildMixedToneReply({
-          professional: 'I am Cedric Joshua Palapuz, a web and mobile developer focused on practical, production-ready products.',
+          professional: 'I am Cedric Joshua Palapuz, a full-stack web developer focused on practical, production-ready products.',
           casual: 'I like shipping things people can actually use.',
-          technical: 'My core stack includes React, Next.js, Expo, Kotlin, Firebase, and Supabase.',
+          technical: 'My core stack includes React, Next.js, Node.js, Firebase, Supabase, and SQL.',
           prompt: ''
         }),
         intent: 'profile',
@@ -856,7 +865,7 @@ const Phone = () => {
           professional: 'Here are my strongest skills.',
           casual: 'These are the tools I use the most in real builds.',
           technical: `Top stack items: ${SKILL_CATEGORIES.flatMap((cat) => cat.skills.map((skill) => skill.name)).slice(0, 8).join(', ')}.`,
-          prompt: 'I can break this down by frontend, mobile, or backend next.'
+          prompt: 'I can break this down by frontend, backend, or databases next.'
         }),
         intent: 'skills',
         topic: 'stack'
@@ -868,7 +877,7 @@ const Phone = () => {
         text: buildMixedToneReply({
           professional: `My featured projects include ${featuredProjects.join(', ')}.`,
           casual: 'Each one reflects a different kind of problem-solving style.',
-          technical: 'The portfolio covers web, mobile, and full-stack product workflows with deployment-ready implementations.',
+          technical: 'The portfolio emphasizes full-stack web workflows, from interfaces and backend services to databases and deployment.',
           prompt: 'Open the Projects app and I can guide you on which one to review first.'
         }),
         intent: 'projects',
@@ -1020,12 +1029,12 @@ const Phone = () => {
                 <img src={aboutImage} alt="Cedric Joshua" />
               </div>
               <h3 className="pv-about-name">Cedric Joshua Palapuz</h3>
-              <p className="pv-about-role">Web & Mobile Developer</p>
+              <p className="pv-about-role">Full-Stack Web Developer</p>
               <div className="pv-section-text">
                 <p className="pv-lead">
-                  I'm a web and mobile developer focused on building practical, user-friendly products.
-                  I work mainly with React and Next.js for web, plus Expo and Kotlin for mobile.
-                  I also use Firebase and Supabase to ship full features quickly.
+                  I'm a full-stack web developer focused on building practical, user-friendly products.
+                  I work mainly with React and Next.js on the frontend, with Node.js, Firebase,
+                  and Supabase behind the scenes.
                 </p>
                 <p className="pv-sub">
                   I enjoy turning ideas into polished apps with clear UX and reliable workflows.
@@ -1163,43 +1172,57 @@ const Phone = () => {
               </div>
 
               <form ref={formRef} onSubmit={handleContactSubmit} className="pv-form">
+                <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px' }}>
+                  <label htmlFor="phone-website">Website</label>
+                  <input id="phone-website" name="website" type="text" tabIndex="-1" autoComplete="off" />
+                </div>
                 {formStatus.submitted && (
-                  <div className="pv-form-msg success">✅ Message sent! I'll get back to you soon.</div>
+                  <div className="pv-form-msg success" role="status" aria-live="polite">✅ Message sent! I'll get back to you soon.</div>
                 )}
                 {formStatus.error && (
-                  <div className="pv-form-msg error">❌ {formStatus.error}</div>
+                  <div className="pv-form-msg error" role="alert">❌ {formStatus.error}</div>
                 )}
                 <div className="pv-form-group">
-                  <label>Name <span className="pv-req">*</span></label>
+                  <label htmlFor="phone-name">Name <span className="pv-req">*</span></label>
                   <input
+                    id="phone-name"
                     type="text"
                     name="from_name"
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    maxLength={100}
+                    minLength={2}
+                    autoComplete="name"
                     required
                     disabled={formStatus.submitting}
                   />
                 </div>
                 <div className="pv-form-group">
-                  <label>Email <span className="pv-req">*</span></label>
+                  <label htmlFor="phone-email">Email <span className="pv-req">*</span></label>
                   <input
+                    id="phone-email"
                     type="email"
                     name="from_email"
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    maxLength={254}
+                    autoComplete="email"
                     required
                     disabled={formStatus.submitting}
                   />
                 </div>
                 <div className="pv-form-group">
-                  <label>Message <span className="pv-req">*</span></label>
+                  <label htmlFor="phone-message">Message <span className="pv-req">*</span></label>
                   <textarea
+                    id="phone-message"
                     name="message"
                     placeholder="Tell me about your project or just say hello..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    maxLength={3000}
+                    minLength={10}
                     required
                     disabled={formStatus.submitting}
                     rows={4}
@@ -1532,7 +1555,7 @@ const Phone = () => {
 
                 {yearMenuOpen && (
                   <ul className="widget-year-menu" role="listbox">
-                    {years.slice().reverse().map((y) => (
+                    {availableYears.map((y) => (
                       <li
                         key={y}
                         role="option"
@@ -1574,6 +1597,8 @@ const Phone = () => {
       {/* Mobile toggle button */}
       <button
         className={`phone-mobile-toggle ${mobileOpen ? 'active' : ''}`}
+        aria-expanded={mobileOpen}
+        aria-controls="portfolio-phone"
         onClick={() => {
           setMobileOpen(!mobileOpen);
           if (mobileOpen) {
@@ -1607,19 +1632,15 @@ const Phone = () => {
       )}
 
       {/* Phone sidebar container */}
-      <div className={`phone-sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
+      <div id="portfolio-phone" className={`phone-sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className={`phone-mockup ${activeGame ? 'game-active' : ''}`}>
           <div className="phone-frame">
             {/* Theme video background inside phone */}
             <div className="phone-video-background" aria-hidden="true">
-              {phoneNightVideoSrc && (
-                <video className={`phone-theme-video night-video ${darkMode ? 'active' : ''}`} autoPlay muted loop playsInline preload="none">
-                  <source src={phoneNightVideoSrc} type="video/mp4" />
-                </video>
-              )}
-              {phoneDayVideoSrc && (
-                <video className={`phone-theme-video ${!darkMode ? 'active' : ''}`} autoPlay muted loop playsInline preload="none">
-                  <source src={phoneDayVideoSrc} type="video/mp4" />
+              {phoneVideoSources && (
+                <video key={darkMode ? 'night' : 'day'} className={`phone-theme-video active ${darkMode ? 'night-video' : ''}`} autoPlay muted loop playsInline preload="none">
+                  <source src={phoneVideoSources.webm} type="video/webm" />
+                  <source src={phoneVideoSources.mp4} type="video/mp4" />
                 </video>
               )}
               <div className="phone-video-overlay"></div>

@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
@@ -14,24 +14,21 @@ import Contact from './components/Contact';
 import Support from './components/Support';
 import AuthorProfile from './components/AuthorProfile';
 import Footer from './components/Footer';
-import Phone from './components/Phone';
-import LoadingScreen from './components/LoadingScreen';
+import ResponsivePhone from './components/ResponsivePhone';
 import SeoManager from './components/SeoManager';
 /* eslint-disable-next-line import/first */
 const StarryBackground = React.lazy(() => import('./components/StarryBackground'));
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
   return (
     <Router>
       <ScrollToHash />
-      <AppContent isLoading={isLoading} setIsLoading={setIsLoading} />
+      <AppContent />
     </Router>
   );
 }
 
-function AppContent({ isLoading, setIsLoading }) {
+export function AppContent() {
   const { pathname } = useLocation();
   // Treat /projects/:slug and /projects/:slug/view as full-project views (hide app chrome)
   const isFullProjectView = /^\/projects\/[^/]+(?:\/view)?$/.test(pathname);
@@ -40,15 +37,13 @@ function AppContent({ isLoading, setIsLoading }) {
     <div className="App">
       <SeoManager />
 
-      {!isFullProjectView && isLoading && <LoadingScreen onFinished={() => setIsLoading(false)} />}
-
       {!isFullProjectView && (
         <Suspense fallback={null}>
           <StarryBackground />
         </Suspense>
       )}
 
-      {!isFullProjectView && <Phone />}
+      {!isFullProjectView && <ResponsivePhone />}
 
       <Routes>
         {/* Home Route */}
@@ -114,6 +109,17 @@ function AppContent({ isLoading, setIsLoading }) {
             <Footer />
           </div>
         } />
+
+        <Route path="*" element={
+          <div className="main-content">
+            <Header />
+            <main className="not-found">
+              <p className="section-label">404</p>
+              <h1>Page not found</h1>
+              <p>The page you requested does not exist.</p>
+            </main>
+          </div>
+        } />
       </Routes>
     </div>
   );
@@ -126,7 +132,7 @@ function ScrollToHash() {
 
   React.useEffect(() => {
     // small delay to allow route to mount
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       if (hash) {
         const id = hash.replace('#', '');
         if (id === 'home') {
@@ -143,6 +149,8 @@ function ScrollToHash() {
       // No hash (regular route change) — ensure page starts at top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 50);
+
+    return () => clearTimeout(timer);
   }, [hash, pathname]);
 
   return null;

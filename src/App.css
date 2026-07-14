@@ -14,6 +14,42 @@
   position: relative;
 }
 
+.phone-lazy-launcher {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .phone-lazy-launcher {
+    position: fixed;
+    right: max(24px, env(safe-area-inset-right));
+    bottom: max(24px, env(safe-area-inset-bottom));
+    z-index: 9999;
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    color: rgba(255, 255, 255, 0.9);
+    font: 600 13px var(--body-font, 'DM Sans'), sans-serif;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.15), rgba(124, 77, 255, 0.12));
+    border: 1.5px solid rgba(79, 195, 247, 0.25);
+    border-radius: 32px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 24px rgba(79, 195, 247, 0.08);
+    backdrop-filter: blur(8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-lazy-launcher {
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+    padding: 11px 20px;
+    font-size: 12px;
+  }
+}
+
 /* Main content sits beside the phone sidebar */
 .main-content {
   margin-left: var(--phone-sidebar-width);
@@ -24,5 +60,18 @@
 /* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
+}
+
+.not-found {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+}
+
+.not-found > * {
+  margin: 0;
 }
 

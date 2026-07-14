@@ -8,8 +8,11 @@ const path = require('path');
 const GITHUB_API_URL = 'https://api.github.com/graphql';
 const token = process.env.GITHUB_TOKEN || process.env.CONTRIB_PAT;
 const username = process.env.GITHUB_USERNAME || 'Corelocked';
-const yearsEnv = process.env.CONTRIB_YEARS || '2024,2025,2026';
-const years = yearsEnv.split(',').map((y) => y.trim());
+const yearsEnv = process.env.CONTRIB_YEARS;
+const currentYear = new Date().getUTCFullYear();
+const years = yearsEnv
+  ? yearsEnv.split(',').map((year) => year.trim())
+  : Array.from({ length: currentYear - 2022 + 1 }, (_, index) => String(2022 + index));
 
 if (!token) {
   console.error('Missing GITHUB_TOKEN or CONTRIB_PAT environment variable. Aborting.');

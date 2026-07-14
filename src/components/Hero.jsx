@@ -5,10 +5,10 @@ import './Hero.css';
 import '../components/Animations.css';
 import heroImage from '../assets/images/Hero2.JPG';
 
-const ROLES = ['Web Developer', 'Data Engineer', 'Full-Stack Developer'];
+const ROLES = ['Web Developer', 'Mobile Developer'];
 const HERO_HIGHLIGHTS = [
   { label: 'Published apps', value: '3+' },
-  { label: 'Focus', value: 'Data + Full-Stack' },
+  { label: 'Focus', value: 'Full-Stack Web' },
   { label: 'Current role', value: 'Web Developer' }
 ];
 

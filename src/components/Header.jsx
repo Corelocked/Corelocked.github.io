@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react';
 import resumeWeb from '../assets/resumes/Resume_WebDev.pdf';
 import resumeQA from '../assets/resumes/Resume_QA.pdf';
 import resumeData from '../assets/resumes/Resume_DataEngineer.pdf';
+import useModalFocus from '../hooks/useModalFocus';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [chooserOpen, setChooserOpen] = useState(false);
+  const chooserRef = useModalFocus(chooserOpen);
 
   const openChooser = () => setChooserOpen(true);
   const closeChooser = () => setChooserOpen(false);
@@ -177,11 +179,11 @@ const Header = () => {
     
     {/* Resume Chooser Modal */}
     {chooserOpen && (
-      <div className="header-resume-modal" role="dialog" aria-modal="true">
+      <div className="header-resume-modal" role="dialog" aria-modal="true" aria-labelledby="header-resume-title">
         <div className="header-resume-modal__backdrop" onClick={closeChooser} />
-        <div className="header-resume-modal__content">
+        <div ref={chooserRef} className="header-resume-modal__content" tabIndex="-1">
           <header className="modal-header">
-            <h3>
+            <h3 id="header-resume-title">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>

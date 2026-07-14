@@ -73,17 +73,8 @@ export const ThemeProvider = ({ children }) => {
     });
   };
 
-  // Allow re-enabling automatic (time-based) theme
-  const enableAutoTheme = () => {
-    try {
-      localStorage.removeItem('themeOverride');
-      localStorage.removeItem('darkMode');
-    } catch {}
-    setDarkMode(isNight());
-  };
-
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode, enableAutoTheme }}>
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );

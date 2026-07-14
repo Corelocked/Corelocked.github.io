@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import './Certificates.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import useModalFocus from '../hooks/useModalFocus';
 
 import cert1 from '../assets/images/certificates/dometrain-csharp-certificate.jpg';
 import cert2 from '../assets/images/certificates/simplilearn-powerbi-certificate.jpg';
@@ -40,6 +41,8 @@ const Certificates = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState(null);
+  const modalRef = useModalFocus(isModalOpen);
+  const lightboxRef = useModalFocus(lightboxIdx !== null);
   const autoplayRef = useRef(null);
   const progressRef = useRef(null);
 
@@ -159,12 +162,9 @@ const Certificates = () => {
                 aria-hidden={i !== index}
               >
                 {item.src ? (
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    onClick={() => setLightboxIdx(i)}
-                    title="Click to enlarge"
-                  />
+                  <button type="button" className="cert-image-button" onClick={() => setLightboxIdx(i)} aria-label={`Enlarge ${item.title}`}>
+                    <img src={item.src} alt={item.alt} />
+                  </button>
                 ) : (
                   <article className="achievement-slide" aria-label={item.alt}>
                     <span className="achievement-badge">{item.badge}</span>
@@ -213,11 +213,11 @@ const Certificates = () => {
 
         {/* View-All Modal */}
         {isModalOpen && (
-          <div className="cert-modal" role="dialog" aria-modal="true">
+          <div className="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
             <div className="cert-modal-backdrop" onClick={closeModal} />
-            <div className="cert-modal-content">
+            <div ref={modalRef} className="cert-modal-content" tabIndex="-1">
               <div className="modal-header">
-                <h3>All Certificates</h3>
+                <h3 id="cert-modal-title">All Certificates</h3>
                 <button className="modal-close" onClick={closeModal} aria-label="Close">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
@@ -255,7 +255,7 @@ const Certificates = () => {
 
         {/* Lightbox */}
         {lightboxIdx !== null && certificates[lightboxIdx].src && (
-          <div className="cert-lightbox" onClick={() => setLightboxIdx(null)}>
+          <div ref={lightboxRef} className="cert-lightbox" role="dialog" aria-modal="true" aria-label={`${certificates[lightboxIdx].title} preview`} tabIndex="-1" onClick={() => setLightboxIdx(null)}>
             <img
               src={certificates[lightboxIdx].src}
               alt={certificates[lightboxIdx].alt}

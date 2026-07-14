@@ -9,17 +9,17 @@ export default function AuthorProfile() {
         <p className="author-kicker">Developer Profile</p>
         <h1>Cedric Joshua Palapuz</h1>
         <p className="author-summary">
-          Cedric Joshua Palapuz is a Computer Science student and Web Developer focused on
-          data engineering, full-stack architecture, and practical products built with
-          JavaScript, Node.js, React, Python, SQL-based tools, and modern CMS platforms.
+          Cedric Joshua Palapuz is a Computer Science student and Full-Stack Web Developer
+          focused on practical products built with JavaScript, React, Node.js, Python,
+          SQL-based tools, and modern CMS platforms.
         </p>
 
         <div className="author-grid">
           <article className="author-card">
             <h2>What I Build</h2>
             <p>
-              I design and ship web, mobile, and data-driven workflows, from finance dashboards
-              and route systems to CMS storefront work and real-time reporting tools.
+              I design and ship full-stack web applications, from responsive interfaces and CMS
+              storefronts to backend workflows, dashboards, and real-time reporting tools.
             </p>
           </article>
 

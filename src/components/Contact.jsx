@@ -1,13 +1,8 @@
 import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import './Contact.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
-
-// EmailJS Configuration
-const EMAILJS_SERVICE_ID = 'service_18woyam';
-const EMAILJS_TEMPLATE_ID = 'template_320vcsc';
-const EMAILJS_PUBLIC_KEY = 'R9B6dfHNiMoceaxmX';
+import { sendContactForm } from '../utils/sendContactForm';
 
 const Contact = () => {
   const [titleRef, isTitleVisible] = useScrollReveal({ threshold: 0.2 });
@@ -32,12 +27,7 @@ const Contact = () => {
     setStatus({ submitting: true, submitted: false, error: null });
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY
-      );
+      await sendContactForm(formRef.current);
       setStatus({ submitting: false, submitted: true, error: null });
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => {
@@ -48,7 +38,9 @@ const Contact = () => {
       setStatus({
         submitting: false,
         submitted: false,
-        error: 'Failed to send message. Please try again or contact me directly via email.'
+        error: error?.status === 429
+          ? 'Please wait one minute before sending another message.'
+          : 'Failed to send message. Please try again or contact me directly via email.'
       });
     }
   };
@@ -61,9 +53,9 @@ const Contact = () => {
           className={`contact-header scroll-reveal fade-up ${isTitleVisible ? 'visible' : ''}`}
         >
           <span className="section-label">Contact</span>
-          <h2 className="section-title">
+          <h1 className="section-title">
             Let's <span className="gradient-text">Connect</span>
-          </h2>
+          </h1>
           <p className="section-subtitle">
             Have a project in mind or just want to say hello? I'd love to hear from you!
           </p>
@@ -103,8 +95,12 @@ const Contact = () => {
             onSubmit={handleSubmit}
             className="contact-form"
           >
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px' }}>
+              <label htmlFor="website">Website</label>
+              <input id="website" name="website" type="text" tabIndex="-1" autoComplete="off" />
+            </div>
             {status.submitted && (
-              <div className="form-message success">
+              <div className="form-message success" role="status" aria-live="polite">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                   <polyline points="22 4 12 14.01 9 11.01"></polyline>
@@ -113,7 +109,7 @@ const Contact = () => {
               </div>
             )}
             {status.error && (
-              <div className="form-message error">
+              <div className="form-message error" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"></circle>
                   <line x1="15" y1="9" x2="9" y2="15"></line>
@@ -133,6 +129,9 @@ const Contact = () => {
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  maxLength={100}
+                  minLength={2}
+                  autoComplete="name"
                   required
                   disabled={status.submitting}
                 />
@@ -146,6 +145,8 @@ const Contact = () => {
                   placeholder="john@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  maxLength={254}
+                  autoComplete="email"
                   required
                   disabled={status.submitting}
                 />
@@ -160,6 +161,8 @@ const Contact = () => {
                 placeholder="Tell me about your project or just say hello..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                maxLength={3000}
+                minLength={10}
                 required
                 disabled={status.submitting}
               ></textarea>

@@ -1056,6 +1056,7 @@
     width: calc(100% - 32px);
     padding: 1.25rem;
     max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
     overflow-y: auto;
   }
 

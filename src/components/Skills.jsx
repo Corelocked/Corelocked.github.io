@@ -24,6 +24,14 @@ import { ReactComponent as NextjsIcon } from '../assets/icons/nextjs.svg';
 import { ReactComponent as NativeWindIcon } from '../assets/icons/nativewind.svg';
 import { ReactComponent as SupabaseIcon } from '../assets/icons/supabase.svg';
 import { ReactComponent as EasIcon } from '../assets/icons/eas.svg';
+import { ReactComponent as LaravelIcon } from '../assets/icons/laravel.svg';
+import { ReactComponent as PythonIcon } from '../assets/icons/python.svg';
+import { ReactComponent as PowerBiIcon } from '../assets/icons/powerbi.svg';
+import { ReactComponent as JupyterIcon } from '../assets/icons/jupyter.svg';
+import { ReactComponent as ShopifyIcon } from '../assets/icons/shopify.svg';
+import { ReactComponent as PageFlyIcon } from '../assets/icons/pagefly.svg';
+import { ReactComponent as WordPressIcon } from '../assets/icons/wordpress.svg';
+import { ReactComponent as ElementorIcon } from '../assets/icons/elementor.svg';
 
 const icons = {
   frontend: <FrontendIcon />,
@@ -47,6 +55,14 @@ const icons = {
   nativewind: <NativeWindIcon />,
   supabase: <SupabaseIcon />,
   eas: <EasIcon />,
+  laravel: <LaravelIcon />,
+  python: <PythonIcon />,
+  powerbi: <PowerBiIcon />,
+  jupyter: <JupyterIcon />,
+  shopify: <ShopifyIcon />,
+  pagefly: <PageFlyIcon />,
+  wordpress: <WordPressIcon />,
+  elementor: <ElementorIcon />,
 };
 
 const skillCategories = [
@@ -60,7 +76,7 @@ const skillCategories = [
       { name: 'JavaScript', iconKey: 'javascript' },
       { name: 'React', iconKey: 'react', featured: true },
       { name: 'Next.js', iconKey: 'nextjs', featured: true },
-      { name: 'Laravel', iconKey: 'backend' },
+      { name: 'Laravel', iconKey: 'laravel' },
       { name: 'HTML', iconKey: 'html' },
       { name: 'CSS', iconKey: 'css' },
       { name: 'Tailwind CSS', iconKey: 'tailwind', featured: true },
@@ -102,13 +118,13 @@ const skillCategories = [
     color: '#8f6a2a',
     gradient: 'linear-gradient(135deg, #8f6a2a, #b78a35)',
     skills: [
-      { name: 'Python', iconKey: 'tools', featured: true },
-      { name: 'Power BI', iconKey: 'tools', featured: true },
-      { name: 'Jupyter Notebook', iconKey: 'tools' },
-      { name: 'Shopify', iconKey: 'tools', featured: true },
-      { name: 'PageFly', iconKey: 'tools' },
-      { name: 'WordPress', iconKey: 'tools' },
-      { name: 'Elementor', iconKey: 'tools' }
+      { name: 'Python', iconKey: 'python', featured: true },
+      { name: 'Power BI', iconKey: 'powerbi', featured: true },
+      { name: 'Jupyter Notebook', iconKey: 'jupyter' },
+      { name: 'Shopify', iconKey: 'shopify', featured: true },
+      { name: 'PageFly', iconKey: 'pagefly' },
+      { name: 'WordPress', iconKey: 'wordpress' },
+      { name: 'Elementor', iconKey: 'elementor' }
     ]
   }
 ];
@@ -145,10 +161,10 @@ const Skills = () => {
             Expertise
           </span>
           <h2 className="section-title">
-            Data, Web & Mobile <span className="gradient-text">Stack</span>
+            Full-Stack Web <span className="gradient-text">Toolkit</span>
           </h2>
           <p className="section-subtitle">
-            I build modern apps, CMS storefronts, and data workflows with this core stack.
+            I build responsive interfaces, backend services, CMS storefronts, and data workflows with these tools.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { projects } from './AllProjects';
+import { projects } from '../data/projects';
 import './ProjectPage.css';
 
 const isVideoDemo = (url) => {

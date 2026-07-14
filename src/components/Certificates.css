@@ -189,6 +189,18 @@
   position: relative;
   pointer-events: auto;
 }
+.cert-image-button {
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.cert-image-button:focus-visible {
+  outline: 3px solid var(--accent-primary, #38bdf8);
+  outline-offset: 4px;
+}
 .cert-slide img {
   max-width: 100%;
   max-height: 100%;
@@ -348,24 +360,40 @@
   gap: 8px;
 }
 .cert-dots .dot {
-  width: 12px;
-  height: 12px;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  box-shadow: none;
+}
+.cert-dots .dot::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1.5px solid rgba(79, 195, 247, 0.2);
   border-radius: 50%;
   background: rgba(79, 195, 247, 0.08);
-  border: 1.5px solid rgba(79, 195, 247, 0.2);
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 2px 8px rgba(79, 195, 247, 0.08);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 .cert-dots .dot.active {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+.cert-dots .dot.active::after {
   border-color: transparent;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   transform: scale(1.35);
-  box-shadow: 0 4px 15px rgba(79, 195, 247, 0.25);
 }
 .cert-dots .dot:hover:not(.active) {
+  background: transparent;
+  transform: none;
+}
+.cert-dots .dot:hover:not(.active)::after {
   background: rgba(79, 195, 247, 0.15);
-  border-color: rgba(79, 195, 247, 0.3);
   transform: scale(1.08);
 }
 
@@ -429,6 +457,7 @@
   max-width: 960px;
   width: calc(100% - 48px);
   max-height: 86vh;
+  max-height: 86dvh;
   padding: 28px;
   border-radius: 16px;
   border: 1px solid var(--border-color);
@@ -604,6 +633,7 @@
 .cert-lightbox img {
   max-width: 90%;
   max-height: 88vh;
+  max-height: 88dvh;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);

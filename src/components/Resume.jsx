@@ -5,12 +5,14 @@ import resumeQA from '../assets/resumes/Resume_QA.pdf';
 import resumeData from '../assets/resumes/Resume_DataEngineer.pdf';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
+import useModalFocus from '../hooks/useModalFocus';
 
 const Resume = () => {
   const [sectionRef, isVisible] = useScrollReveal({ threshold: 0.2 });
 
   const [chooserOpen, setChooserOpen] = React.useState(false);
   const [chooserPurpose, setChooserPurpose] = React.useState('download');
+  const chooserRef = useModalFocus(chooserOpen);
 
   const openChooser = (purpose = 'download') => {
     setChooserPurpose(purpose);
@@ -118,9 +120,9 @@ const Resume = () => {
               Summary
             </h2>
             <p className="summary-card">
-              Computer Science student and Lead Developer specializing in Data Engineering and Full-Stack Architecture.
-              Simplilearn Certified in Power BI, with a proven track record of designing scalable database solutions and real-time reporting systems.
-              Seeking to leverage advanced proficiency in Node.js, Python, and SQL-based environments to optimize data pipelines and drive actionable insights.
+              Computer Science student and Lead Developer focused on Full-Stack Web Development.
+              Experienced in building responsive interfaces, backend services, and data-driven applications with React, Node.js, Python, SQL, Firebase, and Supabase.
+              I turn product requirements into maintainable, production-ready web experiences.
             </p>
           </section>
 
@@ -325,11 +327,11 @@ const Resume = () => {
         </div>
       </div>
         {chooserOpen && (
-          <div className="resume-modal" role="dialog" aria-modal="true">
+          <div className="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-chooser-title">
             <div className="resume-modal__backdrop" onClick={closeChooser} />
-            <div className="resume-modal__content">
+            <div ref={chooserRef} className="resume-modal__content" tabIndex="-1">
               <header className="modal-header">
-                <h3>
+                <h3 id="resume-chooser-title">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>

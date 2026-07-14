@@ -106,9 +106,9 @@ const Support = () => {
           className={`support-header scroll-reveal fade-up ${isTitleVisible ? 'visible' : ''}`}
         >
           <span className="section-label">Support</span>
-          <h2 className="section-title">
+          <h1 className="section-title">
             Support My <span className="gradient-text">Work</span>
-          </h2>
+          </h1>
           <p className="section-subtitle">
             If you enjoy my projects and want to support my work and my cats, consider buying me a coffee or buying them treats by becoming a sponsor!
           </p>
