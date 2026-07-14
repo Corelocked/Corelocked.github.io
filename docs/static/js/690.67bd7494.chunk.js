@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkportfolio=self.webpackChunkportfolio||[]).push([[690],{7690:(e,o,p)=>{e.exports=p.p+"static/media/umbreon.eb8be72c424dadddfe35.webm"}}]);

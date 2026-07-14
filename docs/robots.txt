@@ -1,5 +1,7 @@
-# https://www.robotstxt.org/robotstxt.html
+# All search and AI crawlers may access the public portfolio.
+# Machine-readable summaries:
+# https://corelocked.github.io/llms.txt
+# https://corelocked.github.io/llms-full.txt
 User-agent: *
-Allow: /static/media/
-Disallow: /projects/*/view
+Allow: /
 Sitemap: https://corelocked.github.io/sitemap.xml

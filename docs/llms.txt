@@ -1,0 +1,40 @@
+# Cedric Joshua Palapuz
+
+> Portfolio of a Philippines-based full-stack web and mobile developer who builds practical, production-ready applications.
+
+## Profile
+
+- Primary focus: full-stack web development and mobile development.
+- Core technologies: React, Node.js, Laravel, JavaScript, Python, Kotlin, Firebase, Supabase, SQLite, and Shopify.
+- Work includes responsive interfaces, backend services, CMS storefronts, data workflows, mobile applications, and native desktop software.
+
+## Primary pages
+
+- [Portfolio](https://corelocked.github.io/): Overview, experience, skills, selected projects, and certifications.
+- [Developer profile](https://corelocked.github.io/cedric-joshua-palapuz): Concise biography, core stack, and verified profile links.
+- [Projects](https://corelocked.github.io/projects): Complete project collection.
+- [Contact](https://corelocked.github.io/contact): Contact and collaboration page.
+
+## Complete context
+
+- [Full portfolio context](https://corelocked.github.io/llms-full.txt): Expanded biography, experience, education, skills, certifications, achievements, and every listed project.
+
+## Selected projects
+
+- [Lakbay](https://corelocked.github.io/projects/lakbay/info): Scenic travel mobile app using Kotlin, Python, and Firebase.
+- [BlogShark](https://corelocked.github.io/projects/blogshark/info): Full-stack blogging platform built with Laravel, SQLite, JavaScript, and CSS.
+- [Pitaka](https://corelocked.github.io/projects/pitaka/info): Personal finance web and mobile application built with React, Vite, and Firebase.
+- [NebulaDM](https://corelocked.github.io/projects/nebuladm/info): Native Windows download manager built with Rust, egui, reqwest, and librqbit.
+- [InnSight](https://corelocked.github.io/projects/innsight/info): Award-winning hospitality assistant with voice, text, sentiment, and intent workflows.
+- [unFriendster](https://corelocked.github.io/projects/unfriendster/info): Android social media application built with Java, Firebase, and XML.
+- [Emotion Detector](https://corelocked.github.io/projects/emotion-detector/info): Real-time Python computer-vision application.
+- [Ang Pagong at ang Kuneho](https://corelocked.github.io/projects/ang-pagong-at-ang-kuneho/info): Python desktop game adapting a Filipino fable.
+- [Moody](https://corelocked.github.io/projects/moody/info): React mood-tracking web application.
+- [Tetris](https://corelocked.github.io/projects/tetris/info): Java desktop game.
+- [E-TALA](https://corelocked.github.io/projects/e-tala/info): Kotlin mobile inventory application with barcode scanning.
+- [TaskFlow](https://corelocked.github.io/projects/taskflow/info): React task management web application.
+
+## Verified profiles
+
+- [GitHub](https://github.com/Corelocked)
+- [LinkedIn](https://www.linkedin.com/in/cedric-joshua-palapuz-85645524a/)
