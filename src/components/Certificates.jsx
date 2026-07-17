@@ -3,37 +3,14 @@ import './Certificates.css';
 import '../components/Animations.css';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useModalFocus from '../hooks/useModalFocus';
+import { certificateDetails } from '../data/certificates';
 
 import cert1 from '../assets/images/certificates/dometrain-csharp-certificate.jpg';
 import cert2 from '../assets/images/certificates/simplilearn-powerbi-certificate.jpg';
 import inabelAward from '../assets/images/inabel-awards-2026-innsight.jpg';
 
-const certificates = [
-  {
-    type: 'achievement',
-    src: inabelAward,
-    alt: 'Inabel Awards 2026 Internet of Things Innovation Award',
-    title: 'Inabel Awards 2026 — Internet of Things Innovation',
-    description:
-      'Winner recognition for InnSight, an AI virtual assistant with voice-to-text, text querying, and customer inquiry analysis.',
-    badge: 'Winner',
-    project: 'InnSight',
-  },
-  {
-    src: cert1,
-    alt: 'Dometrain C# Certificate',
-    title: 'Dometrain — C# Fundamentals',
-    description:
-      'Completed the C# fundamentals course covering OOP, LINQ and async programming.',
-  },
-  {
-    src: cert2,
-    alt: 'Simplilearn Power BI Certificate',
-    title: 'Simplilearn — Power BI Professional',
-    description:
-      'Power BI course focused on data modeling, DAX and interactive reporting.',
-  },
-];
+const certificateImages = { inabel: inabelAward, csharp: cert1, powerbi: cert2 };
+const certificates = certificateDetails.map((certificate) => ({ ...certificate, src: certificateImages[certificate.image] }));
 
 const Certificates = () => {
   const [index, setIndex] = useState(0);

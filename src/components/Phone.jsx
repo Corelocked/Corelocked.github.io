@@ -4,7 +4,9 @@ import { useGitHubContributions } from '../hooks/useGitHubContributions';
 import ContributionHeatmap from './ContributionHeatmap';
 import { ThemeContext } from '../context/ThemeContext';
 import { projects } from '../data/projects';
+import { certificateDetails } from '../data/certificates';
 import { sendContactForm } from '../utils/sendContactForm';
+import { getCareerAssistantReply } from '../utils/careerAssistant';
 import './Phone.css';
 
 // Assets
@@ -201,59 +203,25 @@ const PHONE_PROJECTS = projects;
 
 const PROJECT_CATEGORIES = ['All', 'Website', 'Mobile App', 'Desktop App', 'Game', 'AI/ML'];
 
-const BOT_QUICK_QUESTIONS = [
-  'Who is Cedric?',
-  'What are your top skills?',
-  'Which projects are featured?',
-  'How can I contact you?',
-  'What tools do you use for mobile apps?'
-];
-
-const BOT_CONTEXT_SUGGESTIONS = {
-  profile: [
-    'What are your top skills?',
-    'Which projects are featured?',
-    'What are you currently focused on?'
-  ],
-  skills: [
-    'Tell me more about your web stack',
-    'What tools do you use for mobile apps?',
-    'Which skills are strongest for internships?'
-  ],
-  projects: [
-    'Which featured project should I view first?',
-    'Tell me more about Pitaka',
-    'Tell me more about BlogShark'
-  ],
-  contact: [
-    'Are you open for internships?',
-    'What should I include in my message?',
-    'Do you prefer email or LinkedIn?'
-  ],
-  resume: [
-    'Which resume fits web development roles?',
-    'What is your strongest role right now?',
-    'Do you have freelance availability?'
-  ],
-  smalltalk: [
-    'What are your top skills?',
-    'Which projects are featured?',
-    'How can I contact you?'
-  ],
-  policy: [
-    'Which projects are featured?',
-    'What are your top skills?',
-    'How can I contact you?'
-  ],
-  clarify: BOT_QUICK_QUESTIONS
-};
-
 const PROFILE_BOT_GREETING = {
   id: 'bot-welcome',
   role: 'bot',
+  intent: 'profile',
   text:
-    'Hi, I am Cedric. Ask me about my skills, projects, experience, and contact details.',
+    'Hi! Ask me anything about Cedric or this portfolio. I use the website’s projects, experience, skills, certificates, and contact information as my reference.',
 };
+
+const BOT_VIEW_ACTIONS = {
+  profile: { label: 'View profile', view: 'about' },
+  experience: { label: 'View experience', view: 'about' },
+  skills: { label: 'Explore skills', view: 'skills' },
+  projects: { label: 'Explore projects', view: 'projects' },
+  role: { label: 'Choose a resume', view: 'resume' },
+  resume: { label: 'Open resumes', view: 'resume' },
+  contact: { label: 'Contact Cedric', view: 'contact' }
+};
+
+const WEBSITE_REFERENCE_ROUTES = ['/', '/projects', '/contact', '/support', '/cedric-joshua-palapuz'];
 
 const SUPPORT_OPTIONS = [
   {
@@ -455,6 +423,8 @@ const Phone = ({ initiallyOpen = false }) => {
 
   // Assistant chat state
   const [chatInput, setChatInput] = useState('');
+  const [botTyping, setBotTyping] = useState(false);
+  const [copiedMessageId, setCopiedMessageId] = useState(null);
   const [chatMessages, setChatMessages] = useState(() => [
     {
       ...PROFILE_BOT_GREETING,
@@ -463,6 +433,9 @@ const Phone = ({ initiallyOpen = false }) => {
   ]);
   const [botContext, setBotContext] = useState({ lastIntent: 'profile', lastTopic: 'intro' });
   const chatEndRef = useRef(null);
+  const chatInputRef = useRef(null);
+  const replyTimerRef = useRef(null);
+  const websiteIndexRef = useRef([]);
 
   // Swipe state for gesture-based navigation
   const [swipeStart, setSwipeStart] = useState(null);
@@ -582,7 +555,34 @@ const Phone = ({ initiallyOpen = false }) => {
     if (activeView === 'assistant' && chatEndRef.current) {
       chatEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
-  }, [chatMessages, activeView]);
+  }, [chatMessages, botTyping, activeView]);
+
+  useEffect(() => () => clearTimeout(replyTimerRef.current), []);
+
+  useEffect(() => {
+    if (!chatInputRef.current) return;
+    chatInputRef.current.style.height = 'auto';
+    chatInputRef.current.style.height = `${Math.min(chatInputRef.current.scrollHeight, 76)}px`;
+  }, [chatInput]);
+
+  useEffect(() => {
+    if (activeView !== 'assistant' || websiteIndexRef.current.length) return undefined;
+    let active = true;
+
+    Promise.allSettled(WEBSITE_REFERENCE_ROUTES.map(async (route) => {
+      const html = await fetch(route).then((response) => response.text());
+      const content = new DOMParser().parseFromString(html, 'text/html').querySelector('.main-content');
+      return {
+        text: content ? [...content.querySelectorAll('h1, h2, h3, h4, p, li, a')].map((element) => element.textContent).join('\n') : '',
+        href: route,
+        label: route === '/' ? 'Portfolio home' : route.split('/').filter(Boolean).pop().replace(/-/g, ' ')
+      };
+    })).then((pages) => {
+      if (active) websiteIndexRef.current = pages.filter(({ status, value }) => status === 'fulfilled' && value.text).map(({ value }) => value);
+    });
+
+    return () => { active = false; };
+  }, [activeView]);
 
   // Swipe gesture handling for phone navigation
   useEffect(() => {
@@ -702,243 +702,9 @@ const Phone = ({ initiallyOpen = false }) => {
     }
   };
 
-  const buildMixedToneReply = ({ professional, casual, technical, prompt }) => {
-    return [professional, casual, technical, prompt].filter(Boolean).join(' ');
-  };
-
-  const getProfileBotReply = (rawQuestion, context) => {
-    const question = rawQuestion.toLowerCase();
-    const featuredProjects = PHONE_PROJECTS.filter((project) => project.featured).map((project) => project.title);
-    const matchedProject = PHONE_PROJECTS.find((project) => question.includes(project.title.toLowerCase()));
-    const isGreeting = /\b(hi|hello|hey|yo|good\s+morning|good\s+afternoon|good\s+evening)\b/.test(question);
-    const isThanks = /\b(thanks|thank\s+you|ty|appreciate\s+it)\b/.test(question);
-    const asksHowAreYou = /how\s+are\s+you/.test(question);
-    const wantsMore = /\b(tell me more|elaborate|more details|expand|what else|can you explain|go deeper|more about that)\b/.test(question);
-
-    const portfolioKeywords = [
-      'portfolio', 'project', 'projects', 'skills', 'stack', 'tech', 'technology', 'contact', 'email', 'hire',
-      'resume', 'cv', 'experience', 'education', 'work', 'featured', 'react', 'next.js', 'nextjs', 'expo',
-      'kotlin', 'firebase', 'supabase', 'laravel', 'blogshark', 'pitaka', 'lakbay', 'innsight', 'taskflow',
-      'unfriendster', 'emotion detector', 'tetris', 'e-tala', 'cedric'
-    ];
-
-    const privatePersonalKeywords = [
-      'age', 'birthday', 'birthdate', 'address', 'home address', 'religion', 'politics', 'political',
-      'relationship', 'girlfriend', 'boyfriend', 'wife', 'husband', 'family', 'parents', 'siblings',
-      'income', 'salary', 'net worth', 'private life', 'personal life', 'secret', 'password'
-    ];
-
-    const isPrivatePersonalQuestion = privatePersonalKeywords.some((keyword) => question.includes(keyword));
-    const isPortfolioRelated = portfolioKeywords.some((keyword) => question.includes(keyword)) || Boolean(matchedProject);
-    const isGeneralSmallTalk = isGreeting || isThanks || asksHowAreYou;
-
-    if (isPrivatePersonalQuestion || (!isPortfolioRelated && !isGeneralSmallTalk && !wantsMore)) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'I can only answer questions directly related to my portfolio and listed projects.',
-          casual: 'I keep things focused on what is publicly shared here.',
-          technical: 'That includes my stack, shipped work, contact channels, and role-relevant experience shown in the portfolio.',
-          prompt: 'Try asking about my projects, skills, or how to contact me.'
-        }),
-        intent: 'policy',
-        topic: 'scope'
-      };
-    }
-
-    if (isGreeting) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'Great to connect with you.',
-          casual: 'Happy to chat and keep things practical.',
-          technical: 'I can walk through my stack, project architecture, and delivery approach.',
-          prompt: 'What should we start with?'
-        }),
-        intent: 'smalltalk',
-        topic: 'greeting'
-      };
-    }
-
-    if (asksHowAreYou) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'I am doing well, thanks for asking.',
-          casual: 'I am focused on portfolio work and project quality.',
-          technical: 'Lately that means React and Next.js on web, plus Expo and Kotlin on mobile.',
-          prompt: 'Want a quick breakdown of my recent projects?'
-        }),
-        intent: 'smalltalk',
-        topic: 'status'
-      };
-    }
-
-    if (isThanks) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'You are welcome.',
-          casual: 'Glad that helped.',
-          technical: 'If useful, I can next map my skills directly to internship or freelance role requirements.',
-          prompt: ''
-        }),
-        intent: 'smalltalk',
-        topic: 'gratitude'
-      };
-    }
-
-    if (wantsMore) {
-      switch (context.lastIntent) {
-        case 'projects':
-          return {
-            text: buildMixedToneReply({
-              professional: 'Here is a deeper project view.',
-              casual: 'I prioritize products that feel usable, not just demo-ready.',
-              technical: 'My featured work spans Laravel + SQLite, React + Firebase, and cross-platform mobile delivery with Expo and Kotlin.',
-              prompt: 'If you want, I can compare two projects side by side.'
-            }),
-            intent: 'projects',
-            topic: 'projects-deeper'
-          };
-        case 'skills':
-          return {
-            text: buildMixedToneReply({
-              professional: 'Absolutely, here is more depth on my stack.',
-              casual: 'I like tools that ship fast but stay maintainable.',
-              technical: 'Web: React, Next.js, CSS systems. Mobile: Expo, NativeWind, EAS, Kotlin. Backend integrations: Firebase, Supabase, and lightweight API layers.',
-              prompt: 'Want me to tailor this to a specific role like frontend or mobile intern?'
-            }),
-            intent: 'skills',
-            topic: 'skills-deeper'
-          };
-        case 'contact':
-          return {
-            text: buildMixedToneReply({
-              professional: 'I am open to internships, freelance builds, and collaborations.',
-              casual: 'Best way to reach me is still direct and simple.',
-              technical: 'Email gives the fastest turnaround for project scope, stack fit, and timeline discussions.',
-              prompt: 'You can also message me through the Contact app form here.'
-            }),
-            intent: 'contact',
-            topic: 'contact-deeper'
-          };
-        default:
-          return {
-            text: buildMixedToneReply({
-              professional: 'Sure, I can expand further.',
-              casual: 'Just point me to the topic you care about most.',
-              technical: 'I can go deeper on project architecture, stack decisions, or delivery workflow.',
-              prompt: ''
-            }),
-            intent: 'clarify',
-            topic: 'needs-topic'
-          };
-      }
-    }
-
-    if (matchedProject) {
-      return {
-        text: buildMixedToneReply({
-          professional: `${matchedProject.title} is one of my key portfolio projects.`,
-          casual: 'It is a build I am genuinely proud of.',
-          technical: `I developed it with ${matchedProject.technologies.join(', ')} and centered the implementation on ${matchedProject.description.toLowerCase()}`,
-          prompt: 'Open the Projects app here if you want links and a full walkthrough.'
-        }),
-        intent: 'projects',
-        topic: matchedProject.title
-      };
-    }
-
-    if (question.includes('who') || question.includes('about') || question.includes('cedric')) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'I am Cedric Joshua Palapuz, a full-stack web developer focused on practical, production-ready products.',
-          casual: 'I like shipping things people can actually use.',
-          technical: 'My core stack includes React, Next.js, Node.js, Firebase, Supabase, and SQL.',
-          prompt: ''
-        }),
-        intent: 'profile',
-        topic: 'intro'
-      };
-    }
-
-    if (question.includes('skill') || question.includes('stack') || question.includes('tech')) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'Here are my strongest skills.',
-          casual: 'These are the tools I use the most in real builds.',
-          technical: `Top stack items: ${SKILL_CATEGORIES.flatMap((cat) => cat.skills.map((skill) => skill.name)).slice(0, 8).join(', ')}.`,
-          prompt: 'I can break this down by frontend, backend, or databases next.'
-        }),
-        intent: 'skills',
-        topic: 'stack'
-      };
-    }
-
-    if (question.includes('project') || question.includes('built') || question.includes('work')) {
-      return {
-        text: buildMixedToneReply({
-          professional: `My featured projects include ${featuredProjects.join(', ')}.`,
-          casual: 'Each one reflects a different kind of problem-solving style.',
-          technical: 'The portfolio emphasizes full-stack web workflows, from interfaces and backend services to databases and deployment.',
-          prompt: 'Open the Projects app and I can guide you on which one to review first.'
-        }),
-        intent: 'projects',
-        topic: 'featured'
-      };
-    }
-
-    if (question.includes('contact') || question.includes('email') || question.includes('hire') || question.includes('reach')) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'You can reach me directly for internships, freelance work, or collaboration.',
-          casual: 'I am approachable, so feel free to send a quick message.',
-          technical: 'Primary contact: cedricjoshua.palapuz@gmail.com, or phone (+63) 999-405-1077 for direct coordination.',
-          prompt: 'You can also use the Contact app form here for structured project details.'
-        }),
-        intent: 'contact',
-        topic: 'reachout'
-      };
-    }
-
-    if (question.includes('mobile') || question.includes('android') || question.includes('expo') || question.includes('kotlin')) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'My mobile workflow is centered on reliability and rapid iteration.',
-          casual: 'I keep the tooling practical so shipping does not get blocked.',
-          technical: 'I commonly use Expo, NativeWind, EAS, and Kotlin, with Firebase or Supabase for backend services.',
-          prompt: 'If you want, I can map which stack I use for MVP vs production scale.'
-        }),
-        intent: 'skills',
-        topic: 'mobile-stack'
-      };
-    }
-
-    if (question.includes('resume') || question.includes('cv')) {
-      return {
-        text: buildMixedToneReply({
-          professional: 'I maintain targeted resume versions for different roles.',
-          casual: 'So you can check the one that matches what you are hiring for.',
-          technical: 'Available tracks: Web Developer, QA, and Data Engineer, each tuned to role-specific skills and project evidence.',
-          prompt: 'Open the Resume app in the dock to view them.'
-        }),
-        intent: 'resume',
-        topic: 'resume'
-      };
-    }
-
-    return {
-      text: buildMixedToneReply({
-        professional: 'I can definitely help with that.',
-        casual: 'Let us narrow it down so I can give you the best answer.',
-        technical: 'I can cover stack choices, project architecture, contact options, and role-fit details.',
-        prompt: 'Tell me whether you want skills, projects, or availability first.'
-      }),
-      intent: 'clarify',
-      topic: 'unknown'
-    };
-  };
-
   const sendChatMessage = (message) => {
     const trimmedMessage = message.trim();
-    if (!trimmedMessage) return;
+    if (!trimmedMessage || botTyping) return;
     const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
     const userMessage = {
@@ -948,18 +714,49 @@ const Phone = ({ initiallyOpen = false }) => {
       timestamp,
     };
 
-    const reply = getProfileBotReply(trimmedMessage, botContext);
-
-    const botMessage = {
-      id: `bot-${Date.now() + 1}`,
-      role: 'bot',
-      text: reply.text,
-      timestamp,
-    };
-
-    setChatMessages((prev) => [...prev, userMessage, botMessage]);
-    setBotContext({ lastIntent: reply.intent, lastTopic: reply.topic });
+    setChatMessages((prev) => [...prev, userMessage]);
     setChatInput('');
+    setBotTyping(true);
+
+    replyTimerRef.current = setTimeout(() => {
+      const websiteSources = [
+        ...websiteIndexRef.current,
+        { text: certificateDetails.map(({ title, description }) => `${title}. ${description}`).join('\n'), href: '/#certificates', label: 'Certificates & awards' },
+        { text: document.querySelector('.main-content')?.innerText || '', href: window.location.pathname, label: 'Current page' }
+      ];
+      const reply = getCareerAssistantReply(trimmedMessage, botContext, PHONE_PROJECTS, SKILL_CATEGORIES, websiteSources);
+      setChatMessages((prev) => [...prev, {
+        id: `bot-${Date.now()}`,
+        role: 'bot',
+        intent: reply.intent,
+        references: reply.references,
+        text: reply.text,
+        timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      }]);
+      setBotContext({ lastIntent: reply.intent, lastTopic: reply.topic });
+      setBotTyping(false);
+    }, Math.min(800, 350 + trimmedMessage.length * 5));
+  };
+
+  const resetChat = () => {
+    clearTimeout(replyTimerRef.current);
+    setChatMessages([{
+      ...PROFILE_BOT_GREETING,
+      timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    }]);
+    setBotContext({ lastIntent: 'profile', lastTopic: 'intro' });
+    setBotTyping(false);
+    setChatInput('');
+  };
+
+  const copyChatMessage = async (message) => {
+    try {
+      await navigator.clipboard.writeText(message.text);
+      setCopiedMessageId(message.id);
+      setTimeout(() => setCopiedMessageId(null), 1500);
+    } catch {
+      setCopiedMessageId(null);
+    }
   };
 
   // ===== Computed =====
@@ -975,8 +772,6 @@ const Phone = ({ initiallyOpen = false }) => {
       : PHONE_PROJECTS.filter((p) => p.category.includes(activeProjectCat));
 
   const ActiveGameComponent = activeGame ? GAMES.find((g) => g.id === activeGame)?.component : null;
-  const contextualSuggestions = BOT_CONTEXT_SUGGESTIONS[botContext.lastIntent] || BOT_QUICK_QUESTIONS;
-
   // ===== Helpers =====
 
   const getGreeting = () => {
@@ -1323,38 +1118,58 @@ const Phone = ({ initiallyOpen = false }) => {
       case 'assistant':
         return (
           <div className="phone-detail-view">
-            {renderBackHeader('Cedric Assistant')}
+            {renderBackHeader('Ask Cedric')}
             <div className="pv-assistant-shell">
+              <div className="pv-assistant-controls">
+                <span><i /> Portfolio-grounded</span>
+                <button type="button" className="pv-assistant-reset" onClick={resetChat} aria-label="Start a new conversation" title="New conversation">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M20 20v-6h-6M5.1 15a8 8 0 0 0 13.1 2.5M18.9 9A8 8 0 0 0 5.8 6.5" /></svg>
+                </button>
+              </div>
+
               <div className="pv-bot-scroll">
-                <div className="pv-bot-messages" role="log" aria-live="polite">
+                <div className="pv-bot-messages" role="log" aria-live="polite" aria-busy={botTyping}>
                   {chatMessages.map((message) => (
                     <div key={message.id} className={`pv-bot-row ${message.role === 'user' ? 'user' : 'bot'}`}>
-                      <span className={`pv-bot-avatar ${message.role === 'user' ? 'user' : 'bot'}`}>
-                        {message.role === 'user' ? 'You' : 'Cedric'}
-                      </span>
                       <div className="pv-bot-message-content">
                         <div className={`pv-bot-bubble ${message.role === 'user' ? 'user' : 'bot'}`}>
                           {message.text}
                         </div>
-                        <span className="pv-bot-time">{message.timestamp}</span>
+                        {message.role === 'bot' && message.references?.length > 0 && (
+                          <div className="pv-bot-references" aria-label="Answer references">
+                            <span>References</span>
+                            <div>
+                              {message.references.map((reference) => (
+                                <a key={reference.href} href={reference.href} onClick={() => setMobileOpen(false)}>
+                                  {reference.label}<span aria-hidden="true">↗</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        <div className="pv-bot-meta">
+                          <span className="pv-bot-time">{message.timestamp}</span>
+                          {message.role === 'bot' && (
+                            <button type="button" onClick={() => copyChatMessage(message)} aria-label="Copy response">
+                              {copiedMessageId === message.id ? 'Copied' : 'Copy'}
+                            </button>
+                          )}
+                        </div>
+                        {message.role === 'bot' && BOT_VIEW_ACTIONS[message.intent] && (
+                          <button type="button" className="pv-bot-action" onClick={() => setActiveView(BOT_VIEW_ACTIONS[message.intent].view)}>
+                            {BOT_VIEW_ACTIONS[message.intent].label}<span aria-hidden="true">→</span>
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))}
+                  {botTyping && (
+                    <div className="pv-bot-row bot pv-bot-typing-row" aria-label="Cedric is thinking">
+                      <div className="pv-bot-typing"><i /><i /><i /></div>
+                    </div>
+                  )}
                   <div ref={chatEndRef} />
                 </div>
-              </div>
-
-              <div className="pv-bot-quick-grid">
-                {contextualSuggestions.map((prompt) => (
-                  <button
-                    key={prompt}
-                    type="button"
-                    className="pv-bot-quick-btn"
-                    onClick={() => sendChatMessage(prompt)}
-                  >
-                    {prompt}
-                  </button>
-                ))}
               </div>
 
               <div className="pv-bot-composer-wrap">
@@ -1365,10 +1180,18 @@ const Phone = ({ initiallyOpen = false }) => {
                     sendChatMessage(chatInput);
                   }}
                 >
-                  <input
-                    type="text"
+                  <textarea
+                    ref={chatInputRef}
+                    rows="1"
+                    maxLength="280"
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendChatMessage(chatInput);
+                      }
+                    }}
                     onFocus={() => {
                       if (chatEndRef.current) {
                         setTimeout(() => {
@@ -1376,11 +1199,15 @@ const Phone = ({ initiallyOpen = false }) => {
                         }, 120);
                       }
                     }}
-                    placeholder="Ask about skills, projects, or contact info"
+                    placeholder="Ask anything about Cedric"
                     aria-label="Ask Cedric assistant"
+                    disabled={botTyping}
                   />
-                  <button type="submit">Send</button>
+                  <button type="submit" disabled={!chatInput.trim() || botTyping} aria-label="Send message">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 4 16 8-16 8 3-8-3-8Zm3 8h13" /></svg>
+                  </button>
                 </form>
+                <span className="pv-bot-hint">Enter to send · Shift + Enter for a new line</span>
               </div>
             </div>
           </div>
