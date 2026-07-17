@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.15691060.css",
-    "main.js": "/static/js/main.b8f2b6c4.js",
+    "main.js": "/static/js/main.db2612ad.js",
     "static/css/55.ee235b72.chunk.css": "/static/css/55.ee235b72.chunk.css",
     "static/js/55.9bca51aa.chunk.js": "/static/js/55.9bca51aa.chunk.js",
-    "static/css/981.a705693d.chunk.css": "/static/css/981.a705693d.chunk.css",
-    "static/js/981.80461e61.chunk.js": "/static/js/981.80461e61.chunk.js",
+    "static/css/221.46f2301b.chunk.css": "/static/css/221.46f2301b.chunk.css",
+    "static/js/221.61f1598f.chunk.js": "/static/js/221.61f1598f.chunk.js",
     "static/js/103.22123cdd.chunk.js": "/static/js/103.22123cdd.chunk.js",
     "static/js/67.b24d6656.chunk.js": "/static/js/67.b24d6656.chunk.js",
     "static/js/672.c5474ed1.chunk.js": "/static/js/672.c5474ed1.chunk.js",
@@ -83,11 +83,11 @@
     "static/media/pagefly.svg": "/static/media/pagefly.77c91fa5794f7aea487d3285c3fc3c0b.svg",
     "static/media/elementor.svg": "/static/media/elementor.a9a98d7e5e9725591346997c25d03b1b.svg",
     "main.15691060.css.map": "/static/css/main.15691060.css.map",
-    "main.b8f2b6c4.js.map": "/static/js/main.b8f2b6c4.js.map",
+    "main.db2612ad.js.map": "/static/js/main.db2612ad.js.map",
     "55.ee235b72.chunk.css.map": "/static/css/55.ee235b72.chunk.css.map",
     "55.9bca51aa.chunk.js.map": "/static/js/55.9bca51aa.chunk.js.map",
-    "981.a705693d.chunk.css.map": "/static/css/981.a705693d.chunk.css.map",
-    "981.80461e61.chunk.js.map": "/static/js/981.80461e61.chunk.js.map",
+    "221.46f2301b.chunk.css.map": "/static/css/221.46f2301b.chunk.css.map",
+    "221.61f1598f.chunk.js.map": "/static/js/221.61f1598f.chunk.js.map",
     "103.22123cdd.chunk.js.map": "/static/js/103.22123cdd.chunk.js.map",
     "67.b24d6656.chunk.js.map": "/static/js/67.b24d6656.chunk.js.map",
     "672.c5474ed1.chunk.js.map": "/static/js/672.c5474ed1.chunk.js.map",
@@ -101,6 +101,6 @@
   },
   "entrypoints": [
     "static/css/main.15691060.css",
-    "static/js/main.b8f2b6c4.js"
+    "static/js/main.db2612ad.js"
   ]
 }
