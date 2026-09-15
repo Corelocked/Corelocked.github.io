@@ -36,6 +36,7 @@ export function AppContent() {
   return (
     <div className="App">
       <SeoManager />
+      {!isFullProjectView && <a className="skip-link" href="#page-content">Skip to content</a>}
 
       {!isFullProjectView && (
         <Suspense fallback={null}>
@@ -48,7 +49,7 @@ export function AppContent() {
       <Routes>
         {/* Home Route */}
         <Route path="/" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <Hero />
             <About />
@@ -61,7 +62,7 @@ export function AppContent() {
         
         {/* All Projects Route */}
         <Route path="/projects" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <AllProjects />
           </div>
@@ -74,7 +75,7 @@ export function AppContent() {
 
         {/* Per-project details (with header) moved to /projects/:slug/info */}
         <Route path="/projects/:slug/info" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <ProjectPage />
           </div>
@@ -87,7 +88,7 @@ export function AppContent() {
 
         {/* Contact Route */}
         <Route path="/contact" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <Contact />
           </div>
@@ -95,7 +96,7 @@ export function AppContent() {
 
         {/* Support Route */}
         <Route path="/support" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <Support />
           </div>
@@ -103,7 +104,7 @@ export function AppContent() {
 
         {/* Name SEO Route */}
         <Route path="/cedric-joshua-palapuz" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <AuthorProfile />
             <Footer />
@@ -111,7 +112,7 @@ export function AppContent() {
         } />
 
         <Route path="*" element={
-          <div className="main-content">
+          <div id="page-content" className="main-content">
             <Header />
             <main className="not-found">
               <p className="section-label">404</p>

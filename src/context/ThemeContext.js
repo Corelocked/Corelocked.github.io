@@ -3,25 +3,14 @@ import React, { createContext, useState, useEffect } from 'react';
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  // Helper: consider night between 18:00-06:00 local time
-  const isNight = () => {
-    try {
-      const h = new Date().getHours();
-      return h >= 18 || h < 6;
-    } catch {
-      return true;
-    }
-  };
-
   const [darkMode, setDarkMode] = useState(() => {
     try {
-      const override = localStorage.getItem('themeOverride'); // 'manual' if user toggled
+      const override = localStorage.getItem('themeOverride');
       const saved = localStorage.getItem('darkMode');
       if (override === 'manual' && saved !== null) return JSON.parse(saved);
-      // Otherwise, default to time-of-day
-      return isNight();
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
     } catch {
-      return true; // fallback
+      return false;
     }
   });
 
@@ -32,7 +21,7 @@ export const ThemeProvider = ({ children }) => {
     // Update theme-color meta tag
     const metaTag = document.querySelector('meta[name="theme-color"]');
     if (metaTag && !navigator.userAgent.includes('Firefox')) {
-      metaTag.content = darkMode ? '#121212' : '#f8f9fa';
+      metaTag.content = darkMode ? '#09090c' : '#f5f5f7';
     }
 
     // Save preference only if user explicitly chose manual override
@@ -44,22 +33,13 @@ export const ThemeProvider = ({ children }) => {
     } catch {}
   }, [darkMode]);
 
-  // Periodically re-evaluate time-based theme when NOT manually overridden
   useEffect(() => {
-    let timer = null;
-    try {
-      const override = localStorage.getItem('themeOverride');
-      if (override !== 'manual') {
-        // check every 5 minutes to catch day/night transitions
-        timer = setInterval(() => {
-          const nowNight = isNight();
-          setDarkMode(prev => (prev === nowNight ? prev : nowNight));
-        }, 5 * 60 * 1000);
-      }
-    } catch {
-      // ignore
-    }
-    return () => clearInterval(timer);
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncWithSystem = (event) => {
+      if (localStorage.getItem('themeOverride') !== 'manual') setDarkMode(event.matches);
+    };
+    media.addEventListener('change', syncWithSystem);
+    return () => media.removeEventListener('change', syncWithSystem);
   }, []);
 
   const toggleDarkMode = () => {

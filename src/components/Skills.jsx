@@ -157,7 +157,6 @@ const Skills = () => {
           className={`skills-header scroll-reveal fade-up ${isHeaderVisible ? 'visible' : ''}`}
         >
           <span className="section-label">
-            <span className="label-icon">{icons.tools}</span>
             Expertise
           </span>
           <h2 className="section-title">

@@ -478,21 +478,14 @@ const Phone = ({ initiallyOpen = false }) => {
 
   useEffect(() => {
     let cancelled = false;
-    const videos = darkMode
-      ? Promise.all([
-          import('../assets/images/umbreon.webm'),
-          import('../assets/images/umbreon.mp4')
-        ])
-      : Promise.all([
-          import('../assets/images/spider-gwen.webm'),
-          import('../assets/images/spider-gwen.mp4')
-        ]);
+    const video = darkMode
+      ? import('../assets/images/umbreon.webm')
+      : import('../assets/images/spider-gwen.webm');
 
-    videos.then(([webm, mp4]) => {
+    video.then((webm) => {
       if (!cancelled) {
         setPhoneVideoSources({
-          webm: webm.default || webm,
-          mp4: mp4.default || mp4
+          webm: webm.default || webm
         });
       }
     }).catch(() => {});
@@ -1467,7 +1460,6 @@ const Phone = ({ initiallyOpen = false }) => {
               {phoneVideoSources && (
                 <video key={darkMode ? 'night' : 'day'} className={`phone-theme-video active ${darkMode ? 'night-video' : ''}`} autoPlay muted loop playsInline preload="none">
                   <source src={phoneVideoSources.webm} type="video/webm" />
-                  <source src={phoneVideoSources.mp4} type="video/mp4" />
                 </video>
               )}
               <div className="phone-video-overlay"></div>

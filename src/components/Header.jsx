@@ -113,8 +113,8 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <button className="logo" onClick={() => handleNav('home')} aria-label="Home">
-          <span className="logo-bracket">&lt;/</span>
-          <span className="logo-text">Cedric</span>
+          <span className="logo-bracket">&lt;</span>
+          <span className="logo-text">C</span>
           <span className="logo-bracket">&gt;</span>
         </button>
         
@@ -122,37 +122,44 @@ const Header = () => {
           className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
         >
           <span className="hamburger-line"></span>
           <span className="hamburger-line"></span>
           <span className="hamburger-line"></span>
         </button>
         
-        <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
+        <nav id="primary-navigation" aria-label="Primary navigation" className={`nav ${isMenuOpen ? 'active' : ''}`}>
           <button
             type="button"
             className={`nav-link ${activeKey === 'about' ? 'active' : ''}`}
             onClick={() => handleNav('about')}
+            aria-current={activeKey === 'about' ? 'page' : undefined}
           >About</button>
           <button
             type="button"
             className={`nav-link ${activeKey === 'skills' ? 'active' : ''}`}
             onClick={() => handleNav('skills')}
+            aria-current={activeKey === 'skills' ? 'page' : undefined}
           >Skills</button>
           <RouterLink
             to="/projects"
             onClick={closeMenu}
             className={`nav-link ${activeKey === 'projects' ? 'active' : ''}`}
+            aria-current={activeKey === 'projects' ? 'page' : undefined}
           >Projects</RouterLink>
           <RouterLink
             to="/contact"
             onClick={closeMenu}
             className={`nav-link ${location.pathname !== '/' && activeKey === 'contact' ? 'active' : ''}`}
+            aria-current={activeKey === 'contact' ? 'page' : undefined}
           >Contact</RouterLink>
           <RouterLink
             to="/support"
             onClick={closeMenu}
             className={`nav-link ${location.pathname !== '/' && activeKey === 'support' ? 'active' : ''}`}
+            aria-current={activeKey === 'support' ? 'page' : undefined}
           >Support</RouterLink>
           <button
             type="button"

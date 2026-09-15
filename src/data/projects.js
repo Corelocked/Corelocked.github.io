@@ -15,7 +15,6 @@ export const projects = [
     liveDemo: '#',
     website: '#',
     previewWebm: require('../assets/images/lakbay-showcase.webm'),
-    preview: require('../assets/images/lakbay-showcase.mp4'),
     image: require('../assets/images/lakbay-logo2.png'),
     featured: true,
     isWIP: false,

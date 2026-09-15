@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="footer-center">
           <Link to="home" smooth={true} duration={500} className="footer-logo">
             <span className="logo-bracket">&lt;/</span>
-            <span className="logo-text">Cedric</span>
+            <span className="logo-text">C</span>
             <span className="logo-bracket">&gt;</span>
           </Link>
 

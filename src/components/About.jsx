@@ -9,7 +9,6 @@ import lakbayLogo from '../assets/images/lakbay-logo.png';
 import etalaLogo from '../assets/images/e-tala logo.jpg';
 import blogsharkLogo from '../assets/images/blogshark-logo.png';
 import blogsharkFeaturedVideoWebm from '../assets/images/blogshark-featured.webm';
-import blogsharkFeaturedVideoMp4 from '../assets/images/blogshark-featured.mp4';
 import innsightLogo from '../assets/images/innsight.png';
 import inabelAwardsPreview from '../assets/images/inabel-awards-2026-innsight.jpg';
 import megacatLogo from '../assets/images/megacat-logo.jpg';
@@ -149,8 +148,7 @@ const FEATURED_PREVIEWS = {
     subtitle: 'Preview of the actual featured post content',
     ariaLabel: 'BlogShark featured post',
     mediaSources: [
-      { src: blogsharkFeaturedVideoWebm, type: 'video/webm' },
-      { src: blogsharkFeaturedVideoMp4, type: 'video/mp4' }
+      { src: blogsharkFeaturedVideoWebm, type: 'video/webm' }
     ],
     mediaAlt: 'BlogShark featured post preview',
     actionHref: 'https://www.instagram.com/p/DUVf_PRDOQG/',

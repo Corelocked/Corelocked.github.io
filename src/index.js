@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from './context/ThemeContext';
 import App from './App';
 import './index.css';
+import './liquid-glass.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

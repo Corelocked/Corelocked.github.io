@@ -80,7 +80,7 @@ const renderAction = (action, className) => {
 const ProjectCard = ({ project, hideDetails = false, style }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoUrl = getVideoPreviewUrl(project.liveDemo);
-  const hasVideo = isVideoDemo(project.liveDemo) || Boolean(project.preview);
+  const hasVideo = isVideoDemo(project.liveDemo) || Boolean(project.preview || project.previewWebm);
   const showVideoPreview = hasVideo && isHovered;
   const actions = getProjectLinks(project);
   const overlayActions = actions.slice(0, 3);
@@ -109,7 +109,7 @@ const ProjectCard = ({ project, hideDetails = false, style }) => {
         {!hasVideo && !project.website && !project.liveDemo && <div className="video-badge unavailable">Case Study</div>}
         {!hasVideo && project.liveDemo === '#' && project.website === '#' && <div className="video-badge unavailable">Case Study</div>}
         {showVideoPreview && (
-          project.preview ? (
+          (project.preview || project.previewWebm) ? (
             <video
               className="video-preview"
               title={`${project.title} preview`}
@@ -122,7 +122,7 @@ const ProjectCard = ({ project, hideDetails = false, style }) => {
               preload="none"
             >
               {project.previewWebm && <source src={project.previewWebm} type="video/webm" />}
-              <source src={project.preview} type="video/mp4" />
+              {project.preview && <source src={project.preview} type="video/mp4" />}
             </video>
           ) : (
             <iframe
