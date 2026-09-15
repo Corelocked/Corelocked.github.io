@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkportfolio=self.webpackChunkportfolio||[]).push([[705],{4705:(e,p,s)=>{e.exports=s.p+"static/media/spider-gwen.e3643805d1b86104132a.mp4"}}]);
