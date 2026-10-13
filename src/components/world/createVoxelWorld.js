@@ -10,6 +10,7 @@ import playerSkin from '../../assets/skins/player.png';
 import whiteCatSkin from '../../assets/skins/cat-white.png';
 import brownCatSkin from '../../assets/skins/cat-tabby.png';
 import dogSkin from '../../assets/skins/wolf-wolf_chestnut_tame.png';
+import spottedDogSkin from '../../assets/skins/wolf-wolf_spotted_tame.png';
 import catCollarSkin from '../../assets/skins/cat-cat_collar.png';
 import dogCollarSkin from '../../assets/skins/wolf-wolf_collar.png';
 import portrait from '../../assets/images/Hero-512.png';
@@ -241,7 +242,7 @@ export default function createVoxelWorld(host, callbacks) {
   }
   const catCollar = skinMaterial(catCollarSkin,'#c52c35');
   const dogCollar = skinMaterial(dogCollarSkin,'#327cdb');
-  function pet(name, dog, skin, x, y, z, facing=0) {
+  function pet(dog, skin, x, y, z, facing=0) {
     if (station) ({x,z}=destinationPoint(station,x-station.modelX,z-station.modelZ));
     const geometry=dog ? dogGeometry : catGeometry;
     const mesh=new THREE.Mesh(geometry,skinMaterial(skin));
@@ -250,7 +251,6 @@ export default function createVoxelWorld(host, callbacks) {
     const collar=new THREE.Mesh(geometry,dog ? dogCollar : catCollar);
     collar.scale.setScalar(1.006); mesh.add(collar);
     obstacles.push({x,z,w:0.5,d:1.3,yaw:mesh.rotation.y});
-    nameTag(name,x,y+(dog ? 1.3 : 1.15),z,0.85);
   }
   const playerArm = new THREE.Mesh(armGeometry,playerMaterial);
   playerArm.position.set(0.6,-0.68,-0.95); playerArm.rotation.set(-1,0,Math.PI); playerArm.scale.setScalar(0.85);
@@ -394,7 +394,7 @@ export default function createVoxelWorld(host, callbacks) {
     [0,1,2,3].forEach(i => book(12.3+i*0.4,y+0.28,-9.8,[purple,red,leaves[1],gold][i],0.44));
   }
   character(skinMaterial(corelockedSkin),'Corelocked',10,0.27,-7);
-  pet('Yuuki',false,whiteCatSkin,10.95,0.27,-6.35);
+  pet(false,whiteCatSkin,10.95,0.27,-6.35);
   framedImage(portrait,'Cedric Palapuz',10.2,2.05,-9.78,1.35,1.75);
   desk(12.3,-6.8,1.7);
   bonsai(12.7,1.2,-6.9);
@@ -576,8 +576,9 @@ export default function createVoxelWorld(host, callbacks) {
   [[-29,4],[-25,8],[-29,7]].forEach(([x,z])=>block(x,-0.07,z,0.55,0.04,0.5,leaves[0]));
   block(-29,-0.015,4,0.2,0.07,0.2,blossoms[1]);
   character(skinMaterial(kmbapSkin),'kmbap',-29.5,0,12.5,Math.PI*0.7);
-  pet('Luca',true,dogSkin,-28.2,0,12.7,Math.PI*0.7);
-  pet('Kuro',false,brownCatSkin,-30.5,0,12.7,Math.PI*0.7);
+  pet(true,dogSkin,-28.2,0,12.7,Math.PI*0.7);
+  pet(false,brownCatSkin,-30.5,0,12.7,Math.PI*0.7);
+  pet(true,spottedDogSkin,-29.5,0,14.5,Math.PI*0.7);
 
   // Distant cloud blocks give the island a visible silhouette.
   [[-33,20,-32],[28,23,-40],[-35,26,10],[38,18,0]].forEach(([x,y,z])=>{

@@ -19,6 +19,7 @@ https://github.com/InventivetalentDev/minecraft-assets/tree/1.21.5/assets/minecr
 - Yuuki: `cat/white.png`, red-tinted `cat/cat_collar.png`
 - Kuro: `cat/tabby.png`, red-tinted `cat/cat_collar.png`
 - Luca: `wolf/wolf_chestnut_tame.png`, blue-tinted `wolf/wolf_collar.png`
+- White dog with brown face and spots: `wolf/wolf_spotted_tame.png`, blue-tinted `wolf/wolf_collar.png`
 
 Model dimensions and UV regions follow Mojang's cat and wolf models:
 https://github.com/Mojang/bedrock-samples/tree/main/resource_pack/models/entity
