@@ -33,6 +33,7 @@
     ],
     "skipThirdPartyRequests": true,
     "crawl": false,
+    "concurrency": 1,
     "include": [
       "/",
       "/cedric-joshua-palapuz",
