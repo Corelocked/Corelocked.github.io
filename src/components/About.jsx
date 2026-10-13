@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { currentStack } from '../data/currentStack';
 import './About.css';
 import '../components/Animations.css';
 import about from '../assets/images/Hero-512.png';
@@ -132,15 +133,8 @@ export const EDUCATION_ENTRIES = [
   }
 ];
 
-export const CURRENT_STACK = [
-  { name: 'Shopify', icon: <ShopifyIcon /> },
-  { name: 'PageFly', icon: <PageFlyIcon /> },
-  { name: 'WordPress', icon: <WordPressIcon /> },
-  { name: 'Elementor', icon: <ElementorIcon /> },
-  { name: 'PHP', icon: <PhpIcon /> },
-  { name: 'JavaScript', icon: <JavascriptIcon /> },
-  { name: 'Liquid', icon: <LiquidIcon /> }
-];
+const stackIcons = { Shopify: <ShopifyIcon />, PageFly: <PageFlyIcon />, WordPress: <WordPressIcon />, Elementor: <ElementorIcon />, PHP: <PhpIcon />, JavaScript: <JavascriptIcon />, Liquid: <LiquidIcon /> };
+export const CURRENT_STACK = currentStack.map(name => ({ name, icon: stackIcons[name] }));
 
 const FEATURED_PREVIEWS = {
   blogshark: {

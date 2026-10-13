@@ -5,8 +5,11 @@ import WorldChat from './WorldChat';
 import WorldMusic from './WorldMusic';
 import { useGitHubContributions } from '../../hooks/useGitHubContributions';
 import { daylightAt } from './worldState';
-import { destinations, destinationPath, sectionFromLocation } from './destinations';
+import { arrivalPosition, courtyardRadius, destinations, destinationPath, islandBounds, sectionFromLocation } from './destinations';
 import './WorldPortfolio.css';
+import playerSkin from '../../assets/skins/player.png';
+
+const mapTransform = ({x,z,yaw}) => `translate(${x} ${z}) rotate(${-yaw*180/Math.PI})`;
 
 export default function WorldPortfolio() {
   const location = useLocation();
@@ -22,7 +25,9 @@ export default function WorldPortfolio() {
   const [playing, setPlaying] = useState(false);
   const [entered, setEntered] = useState(false);
   const [nearby, setNearby] = useState(null);
-  const [position, setPosition] = useState({ x: 0, z: 12, yaw: 0 });
+  const position = useRef({ ...arrivalPosition, yaw: 0 });
+  const map = useRef(null);
+  const mapPlayer = useRef(null);
   const [help, setHelp] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
@@ -40,7 +45,11 @@ export default function WorldPortfolio() {
     onGuide: () => navigate('/#guide'),
     onPause: () => setPlaying(false),
     onNearby: setNearby,
-    onPosition: setPosition,
+    onPosition: next => {
+      position.current=next;
+      mapPlayer.current?.setAttribute('transform',mapTransform(next));
+      map.current?.setAttribute('aria-label',`Player position: ${Math.round(next.x)}, ${Math.round(next.z)}`);
+    },
     onError: () => { setFailed(true); setPlaying(false); },
   };
 
@@ -127,6 +136,13 @@ export default function WorldPortfolio() {
   };
 
   const pause = () => { engine.current?.pause(); setPlaying(false); };
+  const clickWithCursor = event => {
+    if (!playing || !event.altKey || event.button !== 0) return;
+    const link = event.target.closest('a[href]');
+    if (!link || link.origin !== window.location.origin) return;
+    // Router links treat Alt-click as a browser shortcut; use their normal click while showing the cursor.
+    event.preventDefault(); event.stopPropagation(); link.click();
+  };
   const closePanel = () => navigate('/');
   const toggleFullscreen = async () => {
     try {
@@ -146,13 +162,13 @@ export default function WorldPortfolio() {
   const panelTitle = destinations.find(item => item.id === section)?.name || ({ inventory: 'Inventory', guide: 'Portfolio', project: 'Project details', support: 'Support my work' }[section] || 'Page not found');
   const showWelcome = !playing && !section && !chatOpen;
 
-  return <main id="page-content" data-lighting={daylight < .5 ? 'night' : 'day'} className={`voxel-portfolio ${playing ? 'is-playing' : ''} ${failed ? 'world-unavailable' : ''}`}>
+  return <main id="page-content" onClickCapture={clickWithCursor} data-lighting={daylight < .5 ? 'night' : 'day'} className={`voxel-portfolio ${playing ? 'is-playing' : ''} ${failed ? 'world-unavailable' : ''}`}>
     <div className="world-canvas" ref={host} aria-hidden={!playing} />
     <div className="world-vignette" aria-hidden="true" />
     <a className="world-skip" href="/#guide">Skip walking and browse portfolio</a>
 
     <header className="world-header">
-      <Link to="/" className="world-brand" onClick={pause} aria-label="Cedric Palapuz home"><span className="world-brand-block" aria-hidden="true"><span /></span><span>CEDRIC PALAPUZ</span></Link>
+      <Link to="/" className="world-brand" onClick={pause} aria-label="Cedric Palapuz home"><span className="world-brand-block" style={{backgroundImage:`url(${playerSkin})`}} aria-hidden="true"><span /></span><span>CEDRIC PALAPUZ</span></Link>
       <nav aria-label="Portfolio navigation" className="world-header-nav"><WorldMusic playing={playing} onOpen={pause} /><Link to="/#inventory" aria-label="Inventory and world settings"><PixelIcon name="workshop" /><span>Inventory</span><kbd>I</kbd></Link><Link to="/#guide"><PixelIcon name="book" /> Portfolio <kbd>M</kbd></Link><button onClick={() => { pause(); setHelp(!help); }} aria-label="Show controls" aria-expanded={help}>?</button><button className="world-fullscreen" onClick={toggleFullscreen} aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} aria-pressed={fullscreen}>⛶</button></nav>
     </header>
 
@@ -169,14 +185,18 @@ export default function WorldPortfolio() {
       <div className="world-touch-controls"><button className="world-joystick" aria-label="Movement pad: hold and drag to walk" onPointerDown={event => { joystick.current=event.pointerId; event.currentTarget.setPointerCapture(event.pointerId); moveTouch(event); }} onPointerMove={moveTouch} onPointerUp={stopTouch} onPointerCancel={stopTouch} onLostPointerCapture={stopTouch}><span aria-hidden="true">▲<br />◀ <i /> ▶<br />▼</span></button><span className="world-touch-look">Drag the world to look</span><button className="world-jump" onClick={() => engine.current?.jump()} aria-label="Jump">↑<small>JUMP</small></button></div>
     </>}
 
-    {help && !section && <aside className="world-help" aria-label="Exploration controls"><div><h2>Controls</h2><button onClick={() => setHelp(false)} aria-label="Close controls">×</button></div><dl><dt>W A S D</dt><dd>Walk around</dd><dt>Mouse / drag</dt><dd>Look around</dd><dt>Arrow keys</dt><dd>Walk forward/back, turn left/right</dd><dt>E / click</dt><dd>Open a nearby display</dd><dt>Space / Shift</dt><dd>Jump / walk faster</dd><dt>Esc / M</dt><dd>Pause / portfolio</dd><dt>I / T</dt><dd>Inventory / chat</dd><dt>Touch</dt><dd>Move with the pad. Drag the scene to look.</dd></dl><Link to="/#guide">Browse portfolio ↗</Link></aside>}
+    {help && !section && <aside className="world-help" aria-label="Exploration controls"><div><h2>Controls</h2><button onClick={() => setHelp(false)} aria-label="Close controls">×</button></div><dl><dt>W A S D</dt><dd>Walk around</dd><dt>Mouse / drag</dt><dd>Look around</dd><dt>Hold Alt</dt><dd>Show cursor</dd><dt>Arrow keys</dt><dd>Walk forward/back, turn left/right</dd><dt>E / click</dt><dd>Open a nearby display</dd><dt>Space / Shift</dt><dd>Jump / walk faster</dd><dt>Esc / M</dt><dd>Pause / portfolio</dd><dt>I / T</dt><dd>Inventory / chat</dd><dt>Touch</dt><dd>Move with the pad. Drag the scene to look.</dd></dl><Link to="/#guide">Browse portfolio ↗</Link></aside>}
 
     {!section && playing && <aside className="world-minimap" aria-label="Map">
-      <svg viewBox="-25 -25 50 50" role="img" aria-label={`Player position: ${Math.round(position.x)}, ${Math.round(position.z)}`}>
-        <path d="M-20-21H18L23-15V14L17 22H-17L-23 15V-15Z" fill="#789568" stroke="#a4b989" strokeWidth=".4" />
-        <path d="M0-16V19M-16 1H16M-16 11H16M-11-6V13M11-6V13" stroke="#c8bf90" strokeWidth="2" fill="none" />
-        {destinations.map(place => <rect key={place.id} x={place.x-2} y={place.z-1.5} width="4" height="3" fill={place.color} stroke="#374831" strokeWidth=".5" />)}
-        <path d="M0-1.8L1.3 1.4L0 .6L-1.3 1.4Z" fill="#fff8dc" stroke="#24382b" strokeWidth=".3" transform={`translate(${position.x} ${position.z}) rotate(${-position.yaw*180/Math.PI})`} />
+      <svg ref={map} viewBox={`${-islandBounds.x-3} ${-islandBounds.z-3} ${islandBounds.x*2+6} ${islandBounds.z*2+6}`} role="img" aria-label={`Player position: ${Math.round(position.current.x)}, ${Math.round(position.current.z)}`}>
+        <path d={`M${islandBounds.z-islandBounds.diagonal} ${-islandBounds.z}H${islandBounds.diagonal-islandBounds.z}L${islandBounds.x} ${islandBounds.x-islandBounds.diagonal}V${islandBounds.diagonal-islandBounds.x}L${islandBounds.diagonal-islandBounds.z} ${islandBounds.z}H${islandBounds.z-islandBounds.diagonal}L${-islandBounds.x} ${islandBounds.diagonal-islandBounds.x}V${islandBounds.x-islandBounds.diagonal}Z`} fill="#85967a" stroke="#a4b989" strokeWidth=".4" />
+        {destinations.map(place => <path key={place.id} d={`M0 0L${place.x} ${place.z}`} stroke="#c4c1b4" strokeWidth="3.6" />)}
+        <path d="M0 0V29" stroke="#c4c1b4" strokeWidth="4" />
+        <circle r={courtyardRadius} fill="#c4c1b4" />
+        <path d="M-4 20H4" stroke="#a64c48" strokeWidth="1.2" />
+        <rect x="-2" y="-2" width="4" height="4" fill="#6ca5a0" stroke="#abb09a" strokeWidth=".6" />
+        {destinations.map(place => <rect key={place.id} x={place.x-2} y={place.z-1.5} width="4" height="3" fill={place.color} stroke="#374831" strokeWidth=".5" transform={`rotate(${-place.yaw*180/Math.PI} ${place.x} ${place.z})`} />)}
+        <path ref={mapPlayer} d="M0-1.8L1.3 1.4L0 .6L-1.3 1.4Z" fill="#fff8dc" stroke="#24382b" strokeWidth=".3" transform={mapTransform(position.current)} />
       </svg>
     </aside>}
 

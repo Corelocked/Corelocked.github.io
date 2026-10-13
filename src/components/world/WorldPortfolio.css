@@ -12,8 +12,8 @@
 .world-header { position:absolute; top:28px; left:38px; right:38px; display:flex; align-items:center; justify-content:space-between; gap:16px; z-index:3; }
 .world-brand { display:flex; align-items:center; gap:15px; color:#f3efdb!important; font:800 18px/1.25 var(--world-font); letter-spacing:-.8px; text-shadow:1px 2px #19312055; }
 .world-brand small { display:block; font:500 8px/1.6 var(--world-font); letter-spacing:2.2px; margin-top:5px; opacity:.65; }
-.world-brand-block { display:block; width:33px; height:34px; background:#906e46; border-top:9px solid #afcd72; box-shadow:6px 4px 0 #57452d,6px -5px 0 #6f9850; position:relative; }
-.world-brand-block::after { content:''; position:absolute; width:7px; height:5px; background:#b49359; top:5px; left:5px; box-shadow:10px 7px #745332,15px 0 #a67c47,-2px 14px #76522f; }
+.world-brand-block { display:block; width:34px; height:34px; background-size:800% 800%; background-position:14.2857% 14.2857%; image-rendering:pixelated; box-shadow:3px 3px 0 #172b22; position:relative; }
+.world-brand-block::after { content:''; position:absolute; inset:0; background-image:inherit; background-size:800% 800%; background-position:71.4286% 14.2857%; image-rendering:pixelated; }
 .world-header-nav { display:flex; gap:8px; align-items:center; }
 .world-header-nav a,.world-header-nav button { background:#20392be6; border:1px solid #f0efd72e; color:#eeeedd; min-height:43px; display:flex; align-items:center; justify-content:center; gap:10px; padding:10px 16px; font-size:12px; box-shadow:0 3px 0 #132b24; }
 .world-header-nav button { min-width:43px; padding:5px; font:20px monospace; }
@@ -193,7 +193,22 @@
 .world-panel-body .contact input,.world-panel-body .contact textarea { font-size:16px; color:#34402b; border:1px solid #c3cdb1; background:#f7f5e9; border-radius:2px; }
 .world-panel-body .submit-btn { background:#506d3e; border-radius:2px; color:#f3f4e4; }
 .world-panel-body .resume .section-title { color:#33492c; }
-.world-panel-body .support .support-card { border-radius:2px; }
+.voxel-portfolio .world-dialog .support { clip-path:none; overflow:visible; }
+.voxel-portfolio .world-dialog .support::before,.voxel-portfolio .world-dialog .support-message::before { display:none; }
+.voxel-portfolio .world-dialog .support .support-card { background:#f8f4e7; border:1px solid #b4c09f; border-radius:2px; padding:32px 22px; box-shadow:3px 3px #c6ceb2; }
+.voxel-portfolio .world-dialog .support .support-card:hover { background:#fffdf3; transform:translateY(-3px); box-shadow:3px 6px #c6ceb2; }
+.voxel-portfolio .world-dialog .support .support-name { color:#33482b; text-shadow:none; }
+.voxel-portfolio .world-dialog .support .support-description { color:#526049; }
+.voxel-portfolio .world-dialog .support .support-icon { background:#e4e8d8; border-color:#c4cdb4; box-shadow:none; }
+.voxel-portfolio .world-dialog .support .support-btn { background:#dfe7cb; color:#344b2c; border:1px solid #a4b48a; border-radius:2px; box-shadow:none; }
+.voxel-portfolio .world-dialog .support .support-card:hover .support-btn { background:#344b2c; color:#fff8e3; }
+.voxel-portfolio .world-dialog .support .support-btn::before { display:none; }
+.voxel-portfolio .world-dialog .support-message { background:#e0e6ce; border:1px solid #b4c09f; border-radius:2px; box-shadow:none; }
+.voxel-portfolio .world-dialog .support-message p { color:#33482b; text-shadow:none; min-width:0; }
+.voxel-portfolio .world-dialog .support .qr-modal { background:#f8f4e7; border:2px solid #a4b48a; border-radius:2px; box-shadow:6px 6px #172b2255; }
+.voxel-portfolio .world-dialog .support .qr-modal-title { color:#33482b!important; text-shadow:none; }
+.voxel-portfolio .world-dialog .support .qr-modal-description { color:#526049; }
+.voxel-portfolio .world-dialog .support .qr-modal-close { background:#dfe7cb; border-color:#a4b48a; border-radius:2px; color:#344b2c; }
 
 @media(min-width:1600px) { .world-welcome { top:23%; left:8%; } .world-minimap { width:180px; } }
 @media(max-height:850px) and (min-width:851px) { .world-welcome { top:18%; } .world-welcome h1 { font-size:clamp(48px,5.2vw,70px); } .world-kicker { margin-bottom:19px; } .world-welcome-copy { margin:20px 0; } .world-builder-note { margin-top:20px; padding-top:17px; } .world-control-hint { margin-top:23px; } }
@@ -216,7 +231,7 @@
   .world-profile { grid-template-columns:1fr; gap:23px; } .world-profile>img { width:120px; height:135px; } .world-profile h2 { font-size:22px; }
   .world-career-timeline article { grid-template-columns:1fr; gap:13px; padding-bottom:15px; } .world-career-entry { margin-left:4px; padding-left:18px; } .world-career-heading h3 { font-size:14px; } .world-tool-groups { grid-template-columns:1fr; } .world-tool-groups article { padding:20px; }
   .voxel-portfolio .world-dialog .world-panel-body .contact-form { padding:20px; }
-  .world-header { top:max(18px,env(safe-area-inset-top)); left:22px; right:18px; } .world-brand { gap:11px; font-size:12px; letter-spacing:-.4px; } .world-brand-block { width:24px; height:27px; border-top-width:7px; box-shadow:4px 3px #57452d,4px -4px #6f9850; } .world-brand small { font-size:5px; letter-spacing:1.3px; margin-top:4px; }
+  .world-header { top:max(18px,env(safe-area-inset-top)); left:22px; right:18px; } .world-brand { gap:11px; font-size:12px; letter-spacing:-.4px; } .world-brand-block { width:28px; height:28px; } .world-brand small { font-size:5px; letter-spacing:1.3px; margin-top:4px; }
   .world-header-nav { gap:6px; } .world-header-nav a { font-size:10px; gap:6px; padding:8px; min-height:38px; } .world-header-nav .pixel-icon { display:none; } .world-header-nav button { min-height:38px; min-width:32px; font-size:17px; } .world-fullscreen { display:none!important; }
   .world-welcome { left:26px; right:22px; top:19%; width:auto; } .world-welcome h1 { font-size:clamp(48px,12vw,66px); line-height:1.06; letter-spacing:-2.8px; } .world-kicker { font-size:8px; letter-spacing:1.4px; margin-bottom:22px; } .world-welcome-copy { max-width:300px; font-size:13px; margin:23px 0; } .world-welcome-actions { gap:16px; } .world-button { padding:13px 19px; font-size:12px; }
   .world-control-hint { margin-top:25px; gap:11px; font-size:8px; } .world-control-hint kbd { min-width:14px; padding:0 2px; font-size:8px; } .world-builder-note { margin-top:24px; font-size:7px; } .world-vignette { background:linear-gradient(90deg,#1a3024e8,#1c352ac4 60%,#233d2c99),linear-gradient(0deg,#183024cc,transparent 80%); }
