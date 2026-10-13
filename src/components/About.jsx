@@ -22,15 +22,16 @@ import { ReactComponent as WordPressIcon } from '../assets/icons/wordpress.svg';
 import { ReactComponent as ElementorIcon } from '../assets/icons/elementor.svg';
 import { ReactComponent as LiquidIcon } from '../assets/icons/liquid.svg';
 
-const WORK_ENTRIES = [
+export const WORK_ENTRIES = [
   {
     id: 'megacat',
     badge: 'MCS',
     logo: megacatLogo,
     org: 'Mega Cat Studios',
-    role: 'Web Developer',
+    role: 'Web Developer (Full-time)',
     date: 'Apr 2026 - Present',
     bullets: [
+      'Transitioned to a full-time role on September 21, 2026.',
       'Manage and maintain Shopify storefronts with a focus on technical performance and user experience.',
       'Execute technical SEO work, including alt text audits and collection page title optimization.'
     ],
@@ -115,7 +116,7 @@ const WORK_ENTRIES = [
   }
 ];
 
-const EDUCATION_ENTRIES = [
+export const EDUCATION_ENTRIES = [
   {
     id: 'ciit',
     badge: 'CI',
@@ -131,7 +132,7 @@ const EDUCATION_ENTRIES = [
   }
 ];
 
-const CURRENT_STACK = [
+export const CURRENT_STACK = [
   { name: 'Shopify', icon: <ShopifyIcon /> },
   { name: 'PageFly', icon: <PageFlyIcon /> },
   { name: 'WordPress', icon: <WordPressIcon /> },

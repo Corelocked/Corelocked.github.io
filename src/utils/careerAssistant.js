@@ -1,8 +1,8 @@
 const CAREER = {
-  summary: 'Cedric Joshua Palapuz is a Computer Science student, Web Developer at Mega Cat Studios, and Lead Developer focused on practical full-stack products.',
+  summary: 'Cedric Joshua Palapuz is a Computer Science student and full-time Web Developer at Mega Cat Studios, as well as a Lead Developer focused on practical full-stack products.',
   education: 'He is pursuing a BS in Computer Science at CIIT College of Arts and Technology, specializing in Web and Mobile Development, with graduation expected in October 2027.',
   experience: [
-    'Web Developer at Mega Cat Studios (April 2026-present), maintaining Shopify storefronts and improving technical SEO',
+    'Full-time Web Developer at Mega Cat Studios since September 21, 2026; started in April 2026, maintaining Shopify storefronts and improving technical SEO',
     'Lead Developer for Pitaka (March 2026-present), launching a Philippine-focused finance app on web and mobile',
     'Technical Lead for Lakbay, E-TALA, BlogShark, and the award-winning InnSight assistant',
     'Work Immersion Intern at PNRI, where he encoded 1,000+ records within 40 hours'
@@ -90,7 +90,7 @@ export const getCareerAssistantReply = (rawQuestion, context, projects, skillCat
     return reply('I only use information Cedric has made public on this website. Ask about his profile, skills, experience, projects, education, certificates, role fit, or contact details.', 'policy', 'privacy');
   }
 
-  if (projectMatches.length > 1 || (question.includes(' compare ') && projectMatches.length)) {
+  if (projectMatches.length > 1) {
     const compared = projectMatches.slice(0, 2);
     return reply(`${describeProject(compared[0])} By comparison, ${describeProject(compared[1])} The first is stronger evidence for ${compared[0].category.join(' and ').toLowerCase()} work; the second demonstrates ${compared[1].category.join(' and ').toLowerCase()} work.`, 'projects', compared.map(({ title }) => title).join('|'), compared.map(({ slug, title }) => ({ href: `/projects/${slug}/info`, label: title })));
   }
@@ -116,7 +116,7 @@ export const getCareerAssistantReply = (rawQuestion, context, projects, skillCat
     return reply('Cedric combines hands-on delivery with technical leadership: he has shipped web and mobile products, led several school teams, works professionally on Shopify and technical SEO, and can explain the product impact behind his code. His strongest evidence is Pitaka, BlogShark, Lakbay, and award-winning InnSight.', 'profile', 'strengths', [...REFERENCES.about, ...REFERENCES.projects]);
   }
 
-  if (includesAny(question, ['experience', 'employment', 'work history', 'worked at', 'professional background'])) {
+  if (includesAny(question, ['experience', 'employment', 'employer', 'work history', 'worked at', 'professional background', 'mega cat', 'megacat']) || /\bwhere\b.*\bwork\b/.test(question)) {
     return reply(`${CAREER.summary} His public experience includes: ${CAREER.experience.join('; ')}.`, 'experience', 'experience', REFERENCES.about);
   }
 
@@ -153,11 +153,15 @@ export const getCareerAssistantReply = (rawQuestion, context, projects, skillCat
   }
 
   if (includesAny(question, ['resume', 'cv'])) {
-    return reply('Cedric keeps three targeted resumes: Web Developer, Quality Assurance, and Data Engineer. The Web Developer version best matches the strongest evidence currently visible in this portfolio. Open the Resume app to view or download them.', 'resume', role || 'resume', REFERENCES.profile);
+    return reply('Cedric keeps three targeted resumes: Web Developer, Quality Assurance, and Data Engineer. The Web Developer version best matches the strongest evidence currently visible in this portfolio. Open my resume page to read or download them.', 'resume', role || 'resume', [{ href: '/#resume', label: 'Resume' }]);
+  }
+
+  if (includesAny(question, ['github', 'contribution', 'streak'])) {
+    return reply('Cedric’s GitHub page shows yearly activity, active days, and streaks from saved contribution data.', 'profile', 'github', [{ href: '/#github', label: 'GitHub activity' }]);
   }
 
   if (includesAny(question, ['contact', 'email', 'reach', 'available', 'availability', 'internship', 'freelance', 'collaborate'])) {
-    return reply('Cedric is open to internships, freelance work, and collaboration. Email cedricjoshua.palapuz@gmail.com or use the Contact app. A useful message should include the role or project, expected scope, stack, timeline, and how you found the portfolio.', 'contact', 'availability', REFERENCES.contact);
+    return reply('Cedric is open to internships, freelance work, and collaboration. Email cedricjoshua.palapuz@gmail.com or use the contact form. A useful message should include the role or project, expected scope, stack, timeline, and how you found the portfolio.', 'contact', 'availability', REFERENCES.contact);
   }
 
   if (includesAny(question, ['who is cedric', 'about cedric']) || wantsMore) {

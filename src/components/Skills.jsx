@@ -33,7 +33,7 @@ import { ReactComponent as PageFlyIcon } from '../assets/icons/pagefly.svg';
 import { ReactComponent as WordPressIcon } from '../assets/icons/wordpress.svg';
 import { ReactComponent as ElementorIcon } from '../assets/icons/elementor.svg';
 
-const icons = {
+export const icons = {
   frontend: <FrontendIcon />,
   backend: <BackendIcon />,
   mobile: <MobileIcon />,
@@ -65,7 +65,7 @@ const icons = {
   elementor: <ElementorIcon />,
 };
 
-const skillCategories = [
+export const skillCategories = [
   {
     id: 'web',
     name: 'Web Development',

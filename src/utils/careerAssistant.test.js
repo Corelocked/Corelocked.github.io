@@ -16,6 +16,21 @@ const projects = [
 const skills = [{ skills: [{ name: 'React' }, { name: 'Firebase' }] }];
 const ask = (question, context = {}) => getCareerAssistantReply(question, context, projects, skills);
 
+test('a comparison naming only one project does not crash', () => {
+  expect(ask('Compare Pitaka').text).toContain('Pitaka');
+});
+
+test('answers natural questions about current employment', () => {
+  const answer=ask('Where does Cedric work?');
+  expect(answer.text).toContain('full-time Web Developer at Mega Cat Studios');
+  expect(answer.text).toContain('September 21, 2026');
+});
+
+test('the guide links to the resume library and contribution garden', () => {
+  expect(ask('resume').references).toEqual(expect.arrayContaining([expect.objectContaining({href:'/#resume'})]));
+  expect(ask('GitHub contributions').references).toEqual(expect.arrayContaining([expect.objectContaining({href:'/#github'})]));
+});
+
 test('compares two named projects using portfolio evidence', () => {
   const answer = ask('Compare Pitaka and BlogShark');
   expect(answer.text).toEqual(expect.stringContaining('Pitaka'));

@@ -231,8 +231,9 @@ const Resume = () => {
                 <h3>Mega Cat Studios</h3>
                 <span className="date">Apr 2026 - Present</span>
               </header>
-              <p className="entry-subtitle">Web Developer</p>
+              <p className="entry-subtitle">Web Developer (Full-time)</p>
               <ul>
+                <li>Transitioned to a full-time role on September 21, 2026.</li>
                 <li>Manage and maintain Shopify storefronts, ensuring optimal technical performance and user experience.</li>
                 <li>Execute technical SEO strategies, including comprehensive alt text audits and collection page title optimizations to improve search engine visibility.</li>
               </ul>

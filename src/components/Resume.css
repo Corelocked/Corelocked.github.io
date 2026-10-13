@@ -986,6 +986,25 @@
 }
 
 /* Mobile Responsive */
+/* The resume is a light document, independent of the world's lighting or site theme. */
+.voxel-portfolio .world-dialog .resume .resume-content {
+  background: #fffdf5;
+  border: 1px solid #bec7ac;
+  border-radius: 2px;
+  box-shadow: 4px 4px #334c2320;
+  color: #2e3f29;
+}
+.voxel-portfolio .world-dialog .resume :is(h1, h2, h3, p, li, strong, .skill-badge, .contact-info, .entry-detail, .entry-subtitle, .date) { color: #2e3f29; }
+.voxel-portfolio .world-dialog .resume .resume-section { padding: 0; }
+.voxel-portfolio .world-dialog .resume .resume-section h2 { border-color: #b7c7a0; }
+.voxel-portfolio .world-dialog .resume :is(.summary-card, .entry-card, .skill-category, .skill-badge) { background: #f0f2e5; border-color: #c8d2b7; border-radius: 2px; box-shadow: none; }
+.voxel-portfolio .world-dialog .resume :is(.contact-info a, .resume-section h2 svg, .date) { color: #43632d; }
+.voxel-portfolio .world-dialog .resume :is(.download-btn, .print-btn) { background: #405c32; color: #fffdf0; border: 1px solid #587444; border-radius: 2px; box-shadow: 3px 3px #b8c3a1; }
+.voxel-portfolio .world-dialog .resume .resume-modal__content { background: #f5f2e4; border-color: #c1caaa; border-radius: 2px; }
+.voxel-portfolio .world-dialog .resume :is(.resume-option, .resume-option__title, .resume-option__subtitle, .modal-header h3, .modal-close) { color: #2e3f29; }
+.voxel-portfolio .world-dialog .resume .resume-option { background: #e9eeda; border-color: #c1caaa; border-radius: 2px; }
+.voxel-portfolio .world-dialog .resume .timeline::before, .voxel-portfolio .world-dialog .resume .timeline .entry-card::after { background: #7f9862; }
+
 @media (max-width: 768px) {
   .resume {
     padding: 3rem 0;

@@ -835,14 +835,14 @@ const Phone = ({ initiallyOpen = false }) => {
                   <h4>Education</h4>
                   <p className="pv-card-title">BS in Computer Science</p>
                   <p className="pv-card-sub">CIIT College of Arts and Technology</p>
-                  <span className="pv-card-date">2022 - 2026</span>
+                  <span className="pv-card-date">Expected Oct 2027</span>
                 </div>
                 <div className="pv-card">
                   <span className="pv-card-icon"><BriefcaseIcon /></span>
                   <h4>Experience</h4>
-                  <p className="pv-card-title">Work Immersion Intern</p>
-                  <p className="pv-card-sub">Philippine Nuclear Research Institute</p>
-                  <span className="pv-card-date">2020</span>
+                  <p className="pv-card-title">Web Developer (Full-time)</p>
+                  <p className="pv-card-sub">Mega Cat Studios</p>
+                  <span className="pv-card-date">Full-time since Sep 21, 2026</span>
                 </div>
               </div>
               <div className="pv-highlights">
